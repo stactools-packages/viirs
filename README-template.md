@@ -1,16 +1,16 @@
-# stactools-ephemeral
+# stactools-viirs
 
-[![PyPI](https://img.shields.io/pypi/v/stactools-ephemeral)](https://pypi.org/project/stactools-ephemeral/)
+[![PyPI](https://img.shields.io/pypi/v/stactools-viirs)](https://pypi.org/project/stactools-viirs/)
 
-- Name: ephemeral
-- Package: `stactools.ephemeral`
-- PyPI: https://pypi.org/project/stactools-ephemeral/
+- Name: viirs
+- Package: `stactools.viirs`
+- PyPI: https://pypi.org/project/stactools-viirs/
 - Owner: @githubusername
 - Dataset homepage: http://example.com
 - STAC extensions used:
   - [proj](https://github.com/stac-extensions/projection/)
 - Extra fields:
-  - `ephemeral:custom`: A custom attribute
+  - `viirs:custom`: A custom attribute
 
 A short description of the package and its usage.
 
@@ -21,7 +21,7 @@ A short description of the package and its usage.
 
 ## Installation
 ```shell
-pip install stactools-ephemeral
+pip install stactools-viirs
 ```
 
 ## Command-line Usage
@@ -29,10 +29,10 @@ pip install stactools-ephemeral
 Description of the command line functions
 
 ```shell
-$ stac ephemeral create-item source destination
+$ stac viirs create-item source destination
 ```
 
-Use `stac ephemeral --help` to see all subcommands and options.
+Use `stac viirs --help` to see all subcommands and options.
 
 ## Contributing
 
