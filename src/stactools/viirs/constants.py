@@ -14,3 +14,6 @@ METADATA_ASSET_PROPERTIES = {
     "roles": ["metadata"],
     "title": "Earth Observing System Data and Information System (EOSDIS) metadata"
 }
+
+BINSIZE_500M = 463.313
+BINSIZE_1000M = 926.625

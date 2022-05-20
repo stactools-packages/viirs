@@ -1,6 +1,9 @@
+import ast
+import re
 import datetime
 import os.path
-from typing import Callable, Optional
+from typing import Callable, Optional, cast, List
+import logging
 
 import fsspec
 import shapely.geometry
@@ -10,8 +13,11 @@ from stactools.core.io import ReadHrefModifier
 from stactools.core.io.xml import XmlElement
 import rasterio
 from stactools.core.utils import href_exists
+import h5py
 
 from stactools.viirs import utils
+
+logger = logging.getLogger(__name__)
 
 
 class MissingElement(Exception):
@@ -30,132 +36,88 @@ class Metadata:
                 function to modify the read href
         """
         self.h5_href = h5_href
-        self.xml_href = f"{h5_href}.xml"
-        
+        self.read_href_modifier = read_href_modifier
+
         if read_href_modifier:
             self.read_h5_href = read_href_modifier(h5_href)
-            self.read_xml_href = read_href_modifier(self.xml_href)
         else:
             self.read_h5_href = self.h5_href
-            self.read_xml_href = self.xml_href
 
-        subdatasets = utils.subdatasets(self.read_h5_href)
-        if not subdatasets:
+        with rasterio.open(self.read_h5_href) as dataset:
+            self.tags = dataset.tags()
+            self.subdatasets = cast(List[str], dataset.subdatasets)
+        if not self.subdatasets:
             raise ValueError(
                 f"No subdatasets found in H5 file: {h5_href}")
-        with rasterio.open(subdatasets[0]) as dataset:
-            crs = dataset.crs
-            print(crs)
-            self.transform = list(dataset.transform)[0:6]
-            print(self.transform)
-            self.shape = dataset.shape
-            print(self.shape)
-        self.epsg = None
-        self.wkt2 = crs.to_wkt("WKT2")
 
-        # future: check if an h5 only dataset
-        self._xml_metadata
+        self._h5_attributes()
+        self._h5_metadata()
 
-    @property
-    def xml_href(self) -> Optional[str]:
-        xml_href = f"{self.h5_href}.xml"
-        if href_exists(xml_href):
-            return xml_href
-        else:
-            return None
-
-    def _xml_metadata(self):
-
-        def missing_element(attribute: str) -> Callable[[str], Exception]:
-            def get_exception(xpath: str) -> Exception:
-                return MissingElement(
-                    f"Could not find attribute `{attribute}` at xpath '{xpath}' at href {href}"
-                )
-
-            return get_exception
-
-        with fsspec.open(self.read_xml_href) as file:
-            root = XmlElement(etree.parse(file, base_url=self.xml_href).getroot())
-
-        metadata = root.find_or_throw(
-            "GranuleURMetaData", missing_element("URMetadata")
-        )
-        self.id = os.path.splitext(
-            metadata.find_text_or_throw(
-                "ECSDataGranule/LocalGranuleID", missing_element("id")
-            )
-        )[0]
-        self.product = metadata.find_text_or_throw(
-            "CollectionMetaData/ShortName", missing_element("product")
-        )
-        self.version = utils.version_string(
-            metadata.find_text_or_throw(
-                "CollectionMetaData/VersionID", missing_element("version")
-            )
-        )
-
-        points = [
-            (
-                float(
-                    point.find_text_or_throw(
-                        "PointLongitude", missing_element("longitude")
-                    )
-                ),
-                float(
-                    point.find_text_or_throw(
-                        "PointLatitude", missing_element("latitude")
-                    )
-                ),
-            )
-            for point in metadata.findall(
-                "SpatialDomainContainer/HorizontalSpatialDomainContainer/"
-                "GPolygon/Boundary/Point"
-            )
-        ]
+    def _h5_attributes(self):
+        self.id = os.path.splitext(self.tags["LocalGranuleID"])[0]
+        self.product = self.tags["ShortName"]
+        self.version = self.tags["VersionID"]
+        
+        latitudes = self.tags["GRingLatitude"].split(" ")[0:-1]
+        longitudes = self.tags["GRingLongitude"].split(" ")[0:-1]
+        print(latitudes)
+        print(longitudes)
+        points = [(float(lon), float(lat)) for lon, lat in zip(longitudes, latitudes)]
         polygon = Polygon(points)
         self.geometry = shapely.geometry.mapping(polygon)
         self.bbox = polygon.bounds
 
-        start_date = metadata.find_text_or_throw(
-            "RangeDateTime/RangeBeginningDate", missing_element("start_date")
-        )
-        start_time = metadata.find_text_or_throw(
-            "RangeDateTime/RangeBeginningTime", missing_element("start_time")
-        )
-        self.start_datetime = datetime.datetime.fromisoformat(f"{start_date}T{start_time}")
-        end_date = metadata.find_text_or_throw(
-            "RangeDateTime/RangeEndingDate", missing_element("end_date")
-        )
-        end_time = metadata.find_text_or_throw(
-            "RangeDateTime/RangeEndingTime", missing_element("end_time")
-        )
-        self.end_datetime = datetime.datetime.fromisoformat(f"{end_date}T{end_time}")
+        def clean_time(date_time: str):
+            date_reg = re.compile(r"\d{4}-\d{2}-\d{2}")
+            time_reg = re.compile(r"\d{2}:\d{2}:\d{2}\.\d*")
+            if date_reg.search(date_time):
+                date_str = date_reg.group()
+            if time_reg.search(date_time):
+                time_str = time_reg.group()
+            return datetime.datetime.fromisoformat(f"{date_str}T{time_str}")
 
-        self.created = datetime.datetime.fromisoformat(
-            metadata.find_text_or_throw(
-                "ECSDataGranule/ProductionDateTime", missing_element("created")
-            )
-        )
-        self.updated = datetime.datetime.fromisoformat(
-            metadata.find_text_or_throw("LastUpdate", missing_element("updated"))
-        )
+        h5_start_datetime = self.tags["StartTime"]
+        h5_end_datetime = self.tags["EndTime"]
+        h5_production_datetime = self.tags["ProductionTime"]
+        self.start_datetime = clean_time(h5_start_datetime)
+        self.end_datetime = clean_time(h5_end_datetime)
+        self.created_datetime = clean_time(h5_production_datetime)
 
-        psas = metadata.findall("PSAs/PSA")
-        for psa in psas:
-            name = psa.find_text_or_throw("PSAName", missing_element("PSAName"))
-            value = psa.find_text_or_throw("PSAValue", missing_element("PSAValue"))
-            if name == "HORIZONTALTILENUMBER":
-                self.horizontal_tile = int(value)
-            elif name == "VERTICALTILENUMBER":
-                self.vertical_tile = int(value)
-            elif name == "TileID":
-                self.tile_id = value
+        self.horizontal_tile = int(self.tags["HorizontalTileNumber"])
+        self.vertical_tile = int(self.tags["VerticalTileNumber"])
+        self.tile_id = self.tags["TileID"]
 
-    def _h5_meta(self):
-        # This will be needed for VNP46A2, which does not have sidecar xml
-        # metadata files
-        pass
+        self.cloud_cover = float(self.tags["HDFEOS_GRIDS_PercentCloud"])
+
+    def _h5_metadata(self):
+        with h5py.File(self.read_h5_href, "r") as h5:
+            file_metadata = h5['HDFEOS INFORMATION']['StructMetadata.0'][()].split()
+        metadata = [m.decode('utf-8') for m in file_metadata]
+        metadata_keys_values = [s.split("=") for s in metadata][:-1]
+        metadata_dict = {key: value for key, value in metadata_keys_values}
+
+        self.shape = (int(metadata_dict["XDim"]), int(metadata_dict["YDim"]))
+        self.upper_left = ast.literal_eval(metadata_dict["UpperLeftPointMtrs"])
 
     @property
     def collection(self) -> str:
         return self.product[3:]
+    
+    @property
+    def transform(self) -> List[float]:
+        
+
+    @property
+    def xml_href(self) -> Optional[str]:
+        xml_href = f"{self.h5_href}.xml"
+
+        if self.read_href_modifier:
+            read_xml_href = self.read_href_modifier(xml_href)
+        else:
+            read_xml_href = xml_href
+
+        if href_exists(read_xml_href):
+            return xml_href
+        else:
+            logger.debug(f"No xml file found for h5 file: {self.h5_href}")
+            return None

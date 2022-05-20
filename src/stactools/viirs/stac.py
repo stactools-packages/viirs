@@ -67,23 +67,22 @@ def create_item(
     )
     stactools.core.utils.antimeridian.fix_item(item, antimeridian_strategy)
 
-    item.common_metadata.created = metadata.created
-    item.common_metadata.updated = metadata.updated
+    item.common_metadata.created = metadata.created_datetime
 
     properties = HDF5_ASSET_PROPERTIES.copy()
     properties["href"] = h5_href
     item.add_asset(HDF5_ASSET_KEY, Asset.from_dict(properties))
 
-    properties = METADATA_ASSET_PROPERTIES.copy()
-    properties["href"] = xml_href
-    item.add_asset(METADATA_ASSET_KEY, Asset.from_dict(properties))
+    # properties = METADATA_ASSET_PROPERTIES.copy()
+    # properties["href"] = xml_href
+    # item.add_asset(METADATA_ASSET_KEY, Asset.from_dict(properties))
 
-    projection = ProjectionExtension.ext(item, add_if_missing=True)
-    projection.epsg = metadata.epsg
-    projection.wkt2 = metadata.wkt2
-    projection.geometry = metadata.geometry
-    projection.transform = metadata.transform
-    projection.shape = metadata.shape
+    # projection = ProjectionExtension.ext(item, add_if_missing=True)
+    # projection.epsg = metadata.epsg
+    # projection.wkt2 = metadata.wkt2
+    # projection.geometry = metadata.geometry
+    # projection.transform = metadata.transform
+    # projection.shape = metadata.shape
 
     return item
 
