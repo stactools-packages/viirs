@@ -1,21 +1,91 @@
 import logging
 from datetime import datetime, timezone
+from typing import Optional, List
 
+import pystac.utils
 from pystac import (
-    Asset,
     CatalogType,
     Collection,
     Extent,
     Item,
-    MediaType,
     Provider,
     ProviderRole,
     SpatialExtent,
     TemporalExtent,
+    Asset,
 )
+
 from pystac.extensions.projection import ProjectionExtension
+from stactools.core.io import ReadHrefModifier
+from stactools.core.utils.antimeridian import Strategy
+import stactools.core.utils.antimeridian
+
+from stactools.viirs.metadata import Metadata
+from stactools.viirs.constants import (
+    HDF5_ASSET_KEY,
+    HDF5_ASSET_PROPERTIES,
+    METADATA_ASSET_KEY,
+    METADATA_ASSET_PROPERTIES,
+)
 
 logger = logging.getLogger(__name__)
+
+
+def create_item(
+    h5_href: str,
+    cog_hrefs: Optional[List[str]] = None,
+    read_href_modifier: Optional[ReadHrefModifier] = None,
+    antimeridian_strategy: Strategy = Strategy.SPLIT,
+) -> Item:
+    """Creates a STAC Item from VIIRS data.
+
+    Args:
+        h5_href (str): href to an H5 (HDF5) file
+        cog_hrefs (List[str]): List of COG asset TIF hrefs
+        read_href_modifier (Callable[[str], str]): An optional function to
+            modify the href (e.g. to add a token to a url)
+        antimeridian_strategy (AntimeridianStrategy): Either split on -180 or
+            normalize geometries so all longitudes are either positive or negative.
+
+    Returns:
+        pystac.Item: A STAC Item representing the VIIRS data.
+    """
+    metadata = Metadata(h5_href, read_href_modifier)
+
+    item = Item(
+        id=metadata.id,
+        geometry=metadata.geometry,
+        bbox=metadata.bbox,
+        datetime=None,
+        properties={
+            "start_datetime": pystac.utils.datetime_to_str(metadata.start_datetime),
+            "end_datetime": pystac.utils.datetime_to_str(metadata.end_datetime),
+            "viirs:horizontal-tile": metadata.horizontal_tile,
+            "viirs:vertical-tile": metadata.vertical_tile,
+            "viirs:tile-id": metadata.tile_id,
+        },
+    )
+    stactools.core.utils.antimeridian.fix_item(item, antimeridian_strategy)
+
+    item.common_metadata.created = metadata.created
+    item.common_metadata.updated = metadata.updated
+
+    properties = HDF5_ASSET_PROPERTIES.copy()
+    properties["href"] = h5_href
+    item.add_asset(HDF5_ASSET_KEY, Asset.from_dict(properties))
+
+    properties = METADATA_ASSET_PROPERTIES.copy()
+    properties["href"] = xml_href
+    item.add_asset(METADATA_ASSET_KEY, Asset.from_dict(properties))
+
+    projection = ProjectionExtension.ext(item, add_if_missing=True)
+    projection.epsg = metadata.epsg
+    projection.wkt2 = metadata.wkt2
+    projection.geometry = metadata.geometry
+    projection.transform = metadata.transform
+    projection.shape = metadata.shape
+
+    return item
 
 
 def create_collection() -> Collection:
@@ -57,61 +127,3 @@ def create_collection() -> Collection:
     )
 
     return collection
-
-
-def create_item(asset_href: str) -> Item:
-    """Create a STAC Item
-
-    This function should include logic to extract all relevant metadata from an
-    asset, metadata asset, and/or a constants.py file.
-
-    See `Item<https://pystac.readthedocs.io/en/latest/api.html#item>`_.
-
-    Args:
-        asset_href (str): The HREF pointing to an asset associated with the item
-
-    Returns:
-        Item: STAC Item object
-    """
-
-    properties = {
-        "title": "A dummy STAC Item",
-        "description": "Used for demonstration purposes",
-    }
-
-    demo_geom = {
-        "type": "Polygon",
-        "coordinates": [[[-180, -90], [180, -90], [180, 90], [-180, 90], [-180, -90]]],
-    }
-
-    # Time must be in UTC
-    demo_time = datetime.now(tz=timezone.utc)
-
-    item = Item(
-        id="my-item-id",
-        properties=properties,
-        geometry=demo_geom,
-        bbox=[-180, 90, 180, -90],
-        datetime=demo_time,
-        stac_extensions=[],
-    )
-
-    # It is a good idea to include proj attributes to optimize for libs like stac-vrt
-    proj_attrs = ProjectionExtension.ext(item, add_if_missing=True)
-    proj_attrs.epsg = 4326
-    proj_attrs.bbox = [-180, 90, 180, -90]
-    proj_attrs.shape = [1, 1]  # Raster shape
-    proj_attrs.transform = [-180, 360, 0, 90, 0, 180]  # Raster GeoTransform
-
-    # Add an asset to the item (COG for example)
-    item.add_asset(
-        "image",
-        Asset(
-            href=asset_href,
-            media_type=MediaType.COG,
-            roles=["data"],
-            title="A dummy STAC Item COG",
-        ),
-    )
-
-    return item

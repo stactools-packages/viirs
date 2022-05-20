@@ -1,3 +1,4 @@
+import json
 import unittest
 
 from stactools.viirs import stac
@@ -18,13 +19,12 @@ class StacTest(unittest.TestCase):
         collection.validate()
 
     def test_create_item(self) -> None:
-        # Write tests for each for the creation of STAC Items
-        # Create the STAC Item...
-        item = stac.create_item("/path/to/asset.tif")
+        item = stac.create_item(
+            "zz-mystuff/VNP13A1/20220407/VNP13A1.A2022097.h11v05.001.2022113080900.h5.xml"
+        )
 
-        # Check that it has some required attributes
-        self.assertEqual(item.id, "my-item-id")
-        # self.assertEqual(item.other_attr...
+        # self.assertEqual(item.id, "VNP13A1.A2022097.h11v05.001.2022113080900")
 
-        # Validate
         item.validate()
+
+        print(json.dumps(item.to_dict(), indent=4))

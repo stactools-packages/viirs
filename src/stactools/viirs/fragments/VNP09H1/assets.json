@@ -1,0 +1,89 @@
+{
+    "SurfReflect_I1": {
+        "roles": [
+            "reflectance"
+        ],
+        "eo:bands": [
+            {
+                "name": "SurfReflect_I1",
+                "common_name": "red",
+                "center_wavelength": 0.64,
+                "full_width_half_max": 0.075
+            }
+        ],
+        "raster:bands": [
+            {
+                "data_type": "int16",
+                "scale": 0.0001,
+                "spatial_resolution": 500
+            }
+        ],
+        "title": "Surface Reflectance Band I1"
+    },
+    "SurfReflect_I2": {
+        "roles": [
+            "reflectance"
+        ],
+        "eo:bands": [
+            {
+                "name": "SurfReflect_I2",
+                "common_name": "nir09",
+                "center_wavelength": 0.865,
+                "full_width_half_max": 0.039
+            }
+        ],
+        "raster:bands": [
+            {
+                "data_type": "int16",
+                "scale": 0.0001,
+                "spatial_resolution": 500
+            }
+        ],
+        "title": "Surface Reflectance Band I2"
+    },
+    "SurfReflect_I3": {
+        "roles": [
+            "reflectance"
+        ],
+        "eo:bands": [
+            {
+                "name": "SurfReflect_I3",
+                "common_name": "swir16",
+                "center_wavelength": 1.61,
+                "full_width_half_max": 0.06
+            }
+        ],
+        "raster:bands": [
+            {
+                "data_type": "int16",
+                "scale": 0.0001,
+                "spatial_resolution": 500
+            }
+        ],
+        "title": "Surface Reflectance Band I3"
+    },
+    "SurfReflect_State_500m": {
+        "roles": [
+            "metadata"
+        ],
+        "raster:bands": [
+            {
+                "data_type": "uint16",
+                "spatial_resolution": 500
+            }
+        ],
+        "title": "Surface Reflectance State Quality Assurance (QA)"
+    },
+    "SurfReflect_QC_500m": {
+        "roles": [
+            "metadata"
+        ],
+        "raster:bands": [
+            {
+                "data_type": "uint16",
+                "spatial_resolution": 500
+            }
+        ],
+        "title": "Surface Reflectance Band Quality Control (QC)"
+    }
+}
