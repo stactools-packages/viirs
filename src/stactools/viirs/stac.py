@@ -1,3 +1,5 @@
+from asyncio import constants
+from curses import meta
 import logging
 from datetime import datetime, timezone
 from typing import Optional, List
@@ -21,12 +23,7 @@ from stactools.core.utils.antimeridian import Strategy
 import stactools.core.utils.antimeridian
 
 from stactools.viirs.metadata import Metadata
-from stactools.viirs.constants import (
-    HDF5_ASSET_KEY,
-    HDF5_ASSET_PROPERTIES,
-    METADATA_ASSET_KEY,
-    METADATA_ASSET_PROPERTIES,
-)
+from stactools.viirs import constants
 
 logger = logging.getLogger(__name__)
 
@@ -69,20 +66,20 @@ def create_item(
 
     item.common_metadata.created = metadata.created_datetime
 
-    properties = HDF5_ASSET_PROPERTIES.copy()
+    properties = constants.HDF5_ASSET_PROPERTIES.copy()
     properties["href"] = h5_href
-    item.add_asset(HDF5_ASSET_KEY, Asset.from_dict(properties))
+    item.add_asset(constants.HDF5_ASSET_KEY, Asset.from_dict(properties))
 
     # properties = METADATA_ASSET_PROPERTIES.copy()
     # properties["href"] = xml_href
     # item.add_asset(METADATA_ASSET_KEY, Asset.from_dict(properties))
 
-    # projection = ProjectionExtension.ext(item, add_if_missing=True)
-    # projection.epsg = metadata.epsg
-    # projection.wkt2 = metadata.wkt2
-    # projection.geometry = metadata.geometry
-    # projection.transform = metadata.transform
-    # projection.shape = metadata.shape
+    projection = ProjectionExtension.ext(item, add_if_missing=True)
+    projection.epsg = metadata.epsg
+    projection.wkt2 = metadata.wkt2
+    projection.geometry = metadata.geometry
+    projection.transform = metadata.transform
+    projection.shape = metadata.shape
 
     return item
 

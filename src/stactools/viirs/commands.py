@@ -4,7 +4,6 @@ import os
 
 import click
 from click import Command, Group
-from traitlets import default
 
 from stactools.viirs import stac, cog
 

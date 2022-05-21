@@ -15,7 +15,7 @@ import rasterio
 from stactools.core.utils import href_exists
 import h5py
 
-from stactools.viirs import utils
+from stactools.viirs import utils, constants
 
 logger = logging.getLogger(__name__)
 
@@ -96,7 +96,7 @@ class Metadata:
         metadata_keys_values = [s.split("=") for s in metadata][:-1]
         metadata_dict = {key: value for key, value in metadata_keys_values}
 
-        self.shape = (int(metadata_dict["XDim"]), int(metadata_dict["YDim"]))
+        self.shape = (int(metadata_dict["YDim"]), int(metadata_dict["XDim"]))
         self.upper_left = ast.literal_eval(metadata_dict["UpperLeftPointMtrs"])
 
     @property
@@ -105,7 +105,17 @@ class Metadata:
     
     @property
     def transform(self) -> List[float]:
-        
+        left, upper = self.upper_left
+        px_size = constants.SPATIAL_RESOLUTION[self.product]
+        return [px_size, 0.0, left, 0.0, -px_size, upper]
+
+    @staticmethod
+    def wkt2() -> str:
+        return constants.WKT2["self.product"]
+
+    @staticmethod
+    def epsg() -> None:
+        return None
 
     @property
     def xml_href(self) -> Optional[str]:
