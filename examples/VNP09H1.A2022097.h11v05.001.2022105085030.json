@@ -9,7 +9,20 @@
     "viirs:vertical-tile": 5,
     "viirs:tile-id": "51011005",
     "created": "2022-04-15T08:50:30Z",
-    "updated": "2022-04-15T04:21:14.673000Z",
+    "proj:epsg": null,
+    "proj:wkt2": "PROJCS[\"unnamed\",GEOGCS[\"Unknown datum based upon the custom spheroid\",DATUM[\"Not specified (based on custom spheroid)\",SPHEROID[\"Custom spheroid\",6371007.181,0]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Sinusoidal\"],PARAMETER[\"longitude_of_center\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"Meter\",1],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+    "proj:transform": [
+      463.313,
+      0.0,
+      -7783653.637667,
+      0.0,
+      -463.313,
+      4447802.078667
+    ],
+    "proj:shape": [
+      2400,
+      2400
+    ],
     "datetime": null
   },
   "geometry": {
@@ -17,24 +30,24 @@
     "coordinates": [
       [
         [
-          -91.3785,
+          -80.765781,
+          29.845932
+        ],
+        [
+          -91.37851,
           40.0
         ],
         [
-          -78.1106,
-          40.054
+          -78.110572,
+          40.053954
         ],
         [
-          -69.0368,
-          29.892
+          -69.036814,
+          29.891994
         ],
         [
-          -80.7658,
-          29.8459
-        ],
-        [
-          -91.3785,
-          40.0
+          -80.765781,
+          29.845932
         ]
       ]
     ]
@@ -54,21 +67,15 @@
       "roles": [
         "data"
       ]
-    },
-    "metadata": {
-      "href": "zz-mystuff/VNP09H1/11/05/2022097/VNP09H1.A2022097.h11v05.001.2022105085030.h5.xml",
-      "type": "application/xml",
-      "title": "Earth Observing System Data and Information System (EOSDIS) metadata",
-      "roles": [
-        "metadata"
-      ]
     }
   },
   "bbox": [
-    -91.3785,
-    29.8459,
-    -69.0368,
-    40.054
+    -91.37851,
+    29.845932,
+    -69.036814,
+    40.053954
   ],
-  "stac_extensions": []
+  "stac_extensions": [
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json"
+  ]
 }

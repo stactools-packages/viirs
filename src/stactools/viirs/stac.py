@@ -67,6 +67,7 @@ def create_item(
     item.common_metadata.created = metadata.created_datetime
 
     properties = constants.HDF5_ASSET_PROPERTIES.copy()
+    # Need to make the HREF absolute!
     properties["href"] = h5_href
     item.add_asset(constants.HDF5_ASSET_KEY, Asset.from_dict(properties))
 
@@ -77,7 +78,6 @@ def create_item(
     projection = ProjectionExtension.ext(item, add_if_missing=True)
     projection.epsg = metadata.epsg
     projection.wkt2 = metadata.wkt2
-    projection.geometry = metadata.geometry
     projection.transform = metadata.transform
     projection.shape = metadata.shape
 

@@ -4,6 +4,7 @@ import datetime
 import os.path
 from typing import Callable, Optional, cast, List
 import logging
+import warnings
 
 import fsspec
 import shapely.geometry
@@ -14,6 +15,7 @@ from stactools.core.io.xml import XmlElement
 import rasterio
 from stactools.core.utils import href_exists
 import h5py
+from rasterio.errors import NotGeoreferencedWarning
 
 from stactools.viirs import utils, constants
 
@@ -43,12 +45,11 @@ class Metadata:
         else:
             self.read_h5_href = self.h5_href
 
-        with rasterio.open(self.read_h5_href) as dataset:
-            self.tags = dataset.tags()
-            self.subdatasets = cast(List[str], dataset.subdatasets)
-        if not self.subdatasets:
-            raise ValueError(
-                f"No subdatasets found in H5 file: {h5_href}")
+        with warnings.catch_warnings():
+            warnings.simplefilter("ignore", category=NotGeoreferencedWarning)
+            with rasterio.open(self.read_h5_href) as dataset:
+                self.tags = dataset.tags()
+                self.subdatasets = cast(List[str], dataset.subdatasets)
 
         self._h5_attributes()
         self._h5_metadata()
@@ -57,31 +58,27 @@ class Metadata:
         self.id = os.path.splitext(self.tags["LocalGranuleID"])[0]
         self.product = self.tags["ShortName"]
         self.version = self.tags["VersionID"]
-        
-        latitudes = self.tags["GRingLatitude"].split(" ")[0:-1]
-        longitudes = self.tags["GRingLongitude"].split(" ")[0:-1]
-        print(latitudes)
-        print(longitudes)
+
+        latitudes = self.tags["GRingLatitude"].strip().split(" ")
+        longitudes = self.tags["GRingLongitude"].strip().split(" ")
         points = [(float(lon), float(lat)) for lon, lat in zip(longitudes, latitudes)]
         polygon = Polygon(points)
         self.geometry = shapely.geometry.mapping(polygon)
         self.bbox = polygon.bounds
 
         def clean_time(date_time: str):
-            date_reg = re.compile(r"\d{4}-\d{2}-\d{2}")
-            time_reg = re.compile(r"\d{2}:\d{2}:\d{2}\.\d*")
-            if date_reg.search(date_time):
-                date_str = date_reg.group()
-            if time_reg.search(date_time):
-                time_str = time_reg.group()
+            # Needs to throw an error if date or time is not found
+            found_date = re.search(r"\d{4}-\d{2}-\d{2}", date_time)
+            found_time = re.search(r"\d{2}:\d{2}:\d{2}.*", date_time)
+            if found_date:
+                date_str = found_date.group()
+            if found_time:
+                time_str = found_time.group()
             return datetime.datetime.fromisoformat(f"{date_str}T{time_str}")
 
-        h5_start_datetime = self.tags["StartTime"]
-        h5_end_datetime = self.tags["EndTime"]
-        h5_production_datetime = self.tags["ProductionTime"]
-        self.start_datetime = clean_time(h5_start_datetime)
-        self.end_datetime = clean_time(h5_end_datetime)
-        self.created_datetime = clean_time(h5_production_datetime)
+        self.start_datetime = clean_time(self.tags["StartTime"])
+        self.end_datetime = clean_time(self.tags["EndTime"])
+        self.created_datetime = clean_time(self.tags["ProductionTime"])
 
         self.horizontal_tile = int(self.tags["HorizontalTileNumber"])
         self.vertical_tile = int(self.tags["VerticalTileNumber"])
@@ -109,12 +106,12 @@ class Metadata:
         px_size = constants.SPATIAL_RESOLUTION[self.product]
         return [px_size, 0.0, left, 0.0, -px_size, upper]
 
-    @staticmethod
-    def wkt2() -> str:
-        return constants.WKT2["self.product"]
+    @property
+    def wkt2(self) -> str:
+        return constants.WKT2[self.product]
 
-    @staticmethod
-    def epsg() -> None:
+    @property
+    def epsg(self) -> None:
         return None
 
     @property
