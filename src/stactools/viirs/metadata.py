@@ -2,20 +2,19 @@ import ast
 import re
 import datetime
 import os.path
-from typing import Callable, Optional, cast, List
+from typing import Optional, cast, List
 import logging
 import warnings
 
-import fsspec
 import shapely.geometry
 from lxml import etree
 from shapely.geometry import Polygon
 from stactools.core.io import ReadHrefModifier
-from stactools.core.io.xml import XmlElement
 import rasterio
 from stactools.core.utils import href_exists
 import h5py
 from rasterio.errors import NotGeoreferencedWarning
+from dateutil import parser
 
 from stactools.viirs import utils, constants
 
@@ -66,19 +65,19 @@ class Metadata:
         self.geometry = shapely.geometry.mapping(polygon)
         self.bbox = polygon.bounds
 
-        def clean_time(date_time: str):
-            # Needs to throw an error if date or time is not found
-            found_date = re.search(r"\d{4}-\d{2}-\d{2}", date_time)
-            found_time = re.search(r"\d{2}:\d{2}:\d{2}.*", date_time)
-            if found_date:
-                date_str = found_date.group()
-            if found_time:
-                time_str = found_time.group()
-            return datetime.datetime.fromisoformat(f"{date_str}T{time_str}")
+        # def clean_time(date_time: str):
+        #     found_date = re.search(r"\d{4}-\d{2}-\d{2}", date_time)
+        #     found_time = re.search(r"\d{2}:\d{2}:\d{2}.*", date_time)
+        #     if found_date and found_time:
+        #         date_str = found_date.group()
+        #         time_str = found_time.group()
+        #     else:
+        #         raise ValueError(f"Unable to parse datetime string '{date_time}'.")
+        #     return datetime.datetime.fromisoformat(f"{date_str}T{time_str}")
 
-        self.start_datetime = clean_time(self.tags["StartTime"])
-        self.end_datetime = clean_time(self.tags["EndTime"])
-        self.created_datetime = clean_time(self.tags["ProductionTime"])
+        self.start_datetime = parser.parse(self.tags["StartTime"])
+        self.end_datetime = parser.parse(self.tags["EndTime"])
+        self.created_datetime = parser.parse(self.tags["ProductionTime"])
 
         self.horizontal_tile = int(self.tags["HorizontalTileNumber"])
         self.vertical_tile = int(self.tags["VerticalTileNumber"])

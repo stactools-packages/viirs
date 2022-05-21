@@ -1,11 +1,12 @@
-from asyncio import constants
-from curses import meta
 import logging
+from asyncio import constants
 from datetime import datetime, timezone
-from typing import Optional, List
+from typing import List, Optional
 
 import pystac.utils
+import stactools.core.utils.antimeridian
 from pystac import (
+    Asset,
     CatalogType,
     Collection,
     Extent,
@@ -14,16 +15,13 @@ from pystac import (
     ProviderRole,
     SpatialExtent,
     TemporalExtent,
-    Asset,
 )
-
 from pystac.extensions.projection import ProjectionExtension
 from stactools.core.io import ReadHrefModifier
 from stactools.core.utils.antimeridian import Strategy
-import stactools.core.utils.antimeridian
 
-from stactools.viirs.metadata import Metadata
 from stactools.viirs import constants
+from stactools.viirs.metadata import Metadata
 
 logger = logging.getLogger(__name__)
 

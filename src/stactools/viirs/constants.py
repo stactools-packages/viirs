@@ -1,4 +1,9 @@
 from pystac import MediaType
+from enum import Enum, auto
+
+
+class Products(Enum):
+    VNP09H1 = auto()
 
 CLASSIFICATION_EXTENSION_HREF = ("https://stac-extensions.github.io/"
                                  "classification/v1.0.0/schema.json")
@@ -18,10 +23,10 @@ METADATA_ASSET_PROPERTIES = {
 BINSIZE_500M = 463.313
 BINSIZE_1000M = 926.625
 SPATIAL_RESOLUTION = {
-    "VNP09H1": BINSIZE_500M
+    Products.VNP09H1.name: BINSIZE_500M
 }
 
 WKT2_METERS = "PROJCS[\"unnamed\",GEOGCS[\"Unknown datum based upon the custom spheroid\",DATUM[\"Not specified (based on custom spheroid)\",SPHEROID[\"Custom spheroid\",6371007.181,0]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Sinusoidal\"],PARAMETER[\"longitude_of_center\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"Meter\",1],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]"
 WKT2 = {
-    "VNP09H1": WKT2_METERS
+    Products.VNP09H1.name: WKT2_METERS
 }
