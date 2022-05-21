@@ -1,7 +1,6 @@
 import warnings
-from typing import Any, Dict, List, cast
+from typing import List, cast
 
-import h5py
 import rasterio
 from rasterio.errors import NotGeoreferencedWarning
 
@@ -10,7 +9,7 @@ def subdatasets(href: str) -> List[str]:
     """Returns a list of HDF file subdatasets.
 
     Includes a warning-catcher so you don't get a "no CRS" warning while doing it.
-    
+
     Args:
         href (str): HREF to a VIIRS H5 file.
 

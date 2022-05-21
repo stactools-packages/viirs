@@ -61,11 +61,19 @@
   ],
   "assets": {
     "hdf5": {
-      "href": "zz-mystuff/VNP09H1/11/05/2022097/VNP09H1.A2022097.h11v05.001.2022105085030.h5",
+      "href": "/Users/pjh/dev/viirs/zz-mystuff/VNP09H1/11/05/2022097/VNP09H1.A2022097.h11v05.001.2022105085030.h5",
       "type": "application/x-hdf5",
       "title": "Source data containing all bands",
       "roles": [
         "data"
+      ]
+    },
+    "metadata": {
+      "href": "/Users/pjh/dev/viirs/zz-mystuff/VNP09H1/11/05/2022097/VNP09H1.A2022097.h11v05.001.2022105085030.h5.xml",
+      "type": "application/xml",
+      "title": "Earth Observing System Data and Information System (EOSDIS) metadata",
+      "roles": [
+        "metadata"
       ]
     }
   },

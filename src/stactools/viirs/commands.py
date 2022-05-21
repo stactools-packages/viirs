@@ -1,11 +1,11 @@
 import logging
-from typing import Optional
 import os
+from typing import Optional
 
 import click
 from click import Command, Group
 
-from stactools.viirs import stac, cog
+from stactools.viirs import cog, stac
 
 logger = logging.getLogger(__name__)
 

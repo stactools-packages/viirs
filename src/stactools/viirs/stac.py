@@ -1,5 +1,4 @@
 import logging
-from asyncio import constants
 from datetime import datetime, timezone
 from typing import List, Optional
 
@@ -65,13 +64,13 @@ def create_item(
     item.common_metadata.created = metadata.created_datetime
 
     properties = constants.HDF5_ASSET_PROPERTIES.copy()
-    # Need to make the HREF absolute!
-    properties["href"] = h5_href
+    properties["href"] = pystac.utils.make_absolute_href(h5_href)
     item.add_asset(constants.HDF5_ASSET_KEY, Asset.from_dict(properties))
 
-    # properties = METADATA_ASSET_PROPERTIES.copy()
-    # properties["href"] = xml_href
-    # item.add_asset(METADATA_ASSET_KEY, Asset.from_dict(properties))
+    if metadata.xml_href:
+        properties = constants.METADATA_ASSET_PROPERTIES.copy()
+        properties["href"] = pystac.utils.make_absolute_href(metadata.xml_href)
+        item.add_asset(constants.METADATA_ASSET_KEY, Asset.from_dict(properties))
 
     projection = ProjectionExtension.ext(item, add_if_missing=True)
     projection.epsg = metadata.epsg

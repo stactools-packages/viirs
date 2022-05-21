@@ -1,34 +1,29 @@
 import ast
-import re
-import datetime
-import os.path
-from typing import Optional, cast, List
 import logging
+import os.path
 import warnings
+from typing import List, Optional, cast
 
+import h5py
+import rasterio
 import shapely.geometry
-from lxml import etree
+from dateutil import parser
+from rasterio.errors import NotGeoreferencedWarning
 from shapely.geometry import Polygon
 from stactools.core.io import ReadHrefModifier
-import rasterio
 from stactools.core.utils import href_exists
-import h5py
-from rasterio.errors import NotGeoreferencedWarning
-from dateutil import parser
 
-from stactools.viirs import utils, constants
+from stactools.viirs import constants
 
 logger = logging.getLogger(__name__)
-
-
-class MissingElement(Exception):
-    """An expected element is missing from the XML file"""
 
 
 class Metadata:
     """Structure to hold values fetched from a metadata XML file or other metadata source."""
 
-    def __init__(self, h5_href:str, read_href_modifier: Optional[ReadHrefModifier] = None):
+    def __init__(
+        self, h5_href: str, read_href_modifier: Optional[ReadHrefModifier] = None
+    ):
         """Read metadata from the first h5 dataset and the xml metadata file.
 
         Args:
@@ -53,9 +48,9 @@ class Metadata:
         self._h5_attributes()
         self._h5_metadata()
 
-    def _h5_attributes(self):
+    def _h5_attributes(self) -> None:
         self.id = os.path.splitext(self.tags["LocalGranuleID"])[0]
-        self.product = self.tags["ShortName"]
+        self.product: str = self.tags["ShortName"]
         self.version = self.tags["VersionID"]
 
         latitudes = self.tags["GRingLatitude"].strip().split(" ")
@@ -64,16 +59,6 @@ class Metadata:
         polygon = Polygon(points)
         self.geometry = shapely.geometry.mapping(polygon)
         self.bbox = polygon.bounds
-
-        # def clean_time(date_time: str):
-        #     found_date = re.search(r"\d{4}-\d{2}-\d{2}", date_time)
-        #     found_time = re.search(r"\d{2}:\d{2}:\d{2}.*", date_time)
-        #     if found_date and found_time:
-        #         date_str = found_date.group()
-        #         time_str = found_time.group()
-        #     else:
-        #         raise ValueError(f"Unable to parse datetime string '{date_time}'.")
-        #     return datetime.datetime.fromisoformat(f"{date_str}T{time_str}")
 
         self.start_datetime = parser.parse(self.tags["StartTime"])
         self.end_datetime = parser.parse(self.tags["EndTime"])
@@ -85,20 +70,20 @@ class Metadata:
 
         self.cloud_cover = float(self.tags["HDFEOS_GRIDS_PercentCloud"])
 
-    def _h5_metadata(self):
+    def _h5_metadata(self) -> None:
         with h5py.File(self.read_h5_href, "r") as h5:
-            file_metadata = h5['HDFEOS INFORMATION']['StructMetadata.0'][()].split()
-        metadata = [m.decode('utf-8') for m in file_metadata]
+            file_metadata = h5["HDFEOS INFORMATION"]["StructMetadata.0"][()].split()
+        metadata = [m.decode("utf-8") for m in file_metadata]
         metadata_keys_values = [s.split("=") for s in metadata][:-1]
         metadata_dict = {key: value for key, value in metadata_keys_values}
 
-        self.shape = (int(metadata_dict["YDim"]), int(metadata_dict["XDim"]))
+        self.shape = [int(metadata_dict["YDim"]), int(metadata_dict["XDim"])]
         self.upper_left = ast.literal_eval(metadata_dict["UpperLeftPointMtrs"])
 
     @property
     def collection(self) -> str:
         return self.product[3:]
-    
+
     @property
     def transform(self) -> List[float]:
         left, upper = self.upper_left
@@ -116,7 +101,6 @@ class Metadata:
     @property
     def xml_href(self) -> Optional[str]:
         xml_href = f"{self.h5_href}.xml"
-
         if self.read_href_modifier:
             read_xml_href = self.read_href_modifier(xml_href)
         else:
