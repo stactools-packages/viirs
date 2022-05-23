@@ -46,7 +46,7 @@ class Metadata:
                 self.subdatasets = cast(List[str], dataset.subdatasets)
 
         self._h5_attributes()
-        self._h5_metadata()
+        self._hdfeos_metadata()
 
     def _h5_attributes(self) -> None:
         self.id = os.path.splitext(self.tags["LocalGranuleID"])[0]
@@ -70,15 +70,16 @@ class Metadata:
 
         self.cloud_cover = float(self.tags["HDFEOS_GRIDS_PercentCloud"])
 
-    def _h5_metadata(self) -> None:
+    def _hdfeos_metadata(self) -> None:
         with h5py.File(self.read_h5_href, "r") as h5:
             file_metadata = h5["HDFEOS INFORMATION"]["StructMetadata.0"][()].split()
         metadata = [m.decode("utf-8") for m in file_metadata]
         metadata_keys_values = [s.split("=") for s in metadata][:-1]
         metadata_dict = {key: value for key, value in metadata_keys_values}
 
-        self.shape = [int(metadata_dict["YDim"]), int(metadata_dict["XDim"])]
-        self.upper_left = ast.literal_eval(metadata_dict["UpperLeftPointMtrs"])
+        # XDim = #rows, YDim = #Columns per https://lpdaac.usgs.gov/data/get-started-data/collection-overview/missions/s-npp-nasa-viirs-overview/  # noqa
+        self.shape = [int(metadata_dict["XDim"]), int(metadata_dict["YDim"])]
+        self.left, self.top = ast.literal_eval(metadata_dict["UpperLeftPointMtrs"])
 
     @property
     def collection(self) -> str:
@@ -86,9 +87,8 @@ class Metadata:
 
     @property
     def transform(self) -> List[float]:
-        left, upper = self.upper_left
         px_size = constants.SPATIAL_RESOLUTION[self.product]
-        return [px_size, 0.0, left, 0.0, -px_size, upper]
+        return [px_size, 0.0, self.left, 0.0, -px_size, self.top]
 
     @property
     def wkt2(self) -> str:

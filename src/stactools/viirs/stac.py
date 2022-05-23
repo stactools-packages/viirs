@@ -1,4 +1,5 @@
 import logging
+import os
 from datetime import datetime, timezone
 from typing import List, Optional
 
@@ -15,11 +16,14 @@ from pystac import (
     SpatialExtent,
     TemporalExtent,
 )
+from pystac.extensions.eo import EOExtension
 from pystac.extensions.projection import ProjectionExtension
+from pystac.extensions.raster import RasterExtension
 from stactools.core.io import ReadHrefModifier
 from stactools.core.utils.antimeridian import Strategy
 
 from stactools.viirs import constants
+from stactools.viirs.fragments import STACFragments
 from stactools.viirs.metadata import Metadata
 
 logger = logging.getLogger(__name__)
@@ -59,9 +63,9 @@ def create_item(
             "viirs:tile-id": metadata.tile_id,
         },
     )
-    stactools.core.utils.antimeridian.fix_item(item, antimeridian_strategy)
-
     item.common_metadata.created = metadata.created_datetime
+
+    stactools.core.utils.antimeridian.fix_item(item, antimeridian_strategy)
 
     properties = constants.HDF5_ASSET_PROPERTIES.copy()
     properties["href"] = pystac.utils.make_absolute_href(h5_href)
@@ -72,11 +76,26 @@ def create_item(
         properties["href"] = pystac.utils.make_absolute_href(metadata.xml_href)
         item.add_asset(constants.METADATA_ASSET_KEY, Asset.from_dict(properties))
 
+    if cog_hrefs:
+        fragments = STACFragments(metadata.product)
+        fragments.assets()
+        for href in cog_hrefs:
+            basename = os.path.splitext(os.path.basename(href))[0]
+            subdataset_name = basename.split("_", 1)[1]
+            asset_dict = fragments.subdataset_asset(subdataset_name)
+            asset_dict["href"] = pystac.utils.make_absolute_href(href)
+            item.add_asset(subdataset_name, Asset.from_dict(asset_dict))
+
     projection = ProjectionExtension.ext(item, add_if_missing=True)
     projection.epsg = metadata.epsg
     projection.wkt2 = metadata.wkt2
     projection.transform = metadata.transform
     projection.shape = metadata.shape
+
+    EOExtension.add_to(item)
+    RasterExtension.add_to(item)
+    # How to add classification extension? Is it always present?
+    item.stac_extensions.append(constants.CLASSIFICATION_EXTENSION_HREF)
 
     return item
 

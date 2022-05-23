@@ -64,11 +64,11 @@
     },
     "SurfReflect_State_500m": {
         "roles": [
-            "metadata"
+            "data"
         ],
         "raster:bands": [
             {
-                "data_type": "uint16",
+                "data_type": "uint16", 
                 "spatial_resolution": 500
             }
         ],
@@ -76,7 +76,7 @@
     },
     "SurfReflect_QC_500m": {
         "roles": [
-            "metadata"
+            "data"
         ],
         "raster:bands": [
             {

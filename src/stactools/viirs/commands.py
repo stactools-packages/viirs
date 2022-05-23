@@ -4,6 +4,7 @@ from typing import Optional
 
 import click
 from click import Command, Group
+from stactools.core.utils.antimeridian import Strategy
 
 from stactools.viirs import cog, stac
 
@@ -22,22 +23,19 @@ def create_viirs_command(cli: Group) -> Command:
 
     @viirs.command("create-cogs", short_help="Create subdataset COGs")
     @click.argument("INFILE")
-    @click.option("-o", "--outdir", help="directory for COG files")
+    @click.option("-o", "--outdir", help="directory for COG file")
     def create_cogs(infile: str, outdir: Optional[str]) -> None:
         """Creates a COG for each subdataset in an HDF5 file.
 
         \b
         Args:
             infile (str): HREF to a VIIRS HDF5 file
-            outdir (Optional[str]): Optional directory for the COGs; default is
-                to save the COGs to the same directory as the HDF5 file.
+            outdir (str): The directory that will contain the COGs. The default
+                is the HDF5 directory.
         """
         if outdir is None:
             outdir = os.path.dirname(infile)
-        paths, subdataset_names = cog.cogify(infile, outdir)
-
-        for path, subdataset_name in zip(paths, subdataset_names):
-            print(f"Subdataset '{subdataset_name}' COG saved to {path}")
+        cog.cogify(infile, outdir)
 
         return None
 
@@ -45,31 +43,60 @@ def create_viirs_command(cli: Group) -> Command:
     @click.argument("INFILE")
     @click.argument("OUTDIR")
     @click.option(
+        "-a",
+        "--antimeridian_strategy",
+        type=click.Choice(["normalize", "split"], case_sensitive=False),
+        default="split",
+        show_default=True,
+        help="geometry strategy for antimeridian scenes",
+    )
+    @click.option(
         "-c",
         "--cogify",
         is_flag=True,
         help="Convert the HDF5 subdatasets into COGs",
         default=False,
     )
-    def create_item_command(infile: str, outdir: str, cogify: bool) -> None:
+    @click.option(
+        "-f", "--file-list", help="File containing list of subdataset COG HREFs"
+    )
+    def create_item_command(
+        infile: str,
+        outdir: str,
+        antimeridian_strategy: str,
+        cogify: bool,
+        file_list: Optional[str],
+    ) -> None:
         """Creates a STAC Item based on metadata from an .hdf.xml MODIS file.
 
         \b
         Args:
-            infile (str): The source HDF5 file. A .h5.xml metadata file is
-                expected to reside alongside the .h5 source file.
+            infile (str): The source HDF5 file.
             outdir (str): Directory that will contain the STAC Item.
-            cogify (bool, optional): Convert the .h5 file into multiple
-                Cloud-Optimized GeoTIFFs, one per subdataset. The COGs will
-                saved alongside the .h5 file.
+            antimeridian_strategy (str, optional): Choice of 'normalize' or
+                'split' to either split the Item geometry on -180 longitude or
+                normalize the Item geometry so all longitudes are either
+                positive or negative. Default is 'split'.
+            cogify (bool, optional): Flag to create COGS from the subdatasets in
+                the .h5 file The COGs will saved alongside the HDF5 file. COGs
+                will not be created if the file_list option is also supplied.
+            file_list (str, optional): Text file containing one HREF per line.
+                The HREFs should point to subdataset COG files.
         """
-        paths = None
-        if cogify:
+        strategy = Strategy[antimeridian_strategy.upper()]
+
+        hrefs = None
+        if file_list:
+            with open(file_list) as file:
+                hrefs = [line.strip() for line in file.readlines()]
+        elif cogify:
             h5dir = os.path.dirname(infile)
-            paths, subdataset_names = cog.cogify(infile, h5dir)
-        item = stac.create_item(infile, cog_hrefs=paths)
-        item_path = os.path.join(outdir, "{}.json".format(item.id))
+            hrefs, _ = cog.cogify(infile, h5dir)
+
+        item = stac.create_item(infile, cog_hrefs=hrefs, antimeridian_strategy=strategy)
+        item_path = os.path.join(outdir, f"{item.id}.json")
         item.set_self_href(item_path)
+        item.make_asset_hrefs_relative()
         item.validate()
         item.save_object()
 

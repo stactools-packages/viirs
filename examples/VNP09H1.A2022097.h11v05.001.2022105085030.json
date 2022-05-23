@@ -61,7 +61,7 @@
   ],
   "assets": {
     "hdf5": {
-      "href": "/Users/pjh/dev/viirs/zz-mystuff/VNP09H1/11/05/2022097/VNP09H1.A2022097.h11v05.001.2022105085030.h5",
+      "href": "../zz-mystuff/VNP09H1/11/05/2022097/VNP09H1.A2022097.h11v05.001.2022105085030.h5",
       "type": "application/x-hdf5",
       "title": "Source data containing all bands",
       "roles": [
@@ -69,11 +69,108 @@
       ]
     },
     "metadata": {
-      "href": "/Users/pjh/dev/viirs/zz-mystuff/VNP09H1/11/05/2022097/VNP09H1.A2022097.h11v05.001.2022105085030.h5.xml",
+      "href": "../zz-mystuff/VNP09H1/11/05/2022097/VNP09H1.A2022097.h11v05.001.2022105085030.h5.xml",
       "type": "application/xml",
       "title": "Earth Observing System Data and Information System (EOSDIS) metadata",
       "roles": [
         "metadata"
+      ]
+    },
+    "SurfReflect_I1": {
+      "href": "../zz-mystuff/VNP09H1/11/05/2022097/VNP09H1.A2022097.h11v05.001.2022105085030_SurfReflect_I1.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Surface Reflectance Band I1",
+      "eo:bands": [
+        {
+          "name": "SurfReflect_I1",
+          "common_name": "red",
+          "center_wavelength": 0.64,
+          "full_width_half_max": 0.075
+        }
+      ],
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "scale": 0.0001,
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "reflectance"
+      ]
+    },
+    "SurfReflect_I2": {
+      "href": "../zz-mystuff/VNP09H1/11/05/2022097/VNP09H1.A2022097.h11v05.001.2022105085030_SurfReflect_I2.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Surface Reflectance Band I2",
+      "eo:bands": [
+        {
+          "name": "SurfReflect_I2",
+          "common_name": "nir09",
+          "center_wavelength": 0.865,
+          "full_width_half_max": 0.039
+        }
+      ],
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "scale": 0.0001,
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "reflectance"
+      ]
+    },
+    "SurfReflect_I3": {
+      "href": "../zz-mystuff/VNP09H1/11/05/2022097/VNP09H1.A2022097.h11v05.001.2022105085030_SurfReflect_I3.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Surface Reflectance Band I3",
+      "eo:bands": [
+        {
+          "name": "SurfReflect_I3",
+          "common_name": "swir16",
+          "center_wavelength": 1.61,
+          "full_width_half_max": 0.06
+        }
+      ],
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "scale": 0.0001,
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "reflectance"
+      ]
+    },
+    "SurfReflect_QC_500m": {
+      "href": "../zz-mystuff/VNP09H1/11/05/2022097/VNP09H1.A2022097.h11v05.001.2022105085030_SurfReflect_QC_500m.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Surface Reflectance Band Quality Control (QC)",
+      "raster:bands": [
+        {
+          "data_type": "uint16",
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "SurfReflect_State_500m": {
+      "href": "../zz-mystuff/VNP09H1/11/05/2022097/VNP09H1.A2022097.h11v05.001.2022105085030_SurfReflect_State_500m.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Surface Reflectance State Quality Assurance (QA)",
+      "raster:bands": [
+        {
+          "data_type": "uint16",
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data"
       ]
     }
   },
@@ -84,6 +181,9 @@
     40.053954
   ],
   "stac_extensions": [
-    "https://stac-extensions.github.io/projection/v1.0.0/schema.json"
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/raster/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/classification/v1.0.0/schema.json"
   ]
 }
