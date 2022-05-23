@@ -78,11 +78,11 @@ def create_item(
 
     if cog_hrefs:
         fragments = STACFragments(metadata.product)
-        fragments.assets()
+        fragments.load_assets()
         for href in cog_hrefs:
             basename = os.path.splitext(os.path.basename(href))[0]
             subdataset_name = basename.split("_", 1)[1]
-            asset_dict = fragments.subdataset_asset(subdataset_name)
+            asset_dict = fragments.subdataset_dict(subdataset_name)
             asset_dict["href"] = pystac.utils.make_absolute_href(href)
             item.add_asset(subdataset_name, Asset.from_dict(asset_dict))
 

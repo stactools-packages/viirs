@@ -42,42 +42,49 @@ class Metadata:
         with warnings.catch_warnings():
             warnings.simplefilter("ignore", category=NotGeoreferencedWarning)
             with rasterio.open(self.read_h5_href) as dataset:
-                self.tags = dataset.tags()
+                tags = dataset.tags()
+                self.tags = {k.lower(): v for k, v in tags.items()}
                 self.subdatasets = cast(List[str], dataset.subdatasets)
 
         self._h5_attributes()
         self._hdfeos_metadata()
 
     def _h5_attributes(self) -> None:
-        self.id = os.path.splitext(self.tags["LocalGranuleID"])[0]
-        self.product: str = self.tags["ShortName"]
-        self.version = self.tags["VersionID"]
+        self.id = os.path.splitext(self.tags["localgranuleid"])[0]
+        self.product: str = self.tags["shortname"]
+        self.version = self.tags["versionid"]
 
-        latitudes = self.tags["GRingLatitude"].strip().split(" ")
-        longitudes = self.tags["GRingLongitude"].strip().split(" ")
+        latitudes = self.tags["gringlatitude"].strip().split(" ")
+        longitudes = self.tags["gringlongitude"].strip().split(" ")
         points = [(float(lon), float(lat)) for lon, lat in zip(longitudes, latitudes)]
         polygon = Polygon(points)
         self.geometry = shapely.geometry.mapping(polygon)
         self.bbox = polygon.bounds
 
-        self.start_datetime = parser.parse(self.tags["StartTime"])
-        self.end_datetime = parser.parse(self.tags["EndTime"])
-        self.created_datetime = parser.parse(self.tags["ProductionTime"])
+        self.start_datetime = parser.parse(self.tags["starttime"])
+        self.end_datetime = parser.parse(self.tags["endtime"])
+        self.created_datetime = parser.parse(self.tags["productiontime"])
 
-        self.horizontal_tile = int(self.tags["HorizontalTileNumber"])
-        self.vertical_tile = int(self.tags["VerticalTileNumber"])
-        self.tile_id = self.tags["TileID"]
+        self.horizontal_tile = int(self.tags["horizontaltilenumber"])
+        self.vertical_tile = int(self.tags["verticaltilenumber"])
+        self.tile_id = self.tags["tileid"]
 
-        self.cloud_cover = float(self.tags["HDFEOS_GRIDS_PercentCloud"])
+        cloud_cover = self.tags.get("hdfeos_grids_percentcloud", None)
+        if cloud_cover:
+            self.cloud_cover = float(cloud_cover)
 
     def _hdfeos_metadata(self) -> None:
         with h5py.File(self.read_h5_href, "r") as h5:
-            file_metadata = h5["HDFEOS INFORMATION"]["StructMetadata.0"][()].split()
-        metadata = [m.decode("utf-8") for m in file_metadata]
-        metadata_keys_values = [s.split("=") for s in metadata][:-1]
+            metadata_str = (
+                h5["HDFEOS INFORMATION"]["StructMetadata.0"][()].decode("utf-8").strip()
+            )
+        split_str = [m.strip() for m in metadata_str.split("\n")]
+        metadata_keys_values = [s.split("=") for s in split_str][:-1]
         metadata_dict = {key: value for key, value in metadata_keys_values}
 
-        # XDim = #rows, YDim = #Columns per https://lpdaac.usgs.gov/data/get-started-data/collection-overview/missions/s-npp-nasa-viirs-overview/  # noqa
+        # XDim = #rows, YDim = #Columns. Seems backwards. But correct per
+        # https://lpdaac.usgs.gov/data/get-started-data/collection-overview/
+        # missions/s-npp-nasa-viirs-overview/
         self.shape = [int(metadata_dict["XDim"]), int(metadata_dict["YDim"])]
         self.left, self.top = ast.literal_eval(metadata_dict["UpperLeftPointMtrs"])
 
