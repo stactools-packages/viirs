@@ -63,6 +63,8 @@ def create_item(
             "viirs:tile-id": metadata.tile_id,
         },
     )
+    if metadata.cloud_cover:
+        item.properties["eo:cloud_cover"] = metadata.cloud_cover
     item.common_metadata.created = metadata.created_datetime
 
     stactools.core.utils.antimeridian.fix_item(item, antimeridian_strategy)
