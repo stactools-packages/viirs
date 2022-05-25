@@ -3,7 +3,7 @@ from typing import List, Tuple
 
 from stactools.core.utils.subprocess import call
 
-from stactools.viirs import constants
+from stactools.viirs import utils
 from stactools.viirs.metadata import Metadata
 
 
@@ -19,8 +19,8 @@ def cogify(infile: str, outdir: str) -> Tuple[List[str], List[str]]:
             - The first element is a list of the output tif paths
             - The second element is a list of subdataset names
     """
-    metadata = Metadata(infile)
-    subdatasets = metadata.subdatasets
+    metadata = Metadata.from_h5(infile)
+    subdatasets = utils.subdatasets(infile)
     base_file_name = os.path.splitext(os.path.basename(infile))[0]
     paths = []
     subdataset_names = []
@@ -33,7 +33,7 @@ def cogify(infile: str, outdir: str) -> Tuple[List[str], List[str]]:
         file_name = f"{base_file_name}_{sanitized_subdataset_name}.tif"
         outfile = os.path.join(outdir, file_name)
 
-        px_size = constants.SPATIAL_RESOLUTION[metadata.product]
+        px_size = metadata.spatial_resolution
         height, width = metadata.shape
         ulx = metadata.left
         uly = metadata.top

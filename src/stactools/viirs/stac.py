@@ -1,21 +1,10 @@
 import logging
 import os
-from datetime import datetime, timezone
 from typing import List, Optional
 
 import pystac.utils
 import stactools.core.utils.antimeridian
-from pystac import (
-    Asset,
-    CatalogType,
-    Collection,
-    Extent,
-    Item,
-    Provider,
-    ProviderRole,
-    SpatialExtent,
-    TemporalExtent,
-)
+from pystac import Asset, Item
 from pystac.extensions.eo import EOExtension
 from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.raster import RasterExtension
@@ -23,8 +12,8 @@ from stactools.core.io import ReadHrefModifier
 from stactools.core.utils.antimeridian import Strategy
 
 from stactools.viirs import constants
-from stactools.viirs.fragments import STACFragments
-from stactools.viirs.metadata import Metadata
+from stactools.viirs.fragment import STACFragments
+from stactools.viirs.metadata import viirs_metadata
 
 logger = logging.getLogger(__name__)
 
@@ -48,7 +37,7 @@ def create_item(
     Returns:
         pystac.Item: A STAC Item representing the VIIRS data.
     """
-    metadata = Metadata(h5_href, read_href_modifier)
+    metadata = viirs_metadata(h5_href, read_href_modifier)
 
     item = Item(
         id=metadata.id,
@@ -63,8 +52,8 @@ def create_item(
             "viirs:tile-id": metadata.tile_id,
         },
     )
-    if metadata.cloud_cover:
-        item.properties["eo:cloud_cover"] = metadata.cloud_cover
+    if metadata.percent_cloud_cover:
+        item.properties["eo:cloud_cover"] = metadata.percent_cloud_cover
     item.common_metadata.created = metadata.created_datetime
 
     stactools.core.utils.antimeridian.fix_item(item, antimeridian_strategy)
@@ -96,48 +85,9 @@ def create_item(
 
     EOExtension.add_to(item)
     RasterExtension.add_to(item)
-    # How to add classification extension? Is it always present?
-    item.stac_extensions.append(constants.CLASSIFICATION_EXTENSION_HREF)
+    for asset_key in item.assets.keys():
+        if "classification" in asset_key:
+            item.stac_extensions.append(constants.CLASSIFICATION_EXTENSION_HREF)
+            break
 
     return item
-
-
-def create_collection() -> Collection:
-    """Create a STAC Collection
-
-    This function includes logic to extract all relevant metadata from
-    an asset describing the STAC collection and/or metadata coded into an
-    accompanying constants.py file.
-
-    See `Collection<https://pystac.readthedocs.io/en/latest/api.html#collection>`_.
-
-    Returns:
-        Collection: STAC Collection object
-    """
-    providers = [
-        Provider(
-            name="The OS Community",
-            roles=[ProviderRole.PRODUCER, ProviderRole.PROCESSOR, ProviderRole.HOST],
-            url="https://github.com/stac-utils/stactools",
-        )
-    ]
-
-    # Time must be in UTC
-    demo_time = datetime.now(tz=timezone.utc)
-
-    extent = Extent(
-        SpatialExtent([[-180.0, 90.0, 180.0, -90.0]]),
-        TemporalExtent([[demo_time, None]]),
-    )
-
-    collection = Collection(
-        id="my-collection-id",
-        title="A dummy STAC Collection",
-        description="Used for demonstration purposes",
-        license="CC-0",
-        providers=providers,
-        extent=extent,
-        catalog_type=CatalogType.RELATIVE_PUBLISHED,
-    )
-
-    return collection

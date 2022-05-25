@@ -31,7 +31,7 @@ class STACFragments:
     def _load(self, file_name: str) -> Any:
         try:
             with pkg_resources.resource_stream(
-                "stactools.viirs.fragments", f"fragments/{self.product}/{file_name}"
+                "stactools.viirs.fragment", f"fragments/{self.product}/{file_name}"
             ) as stream:
                 return json.load(stream)
         except FileNotFoundError as e:
