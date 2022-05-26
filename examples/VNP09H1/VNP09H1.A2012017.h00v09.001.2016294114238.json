@@ -175,217 +175,217 @@
       "raster:bands": [
         {
           "data_type": "uint16",
-          "spatial_resolution": 500,
-          "classification:bitfields": [
+          "spatial_resolution": 500
+        }
+      ],
+      "classification:bitfields": [
+        {
+          "name": "modland_qa",
+          "description": "MODLAND QA bits",
+          "offset": 0,
+          "length": 1,
+          "classes": [
             {
-              "name": "modland_qa",
-              "description": "MODLAND QA bits",
-              "offset": 0,
-              "length": 1,
-              "classes": [
-                {
-                  "name": "corrected_ideal",
-                  "description": "Corrected product produced at ideal quality all bands",
-                  "value": 0
-                },
-                {
-                  "name": "corrected_not_ideal",
-                  "description": "Corrected product produced at less than ideal quality some or all bands",
-                  "value": 1
-                },
-                {
-                  "name": "not_corrected_cloud",
-                  "description": "Corrected product not produced due to cloud effects all bands",
-                  "value": 2
-                },
-                {
-                  "name": "not_corrected_other",
-                  "description": "Corrected product not produced due to other reasons some or all bands may be fill value [Note that a value of (3) overrides a value of (1)]",
-                  "value": 3
-                }
-              ]
+              "name": "corrected_ideal",
+              "description": "Corrected product produced at ideal quality all bands",
+              "value": 0
             },
             {
-              "name": "cloud_state",
-              "offset": 2,
-              "length": 2,
-              "classes": [
-                {
-                  "name": "always",
-                  "description": "Always set at 3. Users should use cloud_state in the Surface Reflectance State Quality Assurance (QA) band.",
-                  "value": 3
-                }
-              ]
+              "name": "corrected_not_ideal",
+              "description": "Corrected product produced at less than ideal quality some or all bands",
+              "value": 1
             },
             {
-              "name": "band_1_quality",
-              "description": "Band 1 data quality four bit range",
-              "offset": 4,
-              "length": 4,
-              "classes": [
-                {
-                  "name": "highest_quality",
-                  "description": "Highest quality",
-                  "value": 0
-                },
-                {
-                  "name": "noisy_detector",
-                  "description": "Noisy detector",
-                  "value": 7
-                },
-                {
-                  "name": "dead_detector",
-                  "description": "Dead detector, data interpolated in L1B",
-                  "value": 8
-                },
-                {
-                  "name": "zenith_86",
-                  "description": "Solar zenith >= 86 degrees",
-                  "value": 9
-                },
-                {
-                  "name": "zenith_85_86",
-                  "description": "Solar zenith >= 85 and < 86 degrees",
-                  "value": 10
-                },
-                {
-                  "name": "missing_input",
-                  "description": "Missing input",
-                  "value": 11
-                },
-                {
-                  "name": "internal_constant_used",
-                  "description": "Internal constant used in place of climatological data for at least one atmospheric constant",
-                  "value": 12
-                },
-                {
-                  "name": "constrained",
-                  "description": "Correction out of bounds, pixel constrained to extreme allowable value",
-                  "value": 13
-                },
-                {
-                  "name": "l1b_data_faulty",
-                  "description": "L1B data faulty",
-                  "value": 14
-                },
-                {
-                  "name": "not_processed",
-                  "description": "Not processed due to deep ocean or clouds",
-                  "value": 15
-                }
-              ]
+              "name": "not_corrected_cloud",
+              "description": "Corrected product not produced due to cloud effects all bands",
+              "value": 2
             },
             {
-              "name": "band_2_quality",
-              "description": "Band 2 data quality four bit range",
-              "offset": 8,
-              "length": 4,
-              "classes": [
-                {
-                  "name": "highest_quality",
-                  "description": "Hhighest quality",
-                  "value": 0
-                },
-                {
-                  "name": "noisy_detector",
-                  "description": "Noisy detector",
-                  "value": 7
-                },
-                {
-                  "name": "dead_detector",
-                  "description": "Dead detector, data interpolated in L1B",
-                  "value": 8
-                },
-                {
-                  "name": "zenith_86",
-                  "description": "Solar zenith >= 86 degrees",
-                  "value": 9
-                },
-                {
-                  "name": "zenith_85_86",
-                  "description": "Solar zenith >= 85 and < 86 degrees",
-                  "value": 10
-                },
-                {
-                  "name": "missing_input",
-                  "description": "Missing input",
-                  "value": 11
-                },
-                {
-                  "name": "internal_constant",
-                  "description": "Internal constant used in place of climatological data for at least one atmospheric constant",
-                  "value": 12
-                },
-                {
-                  "name": "constrained",
-                  "description": "Correction out of bounds, pixel constrained to extreme allowable value",
-                  "value": 13
-                },
-                {
-                  "name": "l1b_data_faulty",
-                  "description": "L1B data faulty",
-                  "value": 14
-                },
-                {
-                  "name": "not_processed",
-                  "description": "Not processed due to deep ocean or clouds",
-                  "value": 15
-                }
-              ]
+              "name": "not_corrected_other",
+              "description": "Corrected product not produced due to other reasons some or all bands may be fill value [Note that a value of (3) overrides a value of (1)]",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "name": "cloud_state",
+          "offset": 2,
+          "length": 2,
+          "classes": [
+            {
+              "name": "always",
+              "description": "Always set at 3. Users should use cloud_state in the Surface Reflectance State Quality Assurance (QA) band.",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "name": "band_1_quality",
+          "description": "Band 1 data quality four bit range",
+          "offset": 4,
+          "length": 4,
+          "classes": [
+            {
+              "name": "highest_quality",
+              "description": "Highest quality",
+              "value": 0
             },
             {
-              "name": "atmospheric_correction",
-              "description": "Atmospheric correction performed",
-              "offset": 12,
-              "length": 1,
-              "classes": [
-                {
-                  "name": "yes",
-                  "description": "Yes",
-                  "value": 1
-                },
-                {
-                  "name": "no",
-                  "description": "No",
-                  "value": 0
-                }
-              ]
+              "name": "noisy_detector",
+              "description": "Noisy detector",
+              "value": 7
             },
             {
-              "name": "adjacency_correction",
-              "description": "Adjacency correction performed",
-              "offset": 13,
-              "length": 1,
-              "classes": [
-                {
-                  "name": "yes",
-                  "description": "Yes",
-                  "value": 1
-                },
-                {
-                  "name": "no",
-                  "description": "No",
-                  "value": 0
-                }
-              ]
+              "name": "dead_detector",
+              "description": "Dead detector, data interpolated in L1B",
+              "value": 8
             },
             {
-              "name": "different_orbit",
-              "description": "Different orbit from 500 m",
-              "offset": 14,
-              "length": 1,
-              "classes": [
-                {
-                  "name": "yes",
-                  "description": "Yes",
-                  "value": 1
-                },
-                {
-                  "name": "no",
-                  "description": "No",
-                  "value": 0
-                }
-              ]
+              "name": "zenith_86",
+              "description": "Solar zenith >= 86 degrees",
+              "value": 9
+            },
+            {
+              "name": "zenith_85_86",
+              "description": "Solar zenith >= 85 and < 86 degrees",
+              "value": 10
+            },
+            {
+              "name": "missing_input",
+              "description": "Missing input",
+              "value": 11
+            },
+            {
+              "name": "internal_constant_used",
+              "description": "Internal constant used in place of climatological data for at least one atmospheric constant",
+              "value": 12
+            },
+            {
+              "name": "constrained",
+              "description": "Correction out of bounds, pixel constrained to extreme allowable value",
+              "value": 13
+            },
+            {
+              "name": "l1b_data_faulty",
+              "description": "L1B data faulty",
+              "value": 14
+            },
+            {
+              "name": "not_processed",
+              "description": "Not processed due to deep ocean or clouds",
+              "value": 15
+            }
+          ]
+        },
+        {
+          "name": "band_2_quality",
+          "description": "Band 2 data quality four bit range",
+          "offset": 8,
+          "length": 4,
+          "classes": [
+            {
+              "name": "highest_quality",
+              "description": "Highest quality",
+              "value": 0
+            },
+            {
+              "name": "noisy_detector",
+              "description": "Noisy detector",
+              "value": 7
+            },
+            {
+              "name": "dead_detector",
+              "description": "Dead detector, data interpolated in L1B",
+              "value": 8
+            },
+            {
+              "name": "zenith_86",
+              "description": "Solar zenith >= 86 degrees",
+              "value": 9
+            },
+            {
+              "name": "zenith_85_86",
+              "description": "Solar zenith >= 85 and < 86 degrees",
+              "value": 10
+            },
+            {
+              "name": "missing_input",
+              "description": "Missing input",
+              "value": 11
+            },
+            {
+              "name": "internal_constant",
+              "description": "Internal constant used in place of climatological data for at least one atmospheric constant",
+              "value": 12
+            },
+            {
+              "name": "constrained",
+              "description": "Correction out of bounds, pixel constrained to extreme allowable value",
+              "value": 13
+            },
+            {
+              "name": "l1b_data_faulty",
+              "description": "L1B data faulty",
+              "value": 14
+            },
+            {
+              "name": "not_processed",
+              "description": "Not processed due to deep ocean or clouds",
+              "value": 15
+            }
+          ]
+        },
+        {
+          "name": "atmospheric_correction",
+          "description": "Atmospheric correction performed",
+          "offset": 12,
+          "length": 1,
+          "classes": [
+            {
+              "name": "yes",
+              "description": "Yes",
+              "value": 1
+            },
+            {
+              "name": "no",
+              "description": "No",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "name": "adjacency_correction",
+          "description": "Adjacency correction performed",
+          "offset": 13,
+          "length": 1,
+          "classes": [
+            {
+              "name": "yes",
+              "description": "Yes",
+              "value": 1
+            },
+            {
+              "name": "no",
+              "description": "No",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "name": "different_orbit",
+          "description": "Different orbit from 500 m",
+          "offset": 14,
+          "length": 1,
+          "classes": [
+            {
+              "name": "yes",
+              "description": "Yes",
+              "value": 1
+            },
+            {
+              "name": "no",
+              "description": "No",
+              "value": 0
             }
           ]
         }
@@ -401,190 +401,190 @@
       "raster:bands": [
         {
           "data_type": "uint16",
-          "spatial_resolution": 500,
-          "classification:bitfields": [
+          "spatial_resolution": 500
+        }
+      ],
+      "classification:bitfields": [
+        {
+          "name": "cloud_state",
+          "offset": 0,
+          "length": 2,
+          "classes": [
             {
-              "name": "cloud_state",
-              "offset": 0,
-              "length": 2,
-              "classes": [
-                {
-                  "name": "clear",
-                  "description": "clear",
-                  "value": 0
-                },
-                {
-                  "name": "cloudy",
-                  "description": "cloudy",
-                  "value": 1
-                },
-                {
-                  "name": "mixed",
-                  "description": "mixed",
-                  "value": 2
-                },
-                {
-                  "name": "not_set",
-                  "description": "not set, assumed clear",
-                  "value": 3
-                }
-              ]
+              "name": "clear",
+              "description": "clear",
+              "value": 0
             },
             {
-              "name": "cloud_shadow",
-              "offset": 2,
-              "length": 1,
-              "classes": [
-                {
-                  "name": "yes",
-                  "description": "yes",
-                  "value": 1
-                },
-                {
-                  "name": "no",
-                  "description": "no",
-                  "value": 0
-                }
-              ]
+              "name": "cloudy",
+              "description": "cloudy",
+              "value": 1
             },
             {
-              "name": "land_water",
-              "description": "Land/water flag",
-              "offset": 3,
-              "length": 3,
-              "classes": [
-                {
-                  "name": "shallow_ocean",
-                  "description": "shallow ocean",
-                  "value": 0
-                },
-                {
-                  "name": "land",
-                  "description": "land",
-                  "value": 1
-                },
-                {
-                  "name": "shorelines",
-                  "description": "ocean coastlines and lake shorelines",
-                  "value": 2
-                },
-                {
-                  "name": "shallow_inland_water",
-                  "description": "shallow inland water",
-                  "value": 3
-                },
-                {
-                  "name": "ephemeral_water",
-                  "description": "ephemeral water",
-                  "value": 4
-                },
-                {
-                  "name": "deep_inland_water",
-                  "description": "deep inland water",
-                  "value": 5
-                },
-                {
-                  "name": "continental_moderate_ocean",
-                  "description": "continental/moderate ocean",
-                  "value": 6
-                },
-                {
-                  "name": "deep_ocean",
-                  "description": "deep ocean",
-                  "value": 7
-                }
-              ]
+              "name": "mixed",
+              "description": "mixed",
+              "value": 2
             },
             {
-              "name": "aerosol_uncertainty",
-              "description": "Aerosol quantity: level of uncertainty in aerosol correction",
-              "offset": 6,
-              "length": 2,
-              "classes": [
-                {
-                  "name": "climatology",
-                  "description": "climatology",
-                  "value": 0
-                },
-                {
-                  "name": "low",
-                  "description": "low",
-                  "value": 1
-                },
-                {
-                  "name": "average",
-                  "description": "average",
-                  "value": 2
-                },
-                {
-                  "name": "high",
-                  "description": "high",
-                  "value": 3
-                }
-              ]
+              "name": "not_set",
+              "description": "not set, assumed clear",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "name": "cloud_shadow",
+          "offset": 2,
+          "length": 1,
+          "classes": [
+            {
+              "name": "yes",
+              "description": "yes",
+              "value": 1
             },
             {
-              "name": "cirrus_detected",
-              "offset": 8,
-              "length": 2,
-              "classes": [
-                {
-                  "name": "none",
-                  "description": "none",
-                  "value": 0
-                },
-                {
-                  "name": "small",
-                  "description": "small",
-                  "value": 1
-                },
-                {
-                  "name": "average",
-                  "description": "average",
-                  "value": 2
-                },
-                {
-                  "name": "high",
-                  "description": "high",
-                  "value": 3
-                }
-              ]
+              "name": "no",
+              "description": "no",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "name": "land_water",
+          "description": "Land/water flag",
+          "offset": 3,
+          "length": 3,
+          "classes": [
+            {
+              "name": "shallow_ocean",
+              "description": "shallow ocean",
+              "value": 0
             },
             {
-              "name": "snow_ice",
-              "description": "Snow/ice flag",
-              "offset": 12,
-              "length": 1,
-              "classes": [
-                {
-                  "name": "yes",
-                  "description": "yes",
-                  "value": 1
-                },
-                {
-                  "name": "no",
-                  "description": "no",
-                  "value": 0
-                }
-              ]
+              "name": "land",
+              "description": "land",
+              "value": 1
             },
             {
-              "name": "cloud_adjacent",
-              "description": "Pixel is adjacent to cloud",
-              "offset": 13,
-              "length": 1,
-              "classes": [
-                {
-                  "name": "yes",
-                  "description": "yes",
-                  "value": 1
-                },
-                {
-                  "name": "no",
-                  "description": "no",
-                  "value": 0
-                }
-              ]
+              "name": "shorelines",
+              "description": "ocean coastlines and lake shorelines",
+              "value": 2
+            },
+            {
+              "name": "shallow_inland_water",
+              "description": "shallow inland water",
+              "value": 3
+            },
+            {
+              "name": "ephemeral_water",
+              "description": "ephemeral water",
+              "value": 4
+            },
+            {
+              "name": "deep_inland_water",
+              "description": "deep inland water",
+              "value": 5
+            },
+            {
+              "name": "continental_moderate_ocean",
+              "description": "continental/moderate ocean",
+              "value": 6
+            },
+            {
+              "name": "deep_ocean",
+              "description": "deep ocean",
+              "value": 7
+            }
+          ]
+        },
+        {
+          "name": "aerosol_uncertainty",
+          "description": "Aerosol quantity: level of uncertainty in aerosol correction",
+          "offset": 6,
+          "length": 2,
+          "classes": [
+            {
+              "name": "climatology",
+              "description": "climatology",
+              "value": 0
+            },
+            {
+              "name": "low",
+              "description": "low",
+              "value": 1
+            },
+            {
+              "name": "average",
+              "description": "average",
+              "value": 2
+            },
+            {
+              "name": "high",
+              "description": "high",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "name": "cirrus_detected",
+          "offset": 8,
+          "length": 2,
+          "classes": [
+            {
+              "name": "none",
+              "description": "none",
+              "value": 0
+            },
+            {
+              "name": "small",
+              "description": "small",
+              "value": 1
+            },
+            {
+              "name": "average",
+              "description": "average",
+              "value": 2
+            },
+            {
+              "name": "high",
+              "description": "high",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "name": "snow_ice",
+          "description": "Snow/ice flag",
+          "offset": 12,
+          "length": 1,
+          "classes": [
+            {
+              "name": "yes",
+              "description": "yes",
+              "value": 1
+            },
+            {
+              "name": "no",
+              "description": "no",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "name": "cloud_adjacent",
+          "description": "Pixel is adjacent to cloud",
+          "offset": 13,
+          "length": 1,
+          "classes": [
+            {
+              "name": "yes",
+              "description": "yes",
+              "value": 1
+            },
+            {
+              "name": "no",
+              "description": "no",
+              "value": 0
             }
           ]
         }

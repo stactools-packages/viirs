@@ -1,0 +1,193 @@
+{
+    "NDSI": {
+        "title": "NDSI for all land and inland water pixels",
+        "roles": [
+            "data"
+        ],
+        "raster:bands": [
+            {
+                "data_type": "int16",
+                "spatial_resolution": 375,
+                "scale": 0.001
+            }
+        ]
+    },
+    "NDSI_Snow_Cover": {
+        "title": "Snow cover by NDSI",
+        "roles": [
+            "data"
+        ],
+        "raster:bands": [
+            {
+                "data_type": "uint8",
+                "spatial_resolution": 375
+            }
+        ]
+    },
+    "Algorithm_bit_flags_QA": {
+        "title": "Algorithm bit flags QA",
+        "roles": [
+            "data"
+        ],
+        "raster:bands": [
+            {
+                "data_type": "uint8",
+                "spatial_resolution": 375
+            }
+        ],
+        "classification:bitfields": [
+            {
+                "name": "inland_water_flag",
+                "offset": 0,
+                "length": 1,
+                "classes": [
+                    {
+                        "description": "true",
+                        "value": 1
+                    },
+                    {
+                        "description": "false",
+                        "value": 0
+                    }
+                ]
+            },
+            {
+                "name": "low_visible_screen",
+                "offset": 1,
+                "length": 1,
+                "classes": [
+                    {
+                        "description": "true",
+                        "value": 1
+                    },
+                    {
+                        "description": "false",
+                        "value": 0
+                    }
+                ]
+            },
+            {
+                "name": "low_ndsi_screen",
+                "offset": 2,
+                "length": 1,
+                "classes": [
+                    {
+                        "description": "true",
+                        "value": 1
+                    },
+                    {
+                        "description": "false",
+                        "value": 0
+                    }
+                ]
+            },
+            {
+                "name": "combined_surface_temperature_and_height_screen_or_flag",
+                "offset": 3,
+                "length": 1,
+                "classes": [
+                    {
+                        "description": "true",
+                        "value": 1
+                    },
+                    {
+                        "description": "false",
+                        "value": 0
+                    }
+                ]
+            },
+            {
+                "name": "high_swir_screen_or_flag",
+                "offset": 5,
+                "length": 1,
+                "classes": [
+                    {
+                        "description": "true",
+                        "value": 1
+                    },
+                    {
+                        "description": "false",
+                        "value": 0
+                    }
+                ]
+            },
+            {
+                "name": "solar_zenith_flag",
+                "offset": 7,
+                "length": 1,
+                "classes": [
+                    {
+                        "description": "true",
+                        "value": 1
+                    },
+                    {
+                        "description": "false",
+                        "value": 0
+                    }
+                ]
+            }
+        ]
+    },
+    "Basic_QA": {
+        "title": "Basic QA value",
+        "roles": [
+            "data"
+        ],
+        "raster:bands": [
+            {
+                "data_type": "uint8",
+                "spatial_resolution": 375
+            }
+        ],
+        "classification:classes": [
+            {
+                "description": "good",
+                "value": 0
+            },
+            {
+                "description": "poor",
+                "value": 1
+            },
+            {
+                "description": "bad",
+                "value": 2
+            },
+            {
+                "description": "other",
+                "value": 3
+            },
+            {
+                "description": "night",
+                "value": 211
+            },
+            {
+                "description": "ocean",
+                "value": 239
+            },
+            {
+                "description": "cloud",
+                "value": 250
+            },
+            {
+                "description": "no_decision",
+                "value": 252
+            },
+            {
+                "description": "bowtie_trim",
+                "value": 253
+            }
+        ]
+    },
+    "granule_pnt": {
+        "title": "Granule pointer",
+        "role": [
+            "data"
+        ],
+        "raster:bands": [
+            {
+                "data_type": "uint8",
+                "spatial_resolution": 375
+            }
+        ]
+    }
+}
