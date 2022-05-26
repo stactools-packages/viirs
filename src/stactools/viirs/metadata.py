@@ -233,8 +233,8 @@ class Metadata:
             xml_href=None,
         )
 
-    @staticmethod
-    def _hdfeos_metadata(read_h5_href: str) -> Any:
+    @classmethod
+    def _hdfeos_metadata(cls, read_h5_href: str) -> Any:
         with h5py.File(read_h5_href, "r") as h5:
             metadata_str = (
                 h5["HDFEOS INFORMATION"]["StructMetadata.0"][()].decode("utf-8").strip()
