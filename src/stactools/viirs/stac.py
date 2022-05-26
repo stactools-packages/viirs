@@ -30,8 +30,8 @@ def create_item(
         cog_hrefs (List[str]): List of COG asset TIF hrefs
         read_href_modifier (Callable[[str], str]): An optional function to
             modify the href (e.g. to add a token to a url)
-        antimeridian_strategy (AntimeridianStrategy): Either split on -180 or
-            normalize geometries so all longitudes are either positive or negative.
+        antimeridian_strategy (Strategy): Either split on -180 or normalize
+            geometries so all longitudes are either positive or negative.
 
     Returns:
         pystac.Item: A STAC Item representing the VIIRS data.
@@ -52,6 +52,7 @@ def create_item(
         },
     )
     item.common_metadata.created = metadata.created_datetime
+    item.common_metadata.platform = metadata.platform
 
     stactools.core.utils.antimeridian.fix_item(item, antimeridian_strategy)
 

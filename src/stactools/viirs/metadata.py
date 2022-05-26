@@ -285,6 +285,19 @@ class Metadata:
 def viirs_metadata(
     h5_href: str, read_href_modifier: Optional[ReadHrefModifier] = None
 ) -> Metadata:
+    """Creates a metadata class from the appropriate source (XML or H5).
+
+    Metadata based on XML data is preferred (over the H5 data file) since it is
+    consistent between products; the same can not be said of the H5 attributes.
+
+    Args:
+        h5_href (str): HREF to the H5 data file
+        read_href_modifier (Optional[ReadHrefModifier], optional): An optional
+            function to modify the HREF (e.g. to add a token to a url)
+
+    Returns:
+        Metadata: Metadata class
+    """
     xml_href = f"{h5_href}.xml"
     read_xml_href = modify_href(xml_href, read_href_modifier)
 
