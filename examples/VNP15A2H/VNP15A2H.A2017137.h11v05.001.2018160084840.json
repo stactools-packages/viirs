@@ -1,24 +1,24 @@
 {
   "type": "Feature",
   "stac_version": "1.0.0",
-  "id": "VNP09H1.A2012017.h00v09.001.2016294114238",
+  "id": "VNP15A2H.A2017137.h11v05.001.2018160084840",
   "properties": {
-    "start_datetime": "2012-01-17T00:00:00Z",
-    "end_datetime": "2012-01-25T00:00:00Z",
-    "viirs:horizontal-tile": 0,
-    "viirs:vertical-tile": 9,
-    "viirs:tile-id": "51000009",
-    "created": "2016-10-20T11:42:38Z",
+    "start_datetime": "2017-05-17T00:00:00Z",
+    "end_datetime": "2017-05-24T23:59:59Z",
+    "viirs:horizontal-tile": 11,
+    "viirs:vertical-tile": 5,
+    "viirs:tile-id": "51011005",
+    "created": "2018-06-09T08:48:40Z",
     "platform": "Suomi National Polar-Orbiting Partnership (SNPP)",
     "proj:epsg": null,
     "proj:wkt2": "PROJCS[\"unnamed\",GEOGCS[\"Unknown datum based upon the custom spheroid\",DATUM[\"Not specified (based on custom spheroid)\",SPHEROID[\"Custom spheroid\",6371007.181,0]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Sinusoidal\"],PARAMETER[\"longitude_of_center\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"Meter\",1],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
     "proj:transform": [
       463.312716,
       0.0,
-      -20015109.354,
+      -7783653.637667,
       0.0,
       -463.312716,
-      0.0
+      4447802.078667
     ],
     "proj:shape": [
       2400,
@@ -27,50 +27,28 @@
     "datetime": null
   },
   "geometry": {
-    "type": "MultiPolygon",
+    "type": "Polygon",
     "coordinates": [
       [
         [
-          [
-            180.0,
-            -9.998942948755838
-          ],
-          [
-            180.0,
-            0.0068
-          ],
-          [
-            179.9285,
-            -9.999
-          ],
-          [
-            180.0,
-            -9.998942948755838
-          ]
-        ]
-      ],
-      [
+          -91.3785,
+          40.0
+        ],
         [
-          [
-            -180.0,
-            0.0068
-          ],
-          [
-            -180.0,
-            -9.998942948755838
-          ],
-          [
-            -169.9201,
-            -9.9909
-          ],
-          [
-            -169.9917,
-            0.0
-          ],
-          [
-            -180.0,
-            0.0068
-          ]
+          -78.1106,
+          40.054
+        ],
+        [
+          -69.0368,
+          29.892
+        ],
+        [
+          -80.7658,
+          29.8459
+        ],
+        [
+          -91.3785,
+          40.0
         ]
       ]
     ]
@@ -78,13 +56,13 @@
   "links": [
     {
       "rel": "self",
-      "href": "/Users/pjh/dev/viirs/examples/VNP09H1/VNP09H1.A2012017.h00v09.001.2016294114238.json",
+      "href": "/Users/pjh/dev/viirs/examples/VNP15A2H/VNP15A2H.A2017137.h11v05.001.2018160084840.json",
       "type": "application/json"
     }
   ],
   "assets": {
     "hdf5": {
-      "href": "../../tests/data-files/external/VNP09H1.A2012017.h00v09.001.2016294114238.h5",
+      "href": "../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840.h5",
       "type": "application/x-hdf5",
       "title": "Source data containing all bands",
       "roles": [
@@ -92,7 +70,7 @@
       ]
     },
     "metadata": {
-      "href": "../../tests/data-files/external/VNP09H1.A2012017.h00v09.001.2016294114238.h5.xml",
+      "href": "../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840.h5.xml",
       "type": "application/xml",
       "title": "Earth Observing System Data and Information System (EOSDIS) metadata",
       "roles": [
@@ -101,10 +79,10 @@
     }
   },
   "bbox": [
-    179.9285,
-    -9.999,
-    -169.9201,
-    0.0068
+    -91.3785,
+    29.8459,
+    -69.0368,
+    40.054
   ],
   "stac_extensions": [
     "https://stac-extensions.github.io/projection/v1.0.0/schema.json"

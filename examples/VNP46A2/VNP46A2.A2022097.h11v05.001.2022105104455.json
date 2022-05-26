@@ -1,0 +1,82 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "id": "VNP46A2.A2022097.h11v05.001.2022105104455",
+  "properties": {
+    "start_datetime": "2022-04-07T00:00:00Z",
+    "end_datetime": "2022-04-07T23:59:59Z",
+    "viirs:horizontal-tile": 11,
+    "viirs:vertical-tile": 5,
+    "viirs:tile-id": "61011005",
+    "created": "2022-04-15T10:44:55Z",
+    "platform": "Suomi National Polar-Orbiting Partnership (SNPP)",
+    "proj:epsg": null,
+    "proj:wkt2": "PROJCS[\"unnamed\",GEOGCS[\"Unknown datum based upon the custom spheroid\",DATUM[\"Not specified (based on custom spheroid)\",SPHEROID[\"Custom spheroid\",6371007.181,0]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Sinusoidal\"],PARAMETER[\"longitude_of_center\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"Meter\",1],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+    "proj:transform": [
+      463.312716,
+      0.0,
+      -70000000.0,
+      0.0,
+      -463.312716,
+      40000000.0
+    ],
+    "proj:shape": [
+      2400,
+      2400
+    ],
+    "datetime": null
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -70.0,
+          30.0
+        ],
+        [
+          -70.0,
+          40.0
+        ],
+        [
+          -60.0,
+          40.0
+        ],
+        [
+          -60.0,
+          30.0
+        ],
+        [
+          -70.0,
+          30.0
+        ]
+      ]
+    ]
+  },
+  "links": [
+    {
+      "rel": "self",
+      "href": "/Users/pjh/dev/viirs/examples/VNP46A2/VNP46A2.A2022097.h11v05.001.2022105104455.json",
+      "type": "application/json"
+    }
+  ],
+  "assets": {
+    "hdf5": {
+      "href": "../../tests/data-files/external/VNP46A2.A2022097.h11v05.001.2022105104455.h5",
+      "type": "application/x-hdf5",
+      "title": "Source data containing all bands",
+      "roles": [
+        "data"
+      ]
+    }
+  },
+  "bbox": [
+    -70.0,
+    30.0,
+    -60.0,
+    40.0
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json"
+  ]
+}

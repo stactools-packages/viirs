@@ -1,6 +1,6 @@
 from pystac import MediaType
 
-PLATFORMS = {"VNP": "Suomi National Polar-Orbiting Partnership"}
+PLATFORMS = {"VNP": "Suomi National Polar-Orbiting Partnership (SNPP)"}
 
 HDF5_ASSET_KEY = "hdf5"
 HDF5_ASSET_PROPERTIES = {
