@@ -25,13 +25,13 @@ def create_viirs_command(cli: Group) -> Command:
     @click.argument("INFILE")
     @click.option("-o", "--outdir", help="directory for COG file")
     def create_cogs(infile: str, outdir: Optional[str]) -> None:
-        """Creates a COG for each subdataset in an HDF5 file.
+        """Creates a COG for each subdataset in an H5 file.
 
         \b
         Args:
-            infile (str): HREF to a VIIRS HDF5 file
+            infile (str): HREF to a VIIRS H5 file
             outdir (str): The directory that will contain the COGs. The default
-                is the HDF5 directory.
+                is the H5 directory.
         """
         if outdir is None:
             outdir = os.path.dirname(infile)
@@ -54,7 +54,7 @@ def create_viirs_command(cli: Group) -> Command:
         "-c",
         "--cogify",
         is_flag=True,
-        help="Convert the HDF5 subdatasets into COGs",
+        help="Convert the H5 subdatasets into COGs",
         default=False,
     )
     @click.option(
@@ -67,18 +67,19 @@ def create_viirs_command(cli: Group) -> Command:
         cogify: bool,
         file_list: Optional[str],
     ) -> None:
-        """Creates a STAC Item based on metadata from an .hdf.xml MODIS file.
+        """Creates a STAC Item based on an H5 VIIRS data file and, if it exists,
+        the corresponding XML metadata file.
 
         \b
         Args:
-            infile (str): The source HDF5 file.
+            infile (str): The source H5 file.
             outdir (str): Directory that will contain the STAC Item.
             antimeridian_strategy (str, optional): Choice of 'normalize' or
                 'split' to either split the Item geometry on -180 longitude or
                 normalize the Item geometry so all longitudes are either
                 positive or negative. Default is 'split'.
             cogify (bool, optional): Flag to create COGS from the subdatasets in
-                the .h5 file The COGs will saved alongside the HDF5 file. COGs
+                the H5 file. The COGs will saved alongside the H5 file. COGs
                 will not be created if the file_list option is also supplied.
             file_list (str, optional): Text file containing one HREF per line.
                 The HREFs should point to subdataset COG files.
@@ -103,22 +104,3 @@ def create_viirs_command(cli: Group) -> Command:
         return None
 
     return viirs
-
-    # @viirs.command(
-    #     "create-collection",
-    #     short_help="Creates a STAC collection",
-    # )
-    # @click.argument("destination")
-    # def create_collection_command(destination: str) -> None:
-    #     """Creates a STAC Collection
-
-    #     Args:
-    #         destination (str): An HREF for the Collection JSON
-    #     """
-    #     collection = stac.create_collection()
-
-    #     collection.set_self_href(destination)
-
-    #     collection.save_object()
-
-    #     return None
