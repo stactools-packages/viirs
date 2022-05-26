@@ -5,15 +5,14 @@ from typing import List, Optional
 import pystac.utils
 import stactools.core.utils.antimeridian
 from pystac import Asset, Item
-from pystac.extensions.eo import EOExtension
 from pystac.extensions.projection import ProjectionExtension
-from pystac.extensions.raster import RasterExtension
 from stactools.core.io import ReadHrefModifier
 from stactools.core.utils.antimeridian import Strategy
 
 from stactools.viirs import constants
 from stactools.viirs.fragment import STACFragments
 from stactools.viirs.metadata import viirs_metadata
+from stactools.viirs.utils import add_extensions
 
 logger = logging.getLogger(__name__)
 
@@ -52,8 +51,6 @@ def create_item(
             "viirs:tile-id": metadata.tile_id,
         },
     )
-    if metadata.percent_cloud_cover:
-        item.properties["eo:cloud_cover"] = metadata.percent_cloud_cover
     item.common_metadata.created = metadata.created_datetime
 
     stactools.core.utils.antimeridian.fix_item(item, antimeridian_strategy)
@@ -83,11 +80,6 @@ def create_item(
     projection.transform = metadata.transform
     projection.shape = metadata.shape
 
-    EOExtension.add_to(item)
-    RasterExtension.add_to(item)
-    for asset_key in item.assets.keys():
-        if "classification" in asset_key:
-            item.stac_extensions.append(constants.CLASSIFICATION_EXTENSION_HREF)
-            break
+    add_extensions(item)
 
     return item

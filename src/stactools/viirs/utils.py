@@ -2,8 +2,13 @@ import warnings
 from typing import List, Optional, cast
 
 import rasterio
+from pystac import Item
+from pystac.extensions.eo import EOExtension
+from pystac.extensions.raster import RasterExtension
 from rasterio.errors import NotGeoreferencedWarning
 from stactools.core.io import ReadHrefModifier
+
+from stactools.viirs import constants
 
 
 def subdatasets(href: str) -> List[str]:
@@ -32,3 +37,18 @@ def modify_href(
         return read_href
     else:
         return href
+
+
+def add_extensions(item: Item) -> None:
+    for asset in item.assets.values():
+        asset_dict = asset.to_dict()
+        if (
+            "classification:classes" in asset_dict
+            or "classification:bitfields" in asset_dict
+        ):
+            item.stac_extensions.append(constants.CLASSIFICATION_EXTENSION_HREF)
+        if "eo:bands" in asset_dict:
+            EOExtension.add_to(item)
+        if "raster:bands" in asset_dict:
+            RasterExtension.add_to(item)
+    item.stac_extensions = list(set(item.stac_extensions))

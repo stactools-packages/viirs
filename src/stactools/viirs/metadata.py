@@ -48,8 +48,6 @@ class Metadata:
     end_datetime: datetime.datetime
     created_datetime: datetime.datetime
     updated_datetime: Optional[datetime.datetime]
-    qa_percent_not_produced_cloud: Optional[int]
-    percent_cloud_cover: Optional[int]
     horizontal_tile: int
     vertical_tile: int
     tile_id: str
@@ -156,12 +154,7 @@ class Metadata:
             elif name == "TileID":
                 tile_id = value
 
-        shape, left, top, cloud_cover = cls._hdfeos_metadata(read_h5_href)
-
-        if cloud_cover:
-            percent_cloud_cover = int(float(str(cloud_cover).strip()))
-        else:
-            percent_cloud_cover = None
+        shape, left, top = cls._hdfeos_metadata(read_h5_href)
 
         return Metadata(
             id=id,
@@ -173,8 +166,6 @@ class Metadata:
             end_datetime=end_datetime,
             created_datetime=created_datetime,
             updated_datetime=updated_datetime,
-            percent_cloud_cover=percent_cloud_cover,
-            qa_percent_not_produced_cloud=None,
             horizontal_tile=horizontal_tile,
             vertical_tile=vertical_tile,
             tile_id=tile_id,
@@ -221,15 +212,7 @@ class Metadata:
         vertical_tile = int(tags["verticaltilenumber"])
         tile_id = tags["tileid"]
 
-        # cloud_cover = tags.get("hdfeos_grids_percentcloud", None)
-        cloud_cover = None
-
-        shape, left, top, cloud_cover = cls._hdfeos_metadata(read_h5_href, cloud_cover)
-
-        if cloud_cover:
-            percent_cloud_cover = int(float(str(cloud_cover).strip()))
-        else:
-            percent_cloud_cover = None
+        shape, left, top = cls._hdfeos_metadata(read_h5_href)
 
         return Metadata(
             id=id,
@@ -241,8 +224,6 @@ class Metadata:
             end_datetime=end_datetime,
             created_datetime=created_datetime,
             updated_datetime=None,
-            percent_cloud_cover=percent_cloud_cover,
-            qa_percent_not_produced_cloud=None,
             horizontal_tile=horizontal_tile,
             vertical_tile=vertical_tile,
             tile_id=tile_id,
@@ -253,7 +234,7 @@ class Metadata:
         )
 
     @staticmethod
-    def _hdfeos_metadata(read_h5_href: str, cloud_cover: Optional[float] = None) -> Any:
+    def _hdfeos_metadata(read_h5_href: str) -> Any:
         with h5py.File(read_h5_href, "r") as h5:
             metadata_str = (
                 h5["HDFEOS INFORMATION"]["StructMetadata.0"][()].decode("utf-8").strip()
@@ -261,8 +242,6 @@ class Metadata:
             metadata_split_str = [m.strip() for m in metadata_str.split("\n")]
             metadata_keys_values = [s.split("=") for s in metadata_split_str][:-1]
             metadata_dict = {key: value for key, value in metadata_keys_values}
-            # grid_attributes = h5["HDFEOS"]["GRIDS"].attrs.items()
-            # grid_attributes_dict = {k.lower(): v for k, v in grid_attributes}
 
         split_str = [m.strip() for m in metadata_str.split("\n")]
         metadata_keys_values = [s.split("=") for s in split_str][:-1]
@@ -272,12 +251,7 @@ class Metadata:
         shape = [int(metadata_dict["XDim"]), int(metadata_dict["YDim"])]
         left, top = ast.literal_eval(metadata_dict["UpperLeftPointMtrs"])
 
-        # if cloud_cover is None:
-        #     cloud_cover = grid_attributes_dict.get("percentcloud", None)
-
-        cloud_cover = None
-
-        return shape, left, top, cloud_cover
+        return shape, left, top
 
     @property
     def transform(self) -> List[float]:
