@@ -32,6 +32,7 @@
         "raster:bands": [
             {
                 "data_type": "uint8",
+                "unit": "bit field",
                 "spatial_resolution": 375
             }
         ],

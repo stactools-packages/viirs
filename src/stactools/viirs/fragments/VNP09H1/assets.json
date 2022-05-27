@@ -70,6 +70,7 @@
         "raster:bands": [
             {
                 "data_type": "uint16", 
+                "unit": "bit field",
                 "spatial_resolution": 500
             }
         ],
@@ -241,6 +242,7 @@
         "raster:bands": [
             {
                 "data_type": "uint16",
+                "unit": "bit field",
                 "spatial_resolution": 500
             }
         ],
