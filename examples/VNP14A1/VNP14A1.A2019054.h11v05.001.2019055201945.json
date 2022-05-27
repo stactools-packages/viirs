@@ -76,6 +76,149 @@
       "roles": [
         "metadata"
       ]
+    },
+    "sample": {
+      "href": "../../tests/data-files/external/VNP14A1.A2019054.h11v05.001.2019055201945_sample.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Sample number within a swath",
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "spatial_resolution": 1000
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "MaxFRP": {
+      "href": "../../tests/data-files/external/VNP14A1.A2019054.h11v05.001.2019055201945_MaxFRP.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Maximum Fire Radiative Power",
+      "raster:bands": [
+        {
+          "data_type": "int32",
+          "unit": "megawatt",
+          "scale": 0.1,
+          "spatial_resolution": 1000
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "FireMask": {
+      "href": "../../tests/data-files/external/VNP14A1.A2019054.h11v05.001.2019055201945_FireMask.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Confidence of fire",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "spatial_resolution": 1000
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "not processed (missing input data)",
+          "value": 0
+        },
+        {
+          "description": "not processed (trim)",
+          "value": 1
+        },
+        {
+          "description": "not processed (obsolete)",
+          "value": 2
+        },
+        {
+          "description": "non-fire water",
+          "value": 3
+        },
+        {
+          "description": "cloud (land or water)",
+          "value": 4
+        },
+        {
+          "description": "non-fire land",
+          "value": 5
+        },
+        {
+          "description": "unknown",
+          "value": 6
+        },
+        {
+          "description": "fire (low confidence)",
+          "value": 7
+        },
+        {
+          "description": "fire (nominal confidence)",
+          "value": 8
+        },
+        {
+          "description": "fire (high confidence)",
+          "value": 9
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "QA": {
+      "href": "../../tests/data-files/external/VNP14A1.A2019054.h11v05.001.2019055201945_QA.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Pixel quality indicators",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "unit": "bit field",
+          "spatial_resolution": 1000
+        }
+      ],
+      "classification:bitfields": [
+        {
+          "name": "land_water",
+          "description": "land/water state",
+          "offset": 0,
+          "length": 2,
+          "classes": [
+            {
+              "description": "water",
+              "value": 0
+            },
+            {
+              "description": "coast",
+              "value": 1
+            },
+            {
+              "description": "land",
+              "value": 2
+            },
+            {
+              "description": "missing data",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "name": "day_night",
+          "description": "day/night observation",
+          "offset": 2,
+          "length": 1,
+          "classes": [
+            {
+              "description": "day",
+              "value": 0
+            },
+            {
+              "description": "night",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      "roles": [
+        "data"
+      ]
     }
   },
   "bbox": [
@@ -85,6 +228,8 @@
     40.054
   ],
   "stac_extensions": [
-    "https://stac-extensions.github.io/projection/v1.0.0/schema.json"
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/classification/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/raster/v1.0.0/schema.json"
   ]
 }

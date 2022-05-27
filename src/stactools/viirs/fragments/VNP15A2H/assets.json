@@ -12,7 +12,7 @@
             "data"
         ]
     },
-    "FparExtraQC": {
+    "FparExtra_QC": {
         "raster:bands": [
             {
                 "data_type": "uint8",

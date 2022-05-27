@@ -1,3 +1,4 @@
+import glob
 import os
 
 from stactools.viirs import stac
@@ -17,8 +18,13 @@ EXAMPLE_H5_FILES = [
 
 
 for href in EXAMPLE_H5_FILES:
-    item = stac.create_item(f"tests/data-files/external/{href}")
-    product = item.id.split(".")[0]
+    product = href.split(".")[0]
+    path = "tests/data-files/external"
+    cog_hrefs = glob.glob(f"{path}/{product}*.tif")
+    if cog_hrefs:
+        item = stac.create_item(f"tests/data-files/external/{href}", cog_hrefs=cog_hrefs)
+    else:
+        item = stac.create_item(f"tests/data-files/external/{href}")
     item_path = os.path.join(f"examples/{product}", f"{item.id}.json")
     item.set_self_href(item_path)
     item.make_asset_hrefs_relative()

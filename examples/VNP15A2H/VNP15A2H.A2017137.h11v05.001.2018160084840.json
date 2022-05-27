@@ -76,6 +76,296 @@
       "roles": [
         "metadata"
       ]
+    },
+    "Fpar": {
+      "href": "../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_Fpar.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Fraction of Photosynthetically Active Radiation",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "scale": 0.01,
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "FparExtra_QC": {
+      "href": "../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_FparExtra_QC.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Pass-through Quality Control (QC) for FPAR",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "unit": "bit field",
+          "spatial_resolution": 500
+        }
+      ],
+      "classification:bitfields": [
+        {
+          "name": "cloud_confidence",
+          "description": "Cloud detection and confidence",
+          "offset": 0,
+          "length": 2,
+          "classes": [
+            {
+              "description": "Confident clear",
+              "value": 0
+            },
+            {
+              "description": "Probably clear",
+              "value": 1
+            },
+            {
+              "description": "Probably cloudy",
+              "value": 2
+            },
+            {
+              "description": "Confident cloudy",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "name": "cloud_shadow",
+          "offset": 2,
+          "length": 1,
+          "classes": [
+            {
+              "description": "No cloud shadow",
+              "value": 0
+            },
+            {
+              "description": "Shadow",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "Thin cirrus",
+          "offset": 3,
+          "length": 1,
+          "classes": [
+            {
+              "description": "No",
+              "value": 0
+            },
+            {
+              "description": "Yes",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "aerosol_quantity",
+          "offset": 4,
+          "length": 2,
+          "classes": [
+            {
+              "description": "Climatology",
+              "value": 0
+            },
+            {
+              "description": "Low",
+              "value": 1
+            },
+            {
+              "description": "Average",
+              "value": 2
+            },
+            {
+              "description": "High",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "name": "snow_ice",
+          "offset": 6,
+          "length": 1,
+          "classes": [
+            {
+              "description": "No",
+              "value": 0
+            },
+            {
+              "description": "Yes",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "FparLai_QC": {
+      "href": "../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_FparLai_QC.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Quality for LAI and FPAR",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "unit": "bit field",
+          "spatial_resolution": 500
+        }
+      ],
+      "classification:bitfields": [
+        {
+          "name": "scf_qc",
+          "description": "SCF_QC (five-level confidence score)",
+          "offset": 0,
+          "length": 3,
+          "classes": [
+            {
+              "description": "Main (RT) method used, best result possible (no saturation)",
+              "value": 0
+            },
+            {
+              "description": "Main (RT) method used with saturation. Good, very usable",
+              "value": 1
+            },
+            {
+              "description": "Main (RT) method failed due to bad geometry, empirical algorithm used",
+              "value": 2
+            },
+            {
+              "description": "Main (RT) method failed due to problems other than geometry, empirical algorithm used",
+              "value": 3
+            },
+            {
+              "description": "Pixel not produced at all, value couldn't be retrieved (possible reasons: bad L1B data, unusable VNP09GA data, water pixel)",
+              "value": 4
+            }
+          ]
+        },
+        {
+          "name": "dead_detector",
+          "offset": 3,
+          "length": 1,
+          "classes": [
+            {
+              "description": "Both red and NIR detectors are fine",
+              "value": 0
+            },
+            {
+              "description": "At least one band has dead detector",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "biome_type",
+          "offset": 4,
+          "length": 4,
+          "classes": [
+            {
+              "description": "Water",
+              "value": 0
+            },
+            {
+              "description": "Grasses/cereal crops",
+              "value": 1
+            },
+            {
+              "description": "Shrubs",
+              "value": 2
+            },
+            {
+              "description": "Broadleaf crops",
+              "value": 3
+            },
+            {
+              "description": "Savanna",
+              "value": 4
+            },
+            {
+              "description": "Evergreen broadleaf forest",
+              "value": 5
+            },
+            {
+              "description": "Deciduous broadleaf forest",
+              "value": 6
+            },
+            {
+              "description": "Evergreen needleleaf forest",
+              "value": 7
+            },
+            {
+              "description": "Deciduous needleaf forest",
+              "value": 8
+            },
+            {
+              "description": "Non-vegetated",
+              "value": 9
+            },
+            {
+              "description": "Urban",
+              "value": 10
+            },
+            {
+              "description": "Unclassified",
+              "value": 11
+            },
+            {
+              "description": "Filled Value",
+              "value": 12
+            }
+          ]
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "Lai": {
+      "href": "../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_Lai.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Leaf Area Index",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "unit": "square_meter/square_meter",
+          "scale": 0.1,
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "LaiStdDev": {
+      "href": "../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_LaiStdDev.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Standard deviation for LAI",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "unit": "square_meter/square_meter",
+          "scale": 0.1,
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "FparStdDev": {
+      "href": "../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_FparStdDev.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Standard deviation of FPAR",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "scale": 0.01,
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data"
+      ]
     }
   },
   "bbox": [
@@ -85,6 +375,8 @@
     40.054
   ],
   "stac_extensions": [
-    "https://stac-extensions.github.io/projection/v1.0.0/schema.json"
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/classification/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/raster/v1.0.0/schema.json"
   ]
 }
