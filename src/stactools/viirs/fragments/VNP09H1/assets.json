@@ -80,22 +80,18 @@
                 "length": 2,
                 "classes": [
                     {
-                        "name": "clear",
                         "description": "clear",
                         "value": 0
                     },
                     {
-                        "name": "cloudy",
                         "description": "cloudy",
                         "value": 1
                     },
                     {
-                        "name": "mixed",
                         "description": "mixed",
                         "value": 2
                     },
                     {
-                        "name": "not_set",
                         "description": "not set, assumed clear",
                         "value": 3
                     }
@@ -107,12 +103,10 @@
                 "length": 1,
                 "classes": [
                     {
-                        "name": "yes",
                         "description": "yes",
                         "value": 1
                     },
                     {
-                        "name": "no",
                         "description": "no",
                         "value": 0
                     }
@@ -125,42 +119,34 @@
                 "length": 3,
                 "classes": [
                     {
-                        "name": "shallow_ocean",
                         "description": "shallow ocean",
                         "value": 0
                     },
                     {
-                        "name": "land",
                         "description": "land",
                         "value": 1
                     },
                     {
-                        "name": "shorelines",
                         "description": "ocean coastlines and lake shorelines",
                         "value": 2
                     },
                     {
-                        "name": "shallow_inland_water",
                         "description": "shallow inland water",
                         "value": 3
                     },
                     {
-                        "name": "ephemeral_water",
                         "description": "ephemeral water",
                         "value": 4
                     },
                     {
-                        "name": "deep_inland_water",
                         "description": "deep inland water",
                         "value": 5
                     },
                     {
-                        "name": "continental_moderate_ocean",
                         "description": "continental/moderate ocean",
                         "value": 6
                     },
                     {
-                        "name": "deep_ocean",
                         "description": "deep ocean",
                         "value": 7
                     }
@@ -173,22 +159,18 @@
                 "length": 2,
                 "classes":[
                     {
-                        "name": "climatology",
                         "description": "climatology",
                         "value": 0
                     },
                     {
-                        "name": "low",
                         "description": "low",
                         "value": 1
                     },
                     {
-                        "name": "average",
                         "description": "average",
                         "value": 2
                     },
                     {
-                        "name": "high",
                         "description": "high",
                         "value": 3
                     }
@@ -200,22 +182,18 @@
                 "length": 2,
                 "classes": [
                     {
-                        "name": "none",
                         "description": "none",
                         "value": 0
                     },
                     {
-                        "name": "small",
                         "description": "small",
                         "value": 1
                     },
                     {
-                        "name": "average",
                         "description": "average",
                         "value": 2
                     },
                     {
-                        "name": "high",
                         "description": "high",
                         "value": 3
                     }
@@ -228,12 +206,10 @@
                 "length": 1,
                 "classes": [
                     {
-                        "name": "yes",
                         "description": "yes",
                         "value": 1
                     },
                     {
-                        "name": "no",
                         "description": "no",
                         "value": 0
                     }
@@ -246,12 +222,10 @@
                 "length": 1,
                 "classes": [
                     {
-                        "name": "yes",
                         "description": "yes",
                         "value": 1
                     },
                     {
-                        "name": "no",
                         "description": "no",
                         "value": 0
                     }
@@ -278,22 +252,18 @@
                 "length": 1,
                 "classes": [
                     {
-                        "name": "corrected_ideal",
                         "description": "Corrected product produced at ideal quality all bands",
                         "value": 0
                     },
                     {
-                        "name": "corrected_not_ideal",
                         "description": "Corrected product produced at less than ideal quality some or all bands",
                         "value": 1
                     },
                     {
-                        "name": "not_corrected_cloud",
                         "description": "Corrected product not produced due to cloud effects all bands",
                         "value": 2
                     },
                     {
-                        "name": "not_corrected_other",
                         "description": "Corrected product not produced due to other reasons some or all bands may be fill value [Note that a value of (3) overrides a value of (1)]",
                         "value": 3
                     }
@@ -305,7 +275,6 @@
                 "length": 2,
                 "classes": [
                     {
-                        "name": "always",
                         "description": "Always set at 3. Users should use cloud_state in the Surface Reflectance State Quality Assurance (QA) band.",
                         "value": 3
                     }
@@ -318,52 +287,42 @@
                 "length": 4,
                 "classes":[
                     {
-                        "name": "highest_quality",
                         "description": "Highest quality",
                         "value": 0
                     },
                     {
-                        "name": "noisy_detector",
                         "description": "Noisy detector",
                         "value": 7
                     },
                     {
-                        "name": "dead_detector",
                         "description": "Dead detector, data interpolated in L1B",
                         "value": 8
                     },
                     {
-                        "name": "zenith_86",
                         "description": "Solar zenith >= 86 degrees",
                         "value": 9
                     },
                     {
-                        "name": "zenith_85_86",
                         "description": "Solar zenith >= 85 and < 86 degrees",
                         "value": 10
                     },
                     {
-                        "name": "missing_input",
                         "description": "Missing input",
                         "value": 11
                     },
                     {
-                        "name": "internal_constant_used",
                         "description": "Internal constant used in place of climatological data for at least one atmospheric constant",
                         "value": 12
                     },
                     {
-                        "name": "constrained",
                         "description": "Correction out of bounds, pixel constrained to extreme allowable value",
                         "value": 13
                     },
                     {
-                        "name": "l1b_data_faulty",
                         "description": "L1B data faulty",
                         "value": 14
                     },
                     {
-                        "name": "not_processed",
                         "description": "Not processed due to deep ocean or clouds",
                         "value": 15
                     }
@@ -376,52 +335,42 @@
                 "length": 4,
                 "classes":[
                     {
-                        "name": "highest_quality",
                         "description": "Highest quality",
                         "value": 0
                     },
                     {
-                        "name": "noisy_detector",
                         "description": "Noisy detector",
                         "value": 7
                     },
                     {
-                        "name": "dead_detector",
                         "description": "Dead detector, data interpolated in L1B",
                         "value": 8
                     },
                     {
-                        "name": "zenith_86",
                         "description": "Solar zenith >= 86 degrees",
                         "value": 9
                     },
                     {
-                        "name": "zenith_85_86",
                         "description": "Solar zenith >= 85 and < 86 degrees",
                         "value": 10
                     },
                     {
-                        "name": "missing_input",
                         "description": "Missing input",
                         "value": 11
                     },
                     {
-                        "name": "internal_constant",
                         "description": "Internal constant used in place of climatological data for at least one atmospheric constant",
                         "value": 12
                     },
                     {
-                        "name": "constrained",
                         "description": "Correction out of bounds, pixel constrained to extreme allowable value",
                         "value": 13
                     },
                     {
-                        "name": "l1b_data_faulty",
                         "description": "L1B data faulty",
                         "value": 14
                     },
                     {
-                        "name": "not_processed",
                         "description": "Not processed due to deep ocean or clouds",
                         "value": 15
                     }
@@ -434,12 +383,10 @@
                 "length": 1,
                 "classes": [
                     {
-                        "name": "yes",
                         "description": "Yes",
                         "value": 1
                     },
                     {
-                        "name": "no",
                         "description": "No",
                         "value": 0
                     }
@@ -452,12 +399,10 @@
                 "length": 1,
                 "classes": [
                     {
-                        "name": "yes",
                         "description": "Yes",
                         "value": 1
                     },
                     {
-                        "name": "no",
                         "description": "No",
                         "value": 0
                     }
@@ -470,12 +415,10 @@
                 "length": 1,
                 "classes": [
                     {
-                        "name": "yes",
                         "description": "Yes",
                         "value": 1
                     },
                     {
-                        "name": "no",
                         "description": "No",
                         "value": 0
                     }
