@@ -1,5 +1,6 @@
+import ast
 import warnings
-from typing import List, Optional, cast
+from typing import List, Optional, Tuple, cast
 
 import h5py
 import rasterio
@@ -27,28 +28,6 @@ def subdatasets(href: str) -> List[str]:
         warnings.simplefilter("ignore", category=NotGeoreferencedWarning)
         with rasterio.open(href) as dataset:
             return cast(List[str], dataset.subdatasets)
-
-
-def subdataset_dtype(href: str, sanitized_path):
-    print(sanitized_path)
-    unsanitized_names = []
-    with h5py.File(href) as h5:
-        h5.visit(lambda key : unsanitized_names.append(key) if isinstance(h5[key], h5py.Dataset) else None)
-
-        sanitary_unsanitary = {}
-        for unsanitized_name in unsanitized_names:
-            sanitized = unsanitized_name.replace(" ", "_")
-            sanitary_unsanitary[sanitized] = unsanitized_name
-
-        import json
-        # print(json.dumps(sanitary_unsanitary, indent=4))
-
-        subdataset = h5[sanitary_unsanitary[sanitized_path]]
-        data_type = subdataset.dtype
-        # data_type = "int16" if data_type == "int8" else data_type
-    
-    # print(data_type)
-    return data_type
 
 
 def modify_href(
@@ -83,3 +62,51 @@ def add_extensions(item: Item) -> None:
         RasterExtension.add_to(item)
 
     return None
+
+
+def hdfeos_metadata(h5_href: str) -> Tuple[List[int], float, float]:
+    """Extracts spatial metadata from the EOS metadata structure of an H5 file.
+
+    Args:
+        h5_href (str): HREF to the h5 file
+
+    Returns:
+        Tuple[List[int], Tuple[float]]:
+            - Height and width of the data arrays stored in the H5 file
+            - Projected coordinates of the left, top corner of the data
+    """
+    with h5py.File(h5_href, "r") as h5:
+        metadata_str = (
+            h5["HDFEOS INFORMATION"]["StructMetadata.0"][()].decode("utf-8").strip()
+        )
+        metadata_split_str = [m.strip() for m in metadata_str.split("\n")]
+        metadata_keys_values = [s.split("=") for s in metadata_split_str][:-1]
+        metadata_dict = {key: value for key, value in metadata_keys_values}
+
+    # XDim = #rows, YDim = #columns per https://lpdaac.usgs.gov/data/get-started-data/collection-overview/missions/s-npp-nasa-viirs-overview/  # noqa
+    shape = [int(metadata_dict["XDim"]), int(metadata_dict["YDim"])]
+    assert shape[0] == shape[1]
+    left, top = ast.literal_eval(metadata_dict["UpperLeftPointMtrs"])
+
+    return (shape, left, top)
+
+
+def transform(shape: List[int], left: float, top: float) -> List[float]:
+    """Creates elements of a geospatial transform matrix.
+
+    Args:
+        shape (List[float]): List containing the array height and width
+        left (float): Left projected coordinate of the top-left corner
+        top (float): Top projected coordinate of the top-lef corner
+
+    Returns:
+        List[float]: First six elements of the transformation matrix
+
+    """
+    if shape[0] == 1200:
+        pixel_size = constants.BINSIZE_1000M
+    elif shape[0] == 2400:
+        pixel_size = constants.BINSIZE_500M
+    elif shape[0] == 3000:
+        pixel_size = constants.BINSIZE_375M
+    return [pixel_size, 0.0, left, 0.0, -pixel_size, top]

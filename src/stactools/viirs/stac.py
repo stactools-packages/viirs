@@ -27,11 +27,12 @@ def create_item(
 
     Args:
         h5_href (str): href to an H5 (HDF5) file
-        cog_hrefs (List[str]): List of COG asset TIF hrefs
+        cog_hrefs (List[str]): Optional list of COG asset TIF hrefs
         read_href_modifier (Callable[[str], str]): An optional function to
             modify the href (e.g. to add a token to a url)
         antimeridian_strategy (Strategy): Either split on -180 or normalize
             geometries so all longitudes are either positive or negative.
+            Default is to split antimeridian geometries.
 
     Returns:
         pystac.Item: A STAC Item representing the VIIRS data.

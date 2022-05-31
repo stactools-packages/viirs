@@ -77,6 +77,38 @@
         "metadata"
       ]
     },
+    "500_m_16_days_EVI": {
+      "href": "../../tests/data-files/external/VNP13A1.A2022097.h11v05.001.2022113080900_500_m_16_days_EVI.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "3 band Enhanced Vegetation Index",
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "unit": "EVI",
+          "scale": 0.0001,
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "500_m_16_days_EVI2": {
+      "href": "../../tests/data-files/external/VNP13A1.A2022097.h11v05.001.2022113080900_500_m_16_days_EVI2.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "2 band Enhanced Vegetation Index",
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "scale": 0.0001,
+          "unit": "EVI2",
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
     "500_m_16_days_NDVI": {
       "href": "../../tests/data-files/external/VNP13A1.A2022097.h11v05.001.2022113080900_500_m_16_days_NDVI.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
@@ -93,20 +125,27 @@
         "data"
       ]
     },
-    "500_m_16_days_view_zenith_angle": {
-      "href": "../../tests/data-files/external/VNP13A1.A2022097.h11v05.001.2022113080900_500_m_16_days_view_zenith_angle.tif",
+    "500_m_16_days_NIR_reflectance": {
+      "href": "../../tests/data-files/external/VNP13A1.A2022097.h11v05.001.2022113080900_500_m_16_days_NIR_reflectance.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "View zenith angle for each pixel",
+      "title": "Near-infrared Radiation reflectance (846-885 nm)",
+      "eo:bands": [
+        {
+          "name": "500_m_16_days_NIR_reflectance",
+          "common_name": "nir08",
+          "center_wavelength": 0.865,
+          "full_width_half_max": 0.039
+        }
+      ],
       "raster:bands": [
         {
           "data_type": "int16",
-          "scale": 0.01,
-          "unit": "degree",
+          "scale": 0.0001,
           "spatial_resolution": 500
         }
       ],
       "roles": [
-        "data"
+        "reflectance"
       ]
     },
     "500_m_16_days_SWIR1_reflectance": {
@@ -118,6 +157,52 @@
           "name": "500_m_16_days_SWIR1_reflectance",
           "center_wavelength": 1.24,
           "full_width_half_max": 0.02
+        }
+      ],
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "scale": 0.0001,
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "reflectance"
+      ]
+    },
+    "500_m_16_days_SWIR2_reflectance": {
+      "href": "../../tests/data-files/external/VNP13A1.A2022097.h11v05.001.2022113080900_500_m_16_days_SWIR2_reflectance.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Shortwave Infrared Radiation reflectance (1580-1640 nm)",
+      "eo:bands": [
+        {
+          "name": "500_m_16_days_SWIR2_reflectance",
+          "common_name": "swir16",
+          "center_wavelength": 1.61,
+          "full_width_half_max": 0.06
+        }
+      ],
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "scale": 0.0001,
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "reflectance"
+      ]
+    },
+    "500_m_16_days_SWIR3_reflectance": {
+      "href": "../../tests/data-files/external/VNP13A1.A2022097.h11v05.001.2022113080900_500_m_16_days_SWIR3_reflectance.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Shortwave Infrared Radiation reflectance (2225-2275 nm)",
+      "eo:bands": [
+        {
+          "name": "500_m_16_days_SWIR3_reflectance",
+          "common_name": "swir22",
+          "center_wavelength": 2.25,
+          "full_width_half_max": 0.05
         }
       ],
       "raster:bands": [
@@ -368,31 +453,37 @@
         "data"
       ]
     },
-    "500_m_16_days_EVI": {
-      "href": "../../tests/data-files/external/VNP13A1.A2022097.h11v05.001.2022113080900_500_m_16_days_EVI.tif",
+    "500_m_16_days_blue_reflectance": {
+      "href": "../../tests/data-files/external/VNP13A1.A2022097.h11v05.001.2022113080900_500_m_16_days_blue_reflectance.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "3 band Enhanced Vegetation Index",
+      "title": "Blue band reflectance (478-498 nm)",
+      "eo:bands": [
+        {
+          "name": "500_m_16_days_blue_reflectance",
+          "common_name": "blue",
+          "center_wavelength": 0.488,
+          "full_width_half_max": 0.02
+        }
+      ],
       "raster:bands": [
         {
           "data_type": "int16",
-          "unit": "EVI",
           "scale": 0.0001,
           "spatial_resolution": 500
         }
       ],
       "roles": [
-        "data"
+        "reflectance"
       ]
     },
-    "500_m_16_days_relative_azimuth_angle": {
-      "href": "../../tests/data-files/external/VNP13A1.A2022097.h11v05.001.2022113080900_500_m_16_days_relative_azimuth_angle.tif",
+    "500_m_16_days_composite_day_of_the_year": {
+      "href": "../../tests/data-files/external/VNP13A1.A2022097.h11v05.001.2022113080900_500_m_16_days_composite_day_of_the_year.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Relative azimuth angle for each pixel",
+      "title": "Day of year for the pixel",
       "raster:bands": [
         {
           "data_type": "int16",
-          "scale": 0.01,
-          "unit": "degree",
+          "unit": "Julian day",
           "spatial_resolution": 500
         }
       ],
@@ -400,16 +491,16 @@
         "data"
       ]
     },
-    "500_m_16_days_SWIR3_reflectance": {
-      "href": "../../tests/data-files/external/VNP13A1.A2022097.h11v05.001.2022113080900_500_m_16_days_SWIR3_reflectance.tif",
+    "500_m_16_days_green_reflectance": {
+      "href": "../../tests/data-files/external/VNP13A1.A2022097.h11v05.001.2022113080900_500_m_16_days_green_reflectance.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Shortwave Infrared Radiation reflectance (2225-2275 nm)",
+      "title": "Green band reflectance (545-565 nm)",
       "eo:bands": [
         {
-          "name": "500_m_16_days_SWIR3_reflectance",
-          "common_name": "swir22",
-          "center_wavelength": 2.25,
-          "full_width_half_max": 0.05
+          "name": "500_m_16_days_green_reflectance",
+          "common_name": "green",
+          "center_wavelength": 0.555,
+          "full_width_half_max": 0.02
         }
       ],
       "raster:bands": [
@@ -487,15 +578,38 @@
         "data"
       ]
     },
-    "500_m_16_days_EVI2": {
-      "href": "../../tests/data-files/external/VNP13A1.A2022097.h11v05.001.2022113080900_500_m_16_days_EVI2.tif",
+    "500_m_16_days_red_reflectance": {
+      "href": "../../tests/data-files/external/VNP13A1.A2022097.h11v05.001.2022113080900_500_m_16_days_red_reflectance.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "2 band Enhanced Vegetation Index",
+      "title": "Red band reflectance (600-680 nm)",
+      "eo:bands": [
+        {
+          "name": "500_m_16_days_red_reflectance",
+          "common_name": "red",
+          "center_wavelength": 0.64,
+          "full_width_half_max": 0.08
+        }
+      ],
       "raster:bands": [
         {
           "data_type": "int16",
           "scale": 0.0001,
-          "unit": "EVI2",
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "reflectance"
+      ]
+    },
+    "500_m_16_days_relative_azimuth_angle": {
+      "href": "../../tests/data-files/external/VNP13A1.A2022097.h11v05.001.2022113080900_500_m_16_days_relative_azimuth_angle.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Relative azimuth angle for each pixel",
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "scale": 0.01,
+          "unit": "degree",
           "spatial_resolution": 500
         }
       ],
@@ -519,134 +633,20 @@
         "data"
       ]
     },
-    "500_m_16_days_blue_reflectance": {
-      "href": "../../tests/data-files/external/VNP13A1.A2022097.h11v05.001.2022113080900_500_m_16_days_blue_reflectance.tif",
+    "500_m_16_days_view_zenith_angle": {
+      "href": "../../tests/data-files/external/VNP13A1.A2022097.h11v05.001.2022113080900_500_m_16_days_view_zenith_angle.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Blue band reflectance (478-498 nm)",
-      "eo:bands": [
-        {
-          "name": "500_m_16_days_blue_reflectance",
-          "common_name": "blue",
-          "center_wavelength": 0.488,
-          "full_width_half_max": 0.02
-        }
-      ],
+      "title": "View zenith angle for each pixel",
       "raster:bands": [
         {
           "data_type": "int16",
-          "scale": 0.0001,
-          "spatial_resolution": 500
-        }
-      ],
-      "roles": [
-        "reflectance"
-      ]
-    },
-    "500_m_16_days_composite_day_of_the_year": {
-      "href": "../../tests/data-files/external/VNP13A1.A2022097.h11v05.001.2022113080900_500_m_16_days_composite_day_of_the_year.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Day of year for the pixel",
-      "raster:bands": [
-        {
-          "data_type": "int16",
-          "unit": "Julian day",
+          "scale": 0.01,
+          "unit": "degree",
           "spatial_resolution": 500
         }
       ],
       "roles": [
         "data"
-      ]
-    },
-    "500_m_16_days_SWIR2_reflectance": {
-      "href": "../../tests/data-files/external/VNP13A1.A2022097.h11v05.001.2022113080900_500_m_16_days_SWIR2_reflectance.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Shortwave Infrared Radiation reflectance (1580-1640 nm)",
-      "eo:bands": [
-        {
-          "name": "500_m_16_days_SWIR2_reflectance",
-          "common_name": "swir16",
-          "center_wavelength": 1.61,
-          "full_width_half_max": 0.06
-        }
-      ],
-      "raster:bands": [
-        {
-          "data_type": "int16",
-          "scale": 0.0001,
-          "spatial_resolution": 500
-        }
-      ],
-      "roles": [
-        "reflectance"
-      ]
-    },
-    "500_m_16_days_green_reflectance": {
-      "href": "../../tests/data-files/external/VNP13A1.A2022097.h11v05.001.2022113080900_500_m_16_days_green_reflectance.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Green band reflectance (545-565 nm)",
-      "eo:bands": [
-        {
-          "name": "500_m_16_days_green_reflectance",
-          "common_name": "green",
-          "center_wavelength": 0.555,
-          "full_width_half_max": 0.02
-        }
-      ],
-      "raster:bands": [
-        {
-          "data_type": "int16",
-          "scale": 0.0001,
-          "spatial_resolution": 500
-        }
-      ],
-      "roles": [
-        "reflectance"
-      ]
-    },
-    "500_m_16_days_NIR_reflectance": {
-      "href": "../../tests/data-files/external/VNP13A1.A2022097.h11v05.001.2022113080900_500_m_16_days_NIR_reflectance.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Near-infrared Radiation reflectance (846-885 nm)",
-      "eo:bands": [
-        {
-          "name": "500_m_16_days_NIR_reflectance",
-          "common_name": "nir08",
-          "center_wavelength": 0.865,
-          "full_width_half_max": 0.039
-        }
-      ],
-      "raster:bands": [
-        {
-          "data_type": "int16",
-          "scale": 0.0001,
-          "spatial_resolution": 500
-        }
-      ],
-      "roles": [
-        "reflectance"
-      ]
-    },
-    "500_m_16_days_red_reflectance": {
-      "href": "../../tests/data-files/external/VNP13A1.A2022097.h11v05.001.2022113080900_500_m_16_days_red_reflectance.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Red band reflectance (600-680 nm)",
-      "eo:bands": [
-        {
-          "name": "500_m_16_days_red_reflectance",
-          "common_name": "red",
-          "center_wavelength": 0.64,
-          "full_width_half_max": 0.08
-        }
-      ],
-      "raster:bands": [
-        {
-          "data_type": "int16",
-          "scale": 0.0001,
-          "spatial_resolution": 500
-        }
-      ],
-      "roles": [
-        "reflectance"
       ]
     }
   },

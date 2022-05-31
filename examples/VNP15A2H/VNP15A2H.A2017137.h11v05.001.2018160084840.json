@@ -320,6 +320,21 @@
         "data"
       ]
     },
+    "FparStdDev": {
+      "href": "../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_FparStdDev.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Standard deviation of FPAR",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "scale": 0.01,
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
     "Lai": {
       "href": "../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_Lai.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
@@ -345,21 +360,6 @@
           "data_type": "uint8",
           "unit": "square_meter/square_meter",
           "scale": 0.1,
-          "spatial_resolution": 500
-        }
-      ],
-      "roles": [
-        "data"
-      ]
-    },
-    "FparStdDev": {
-      "href": "../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_FparStdDev.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Standard deviation of FPAR",
-      "raster:bands": [
-        {
-          "data_type": "uint8",
-          "scale": 0.01,
           "spatial_resolution": 500
         }
       ],

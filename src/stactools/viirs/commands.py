@@ -92,7 +92,7 @@ def create_viirs_command(cli: Group) -> Command:
                 hrefs = [line.strip() for line in file.readlines()]
         elif cogify:
             h5dir = os.path.dirname(infile)
-            hrefs, _ = cog.cogify(infile, h5dir)
+            hrefs = cog.cogify(infile, h5dir)
 
         item = stac.create_item(infile, cog_hrefs=hrefs, antimeridian_strategy=strategy)
         item_path = os.path.join(outdir, f"{item.id}.json")

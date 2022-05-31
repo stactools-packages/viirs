@@ -1,4 +1,3 @@
-import ast
 import datetime
 import logging
 import os.path
@@ -7,7 +6,6 @@ from dataclasses import dataclass
 from typing import Any, Callable, Dict, List, Optional
 
 import fsspec
-import h5py
 import rasterio
 import shapely.geometry
 from dateutil import parser
@@ -18,8 +16,7 @@ from stactools.core.io import ReadHrefModifier
 from stactools.core.io.xml import XmlElement
 from stactools.core.utils import href_exists
 
-from stactools.viirs import constants
-from stactools.viirs.utils import modify_href, ground_pixel_size
+from stactools.viirs import constants, utils
 
 logger = logging.getLogger(__name__)
 
@@ -52,8 +49,7 @@ class Metadata:
     vertical_tile: int
     tile_id: str
     shape: List[int]
-    left: float
-    top: float
+    transform: List[float]
     xml_href: Optional[str]
 
     @classmethod
@@ -72,8 +68,8 @@ class Metadata:
             return get_exception
 
         xml_href = f"{h5_href}.xml"
-        read_xml_href = modify_href(xml_href, read_href_modifier)
-        read_h5_href = modify_href(h5_href, read_href_modifier)
+        read_xml_href = utils.modify_href(xml_href, read_href_modifier)
+        read_h5_href = utils.modify_href(h5_href, read_href_modifier)
 
         with fsspec.open(read_xml_href) as file:
             root = XmlElement(etree.parse(file, base_url=xml_href).getroot())
@@ -154,7 +150,8 @@ class Metadata:
             elif name == "TileID":
                 tile_id = value
 
-        shape, left, top = cls._hdfeos_metadata(read_h5_href)
+        shape, left, top = utils.hdfeos_metadata(read_h5_href)
+        transform = utils.transform(shape, left, top)
 
         return Metadata(
             id=id,
@@ -170,8 +167,7 @@ class Metadata:
             vertical_tile=vertical_tile,
             tile_id=tile_id,
             shape=shape,
-            left=left,
-            top=top,
+            transform=transform,
             xml_href=xml_href,
         )
 
@@ -180,7 +176,7 @@ class Metadata:
         cls, h5_href: str, read_href_modifier: Optional[ReadHrefModifier] = None
     ) -> "Metadata":
         """Extracts metadata from H5 attributes and H5 EOS metadata structure"""
-        read_h5_href = modify_href(h5_href, read_href_modifier)
+        read_h5_href = utils.modify_href(h5_href, read_href_modifier)
         with warnings.catch_warnings():
             warnings.simplefilter("ignore", category=NotGeoreferencedWarning)
             with rasterio.open(read_h5_href) as dataset:
@@ -212,7 +208,8 @@ class Metadata:
         vertical_tile = int(tags["verticaltilenumber"])
         tile_id = tags["tileid"]
 
-        shape, left, top = cls._hdfeos_metadata(read_h5_href)
+        shape, left, top = utils.hdfeos_metadata(read_h5_href)
+        transform = utils.transform(shape, left, top)
 
         return Metadata(
             id=id,
@@ -228,50 +225,13 @@ class Metadata:
             vertical_tile=vertical_tile,
             tile_id=tile_id,
             shape=shape,
-            left=left,
-            top=top,
+            transform=transform,
             xml_href=None,
         )
 
-    @classmethod
-    def _hdfeos_metadata(cls, read_h5_href: str) -> Any:
-        with h5py.File(read_h5_href, "r") as h5:
-            metadata_str = (
-                h5["HDFEOS INFORMATION"]["StructMetadata.0"][()].decode("utf-8").strip()
-            )
-            metadata_split_str = [m.strip() for m in metadata_str.split("\n")]
-            metadata_keys_values = [s.split("=") for s in metadata_split_str][:-1]
-            metadata_dict = {key: value for key, value in metadata_keys_values}
-
-        split_str = [m.strip() for m in metadata_str.split("\n")]
-        metadata_keys_values = [s.split("=") for s in split_str][:-1]
-        metadata_dict = {key: value for key, value in metadata_keys_values}
-
-        # XDim = #rows, YDim = #columns per https://lpdaac.usgs.gov/data/get-started-data/collection-overview/missions/s-npp-nasa-viirs-overview/  # noqa
-        shape = [int(metadata_dict["XDim"]), int(metadata_dict["YDim"])]
-        assert shape[0] == shape[1]
-        left, top = ast.literal_eval(metadata_dict["UpperLeftPointMtrs"])
-
-        return shape, left, top
-
-    @property
-    def transform(self) -> List[float]:
-        spatial_resolution = self.spatial_resolution
-        return [spatial_resolution, 0.0, self.left, 0.0, -spatial_resolution, self.top]
-
-    @property
-    def spatial_resolution(self) -> float:
-        if self.shape[0] == 1200:
-            spatial_resolution = constants.BINSIZE_1000M
-        elif self.shape[0] == 2400:
-            spatial_resolution = constants.BINSIZE_500M
-        elif self.shape[0] == 3000:
-            spatial_resolution = constants.BINSIZE_375M
-        return spatial_resolution
-
     @property
     def wkt2(self) -> str:
-        return constants.WKT2_METERS
+        return constants.WKT2
 
     @property
     def epsg(self) -> None:
@@ -300,7 +260,7 @@ def viirs_metadata(
         Metadata: Metadata class
     """
     xml_href = f"{h5_href}.xml"
-    read_xml_href = modify_href(xml_href, read_href_modifier)
+    read_xml_href = utils.modify_href(xml_href, read_href_modifier)
 
     if href_exists(read_xml_href):
         return Metadata.from_xml_and_h5(h5_href, read_href_modifier)

@@ -47,7 +47,7 @@ class CogTest(TestCase):
             "VNP09H1.A2012017.h00v09.001.2016294114238.h5"
         )
         with TemporaryDirectory() as temporary_directory:
-            paths, _ = stactools.viirs.cog.cogify(infile, temporary_directory)
+            paths = stactools.viirs.cog.cogify(infile, temporary_directory)
             assert all(os.path.exists(path) for path in paths)
         self.assertEqual(len(paths), 5)
         file_names = [os.path.basename(path) for path in paths]
