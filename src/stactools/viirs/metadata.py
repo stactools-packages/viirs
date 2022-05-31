@@ -19,7 +19,7 @@ from stactools.core.io.xml import XmlElement
 from stactools.core.utils import href_exists
 
 from stactools.viirs import constants
-from stactools.viirs.utils import modify_href
+from stactools.viirs.utils import modify_href, ground_pixel_size
 
 logger = logging.getLogger(__name__)
 
@@ -249,6 +249,7 @@ class Metadata:
 
         # XDim = #rows, YDim = #columns per https://lpdaac.usgs.gov/data/get-started-data/collection-overview/missions/s-npp-nasa-viirs-overview/  # noqa
         shape = [int(metadata_dict["XDim"]), int(metadata_dict["YDim"])]
+        assert shape[0] == shape[1]
         left, top = ast.literal_eval(metadata_dict["UpperLeftPointMtrs"])
 
         return shape, left, top

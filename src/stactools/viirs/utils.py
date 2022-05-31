@@ -1,6 +1,7 @@
 import warnings
 from typing import List, Optional, cast
 
+import h5py
 import rasterio
 from pystac import Item
 from pystac.extensions.eo import EOExtension
@@ -26,6 +27,28 @@ def subdatasets(href: str) -> List[str]:
         warnings.simplefilter("ignore", category=NotGeoreferencedWarning)
         with rasterio.open(href) as dataset:
             return cast(List[str], dataset.subdatasets)
+
+
+def subdataset_dtype(href: str, sanitized_path):
+    print(sanitized_path)
+    unsanitized_names = []
+    with h5py.File(href) as h5:
+        h5.visit(lambda key : unsanitized_names.append(key) if isinstance(h5[key], h5py.Dataset) else None)
+
+        sanitary_unsanitary = {}
+        for unsanitized_name in unsanitized_names:
+            sanitized = unsanitized_name.replace(" ", "_")
+            sanitary_unsanitary[sanitized] = unsanitized_name
+
+        import json
+        # print(json.dumps(sanitary_unsanitary, indent=4))
+
+        subdataset = h5[sanitary_unsanitary[sanitized_path]]
+        data_type = subdataset.dtype
+        # data_type = "int16" if data_type == "int8" else data_type
+    
+    # print(data_type)
+    return data_type
 
 
 def modify_href(
