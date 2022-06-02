@@ -52,8 +52,9 @@ def cogify(infile: str, outdir: str) -> List[str]:
 
         with h5py.File(infile) as h5:
             data: Any = np.array(h5[subdataset_key])
-            if len(data.shape) != 2:
+            if len(data.shape) != 2:  # skip single value (non-data) "grids"
                 continue
+            data = np.int16(data) if data.dtype == "int8" else data
 
             src_profile = dict(
                 driver="GTiff",
