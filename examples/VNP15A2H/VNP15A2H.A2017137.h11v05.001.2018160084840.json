@@ -93,6 +93,7 @@
       "raster:bands": [
         {
           "data_type": "uint8",
+          "nodata": 255,
           "unit": "bit field",
           "spatial_resolution": 500
         }
@@ -202,6 +203,7 @@
       "raster:bands": [
         {
           "data_type": "uint8",
+          "nodata": 255,
           "unit": "bit field",
           "spatial_resolution": 500
         }

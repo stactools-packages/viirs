@@ -11,12 +11,14 @@
         "raster:bands": [
             {
                 "data_type": "int16",
+                "nodata": -1000,
                 "scale": 0.0001,
                 "spatial_resolution": 500
             }
         ],
         "title": "Blue band reflectance (478-498 nm)",
         "roles": [
+            "data",
             "reflectance"
         ]
     },
@@ -32,12 +34,14 @@
         "raster:bands": [
             {
                 "data_type": "int16",
+                "nodata": -1000,
                 "scale": 0.0001,
                 "spatial_resolution": 500
             }
         ],
         "title": "Green band reflectance (545-565 nm)",
         "roles": [
+            "data",
             "reflectance"
         ]
     },
@@ -53,12 +57,14 @@
         "raster:bands": [
             {
                 "data_type": "int16",
+                "nodata": -1000,
                 "scale": 0.0001,
                 "spatial_resolution": 500
             }
         ],
         "title": "Red band reflectance (600-680 nm)",
         "roles": [
+            "data",
             "reflectance"
         ]
     },
@@ -74,12 +80,14 @@
         "raster:bands": [
             {
                 "data_type": "int16",
+                "nodata": -1000,
                 "scale": 0.0001,
                 "spatial_resolution": 500
             }
         ],
         "title": "Near-infrared Radiation reflectance (846-885 nm)",
         "roles": [
+            "data",
             "reflectance"
         ]
     },
@@ -94,12 +102,14 @@
         "raster:bands": [
             {
                 "data_type": "int16",
+                "nodata": -1000,
                 "scale": 0.0001,
                 "spatial_resolution": 500
             }
         ],
         "title": "Shortwave Infrared Radiation reflectance (1230-1250 nm)",
         "roles": [
+            "data",
             "reflectance"
         ]
     },
@@ -115,12 +125,14 @@
         "raster:bands": [
             {
                 "data_type": "int16",
+                "nodata": -1000,
                 "scale": 0.0001,
                 "spatial_resolution": 500
             }
         ],
         "title": "Shortwave Infrared Radiation reflectance (1580-1640 nm)",
         "roles": [
+            "data",
             "reflectance"
         ]
     },
@@ -136,12 +148,14 @@
         "raster:bands": [
             {
                 "data_type": "int16",
+                "nodata": -1000,
                 "scale": 0.0001,
                 "spatial_resolution": 500
             }
         ],
         "title": "Shortwave Infrared Radiation reflectance (2225-2275 nm)",
         "roles": [
+            "data",
             "reflectance"
         ]
     },
@@ -191,6 +205,7 @@
         "raster:bands": [
             {
                 "data_type": "int16",
+                "nodata": -20000,
                 "scale": 0.01,
                 "unit": "degree",
                 "spatial_resolution": 500
@@ -205,6 +220,7 @@
         "raster:bands": [
             {
                 "data_type": "int16",
+                "nodata": -20000,
                 "scale": 0.01,
                 "unit": "degree",
                 "spatial_resolution": 500
@@ -219,6 +235,7 @@
         "raster:bands": [
             {
                 "data_type": "int16",
+                "nodata": -20000,
                 "scale": 0.01,
                 "unit": "degree",
                 "spatial_resolution": 500
@@ -233,6 +250,7 @@
         "raster:bands": [
             {
                 "data_type": "uint16",
+                "nodata": 65535,
                 "unit": "bit field",
                 "spatial_resolution": 500
             }
@@ -530,6 +548,7 @@
         "raster:bands": [
             {
                 "data_type": "int16",
+                "nodata": -1,
                 "unit": "Julian day",
                 "spatial_resolution": 500
             }

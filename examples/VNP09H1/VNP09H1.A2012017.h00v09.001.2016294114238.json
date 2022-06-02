@@ -108,11 +108,13 @@
       "raster:bands": [
         {
           "data_type": "int16",
+          "nodata": -28672,
           "scale": 0.0001,
           "spatial_resolution": 500
         }
       ],
       "roles": [
+        "data",
         "reflectance"
       ]
     },
@@ -131,11 +133,13 @@
       "raster:bands": [
         {
           "data_type": "int16",
+          "nodata": -28672,
           "scale": 0.0001,
           "spatial_resolution": 500
         }
       ],
       "roles": [
+        "data",
         "reflectance"
       ]
     },
@@ -154,11 +158,13 @@
       "raster:bands": [
         {
           "data_type": "int16",
+          "nodata": -28672,
           "scale": 0.0001,
           "spatial_resolution": 500
         }
       ],
       "roles": [
+        "data",
         "reflectance"
       ]
     },
@@ -169,6 +175,7 @@
       "raster:bands": [
         {
           "data_type": "uint16",
+          "nodata": 65535,
           "unit": "bit field",
           "spatial_resolution": 500
         }
@@ -178,7 +185,7 @@
           "name": "modland_qa",
           "description": "MODLAND QA bits",
           "offset": 0,
-          "length": 1,
+          "length": 2,
           "classes": [
             {
               "description": "Corrected product produced at ideal quality all bands",
@@ -365,6 +372,7 @@
       "raster:bands": [
         {
           "data_type": "uint16",
+          "nodata": 65535,
           "unit": "bit field",
           "spatial_resolution": 500
         }
@@ -541,8 +549,8 @@
   ],
   "stac_extensions": [
     "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/raster/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
     "https://stac-extensions.github.io/classification/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/eo/v1.0.0/schema.json"
+    "https://stac-extensions.github.io/raster/v1.0.0/schema.json"
   ]
 }

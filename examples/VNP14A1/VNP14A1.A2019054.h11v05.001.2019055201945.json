@@ -134,6 +134,7 @@
       "raster:bands": [
         {
           "data_type": "int32",
+          "nodata": 0,
           "unit": "megawatt",
           "scale": 0.1,
           "spatial_resolution": 1000
@@ -207,6 +208,7 @@
       "raster:bands": [
         {
           "data_type": "int16",
+          "nodata": -1,
           "spatial_resolution": 1000
         }
       ],
@@ -223,7 +225,7 @@
   ],
   "stac_extensions": [
     "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/raster/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/classification/v1.0.0/schema.json"
+    "https://stac-extensions.github.io/classification/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/raster/v1.0.0/schema.json"
   ]
 }

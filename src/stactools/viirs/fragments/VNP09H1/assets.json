@@ -2,6 +2,7 @@
     "SurfReflect_I1": {
         "title": "Surface Reflectance Band I1",
         "roles": [
+            "data",
             "reflectance"
         ],
         "eo:bands": [
@@ -15,6 +16,7 @@
         "raster:bands": [
             {
                 "data_type": "int16",
+                "nodata": -28672,
                 "scale": 0.0001,
                 "spatial_resolution": 500
             }
@@ -23,6 +25,7 @@
     "SurfReflect_I2": {
         "title": "Surface Reflectance Band I2",
         "roles": [
+            "data",
             "reflectance"
         ],
         "eo:bands": [
@@ -36,6 +39,7 @@
         "raster:bands": [
             {
                 "data_type": "int16",
+                "nodata": -28672,
                 "scale": 0.0001,
                 "spatial_resolution": 500
             }
@@ -44,6 +48,7 @@
     "SurfReflect_I3": {
         "title": "Surface Reflectance Band I3",
         "roles": [
+            "data",
             "reflectance"
         ],
         "eo:bands": [
@@ -57,6 +62,7 @@
         "raster:bands": [
             {
                 "data_type": "int16",
+                "nodata": -28672,
                 "scale": 0.0001,
                 "spatial_resolution": 500
             }
@@ -70,6 +76,7 @@
         "raster:bands": [
             {
                 "data_type": "uint16", 
+                "nodata": 65535,
                 "unit": "bit field",
                 "spatial_resolution": 500
             }
@@ -242,6 +249,7 @@
         "raster:bands": [
             {
                 "data_type": "uint16",
+                "nodata": 65535,
                 "unit": "bit field",
                 "spatial_resolution": 500
             }
@@ -251,7 +259,7 @@
                 "name": "modland_qa",
                 "description": "MODLAND QA bits",
                 "offset": 0,
-                "length": 1,
+                "length": 2,
                 "classes": [
                     {
                         "description": "Corrected product produced at ideal quality all bands",

@@ -57,6 +57,7 @@
         "raster:bands": [
             {
                 "data_type": "int32",
+                "nodata": 0,
                 "unit": "megawatt",
                 "scale": 0.1,
                 "spatial_resolution": 1000
@@ -126,6 +127,7 @@
         "raster:bands": [
             {
                 "data_type": "int16",
+                "nodata": -1,
                 "spatial_resolution": 1000
             }
         ],
