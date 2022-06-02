@@ -49,17 +49,28 @@ def modify_href(
 def add_extensions(item: Item) -> None:
     """Adds extensions to the Item extension list if they exist on the Item assets.
 
+    NOTE: This package does not nest the classification extension inside
+    'raster:bands', so we do not check for its existence there.
+
     Args:
         item (Item): The Item being modified
     """
-    item_str = str(item.to_dict())
+    extensions = set()
+    for asset in item.assets.values():
+        asset_dict = asset.to_dict()
+        if (
+            "classification:classes" in asset_dict
+            or "classification:bitfields" in asset_dict
+        ):
+            extensions.add(constants.CLASSIFICATION_EXTENSION_HREF)
+        if "eo:bands" in asset_dict:
+            extensions.add(EOExtension.get_schema_uri())
+        if "raster:bands" in asset_dict:
+            extensions.add(RasterExtension.get_schema_uri())
 
-    if "classification:classes" in item_str or "classification:bitfields" in item_str:
-        item.stac_extensions.append(constants.CLASSIFICATION_EXTENSION_HREF)
-    if "eo:bands" in item_str:
-        EOExtension.add_to(item)
-    if "raster:bands" in item_str:
-        RasterExtension.add_to(item)
+    for extension in extensions:
+        if extension not in item.stac_extensions:
+            item.stac_extensions.append(extension)
 
     return None
 
