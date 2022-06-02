@@ -53,13 +53,7 @@
       ]
     ]
   },
-  "links": [
-    {
-      "rel": "self",
-      "href": "/Users/pjh/dev/viirs/examples/VNP13A1/VNP13A1.A2022097.h11v05.001.2022113080900.json",
-      "type": "application/json"
-    }
-  ],
+  "links": [],
   "assets": {
     "hdf5": {
       "href": "../../tests/data-files/external/VNP13A1.A2022097.h11v05.001.2022113080900.h5",
@@ -520,7 +514,7 @@
       "title": "Pixel usefulness using a simple rank class",
       "raster:bands": [
         {
-          "data_type": "int8",
+          "data_type": "int16",
           "spatial_resolution": 500
         }
       ],

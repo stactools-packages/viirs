@@ -75,13 +75,7 @@
       ]
     ]
   },
-  "links": [
-    {
-      "rel": "self",
-      "href": "/Users/pjh/dev/viirs/examples/VNP09H1/VNP09H1.A2012017.h00v09.001.2016294114238.json",
-      "type": "application/json"
-    }
-  ],
+  "links": [],
   "assets": {
     "hdf5": {
       "href": "../../tests/data-files/external/VNP09H1.A2012017.h00v09.001.2016294114238.h5",

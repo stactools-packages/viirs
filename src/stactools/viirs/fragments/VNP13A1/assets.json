@@ -467,7 +467,7 @@
     "500_m_16_days_pixel_reliability": {
         "raster:bands": [
             {
-                "data_type": "int8",
+                "data_type": "int16",
                 "spatial_resolution": 500
             }
         ],

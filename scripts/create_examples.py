@@ -31,7 +31,7 @@ def examples(create_cogs: bool) -> None:
         item.set_self_href(item_path)
         item.make_asset_hrefs_relative()
         item.validate()
-        item.save_object()
+        item.save_object(include_self_link=False)
 
 
 if __name__ == "__main__":
