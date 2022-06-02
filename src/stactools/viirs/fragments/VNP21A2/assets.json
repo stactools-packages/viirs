@@ -84,6 +84,102 @@
                 "spatial_resolution": 1000
             }
         ],
+        "classification:bitfields": [
+            {
+                "name": "mandatory_flags",
+                "description": "Mandatory QA flags",
+                "offset": 0,
+                "length": 2,
+                "classes": [
+                    {
+                        "description": "Pixel produced, good quality, no further QA info necessary",
+                        "value": 0
+                    },
+                    {
+                        "description": "Pixel produced but unreliable quality. Recommend more detailed analysis of other QC information",
+                        "value": 1
+                    },
+                    {
+                        "description": "Pixel not produced due to cloud",
+                        "value": 2
+                    },
+                    {
+                        "description": "Pixel not produced due to reasons other than cloud",
+                        "value": 3
+                    }
+                ]
+            },
+            {
+                "name": "quality_flag",
+                "description": "Data quality flag",
+                "offset": 2,
+                "length": 2,
+                "classes": [
+                    {
+                        "description": "Good data quality of L1B bands 14, 15, 16",
+                        "value": 0
+                    },
+                    {
+                        "description": "Missing pixel",
+                        "value": 1
+                    },
+                    {
+                        "description": "Fairly calibrated",
+                        "value": 2
+                    },
+                    {
+                        "description": "Poorly calibrated, TES processing skipped",
+                        "value": 3
+                    }
+                ]
+            },
+            {
+                "name": "emissivity_accuracy",
+                "offset": 4,
+                "length": 2,
+                "classes": [
+                    {
+                        "description": ">0.02 (Poor performance)",
+                        "value": 0
+                    },
+                    {
+                        "description": "0.015 - 0.02 (Marginal performance)",
+                        "value": 1
+                    },
+                    {
+                        "description": "0.01 - 0.015 (Good performance)",
+                        "value": 2
+                    },
+                    {
+                        "description": "<0.01 (Excellent performance)",
+                        "value": 3
+                    }
+                ]
+            },
+            {
+                "name": "lst_accuracy",
+                "offset": 6,
+                "length": 2,
+                "classes": [
+                    {
+                        "description": ">2 K (Poor performance)",
+                        "value": 0
+                    },
+                    {
+                        "description": "1.5 - 2 K (Marginal performance)",
+                        "value": 1
+                    },
+                    {
+                        "description": "1 - 1.5 K (Good performance)",
+                        "value": 2
+                    },
+                    {
+                        "description": "<1 K (Excellent performance)",
+                        "value": 3
+                    }
+                ]
+            }
+        ],
         "title": "Day Quality Control for LST and Emissivity",
         "roles": [
             "data"
@@ -95,6 +191,102 @@
                 "data_type": "uint8",
                 "nodata": 0,
                 "spatial_resolution": 1000
+            }
+        ],
+        "classification:bitfields": [
+            {
+                "name": "mandatory_flags",
+                "description": "Mandatory QA flags",
+                "offset": 0,
+                "length": 2,
+                "classes": [
+                    {
+                        "description": "Pixel produced, good quality, no further QA info necessary",
+                        "value": 0
+                    },
+                    {
+                        "description": "Pixel produced but unreliable quality. Recommend more detailed analysis of other QC information",
+                        "value": 1
+                    },
+                    {
+                        "description": "Pixel not produced due to cloud",
+                        "value": 2
+                    },
+                    {
+                        "description": "Pixel not produced due to reasons other than cloud",
+                        "value": 3
+                    }
+                ]
+            },
+            {
+                "name": "quality_flag",
+                "description": "Data quality flag",
+                "offset": 2,
+                "length": 2,
+                "classes": [
+                    {
+                        "description": "Good data quality of L1B bands 14, 15, 16",
+                        "value": 0
+                    },
+                    {
+                        "description": "Missing pixel",
+                        "value": 1
+                    },
+                    {
+                        "description": "Fairly calibrated",
+                        "value": 2
+                    },
+                    {
+                        "description": "Poorly calibrated, TES processing skipped",
+                        "value": 3
+                    }
+                ]
+            },
+            {
+                "name": "emissivity_accuracy",
+                "offset": 4,
+                "length": 2,
+                "classes": [
+                    {
+                        "description": ">0.02 (Poor performance)",
+                        "value": 0
+                    },
+                    {
+                        "description": "0.015 - 0.02 (Marginal performance)",
+                        "value": 1
+                    },
+                    {
+                        "description": "0.01 - 0.015 (Good performance)",
+                        "value": 2
+                    },
+                    {
+                        "description": "<0.01 (Excellent performance)",
+                        "value": 3
+                    }
+                ]
+            },
+            {
+                "name": "lst_accuracy",
+                "offset": 6,
+                "length": 2,
+                "classes": [
+                    {
+                        "description": ">2 K (Poor performance)",
+                        "value": 0
+                    },
+                    {
+                        "description": "1.5 - 2 K (Marginal performance)",
+                        "value": 1
+                    },
+                    {
+                        "description": "1 - 1.5 K (Good performance)",
+                        "value": 2
+                    },
+                    {
+                        "description": "<1 K (Excellent performance)",
+                        "value": 3
+                    }
+                ]
             }
         ],
         "title": "Night Quality Control for LST and Emissivity",
