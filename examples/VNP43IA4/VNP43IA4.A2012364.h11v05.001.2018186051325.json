@@ -13,11 +13,11 @@
     "proj:epsg": null,
     "proj:wkt2": "PROJCS[\"unnamed\",GEOGCS[\"Unknown datum based upon the custom spheroid\",DATUM[\"Not specified (based on custom spheroid)\",SPHEROID[\"Custom spheroid\",6371007.181,0]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Sinusoidal\"],PARAMETER[\"longitude_of_center\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"Meter\",1],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
     "proj:transform": [
-      463.312716,
+      463.3127165279169,
       0.0,
       -7783653.637667,
       0.0,
-      -463.312716,
+      -463.3127165279167,
       4447802.078667
     ],
     "proj:shape": [
@@ -35,15 +35,15 @@
           39.99999999641088
         ],
         [
-          -80.82903768637865,
-          30.000000008700304
+          -80.82903767709807,
+          29.99999999730591
         ],
         [
-          -69.28203231576441,
-          30.000000008700304
+          -69.28203229465252,
+          29.99999999730591
         ],
         [
-          -78.3244373636603,
+          -78.32443734878598,
           39.99999999641088
         ],
         [
@@ -200,13 +200,13 @@
   },
   "bbox": [
     -91.37851024025423,
-    30.000000008700304,
-    -69.28203231576441,
+    29.99999999730591,
+    -69.28203229465252,
     39.99999999641088
   ],
   "stac_extensions": [
     "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/classification/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/raster/v1.0.0/schema.json"
+    "https://stac-extensions.github.io/raster/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/classification/v1.0.0/schema.json"
   ]
 }

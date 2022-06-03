@@ -1,0 +1,100 @@
+{
+    "DNB_BRDF-Corrected_NTL": {
+        "raster:bands": [
+            {
+                "data_type": "uint16",
+                "nodata": 65535,
+                "unit": "nWatts / cm^2 / sr",
+                "scale": 0.1,
+                "spatial_resolution": 500
+            }
+        ],
+        "title": "BRDF Corrected Day/Night Band Night Time Lights",
+        "roles": [
+            "data"
+        ]
+    },
+    "Gap_Filled_DNB_BRDF-Corrected_NTL": {
+        "raster:bands": [
+            {
+                "data_type": "uint16",
+                "nodata": 65535,
+                "unit": "nWatts / cm^2 / sr",
+                "scale": 0.1,
+                "spatial_resolution": 500
+            }
+        ],
+        "title": "Gap Filled BRDF Corrected Day/Night Band Night Time Lights",
+        "roles": [
+            "data"
+        ]
+    },
+    "DNB_Lunar_Irradiance": {
+        "raster:bands": [
+            {
+                "data_type": "uint16",
+                "nodata": 65535,
+                "unit": "nWatts / cm^2 / sr",
+                "scale": 0.1,
+                "spatial_resolution": 500
+            }
+        ],
+        "title": "Day/Night Band Lunar Irradiance",
+        "roles": [
+            "data"
+        ]
+    },
+    "Latest_High_Quality_Retrieval": {
+        "raster:bands": [
+            {
+                "data_type": "uint8",
+                "nodata": 255,
+                "unit": "days",
+                "spatial_resolution": 500
+            }
+        ],
+        "title": "Latest High Quality BRDF Corrected Day/Night Band Radiance Retrieval",
+        "roles": [
+            "data"
+        ]
+    },
+    "Mandatory_Quality_Flag": {
+        "raster:bands": [
+            {
+                "data_type": "uint8",
+                "nodata": 255,
+                "spatial_resolution": 500
+            }
+        ],
+        "title": "Mandatory Quality Flag",
+        "roles": [
+            "data"
+        ]
+    },
+    "QF_Cloud_Mask": {
+        "raster:bands": [
+            {
+                "data_type": "uint16",
+                "nodata": 65535,
+                "spatial_resolution": 500
+            }
+        ],
+        "title": "Quality Flag for Cloud Mask",
+        "roles": [
+            "data"
+        ]
+    },
+    "Snow_Flag": {
+        "raster:bands": [
+            {
+                "data_type": "uint8",
+                "nodata": 255,
+                "spatial_resolution": 500
+            }
+        ],
+        "title": "Flag for Snow Cover",
+        "roles": [
+            "data"
+        ]
+    }
+}

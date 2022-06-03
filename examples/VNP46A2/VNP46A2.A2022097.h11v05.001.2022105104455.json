@@ -1,0 +1,188 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "id": "VNP46A2.A2022097.h11v05.001.2022105104455",
+  "properties": {
+    "start_datetime": "2022-04-07T00:00:00Z",
+    "end_datetime": "2022-04-07T23:59:59Z",
+    "viirs:horizontal-tile": 11,
+    "viirs:vertical-tile": 5,
+    "viirs:tile-id": "61011005",
+    "created": "2022-04-15T10:44:55Z",
+    "platform": "snpp",
+    "proj:epsg": 4326,
+    "proj:transform": [
+      0.004166666666666667,
+      0.0,
+      -70,
+      0.0,
+      -0.004166666666666667,
+      40
+    ],
+    "proj:shape": [
+      2400,
+      2400
+    ],
+    "datetime": null
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -70.0,
+          40.0
+        ],
+        [
+          -70.0,
+          30.0
+        ],
+        [
+          -60.0,
+          30.0
+        ],
+        [
+          -60.0,
+          40.0
+        ],
+        [
+          -70.0,
+          40.0
+        ]
+      ]
+    ]
+  },
+  "links": [],
+  "assets": {
+    "hdf5": {
+      "href": "../../tests/data-files/external/VNP46A2.A2022097.h11v05.001.2022105104455.h5",
+      "type": "application/x-hdf5",
+      "title": "Source data containing all bands",
+      "roles": [
+        "data"
+      ]
+    },
+    "DNB_BRDF-Corrected_NTL": {
+      "href": "../../tests/data-files/external/VNP46A2.A2022097.h11v05.001.2022105104455_DNB_BRDF-Corrected_NTL.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "BRDF Corrected Day/Night Band Night Time Lights",
+      "raster:bands": [
+        {
+          "data_type": "uint16",
+          "nodata": 65535,
+          "unit": "nWatts / cm^2 / sr",
+          "scale": 0.1,
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "DNB_Lunar_Irradiance": {
+      "href": "../../tests/data-files/external/VNP46A2.A2022097.h11v05.001.2022105104455_DNB_Lunar_Irradiance.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Day/Night Band Lunar Irradiance",
+      "raster:bands": [
+        {
+          "data_type": "uint16",
+          "nodata": 65535,
+          "unit": "nWatts / cm^2 / sr",
+          "scale": 0.1,
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "Gap_Filled_DNB_BRDF-Corrected_NTL": {
+      "href": "../../tests/data-files/external/VNP46A2.A2022097.h11v05.001.2022105104455_Gap_Filled_DNB_BRDF-Corrected_NTL.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Gap Filled BRDF Corrected Day/Night Band Night Time Lights",
+      "raster:bands": [
+        {
+          "data_type": "uint16",
+          "nodata": 65535,
+          "unit": "nWatts / cm^2 / sr",
+          "scale": 0.1,
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "Latest_High_Quality_Retrieval": {
+      "href": "../../tests/data-files/external/VNP46A2.A2022097.h11v05.001.2022105104455_Latest_High_Quality_Retrieval.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Latest High Quality BRDF Corrected Day/Night Band Radiance Retrieval",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "unit": "days",
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "Mandatory_Quality_Flag": {
+      "href": "../../tests/data-files/external/VNP46A2.A2022097.h11v05.001.2022105104455_Mandatory_Quality_Flag.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Mandatory Quality Flag",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "QF_Cloud_Mask": {
+      "href": "../../tests/data-files/external/VNP46A2.A2022097.h11v05.001.2022105104455_QF_Cloud_Mask.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Quality Flag for Cloud Mask",
+      "raster:bands": [
+        {
+          "data_type": "uint16",
+          "nodata": 65535,
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "Snow_Flag": {
+      "href": "../../tests/data-files/external/VNP46A2.A2022097.h11v05.001.2022105104455_Snow_Flag.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Flag for Snow Cover",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    }
+  },
+  "bbox": [
+    -70.0,
+    30.0,
+    -60.0,
+    40.0
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/raster/v1.0.0/schema.json"
+  ]
+}

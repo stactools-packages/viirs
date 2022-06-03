@@ -13,11 +13,11 @@
     "proj:epsg": null,
     "proj:wkt2": "PROJCS[\"unnamed\",GEOGCS[\"Unknown datum based upon the custom spheroid\",DATUM[\"Not specified (based on custom spheroid)\",SPHEROID[\"Custom spheroid\",6371007.181,0]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Sinusoidal\"],PARAMETER[\"longitude_of_center\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"Meter\",1],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
     "proj:transform": [
-      463.312716,
+      463.3127165279165,
       0.0,
       -20015109.354,
       0.0,
-      -463.312716,
+      -463.3127165279167,
       0.0
     ],
     "proj:shape": [
@@ -37,14 +37,14 @@
           ],
           [
             -180.0,
-            -9.999999987710575
+            -9.999999999104968
           ],
           [
-            -172.62252401011307,
-            -9.999999987710575
+            -172.62252400459607,
+            -9.999999999104968
           ],
           [
-            -169.99999999612487,
+            -169.99999998473047,
             0.0
           ],
           [
@@ -61,19 +61,19 @@
         [
           [
             180.0,
-            -9.999999987710575
+            -9.999999999104968
           ],
           [
             180.0,
             -5.821302195840872e-08
           ],
           [
-            177.22320988389254,
-            -9.999999987710575
+            177.2232098774833,
+            -9.999999999104968
           ],
           [
             180.0,
-            -9.999999987710575
+            -9.999999999104968
           ]
         ]
       ]
@@ -546,15 +546,15 @@
     }
   },
   "bbox": [
-    177.22320988389254,
-    -9.999999987710575,
-    -169.99999999612487,
+    177.2232098774833,
+    -9.999999999104968,
+    -169.99999998473047,
     0.0
   ],
   "stac_extensions": [
     "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/raster/v1.0.0/schema.json",
     "https://stac-extensions.github.io/classification/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/raster/v1.0.0/schema.json"
+    "https://stac-extensions.github.io/eo/v1.0.0/schema.json"
   ]
 }
