@@ -1,10 +1,20 @@
 {
-    "BRDF_Alebdo_Band_Mandatory_Quality_I1": {
+    "BRDF_Albedo_Band_Mandatory_Quality_I1": {
         "raster:bands": [
             {
                 "data_type": "uint8",
                 "nodata": 255,
                 "spatial_resolution": 500
+            }
+        ],
+        "classification:classes": [
+            {
+                "description": "full BRDF inversions",
+                "value": 0
+            },
+            {
+                "description": "magnitude BRDF inversions",
+                "value": 1
             }
         ],
         "title": "BRDF/Albedo Mandatory Quality for Band I1",
@@ -12,7 +22,7 @@
             "data"
         ]
     },
-    "BRDF_Alebdo_Band_Mandatory_Quality_I2": {
+    "BRDF_Albedo_Band_Mandatory_Quality_I2": {
         "raster:bands": [
             {
                 "data_type": "uint8",
@@ -20,17 +30,37 @@
                 "spatial_resolution": 500
             }
         ],
+        "classification:classes": [
+            {
+                "description": "full BRDF inversions",
+                "value": 0
+            },
+            {
+                "description": "magnitude BRDF inversions",
+                "value": 1
+            }
+        ],
         "title": "BRDF/Albedo Mandatory Quality for Band I2",
         "roles": [
             "data"
         ]
     },
-    "BRDF_Alebdo_Band_Mandatory_Quality_I3": {
+    "BRDF_Albedo_Band_Mandatory_Quality_I3": {
         "raster:bands": [
             {
                 "data_type": "uint8",
                 "nodata": 255,
                 "spatial_resolution": 500
+            }
+        ],
+        "classification:classes": [
+            {
+                "description": "full BRDF inversions",
+                "value": 0
+            },
+            {
+                "description": "magnitude BRDF inversions",
+                "value": 1
             }
         ],
         "title": "BRDF/Albedo Mandatory Quality for Band I3",

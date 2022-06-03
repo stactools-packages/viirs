@@ -31,24 +31,24 @@
     "coordinates": [
       [
         [
-          -91.3785,
-          40.0
+          -91.37851024025423,
+          39.99999999641088
         ],
         [
-          -78.1106,
-          40.054
+          -80.82903768637865,
+          30.000000008700304
         ],
         [
-          -69.0368,
-          29.892
+          -69.28203231576441,
+          30.000000008700304
         ],
         [
-          -80.7658,
-          29.8459
+          -78.3244373636603,
+          39.99999999641088
         ],
         [
-          -91.3785,
-          40.0
+          -91.37851024025423,
+          39.99999999641088
         ]
       ]
     ]
@@ -664,15 +664,15 @@
     }
   },
   "bbox": [
-    -91.3785,
-    29.8459,
-    -69.0368,
-    40.054
+    -91.37851024025423,
+    30.000000008700304,
+    -69.28203231576441,
+    39.99999999641088
   ],
   "stac_extensions": [
     "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/classification/v1.0.0/schema.json",
     "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/classification/v1.0.0/schema.json",
     "https://stac-extensions.github.io/raster/v1.0.0/schema.json"
   ]
 }

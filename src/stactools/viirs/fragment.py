@@ -10,6 +10,7 @@ class STACFragments:
 
     def __init__(self, product: str) -> None:
         self.product = product
+        print(self.product)
 
     def load_assets(self) -> None:
         self.assets = self._load("assets.json")
