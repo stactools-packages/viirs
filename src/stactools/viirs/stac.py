@@ -22,6 +22,7 @@ def create_item(
     cog_hrefs: Optional[List[str]] = None,
     read_href_modifier: Optional[ReadHrefModifier] = None,
     antimeridian_strategy: Strategy = Strategy.SPLIT,
+    densify_factor: Optional[int] = None,
 ) -> Item:
     """Creates a STAC Item from VIIRS data.
 
@@ -37,7 +38,7 @@ def create_item(
     Returns:
         pystac.Item: A STAC Item representing the VIIRS data.
     """
-    metadata = viirs_metadata(h5_href, read_href_modifier)
+    metadata = viirs_metadata(h5_href, read_href_modifier, densify_factor)
 
     item = Item(
         id=metadata.id,
@@ -77,8 +78,8 @@ def create_item(
             item.add_asset(subdataset_name, Asset.from_dict(asset_dict))
 
     projection = ProjectionExtension.ext(item, add_if_missing=True)
-    projection.epsg = metadata.epsg
-    projection.wkt2 = metadata.wkt2
+    projection.epsg = None
+    projection.wkt2 = constants.WKT2
     projection.transform = metadata.transform
     projection.shape = metadata.shape
 

@@ -23,7 +23,7 @@ def cogify(infile: str, outdir: str) -> List[str]:
         List[str]: The COG hrefs
     """
     shape, left, top = utils.hdfeos_metadata(infile)
-    transform = utils.transform(shape, left, top)
+    transform = utils.transform(shape[0], left, top)
     base_filename = os.path.splitext(os.path.basename(infile))[0]
 
     all_keys: List[str] = []

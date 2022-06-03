@@ -58,6 +58,12 @@ def create_viirs_command(cli: Group) -> Command:
         default=False,
     )
     @click.option(
+        "-d",
+        "--densify_factor",
+        help="Factor by which to densify the Item geometry",
+        type=int,
+    )
+    @click.option(
         "-f", "--file-list", help="File containing list of subdataset COG HREFs"
     )
     def create_item_command(
@@ -65,7 +71,8 @@ def create_viirs_command(cli: Group) -> Command:
         outdir: str,
         antimeridian_strategy: str,
         cogify: bool,
-        file_list: Optional[str],
+        densify_factor: Optional[int] = None,
+        file_list: Optional[str] = None,
     ) -> None:
         """Creates a STAC Item based on an H5 VIIRS data file and, if it exists,
         the corresponding XML metadata file.
@@ -94,7 +101,12 @@ def create_viirs_command(cli: Group) -> Command:
             h5dir = os.path.dirname(infile)
             hrefs = cog.cogify(infile, h5dir)
 
-        item = stac.create_item(infile, cog_hrefs=hrefs, antimeridian_strategy=strategy)
+        item = stac.create_item(
+            infile,
+            cog_hrefs=hrefs,
+            antimeridian_strategy=strategy,
+            densify_factor=densify_factor,
+        )
         item_path = os.path.join(outdir, f"{item.id}.json")
         item.set_self_href(item_path)
         item.make_asset_hrefs_relative()

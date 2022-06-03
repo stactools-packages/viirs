@@ -3,9 +3,10 @@ import logging
 import os.path
 import warnings
 from dataclasses import dataclass
-from typing import Any, Callable, Dict, List, Optional
+from typing import Any, Callable, Dict, List, Optional, Tuple
 
 import fsspec
+import numpy as np
 import rasterio
 import shapely.geometry
 from dateutil import parser
@@ -14,6 +15,7 @@ from rasterio.errors import NotGeoreferencedWarning
 from shapely.geometry import Polygon
 from stactools.core.io import ReadHrefModifier
 from stactools.core.io.xml import XmlElement
+from stactools.core.projection import reproject_geom
 from stactools.core.utils import href_exists
 
 from stactools.viirs import constants, utils
@@ -54,7 +56,10 @@ class Metadata:
 
     @classmethod
     def from_xml_and_h5(
-        cls, h5_href: str, read_href_modifier: Optional[ReadHrefModifier] = None
+        cls,
+        h5_href: str,
+        read_href_modifier: Optional[ReadHrefModifier] = None,
+        densify_factor: Optional[int] = None,
     ) -> "Metadata":
         """Extracts metadata from XML elements and H5 EOS metadata structure"""
 
@@ -93,28 +98,6 @@ class Metadata:
         else:
             raise ValueError(f"Unsupported VIIRS version: {version}")
 
-        points = [
-            (
-                float(
-                    point.find_text_or_throw(
-                        "PointLongitude", missing_element("longitude")
-                    )
-                ),
-                float(
-                    point.find_text_or_throw(
-                        "PointLatitude", missing_element("latitude")
-                    )
-                ),
-            )
-            for point in metadata.findall(
-                "SpatialDomainContainer/HorizontalSpatialDomainContainer/"
-                "GPolygon/Boundary/Point"
-            )
-        ]
-        polygon = Polygon(points)
-        geometry = shapely.geometry.mapping(polygon)
-        bbox = polygon.bounds
-
         start_date = metadata.find_text_or_throw(
             "RangeDateTime/RangeBeginningDate", missing_element("start_date")
         )
@@ -122,6 +105,7 @@ class Metadata:
             "RangeDateTime/RangeBeginningTime", missing_element("start_time")
         )
         start_datetime = datetime.datetime.fromisoformat(f"{start_date}T{start_time}")
+
         end_date = metadata.find_text_or_throw(
             "RangeDateTime/RangeEndingDate", missing_element("end_date")
         )
@@ -151,14 +135,14 @@ class Metadata:
                 tile_id = value
 
         shape, left, top = utils.hdfeos_metadata(read_h5_href)
-        transform = utils.transform(shape, left, top)
+        transform = utils.transform(shape[0], left, top)
+        geometry = cls._geometry(shape, transform, densify_factor)
+        bbox = shapely.geometry.shape(geometry).bounds
 
         return Metadata(
             id=id,
             product=product,
             version=version,
-            geometry=geometry,
-            bbox=bbox,
             start_datetime=start_datetime,
             end_datetime=end_datetime,
             created_datetime=created_datetime,
@@ -166,6 +150,8 @@ class Metadata:
             horizontal_tile=horizontal_tile,
             vertical_tile=vertical_tile,
             tile_id=tile_id,
+            geometry=geometry,
+            bbox=bbox,
             shape=shape,
             transform=transform,
             xml_href=xml_href,
@@ -173,7 +159,10 @@ class Metadata:
 
     @classmethod
     def from_h5(
-        cls, h5_href: str, read_href_modifier: Optional[ReadHrefModifier] = None
+        cls,
+        h5_href: str,
+        read_href_modifier: Optional[ReadHrefModifier] = None,
+        densify_factor: Optional[int] = None,
     ) -> "Metadata":
         """Extracts metadata from H5 attributes and H5 EOS metadata structure"""
         read_h5_href = utils.modify_href(h5_href, read_href_modifier)
@@ -187,19 +176,6 @@ class Metadata:
         product: str = tags["shortname"]
         version = tags["versionid"]
 
-        latitudes = tags.get("gringlatitude", None) or tags.get(
-            "gringpointlatitude", None
-        )
-        longitudes = tags.get("gringlongitude", None) or tags.get(
-            "gringpointlongitude", None
-        )
-        latitudes = latitudes.strip().split(" ")
-        longitudes = longitudes.strip().split(" ")
-        points = [(float(lon), float(lat)) for lon, lat in zip(longitudes, latitudes)]
-        polygon = Polygon(points)
-        geometry = shapely.geometry.mapping(polygon)
-        bbox = polygon.bounds
-
         start_datetime = parser.parse(tags["starttime"])
         end_datetime = parser.parse(tags["endtime"])
         created_datetime = parser.parse(tags["productiontime"])
@@ -209,14 +185,14 @@ class Metadata:
         tile_id = tags["tileid"]
 
         shape, left, top = utils.hdfeos_metadata(read_h5_href)
-        transform = utils.transform(shape, left, top)
+        transform = utils.transform(shape[0], left, top)
+        geometry = cls._geometry(shape, transform, densify_factor)
+        bbox = shapely.geometry.shape(geometry).bounds
 
         return Metadata(
             id=id,
             product=product,
             version=version,
-            geometry=geometry,
-            bbox=bbox,
             start_datetime=start_datetime,
             end_datetime=end_datetime,
             created_datetime=created_datetime,
@@ -224,27 +200,62 @@ class Metadata:
             horizontal_tile=horizontal_tile,
             vertical_tile=vertical_tile,
             tile_id=tile_id,
+            geometry=geometry,
+            bbox=bbox,
             shape=shape,
             transform=transform,
             xml_href=None,
         )
 
     @property
-    def wkt2(self) -> str:
-        return constants.WKT2
-
-    @property
-    def epsg(self) -> None:
-        return None
-
-    @property
     def platform(self) -> str:
         product_prefix = self.product[0:3]
         return constants.PLATFORMS[product_prefix]
 
+    @classmethod
+    def _geometry(
+        cls,
+        shape: List[int],
+        transform: List[float],
+        densify_factor: Optional[int] = None,
+    ) -> Dict[str, Any]:
+        num_rows, num_cols = shape
+        upper_left = (0, 0)
+        lower_left = (0, num_rows)
+        lower_right = (num_cols, num_rows)
+        upper_right = (num_cols, 0)
+        pixel_points = [upper_left, lower_left, lower_right, upper_right, upper_left]
+
+        affine = rasterio.Affine(*transform)
+        proj_points = [affine * xy for xy in pixel_points]
+
+        if densify_factor is not None:
+            proj_points = cls._densify(proj_points, densify_factor)
+        proj_polygon = Polygon(proj_points)
+        proj_geometry = shapely.geometry.mapping(proj_polygon)
+        wgs84_geometry = reproject_geom(constants.WKT2, "epsg:4326", proj_geometry)
+
+        return wgs84_geometry
+
+    @classmethod
+    def _densify(
+        cls, point_list: List[Tuple[float, float]], densify_factor: int
+    ) -> List[Tuple[float, float]]:
+        # https://stackoverflow.com/questions/64995977/generating-equidistance-points-along-the-boundary-of-a-polygon-but-cw-ccw  # noqa
+        points: Any = np.asarray(point_list)
+        densified_number = len(points) * densify_factor
+        existing_indices = np.arange(0, densified_number, densify_factor)
+        interp_indices = np.arange(existing_indices[-1])
+        interp_x = np.interp(interp_indices, existing_indices, points[:, 0])
+        interp_y = np.interp(interp_indices, existing_indices, points[:, 1])
+        densified_points = [(x, y) for x, y in zip(interp_x, interp_y)]
+        return densified_points
+
 
 def viirs_metadata(
-    h5_href: str, read_href_modifier: Optional[ReadHrefModifier] = None
+    h5_href: str,
+    read_href_modifier: Optional[ReadHrefModifier] = None,
+    densify_factor: Optional[int] = None,
 ) -> Metadata:
     """Creates a metadata class from the appropriate source (XML or H5).
 
@@ -263,6 +274,6 @@ def viirs_metadata(
     read_xml_href = utils.modify_href(xml_href, read_href_modifier)
 
     if href_exists(read_xml_href):
-        return Metadata.from_xml_and_h5(h5_href, read_href_modifier)
+        return Metadata.from_xml_and_h5(h5_href, read_href_modifier, densify_factor)
     else:
-        return Metadata.from_h5(h5_href, read_href_modifier)
+        return Metadata.from_h5(h5_href, read_href_modifier, densify_factor)

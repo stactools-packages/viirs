@@ -28,8 +28,8 @@ def test_antimeridian_normalize() -> None:
     _ = test_data.get_external_data(f"{filename}.xml")
     item = stac.create_item(href, antimeridian_strategy=Strategy.NORMALIZE)
     bounds = shapely.geometry.shape(item.geometry).bounds
-    assert bounds[0] == -180.0715
-    assert bounds[2] == -169.9201
+    assert bounds[0] == -182.77679011610746
+    assert bounds[2] == -169.99999999612487
     item.validate()
 
 
