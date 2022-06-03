@@ -9,7 +9,7 @@ import stactools.core.utils.convert
 from rasterio.errors import NotGeoreferencedWarning
 from rasterio.io import MemoryFile
 
-from stactools.viirs import constants, utils
+from stactools.viirs.metadata import viirs_metadata
 
 
 def cogify(infile: str, outdir: str) -> List[str]:
@@ -22,8 +22,7 @@ def cogify(infile: str, outdir: str) -> List[str]:
     Returns:
         List[str]: The COG hrefs
     """
-    shape, left, top = utils.hdfeos_metadata(infile)
-    transform = utils.transform(shape[0], left, top)
+    metadata = viirs_metadata(infile)
     base_filename = os.path.splitext(os.path.basename(infile))[0]
 
     all_keys: List[str] = []
@@ -54,6 +53,7 @@ def cogify(infile: str, outdir: str) -> List[str]:
             data: Any = np.array(h5[subdataset_key])
             if len(data.shape) == 1:  # skip single value (non-data) "grids"
                 continue
+
             data = np.int16(data) if data.dtype == "int8" else data
 
             src_profile = dict(
@@ -62,8 +62,8 @@ def cogify(infile: str, outdir: str) -> List[str]:
                 count=1,
                 height=data.shape[0],
                 width=data.shape[1],
-                crs=constants.WKT2,
-                transform=rasterio.Affine(*transform),
+                crs=metadata.crs,
+                transform=rasterio.Affine(*metadata.transform),
             )
 
             with MemoryFile() as mem_file:

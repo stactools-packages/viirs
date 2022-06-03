@@ -78,8 +78,9 @@ def create_item(
             item.add_asset(subdataset_name, Asset.from_dict(asset_dict))
 
     projection = ProjectionExtension.ext(item, add_if_missing=True)
-    projection.epsg = None
-    projection.wkt2 = constants.WKT2
+    projection.epsg = metadata.epsg
+    if projection.epsg is None:
+        projection.wkt2 = metadata.wkt2
     projection.transform = metadata.transform
     projection.shape = metadata.shape
 

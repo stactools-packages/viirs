@@ -1,3 +1,4 @@
+import ast
 import datetime
 import logging
 import os.path
@@ -6,6 +7,7 @@ from dataclasses import dataclass
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
 import fsspec
+import h5py
 import numpy as np
 import rasterio
 import shapely.geometry
@@ -41,8 +43,6 @@ class Metadata:
     id: str
     product: str
     version: str
-    geometry: Dict[str, Any]
-    bbox: List[float]
     start_datetime: datetime.datetime
     end_datetime: datetime.datetime
     created_datetime: datetime.datetime
@@ -50,8 +50,8 @@ class Metadata:
     horizontal_tile: int
     vertical_tile: int
     tile_id: str
-    shape: List[int]
-    transform: List[float]
+    shape_bounds: Dict[str, Any]
+    densify_factor: Optional[int]
     xml_href: Optional[str]
 
     @classmethod
@@ -134,10 +134,7 @@ class Metadata:
             elif name == "TileID":
                 tile_id = value
 
-        shape, left, top = utils.hdfeos_metadata(read_h5_href)
-        transform = utils.transform(shape[0], left, top)
-        geometry = cls._geometry(shape, transform, densify_factor)
-        bbox = shapely.geometry.shape(geometry).bounds
+        shape_bounds = cls._hdfeos_metadata(read_h5_href)
 
         return Metadata(
             id=id,
@@ -150,10 +147,8 @@ class Metadata:
             horizontal_tile=horizontal_tile,
             vertical_tile=vertical_tile,
             tile_id=tile_id,
-            geometry=geometry,
-            bbox=bbox,
-            shape=shape,
-            transform=transform,
+            shape_bounds=shape_bounds,
+            densify_factor=densify_factor,
             xml_href=xml_href,
         )
 
@@ -184,10 +179,7 @@ class Metadata:
         vertical_tile = int(tags["verticaltilenumber"])
         tile_id = tags["tileid"]
 
-        shape, left, top = utils.hdfeos_metadata(read_h5_href)
-        transform = utils.transform(shape[0], left, top)
-        geometry = cls._geometry(shape, transform, densify_factor)
-        bbox = shapely.geometry.shape(geometry).bounds
+        shape_bounds = cls._hdfeos_metadata(read_h5_href)
 
         return Metadata(
             id=id,
@@ -200,46 +192,101 @@ class Metadata:
             horizontal_tile=horizontal_tile,
             vertical_tile=vertical_tile,
             tile_id=tile_id,
-            geometry=geometry,
-            bbox=bbox,
-            shape=shape,
-            transform=transform,
+            shape_bounds=shape_bounds,
+            densify_factor=densify_factor,
             xml_href=None,
         )
 
-    @property
-    def platform(self) -> str:
-        product_prefix = self.product[0:3]
-        return constants.PLATFORMS[product_prefix]
-
     @classmethod
-    def _geometry(
-        cls,
-        shape: List[int],
-        transform: List[float],
-        densify_factor: Optional[int] = None,
-    ) -> Dict[str, Any]:
-        num_rows, num_cols = shape
+    def _hdfeos_metadata(cls, h5_href: str) -> Dict[str, Any]:
+        """Extracts spatial metadata from the EOS metadata structure of an H5 file.
+
+        Args:
+            h5_href (str): HREF to the h5 file
+
+        Returns:
+            Tuple[List[int], Tuple[float]]:
+                - Height and width of the data arrays stored in the H5 file
+                - Projected coordinates of the left, top corner of the data
+        """
+        with h5py.File(h5_href, "r") as h5:
+            metadata_str = (
+                h5["HDFEOS INFORMATION"]["StructMetadata.0"][()].decode("utf-8").strip()
+            )
+            metadata_split_str = [m.strip() for m in metadata_str.split("\n")]
+            metadata_keys_values = [s.split("=") for s in metadata_split_str][:-1]
+            metadata_dict = {key: value for key, value in metadata_keys_values}
+
+        shape = [
+            int(metadata_dict["YDim"]),
+            int(metadata_dict["XDim"]),
+        ]  # [rows, columns]
+        assert shape[0] == shape[1]
+
+        left, top = ast.literal_eval(metadata_dict["UpperLeftPointMtrs"])
+        right, bottom = ast.literal_eval(metadata_dict["LowerRightMtrs"])
+
+        return {
+            "shape": shape,
+            "height": shape[0],
+            "width": shape[1],
+            "left": left,
+            "right": right,
+            "top": top,
+            "bottom": bottom,
+        }
+
+    @property
+    def transform(self) -> List[float]:
+        height_pixels = self.shape_bounds["height"]
+        width_pixels = self.shape_bounds["width"]
+        if self.epsg == 4326:
+            # 10x10 degree geographic grid
+            x_size = 10.0 / width_pixels
+            y_size = 10.0 / height_pixels
+            left = 10 * self.horizontal_tile - 180
+            top = 90 - 10 * self.vertical_tile
+        else:
+            # Sinusoidal projection grid
+            width_meters = self.shape_bounds["right"] - self.shape_bounds["left"]
+            height_meters = self.shape_bounds["top"] - self.shape_bounds["bottom"]
+            x_size = width_meters / width_pixels
+            y_size = height_meters / height_pixels
+            left = self.shape_bounds["left"]
+            top = self.shape_bounds["top"]
+        return [x_size, 0.0, left, 0.0, -y_size, top]
+
+    @property
+    def shape(self) -> List[int]:
+        shape: list[int] = self.shape_bounds["shape"]
+        return shape
+
+    @property
+    def geometry(self) -> Dict[str, Any]:
+        num_rows, num_cols = self.shape
         upper_left = (0, 0)
         lower_left = (0, num_rows)
         lower_right = (num_cols, num_rows)
         upper_right = (num_cols, 0)
         pixel_points = [upper_left, lower_left, lower_right, upper_right, upper_left]
 
-        affine = rasterio.Affine(*transform)
+        affine = rasterio.Affine(*self.transform)
         proj_points = [affine * xy for xy in pixel_points]
 
-        if densify_factor is not None:
-            proj_points = cls._densify(proj_points, densify_factor)
+        if self.densify_factor is not None:
+            proj_points = self._densify(proj_points, self.densify_factor)
         proj_polygon = Polygon(proj_points)
         proj_geometry = shapely.geometry.mapping(proj_polygon)
-        wgs84_geometry = reproject_geom(constants.WKT2, "epsg:4326", proj_geometry)
+        wgs84_geometry = reproject_geom(self.crs, "epsg:4326", proj_geometry)
 
         return wgs84_geometry
 
-    @classmethod
+    @property
+    def bbox(self) -> List[float]:
+        return list(shapely.geometry.shape(self.geometry).bounds)
+
     def _densify(
-        cls, point_list: List[Tuple[float, float]], densify_factor: int
+        self, point_list: List[Tuple[float, float]], densify_factor: int
     ) -> List[Tuple[float, float]]:
         # https://stackoverflow.com/questions/64995977/generating-equidistance-points-along-the-boundary-of-a-polygon-but-cw-ccw  # noqa
         points: Any = np.asarray(point_list)
@@ -250,6 +297,35 @@ class Metadata:
         interp_y = np.interp(interp_indices, existing_indices, points[:, 1])
         densified_points = [(x, y) for x, y in zip(interp_x, interp_y)]
         return densified_points
+
+    @property
+    def crs(self) -> str:
+        epsg = constants.EPSG.get(self.product, None)
+        if epsg is not None:
+            return epsg
+        else:
+            return constants.SINUSOIDAL_WKT2
+
+    @property
+    def epsg(self) -> Optional[int]:
+        crs = self.crs
+        if crs.startswith("PROJCS"):
+            return None
+        else:
+            return int(crs.split(":")[-1])
+
+    @property
+    def wkt2(self) -> Optional[str]:
+        crs = self.crs
+        if crs.startswith("PROJCS"):
+            return crs
+        else:
+            return None
+
+    @property
+    def platform(self) -> str:
+        product_prefix = self.product[0:3]
+        return constants.PLATFORMS[product_prefix]
 
 
 def viirs_metadata(

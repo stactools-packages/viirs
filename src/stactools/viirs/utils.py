@@ -1,8 +1,6 @@
-import ast
 import warnings
-from typing import List, Optional, Tuple, cast
+from typing import List, Optional, cast
 
-import h5py
 import rasterio
 from pystac import Item
 from pystac.extensions.eo import EOExtension
@@ -73,50 +71,3 @@ def add_extensions(item: Item) -> None:
             item.stac_extensions.append(extension)
 
     return None
-
-
-def hdfeos_metadata(h5_href: str) -> Tuple[List[int], float, float]:
-    """Extracts spatial metadata from the EOS metadata structure of an H5 file.
-
-    Args:
-        h5_href (str): HREF to the h5 file
-
-    Returns:
-        Tuple[List[int], Tuple[float]]:
-            - Height and width of the data arrays stored in the H5 file
-            - Projected coordinates of the left, top corner of the data
-    """
-    with h5py.File(h5_href, "r") as h5:
-        metadata_str = (
-            h5["HDFEOS INFORMATION"]["StructMetadata.0"][()].decode("utf-8").strip()
-        )
-        metadata_split_str = [m.strip() for m in metadata_str.split("\n")]
-        metadata_keys_values = [s.split("=") for s in metadata_split_str][:-1]
-        metadata_dict = {key: value for key, value in metadata_keys_values}
-
-    shape = [int(metadata_dict["YDim"]), int(metadata_dict["XDim"])]  # [rows, columns]
-    assert shape[0] == shape[1]
-    left, top = ast.literal_eval(metadata_dict["UpperLeftPointMtrs"])
-
-    return (shape, left, top)
-
-
-def transform(size: int, left: float, top: float) -> List[float]:
-    """Creates elements of a geospatial transform matrix.
-
-    Args:
-        size (int): Square array size, i.e., the number of rows or columns
-        left (float): Left projected coordinate of the top-left corner
-        top (float): Top projected coordinate of the top-left corner
-
-    Returns:
-        List[float]: First six elements of the transformation matrix
-
-    """
-    if size == 1200:
-        pixel_size = constants.BINSIZE_1000M
-    elif size == 2400:
-        pixel_size = constants.BINSIZE_500M
-    elif size == 3000:
-        pixel_size = constants.BINSIZE_375M
-    return [pixel_size, 0.0, left, 0.0, -pixel_size, top]
