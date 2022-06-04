@@ -258,7 +258,7 @@ class Metadata:
 
     @property
     def shape(self) -> List[int]:
-        shape: list[int] = self.shape_bounds["shape"]
+        shape: List[int] = self.shape_bounds["shape"]
         return shape
 
     @property
