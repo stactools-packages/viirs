@@ -1,3 +1,4 @@
+import glob
 import os
 import sys
 
@@ -26,7 +27,8 @@ def examples(create_cogs: bool) -> None:
             cog_hrefs = cog.cogify(h5_file_path, h5_dir_path)
             item = stac.create_item(h5_file_path, cog_hrefs=cog_hrefs)
         else:
-            item = stac.create_item(h5_file_path)
+            cog_hrefs = glob.glob(f"{h5_dir_path}/{product}*.tif")
+            item = stac.create_item(h5_file_path, cog_hrefs=cog_hrefs)
         item_path = os.path.join(f"examples/{product}", f"{item.id}.json")
         item.set_self_href(item_path)
         item.make_asset_hrefs_relative()
@@ -35,10 +37,9 @@ def examples(create_cogs: bool) -> None:
 
 
 if __name__ == "__main__":
-    create_cogs = sys.argv[1]
     if len(sys.argv) == 1:
         examples(False)
     elif sys.argv[1] == "-c":
         examples(True)
     else:
-        print("Only valid option is `-c` for creating COGs")
+        print("Only valid option is `-c` for creating new COGs")

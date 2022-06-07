@@ -85,5 +85,6 @@ def create_item(
     projection.shape = metadata.shape
 
     add_extensions(item)
+    item.stac_extensions.sort()
 
     return item

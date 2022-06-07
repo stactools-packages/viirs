@@ -71,6 +71,101 @@
         "metadata"
       ]
     },
+    "granule_pnt": {
+      "href": "../../tests/data-files/external/VNP10A1.A2022097.h11v05.001.2022098094651_granule_pnt.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Granule pointer",
+      "role": [
+        "data"
+      ],
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "spatial_resolution": 375
+        }
+      ]
+    },
+    "Basic_QA": {
+      "href": "../../tests/data-files/external/VNP10A1.A2022097.h11v05.001.2022098094651_Basic_QA.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Basic QA value",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "spatial_resolution": 375
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "good",
+          "value": 0
+        },
+        {
+          "description": "poor",
+          "value": 1
+        },
+        {
+          "description": "bad",
+          "value": 2
+        },
+        {
+          "description": "other",
+          "value": 3
+        },
+        {
+          "description": "night",
+          "value": 211
+        },
+        {
+          "description": "ocean",
+          "value": 239
+        },
+        {
+          "description": "cloud",
+          "value": 250
+        },
+        {
+          "description": "no_decision",
+          "value": 252
+        },
+        {
+          "description": "bowtie_trim",
+          "value": 253
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "NDSI_Snow_Cover": {
+      "href": "../../tests/data-files/external/VNP10A1.A2022097.h11v05.001.2022098094651_NDSI_Snow_Cover.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Snow cover by NDSI",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "spatial_resolution": 375
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "NDSI": {
+      "href": "../../tests/data-files/external/VNP10A1.A2022097.h11v05.001.2022098094651_NDSI.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "NDSI for all land and inland water pixels",
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "spatial_resolution": 375,
+          "scale": 0.001
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
     "Algorithm_bit_flags_QA": {
       "href": "../../tests/data-files/external/VNP10A1.A2022097.h11v05.001.2022098094651_Algorithm_bit_flags_QA.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
@@ -177,101 +272,6 @@
       "roles": [
         "data"
       ]
-    },
-    "Basic_QA": {
-      "href": "../../tests/data-files/external/VNP10A1.A2022097.h11v05.001.2022098094651_Basic_QA.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Basic QA value",
-      "raster:bands": [
-        {
-          "data_type": "uint8",
-          "spatial_resolution": 375
-        }
-      ],
-      "classification:classes": [
-        {
-          "description": "good",
-          "value": 0
-        },
-        {
-          "description": "poor",
-          "value": 1
-        },
-        {
-          "description": "bad",
-          "value": 2
-        },
-        {
-          "description": "other",
-          "value": 3
-        },
-        {
-          "description": "night",
-          "value": 211
-        },
-        {
-          "description": "ocean",
-          "value": 239
-        },
-        {
-          "description": "cloud",
-          "value": 250
-        },
-        {
-          "description": "no_decision",
-          "value": 252
-        },
-        {
-          "description": "bowtie_trim",
-          "value": 253
-        }
-      ],
-      "roles": [
-        "data"
-      ]
-    },
-    "NDSI": {
-      "href": "../../tests/data-files/external/VNP10A1.A2022097.h11v05.001.2022098094651_NDSI.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "NDSI for all land and inland water pixels",
-      "raster:bands": [
-        {
-          "data_type": "int16",
-          "spatial_resolution": 375,
-          "scale": 0.001
-        }
-      ],
-      "roles": [
-        "data"
-      ]
-    },
-    "NDSI_Snow_Cover": {
-      "href": "../../tests/data-files/external/VNP10A1.A2022097.h11v05.001.2022098094651_NDSI_Snow_Cover.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Snow cover by NDSI",
-      "raster:bands": [
-        {
-          "data_type": "uint8",
-          "spatial_resolution": 375
-        }
-      ],
-      "roles": [
-        "data"
-      ]
-    },
-    "granule_pnt": {
-      "href": "../../tests/data-files/external/VNP10A1.A2022097.h11v05.001.2022098094651_granule_pnt.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Granule pointer",
-      "role": [
-        "data"
-      ],
-      "raster:bands": [
-        {
-          "data_type": "uint8",
-          "spatial_resolution": 375
-        }
-      ]
     }
   },
   "bbox": [
@@ -281,8 +281,8 @@
     39.99999999641088
   ],
   "stac_extensions": [
+    "https://stac-extensions.github.io/classification/v1.0.0/schema.json",
     "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/raster/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/classification/v1.0.0/schema.json"
+    "https://stac-extensions.github.io/raster/v1.0.0/schema.json"
   ]
 }

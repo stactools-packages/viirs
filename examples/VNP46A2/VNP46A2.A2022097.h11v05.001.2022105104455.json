@@ -62,40 +62,6 @@
         "data"
       ]
     },
-    "DNB_BRDF-Corrected_NTL": {
-      "href": "../../tests/data-files/external/VNP46A2.A2022097.h11v05.001.2022105104455_DNB_BRDF-Corrected_NTL.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "BRDF Corrected Day/Night Band Night Time Lights",
-      "raster:bands": [
-        {
-          "data_type": "uint16",
-          "nodata": 65535,
-          "unit": "nWatts / cm^2 / sr",
-          "scale": 0.1,
-          "spatial_resolution": 500
-        }
-      ],
-      "roles": [
-        "data"
-      ]
-    },
-    "DNB_Lunar_Irradiance": {
-      "href": "../../tests/data-files/external/VNP46A2.A2022097.h11v05.001.2022105104455_DNB_Lunar_Irradiance.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Day/Night Band Lunar Irradiance",
-      "raster:bands": [
-        {
-          "data_type": "uint16",
-          "nodata": 65535,
-          "unit": "nWatts / cm^2 / sr",
-          "scale": 0.1,
-          "spatial_resolution": 500
-        }
-      ],
-      "roles": [
-        "data"
-      ]
-    },
     "Gap_Filled_DNB_BRDF-Corrected_NTL": {
       "href": "../../tests/data-files/external/VNP46A2.A2022097.h11v05.001.2022105104455_Gap_Filled_DNB_BRDF-Corrected_NTL.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
@@ -113,26 +79,10 @@
         "data"
       ]
     },
-    "Latest_High_Quality_Retrieval": {
-      "href": "../../tests/data-files/external/VNP46A2.A2022097.h11v05.001.2022105104455_Latest_High_Quality_Retrieval.tif",
+    "Snow_Flag": {
+      "href": "../../tests/data-files/external/VNP46A2.A2022140.h11v05.001.2022148104414_Snow_Flag.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Latest High Quality BRDF Corrected Day/Night Band Radiance Retrieval",
-      "raster:bands": [
-        {
-          "data_type": "uint8",
-          "nodata": 255,
-          "unit": "days",
-          "spatial_resolution": 500
-        }
-      ],
-      "roles": [
-        "data"
-      ]
-    },
-    "Mandatory_Quality_Flag": {
-      "href": "../../tests/data-files/external/VNP46A2.A2022097.h11v05.001.2022105104455_Mandatory_Quality_Flag.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Mandatory Quality Flag",
+      "title": "Flag for Snow Cover",
       "raster:bands": [
         {
           "data_type": "uint8",
@@ -142,20 +92,29 @@
       ],
       "classification:classes": [
         {
-          "description": "High-Quality Main Algorithm (Persistent Nighttime Lights)",
+          "description": "No snow/ice",
           "value": 0
         },
         {
-          "description": "High-Quality Main Algorithm (Ephemeral Nighttime Lights)",
+          "description": "snow/ice",
           "value": 1
-        },
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "DNB_BRDF-Corrected_NTL": {
+      "href": "../../tests/data-files/external/VNP46A2.A2022097.h11v05.001.2022105104455_DNB_BRDF-Corrected_NTL.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "BRDF Corrected Day/Night Band Night Time Lights",
+      "raster:bands": [
         {
-          "description": "Poor-Quality Main Algorithm (Outlier, Potential cloud contamination or other issues)",
-          "value": 2
-        },
-        {
-          "description": "No Retrieval (Fill Value)",
-          "value": 255
+          "data_type": "uint16",
+          "nodata": 65535,
+          "unit": "nWatts / cm^2 / sr",
+          "scale": 0.1,
+          "spatial_resolution": 500
         }
       ],
       "roles": [
@@ -295,10 +254,27 @@
         "data"
       ]
     },
-    "Snow_Flag": {
-      "href": "../../tests/data-files/external/VNP46A2.A2022097.h11v05.001.2022105104455_Snow_Flag.tif",
+    "DNB_Lunar_Irradiance": {
+      "href": "../../tests/data-files/external/VNP46A2.A2022140.h11v05.001.2022148104414_DNB_Lunar_Irradiance.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Flag for Snow Cover",
+      "title": "Day/Night Band Lunar Irradiance",
+      "raster:bands": [
+        {
+          "data_type": "uint16",
+          "nodata": 65535,
+          "unit": "nWatts / cm^2 / sr",
+          "scale": 0.1,
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "Mandatory_Quality_Flag": {
+      "href": "../../tests/data-files/external/VNP46A2.A2022140.h11v05.001.2022148104414_Mandatory_Quality_Flag.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Mandatory Quality Flag",
       "raster:bands": [
         {
           "data_type": "uint8",
@@ -308,12 +284,36 @@
       ],
       "classification:classes": [
         {
-          "description": "No snow/ice",
+          "description": "High-Quality Main Algorithm (Persistent Nighttime Lights)",
           "value": 0
         },
         {
-          "description": "snow/ice",
+          "description": "High-Quality Main Algorithm (Ephemeral Nighttime Lights)",
           "value": 1
+        },
+        {
+          "description": "Poor-Quality Main Algorithm (Outlier, Potential cloud contamination or other issues)",
+          "value": 2
+        },
+        {
+          "description": "No Retrieval (Fill Value)",
+          "value": 255
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "Latest_High_Quality_Retrieval": {
+      "href": "../../tests/data-files/external/VNP46A2.A2022140.h11v05.001.2022148104414_Latest_High_Quality_Retrieval.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Latest High Quality BRDF Corrected Day/Night Band Radiance Retrieval",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "unit": "days",
+          "spatial_resolution": 500
         }
       ],
       "roles": [
@@ -328,8 +328,8 @@
     40.0
   ],
   "stac_extensions": [
-    "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
     "https://stac-extensions.github.io/classification/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
     "https://stac-extensions.github.io/raster/v1.0.0/schema.json"
   ]
 }

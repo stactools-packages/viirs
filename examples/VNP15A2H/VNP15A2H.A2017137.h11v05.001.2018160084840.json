@@ -316,21 +316,6 @@
         "data"
       ]
     },
-    "FparStdDev": {
-      "href": "../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_FparStdDev.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Standard deviation of FPAR",
-      "raster:bands": [
-        {
-          "data_type": "uint8",
-          "scale": 0.01,
-          "spatial_resolution": 500
-        }
-      ],
-      "roles": [
-        "data"
-      ]
-    },
     "Lai": {
       "href": "../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_Lai.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
@@ -362,6 +347,21 @@
       "roles": [
         "data"
       ]
+    },
+    "FparStdDev": {
+      "href": "../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_FparStdDev.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Standard deviation of FPAR",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "scale": 0.01,
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data"
+      ]
     }
   },
   "bbox": [
@@ -371,8 +371,8 @@
     39.99999999641088
   ],
   "stac_extensions": [
-    "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
     "https://stac-extensions.github.io/classification/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
     "https://stac-extensions.github.io/raster/v1.0.0/schema.json"
   ]
 }
