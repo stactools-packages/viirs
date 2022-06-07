@@ -140,6 +140,24 @@
           "spatial_resolution": 500
         }
       ],
+      "classification:classes": [
+        {
+          "description": "High-Quality Main Algorithm (Persistent Nighttime Lights)",
+          "value": 0
+        },
+        {
+          "description": "High-Quality Main Algorithm (Ephemeral Nighttime Lights)",
+          "value": 1
+        },
+        {
+          "description": "Poor-Quality Main Algorithm (Outlier, Potential cloud contamination or other issues)",
+          "value": 2
+        },
+        {
+          "description": "No Retrieval (Fill Value)",
+          "value": 255
+        }
+      ],
       "roles": [
         "data"
       ]
@@ -153,6 +171,124 @@
           "data_type": "uint16",
           "nodata": 65535,
           "spatial_resolution": 500
+        }
+      ],
+      "classification:bitfields": [
+        {
+          "name": "day_night",
+          "description": "Day/Night",
+          "offset": 0,
+          "length": 1,
+          "classes": [
+            {
+              "description": "Night",
+              "value": 0
+            },
+            {
+              "description": "Day",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "land_water",
+          "description": "Land/Water Background",
+          "offset": 1,
+          "length": 3,
+          "classes": [
+            {
+              "description": "Land & Desert",
+              "value": 0
+            },
+            {
+              "description": "Land no Desert",
+              "value": 1
+            },
+            {
+              "description": "Inland Water",
+              "value": 2
+            },
+            {
+              "description": "Sea Water",
+              "value": 3
+            },
+            {
+              "description": "Coastal",
+              "value": 5
+            }
+          ]
+        },
+        {
+          "name": "cloud",
+          "description": "Cloud Detection Results & Confidence Indicator",
+          "offset": 6,
+          "length": 2,
+          "classes": [
+            {
+              "description": "Confident Clear",
+              "value": 0
+            },
+            {
+              "description": "Probably Clear",
+              "value": 1
+            },
+            {
+              "description": "Probably Cloudy",
+              "value": 2
+            },
+            {
+              "description": "Confident Cloudy",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "name": "shadow",
+          "description": "Shadow Detected",
+          "offset": 8,
+          "length": 1,
+          "classes": [
+            {
+              "description": "No",
+              "value": 0
+            },
+            {
+              "description": "Yes",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "cirrus",
+          "description": "Cirrus Detection (IR) (BTM15-BTM16)",
+          "offset": 9,
+          "length": 1,
+          "classes": [
+            {
+              "description": "No Cloud",
+              "value": 0
+            },
+            {
+              "description": "Cloud",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "snow_ice",
+          "description": "Snow/Ice",
+          "offset": 10,
+          "length": 1,
+          "classes": [
+            {
+              "description": "No Snow/Ice",
+              "value": 0
+            },
+            {
+              "description": "Snow/Ice",
+              "value": 1
+            }
+          ]
         }
       ],
       "roles": [
@@ -170,6 +306,16 @@
           "spatial_resolution": 500
         }
       ],
+      "classification:classes": [
+        {
+          "description": "No snow/ice",
+          "value": 0
+        },
+        {
+          "description": "snow/ice",
+          "value": 1
+        }
+      ],
       "roles": [
         "data"
       ]
@@ -183,6 +329,7 @@
   ],
   "stac_extensions": [
     "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/classification/v1.0.0/schema.json",
     "https://stac-extensions.github.io/raster/v1.0.0/schema.json"
   ]
 }
