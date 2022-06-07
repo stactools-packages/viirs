@@ -95,6 +95,7 @@
       "raster:bands": [
         {
           "data_type": "uint16",
+          "unit": "bit field",
           "spatial_resolution": 1000
         }
       ],
@@ -306,7 +307,8 @@
         }
       ],
       "roles": [
-        "data"
+        "data",
+        "temperature"
       ]
     },
     "Emis_16": {

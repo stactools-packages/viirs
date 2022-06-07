@@ -110,7 +110,8 @@
       "title": "Shortwave Infrared Radiation reflectance (1230-1250 nm)",
       "eo:bands": [
         {
-          "name": "500_m_16_days_SWIR1_reflectance",
+          "name": "M8",
+          "description": "Shortwave Infrared",
           "center_wavelength": 1.24,
           "full_width_half_max": 0.02
         }
@@ -405,8 +406,8 @@
       "title": "Shortwave Infrared Radiation reflectance (2225-2275 nm)",
       "eo:bands": [
         {
-          "name": "500_m_16_days_SWIR3_reflectance",
-          "common_name": "swir22",
+          "name": "M11",
+          "description": "Shortwave Infrared",
           "center_wavelength": 2.25,
           "full_width_half_max": 0.05
         }
@@ -527,8 +528,8 @@
       "title": "Blue band reflectance (478-498 nm)",
       "eo:bands": [
         {
-          "name": "500_m_16_days_blue_reflectance",
-          "common_name": "blue",
+          "name": "M3",
+          "description": "Visible/Reflective",
           "center_wavelength": 0.488,
           "full_width_half_max": 0.02
         }
@@ -568,8 +569,8 @@
       "title": "Shortwave Infrared Radiation reflectance (1580-1640 nm)",
       "eo:bands": [
         {
-          "name": "500_m_16_days_SWIR2_reflectance",
-          "common_name": "swir16",
+          "name": "I3",
+          "description": "Shortwave Infrared",
           "center_wavelength": 1.61,
           "full_width_half_max": 0.06
         }
@@ -593,8 +594,8 @@
       "title": "Green band reflectance (545-565 nm)",
       "eo:bands": [
         {
-          "name": "500_m_16_days_green_reflectance",
-          "common_name": "green",
+          "name": "M4",
+          "description": "Visible/Reflective",
           "center_wavelength": 0.555,
           "full_width_half_max": 0.02
         }
@@ -618,8 +619,8 @@
       "title": "Near-infrared Radiation reflectance (846-885 nm)",
       "eo:bands": [
         {
-          "name": "500_m_16_days_NIR_reflectance",
-          "common_name": "nir08",
+          "name": "M7",
+          "description": "Shortwave Infrared",
           "center_wavelength": 0.865,
           "full_width_half_max": 0.039
         }
@@ -643,8 +644,8 @@
       "title": "Red band reflectance (600-680 nm)",
       "eo:bands": [
         {
-          "name": "500_m_16_days_red_reflectance",
-          "common_name": "red",
+          "name": "I1",
+          "description": "Visible/Reflective",
           "center_wavelength": 0.64,
           "full_width_half_max": 0.08
         }

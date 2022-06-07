@@ -83,6 +83,14 @@
           "spatial_resolution": 500
         }
       ],
+      "eo:bands": [
+        {
+          "name": "I1",
+          "description": "Near Infrared",
+          "center_wavelength": 0.64,
+          "full_width_half_max": 0.075
+        }
+      ],
       "roles": [
         "data",
         "reflectance"
@@ -100,6 +108,14 @@
           "spatial_resolution": 500
         }
       ],
+      "eo:bands": [
+        {
+          "name": "I3",
+          "description": "Medium-wave Infrared",
+          "center_wavelength": 1.61,
+          "full_width_half_max": 0.06
+        }
+      ],
       "roles": [
         "data",
         "reflectance"
@@ -115,6 +131,14 @@
           "nodata": 32767,
           "scale": 0.0001,
           "spatial_resolution": 500
+        }
+      ],
+      "eo:bands": [
+        {
+          "name": "I2",
+          "description": "Shortwave Infrared",
+          "center_wavelength": 0.865,
+          "full_width_half_max": 0.039
         }
       ],
       "roles": [
@@ -206,6 +230,7 @@
   ],
   "stac_extensions": [
     "https://stac-extensions.github.io/classification/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
     "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
     "https://stac-extensions.github.io/raster/v1.0.0/schema.json"
   ]

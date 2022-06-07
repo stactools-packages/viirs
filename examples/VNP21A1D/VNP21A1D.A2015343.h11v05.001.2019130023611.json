@@ -85,7 +85,8 @@
         }
       ],
       "roles": [
-        "data"
+        "data",
+        "temperature"
       ]
     },
     "View_Time": {
@@ -163,6 +164,7 @@
       "raster:bands": [
         {
           "data_type": "uint16",
+          "unit": "bit field",
           "spatial_resolution": 1000
         }
       ],

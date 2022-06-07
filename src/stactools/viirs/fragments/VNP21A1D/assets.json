@@ -56,13 +56,15 @@
         ],
         "title": "Daily 1 km Land Surface Temperature (LST)",
         "roles": [
-            "data"
+            "data",
+            "temperature"
         ]
     },
     "QC": {
         "raster:bands": [
             {
                 "data_type": "uint16",
+                "unit": "bit field",
                 "spatial_resolution": 1000
             }
         ],

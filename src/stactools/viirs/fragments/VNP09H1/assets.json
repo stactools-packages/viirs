@@ -7,8 +7,8 @@
         ],
         "eo:bands": [
             {
-                "name": "SurfReflect_I1",
-                "common_name": "red",
+                "name": "I1",
+                "description": "Near Infrared",
                 "center_wavelength": 0.64,
                 "full_width_half_max": 0.075
             }
@@ -30,8 +30,8 @@
         ],
         "eo:bands": [
             {
-                "name": "SurfReflect_I2",
-                "common_name": "nir09",
+                "name": "I2",
+                "description": "Shortwave Infrared",
                 "center_wavelength": 0.865,
                 "full_width_half_max": 0.039
             }
@@ -53,8 +53,8 @@
         ],
         "eo:bands": [
             {
-                "name": "SurfReflect_I3",
-                "common_name": "swir16",
+                "name": "I3",
+                "description": "Medium-wave Infrared",
                 "center_wavelength": 1.61,
                 "full_width_half_max": 0.06
             }
@@ -111,12 +111,12 @@
                 "length": 1,
                 "classes": [
                     {
-                        "description": "yes",
-                        "value": 1
-                    },
-                    {
                         "description": "no",
                         "value": 0
+                    },
+                    {
+                        "description": "yes",
+                        "value": 1
                     }
                 ]
             },
@@ -214,12 +214,12 @@
                 "length": 1,
                 "classes": [
                     {
-                        "description": "yes",
-                        "value": 1
-                    },
-                    {
                         "description": "no",
                         "value": 0
+                    },
+                    {
+                        "description": "yes",
+                        "value": 1
                     }
                 ]
             },
@@ -230,12 +230,12 @@
                 "length": 1,
                 "classes": [
                     {
-                        "description": "yes",
-                        "value": 1
-                    },
-                    {
                         "description": "no",
                         "value": 0
+                    },
+                    {
+                        "description": "yes",
+                        "value": 1
                     }
                 ]
             }
@@ -393,12 +393,12 @@
                 "length": 1,
                 "classes": [
                     {
-                        "description": "Yes",
-                        "value": 1
-                    },
-                    {
                         "description": "No",
                         "value": 0
+                    },
+                    {
+                        "description": "Yes",
+                        "value": 1
                     }
                 ]
             },
@@ -409,12 +409,12 @@
                 "length": 1,
                 "classes": [
                     {
-                        "description": "Yes",
-                        "value": 1
-                    },
-                    {
                         "description": "No",
                         "value": 0
+                    },
+                    {
+                        "description": "Yes",
+                        "value": 1
                     }
                 ]
             },
@@ -425,12 +425,12 @@
                 "length": 1,
                 "classes": [
                     {
-                        "description": "Yes",
-                        "value": 1
-                    },
-                    {
                         "description": "No",
                         "value": 0
+                    },
+                    {
+                        "description": "Yes",
+                        "value": 1
                     }
                 ]
             }

@@ -96,6 +96,7 @@
         {
           "data_type": "uint8",
           "nodata": 0,
+          "unit": "bit field",
           "spatial_resolution": 1000
         }
       ],
@@ -277,6 +278,7 @@
         {
           "data_type": "uint8",
           "nodata": 0,
+          "unit": "bit field",
           "spatial_resolution": 1000
         }
       ],

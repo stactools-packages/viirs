@@ -94,6 +94,7 @@
             {
                 "data_type": "uint16",
                 "nodata": 65535,
+                "unit": "bit field",
                 "spatial_resolution": 500
             }
         ],

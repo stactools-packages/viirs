@@ -1,4 +1,73 @@
 {
+    "Nadir_Reflectance_I1": {
+        "raster:bands": [
+            {
+                "data_type": "int16",
+                "nodata": 32767,
+                "scale": 0.0001,
+                "spatial_resolution": 500
+            }
+        ],
+        "eo:bands": [
+            {
+                "name": "I1",
+                "description": "Near Infrared",
+                "center_wavelength": 0.64,
+                "full_width_half_max": 0.075
+            }
+        ],
+        "title": "Nadir BRDF/Albedo Reflectance at Local Solar Noon for Band I1",
+        "roles": [
+            "data",
+            "reflectance"
+        ]
+    },
+    "Nadir_Reflectance_I2": {
+        "raster:bands": [
+            {
+                "data_type": "int16",
+                "nodata": 32767,
+                "scale": 0.0001,
+                "spatial_resolution": 500
+            }
+        ],
+        "eo:bands": [
+            {
+                "name": "I2",
+                "description": "Shortwave Infrared",
+                "center_wavelength": 0.865,
+                "full_width_half_max": 0.039
+            }
+        ],
+        "title": "Nadir BRDF/Albedo Reflectance at Local Solar Noon for Band I2",
+        "roles": [
+            "data",
+            "reflectance"
+        ]
+    },
+    "Nadir_Reflectance_I3": {
+        "raster:bands": [
+            {
+                "data_type": "int16",
+                "nodata": 32767,
+                "scale": 0.0001,
+                "spatial_resolution": 500
+            }
+        ],
+        "eo:bands": [
+            {
+                "name": "I3",
+                "description": "Medium-wave Infrared",
+                "center_wavelength": 1.61,
+                "full_width_half_max": 0.06
+            }
+        ],
+        "title": "Nadir BRDF/Albedo Reflectance at Local Solar Noon for Band 3",
+        "roles": [
+            "data",
+            "reflectance"
+        ]
+    },
     "BRDF_Albedo_Band_Mandatory_Quality_I1": {
         "raster:bands": [
             {
@@ -66,51 +135,6 @@
         "title": "BRDF/Albedo Mandatory Quality for Band I3",
         "roles": [
             "data"
-        ]
-    },
-    "Nadir_Reflectance_I1": {
-        "raster:bands": [
-            {
-                "data_type": "int16",
-                "nodata": 32767,
-                "scale": 0.0001,
-                "spatial_resolution": 500
-            }
-        ],
-        "title": "Nadir BRDF/Albedo Reflectance at Local Solar Noon for Band I1",
-        "roles": [
-            "data",
-            "reflectance"
-        ]
-    },
-    "Nadir_Reflectance_I2": {
-        "raster:bands": [
-            {
-                "data_type": "int16",
-                "nodata": 32767,
-                "scale": 0.0001,
-                "spatial_resolution": 500
-            }
-        ],
-        "title": "Nadir BRDF/Albedo Reflectance at Local Solar Noon for Band I2",
-        "roles": [
-            "data",
-            "reflectance"
-        ]
-    },
-    "Nadir_Reflectance_I3": {
-        "raster:bands": [
-            {
-                "data_type": "int16",
-                "nodata": 32767,
-                "scale": 0.0001,
-                "spatial_resolution": 500
-            }
-        ],
-        "title": "Nadir BRDF/Albedo Reflectance at Local Solar Noon for Band 3",
-        "roles": [
-            "data",
-            "reflectance"
         ]
     }
 }
