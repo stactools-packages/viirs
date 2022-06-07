@@ -293,8 +293,8 @@ class Metadata:
         densified_number = len(points) * densify_factor
         existing_indices = np.arange(0, densified_number, densify_factor)
         interp_indices = np.arange(existing_indices[-1])
-        interp_x = np.interp(interp_indices, existing_indices, points[:, 0])
-        interp_y = np.interp(interp_indices, existing_indices, points[:, 1])
+        interp_x = np.interp(interp_indices, existing_indices, points[:, 0])  # noqa
+        interp_y = np.interp(interp_indices, existing_indices, points[:, 1])  # noqa
         densified_points = [(x, y) for x, y in zip(interp_x, interp_y)]
         return densified_points
 
