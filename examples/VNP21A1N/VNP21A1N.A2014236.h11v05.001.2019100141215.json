@@ -71,21 +71,73 @@
         "metadata"
       ]
     },
-    "View_Time": {
-      "href": "../../tests/data-files/external/VNP21A1N.A2014236.h11v05.001.2019100141215_View_Time.tif",
+    "Emis_14": {
+      "href": "../../tests/data-files/external/VNP21A1N.A2014236.h11v05.001.2019100141215_Emis_14.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Time of LST observation",
+      "title": "Daily M14 emissivity",
       "raster:bands": [
         {
           "data_type": "uint8",
-          "nodata": 255,
-          "unit": "hours",
-          "scale": 0.1,
+          "nodata": 0,
+          "scale": 0.002,
+          "offset": 0.49,
           "spatial_resolution": 1000
         }
       ],
       "roles": [
         "data"
+      ]
+    },
+    "Emis_15": {
+      "href": "../../tests/data-files/external/VNP21A1N.A2014236.h11v05.001.2019100141215_Emis_15.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Daily M15 emissivity",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 0,
+          "scale": 0.002,
+          "offset": 0.49,
+          "spatial_resolution": 1000
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "Emis_16": {
+      "href": "../../tests/data-files/external/VNP21A1N.A2014236.h11v05.001.2019100141215_Emis_16.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Daily M16 emissivity",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 0,
+          "scale": 0.002,
+          "offset": 0.49,
+          "spatial_resolution": 1000
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "LST_1KM": {
+      "href": "../../tests/data-files/external/VNP21A1N.A2014236.h11v05.001.2019100141215_LST_1KM.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Daily 1 km Land Surface Temperature (LST)",
+      "raster:bands": [
+        {
+          "data_type": "uint16",
+          "nodata": 0,
+          "unit": "kelvin",
+          "scale": 0.02,
+          "spatial_resolution": 1000
+        }
+      ],
+      "roles": [
+        "data",
+        "temperature"
       ]
     },
     "QC": {
@@ -293,75 +345,6 @@
         "data"
       ]
     },
-    "LST_1KM": {
-      "href": "../../tests/data-files/external/VNP21A1N.A2014236.h11v05.001.2019100141215_LST_1KM.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Daily 1 km Land Surface Temperature (LST)",
-      "raster:bands": [
-        {
-          "data_type": "uint16",
-          "nodata": 0,
-          "unit": "kelvin",
-          "scale": 0.02,
-          "spatial_resolution": 1000
-        }
-      ],
-      "roles": [
-        "data",
-        "temperature"
-      ]
-    },
-    "Emis_16": {
-      "href": "../../tests/data-files/external/VNP21A1N.A2014236.h11v05.001.2019100141215_Emis_16.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Daily M16 emissivity",
-      "raster:bands": [
-        {
-          "data_type": "uint8",
-          "nodata": 0,
-          "scale": 0.002,
-          "offset": 0.49,
-          "spatial_resolution": 1000
-        }
-      ],
-      "roles": [
-        "data"
-      ]
-    },
-    "Emis_15": {
-      "href": "../../tests/data-files/external/VNP21A1N.A2014236.h11v05.001.2019100141215_Emis_15.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Daily M15 emissivity",
-      "raster:bands": [
-        {
-          "data_type": "uint8",
-          "nodata": 0,
-          "scale": 0.002,
-          "offset": 0.49,
-          "spatial_resolution": 1000
-        }
-      ],
-      "roles": [
-        "data"
-      ]
-    },
-    "Emis_14": {
-      "href": "../../tests/data-files/external/VNP21A1N.A2014236.h11v05.001.2019100141215_Emis_14.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Daily M14 emissivity",
-      "raster:bands": [
-        {
-          "data_type": "uint8",
-          "nodata": 0,
-          "scale": 0.002,
-          "offset": 0.49,
-          "spatial_resolution": 1000
-        }
-      ],
-      "roles": [
-        "data"
-      ]
-    },
     "View_Angle": {
       "href": "../../tests/data-files/external/VNP21A1N.A2014236.h11v05.001.2019100141215_View_Angle.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
@@ -372,6 +355,23 @@
           "nodata": 255,
           "unit": "degree",
           "offset": -65,
+          "spatial_resolution": 1000
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "View_Time": {
+      "href": "../../tests/data-files/external/VNP21A1N.A2014236.h11v05.001.2019100141215_View_Time.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Time of LST observation",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "unit": "hours",
+          "scale": 0.1,
           "spatial_resolution": 1000
         }
       ],

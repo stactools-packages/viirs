@@ -164,12 +164,36 @@
         "raster:bands": [
             {
                 "data_type": "int16",
+                "nodata": -32768,
                 "unit": "EVI",
                 "scale": 0.0001,
                 "spatial_resolution": 500
             }
         ],
-        "title": "3 band Enhanced Vegetation Index",
+        "title": "3 Band Enhanced Vegetation Index",
+        "roles": [
+            "data"
+        ]
+    },
+    "500_m_16_days_EVI_fill": {
+        "raster:bands": [
+            {
+                "data_type": "int16",
+                "nodata": -32768,
+                "spatial_resolution": 500
+            }
+        ],
+        "classification:classes": [
+            {
+                "description": "over ocean/water",
+                "value": -15000
+            },
+            {
+                "description": "over land",
+                "value": -13000
+            }
+        ],
+        "title": "3 Band Enhanced Vegetation Index Fill Values",
         "roles": [
             "data"
         ]
@@ -178,12 +202,36 @@
         "raster:bands": [
             {
                 "data_type": "int16",
+                "nodata": -32768,
                 "scale": 0.0001,
                 "unit": "EVI2",
                 "spatial_resolution": 500
             }
         ],
-        "title": "2 band Enhanced Vegetation Index",
+        "title": "2 Band Enhanced Vegetation Index",
+        "roles": [
+            "data"
+        ]
+    },
+    "500_m_16_days_EVI2_fill": {
+        "raster:bands": [
+            {
+                "data_type": "int16",
+                "nodata": -32768,
+                "spatial_resolution": 500
+            }
+        ],
+        "classification:classes": [
+            {
+                "description": "over ocean/water",
+                "value": -15000
+            },
+            {
+                "description": "over land",
+                "value": -13000
+            }
+        ],
+        "title": "2 Band Enhanced Vegetation Index Fill Values",
         "roles": [
             "data"
         ]
@@ -192,12 +240,36 @@
         "raster:bands": [
             {
                 "data_type": "int16",
+                "nodata": -32768,
                 "scale": 0.0001,
                 "unit": "NDVI",
                 "spatial_resolution": 500
             }
         ],
         "title": "Normalized Difference Vegetation Index",
+        "roles": [
+            "data"
+        ]
+    },
+    "500_m_16_days_NDVI_fill": {
+        "raster:bands": [
+            {
+                "data_type": "int16",
+                "nodata": -32768,
+                "spatial_resolution": 500
+            }
+        ],
+        "classification:classes": [
+            {
+                "description": "over ocean/water",
+                "value": -15000
+            },
+            {
+                "description": "over land",
+                "value": -13000
+            }
+        ],
+        "title": "Normalized Difference Vegetation Index Fill Values",
         "roles": [
             "data"
         ]
@@ -487,6 +559,7 @@
         "raster:bands": [
             {
                 "data_type": "int16",
+                "nodata": -32768,
                 "spatial_resolution": 500
             }
         ],
@@ -541,6 +614,29 @@
             }
         ],
         "title": "Pixel usefulness using a simple rank class",
+        "roles": [
+            "data"
+        ]
+    },
+    "500_m_16_days_pixel_reliability_fill": {
+        "raster:bands": [
+            {
+                "data_type": "int16",
+                "nodata": -32768,
+                "spatial_resolution": 500
+            }
+        ],
+        "classification:classes": [
+            {
+                "description": "over ocean/water",
+                "value": -4
+            },
+            {
+                "description": "over land",
+                "value": -1
+            }
+        ],
+        "title": "Pixel Reliability Fill Values",
         "roles": [
             "data"
         ]

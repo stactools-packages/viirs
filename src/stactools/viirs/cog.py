@@ -1,6 +1,6 @@
 import os
 import warnings
-from typing import Any, List
+from typing import Any, Dict, List, Optional, Tuple, cast
 
 import h5py
 import numpy as np
@@ -9,11 +9,15 @@ import stactools.core.utils.convert
 from rasterio.errors import NotGeoreferencedWarning
 from rasterio.io import MemoryFile
 
+from stactools.viirs.constants import MULTIPLE_NODATA
 from stactools.viirs.metadata import viirs_metadata
 
 
 def cogify(infile: str, outdir: str) -> List[str]:
     """Creates COGs for the provided HDF5 file.
+
+    COGs are created using h5py as the data reader; rasterio and GDAL silently
+    convert int8 (signed byte) data to uint8 (byte) data.
 
     Args:
         infile (str): The input HDF5 file
@@ -53,25 +57,102 @@ def cogify(infile: str, outdir: str) -> List[str]:
             data: Any = np.array(h5[subdataset_key])
             if len(data.shape) == 1:  # skip single value (non-data) "grids"
                 continue
+            if len(data.shape) == 3:
+                raise ValueError(
+                    f"MultiBand COG creation not supported for "
+                    f"subdataset '{subdataset_name}' in product "
+                    f"'{metadata.product}'"
+                )
 
+            # gdal (and software built on gdal) doesn't always play well with signed byte data
             data = np.int16(data) if data.dtype == "int8" else data
 
-            src_profile = dict(
-                driver="GTiff",
-                dtype=data.dtype,
-                count=1,
-                height=data.shape[0],
-                width=data.shape[1],
-                crs=metadata.crs,
-                transform=rasterio.Affine(*metadata.transform),
-            )
+            if "_FillValue" in h5[subdataset_key].attrs.keys():
+                temp = h5[subdataset_key].attrs["_FillValue"].item()
+            elif "_Fillvalue" in h5[subdataset_key].attrs.keys():
+                temp = h5[subdataset_key].attrs["_Fillvalue"].item()
+            nodata_values: List[Optional[int]] = [None] if temp == b"n/a" else [temp]
 
-            with MemoryFile() as mem_file:
-                with mem_file.open(**src_profile) as mem:
-                    mem.write(data, 1)
-                    mem.update_tags(**rasterio_tags)
-                    stactools.core.utils.convert.cogify(mem, cog_path)
+            nodata_new: int
+            if metadata.product in MULTIPLE_NODATA:
+                subdatasets = MULTIPLE_NODATA[metadata.product]
+                if subdataset_name in subdatasets:
+                    nodata_values = cast(
+                        List[Optional[int]], subdatasets[subdataset_name]["multiple"]
+                    )
+                    nodata_new = cast(int, subdatasets[subdataset_name]["new"])
 
-        cog_paths.append(cog_path)
+            if len(nodata_values) > 1:
+                clean_data, clean_nodata = clean(data, nodata_values, nodata_new)
+                nodata_cog_path = f"{os.path.splitext(cog_path)[0]}_fill.tif"
+                cog(
+                    clean_data,
+                    metadata.crs,
+                    metadata.transform,
+                    rasterio_tags,
+                    cog_path,
+                    nodata_new,
+                )
+                cog_paths.append(cog_path)
+                cog(
+                    clean_nodata,
+                    metadata.crs,
+                    metadata.transform,
+                    rasterio_tags,
+                    nodata_cog_path,
+                    nodata_new,
+                )
+                cog_paths.append(nodata_cog_path)
+            else:
+                cog(
+                    data,
+                    metadata.crs,
+                    metadata.transform,
+                    rasterio_tags,
+                    cog_path,
+                    nodata_values[0],
+                )
+                cog_paths.append(cog_path)
 
     return cog_paths
+
+
+def cog(
+    data: Any,
+    crs: str,
+    transform: List[float],
+    tags: Dict[str, Any],
+    cog_path: str,
+    nodata: Optional[int] = None,
+) -> None:
+    src_profile = dict(
+        driver="GTiff",
+        dtype=data.dtype,
+        nodata=nodata,
+        count=1,
+        height=data.shape[0],
+        width=data.shape[1],
+        crs=crs,
+        transform=rasterio.Affine(*transform),
+    )
+
+    with MemoryFile() as mem_file:
+        with mem_file.open(**src_profile) as mem:
+            mem.write(data, 1)
+            mem.update_tags(**tags)
+            stactools.core.utils.convert.cogify(mem, cog_path)
+
+
+def clean(
+    data: Any, nodata_values: List[Optional[int]], nodata_new: int
+) -> Tuple[Any, Any]:
+    np.ma.asarray(data)
+    for nodata in nodata_values:
+        data = np.ma.masked_equal(data, nodata)
+    clean_data = np.ma.filled(data, nodata_new)
+
+    mask = np.ma.getmaskarray(data)
+    clean_nodata = np.ma.getdata(data)
+    clean_nodata[~mask] = nodata_new
+
+    return (clean_data, clean_nodata)

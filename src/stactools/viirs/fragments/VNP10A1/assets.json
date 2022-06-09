@@ -8,6 +8,20 @@
                 "spatial_resolution": 375
             }
         ],
+        "title": "Normalized Difference Snow Index (NDSI)",
+        "description": "NDSI for all land and inland water pixels without the cloud mask applied",
+        "roles": [
+            "data"
+        ]
+    },
+    "NDSI_fill": {
+        "raster:bands": [
+            {
+                "data_type": "int16",
+                "nodata": 32767,
+                "spatial_resolution": 375
+            }
+        ],
         "classification:classes": [
             {
                 "description": "night",
@@ -34,12 +48,25 @@
                 "value": 25400
             }
         ],
-        "title": "NDSI for all land and inland water pixels without the cloud mask applied",
+        "title": "Normalized Difference Snow Index (NDSI) Fill Values",
         "roles": [
             "data"
         ]
     },
     "NDSI_Snow_Cover": {
+        "raster:bands": [
+            {
+                "data_type": "uint8",
+                "nodata": 255,
+                "spatial_resolution": 375
+            }
+        ],
+        "title": "Snow Cover by NDSI",
+        "roles": [
+            "data"
+        ]
+    },
+    "NDSI_Snow_Cover_fill": {
         "raster:bands": [
             {
                 "data_type": "uint8",
@@ -81,7 +108,7 @@
                 "value": 254
             }
         ],
-        "title": "Snow cover by NDSI",
+        "title": "Snow Cover by NDSI Fill Values",
         "roles": [
             "data"
         ]
@@ -186,7 +213,7 @@
                 ]
             }
         ],
-        "title": "Algorithm bit flags QA",
+        "title": "Algorithm Bit Flags QA",
         "description": "A bitfield of flags set for certain conditions detected by data screens in the algorithm. Multiple flags may be set for a pixel.",
         "roles": [
             "data"
@@ -238,7 +265,7 @@
                 "value": 253
             }
         ],
-        "title": "Basic QA value",
+        "title": "Basic QA Value",
         "roles": [
             "data"
         ]
@@ -251,7 +278,7 @@
                 "spatial_resolution": 375
             }
         ],
-        "title": "Granule pointer",
+        "title": "Granule Pointer",
         "description": "A numeric value that points to the index of values stored in the global attributes GranulePointerArray, GranuleBeginningDateTime and GranuleEndingDateTime. This pointer points to the index of the value in those arrays from which the 'best' observation was selected.",
         "role": [
             "data"

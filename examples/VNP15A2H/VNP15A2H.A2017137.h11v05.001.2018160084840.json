@@ -74,12 +74,58 @@
     "Fpar": {
       "href": "../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_Fpar.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Fraction of Photosynthetically Active Radiation",
+      "title": "Fraction of Photosynthetically Active Radiation (FPAR)",
       "raster:bands": [
         {
           "data_type": "uint8",
+          "nodata": 200,
           "scale": 0.01,
           "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "Fpar_fill": {
+      "href": "../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_Fpar_fill.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Fpar Fill Values",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 200,
+          "spatial_resolution": 500
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "land cover assigned as 'unclassified1 or not able to determine",
+          "value": 249
+        },
+        {
+          "description": "land cover assigned as urban/built-up",
+          "value": 250
+        },
+        {
+          "description": "land cover assigned as \u201cpermanent\u201d wetlands/inundated marshlands",
+          "value": 251
+        },
+        {
+          "description": "land cover assigned as perennial snow, ice",
+          "value": 252
+        },
+        {
+          "description": "land cover assigned as barren, sparse vegetation (rock, tundra, desert)",
+          "value": 253
+        },
+        {
+          "description": "land cover assigned as perennial salt or inland fresh water",
+          "value": 254
+        },
+        {
+          "description": "Fillvalue, assigned when: the VNP09GA surface reflectance for channels VIS, NIR was assigned as Fillvalue, or land cover pixel itself was assigned Fillvalue of 255 or 254",
+          "value": 255
         }
       ],
       "roles": [
@@ -316,16 +362,127 @@
         "data"
       ]
     },
-    "Lai": {
-      "href": "../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_Lai.tif",
+    "FparStdDev": {
+      "href": "../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_FparStdDev.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Leaf Area Index",
+      "title": "FPAR Standard deviation",
       "raster:bands": [
         {
           "data_type": "uint8",
+          "nodata": 200,
+          "scale": 0.01,
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "FparStdDev_fill": {
+      "href": "../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_FparStdDev_fill.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "FPAR Standard deviation Fill Values",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 200,
+          "spatial_resolution": 500
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "No standard deviation available, pixel produced using backup method",
+          "value": 248
+        },
+        {
+          "description": "land cover assigned as 'unclassified1 or not able to determine",
+          "value": 249
+        },
+        {
+          "description": "land cover assigned as urban/built-up",
+          "value": 250
+        },
+        {
+          "description": "land cover assigned as \u201cpermanent\u201d wetlands/inundated marshlands",
+          "value": 251
+        },
+        {
+          "description": "land cover assigned as perennial snow, ice",
+          "value": 252
+        },
+        {
+          "description": "land cover assigned as barren, sparse vegetation (rock, tundra, desert)",
+          "value": 253
+        },
+        {
+          "description": "land cover assigned as perennial salt or inland fresh water",
+          "value": 254
+        },
+        {
+          "description": "Fillvalue, assigned when: the VNP09GA surface reflectance for channels VIS, NIR was assigned as Fillvalue, or land cover pixel itself was assigned Fillvalue of 255 or 254",
+          "value": 255
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "Lai": {
+      "href": "../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_Lai.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Leaf Area Index (LAI)",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 200,
           "unit": "square_meter/square_meter",
           "scale": 0.1,
           "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "Lai_fill": {
+      "href": "../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_Lai_fill.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "LAI Fill Values",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 200,
+          "spatial_resolution": 500
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "land cover assigned as 'unclassified1 or not able to determine",
+          "value": 249
+        },
+        {
+          "description": "land cover assigned as urban/built-up",
+          "value": 250
+        },
+        {
+          "description": "land cover assigned as \u201cpermanent\u201d wetlands/inundated marshlands",
+          "value": 251
+        },
+        {
+          "description": "land cover assigned as perennial snow, ice",
+          "value": 252
+        },
+        {
+          "description": "land cover assigned as barren, sparse vegetation (rock, tundra, desert)",
+          "value": 253
+        },
+        {
+          "description": "land cover assigned as perennial salt or inland fresh water",
+          "value": 254
+        },
+        {
+          "description": "Fillvalue, assigned when: the VNP09GA surface reflectance for channels VIS, NIR was assigned as Fillvalue, or land cover pixel itself was assigned Fillvalue of 255 or 254",
+          "value": 255
         }
       ],
       "roles": [
@@ -335,10 +492,11 @@
     "LaiStdDev": {
       "href": "../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_LaiStdDev.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Standard deviation for LAI",
+      "title": "LAI Standard Deviation",
       "raster:bands": [
         {
           "data_type": "uint8",
+          "nodata": 200,
           "unit": "square_meter/square_meter",
           "scale": 0.1,
           "spatial_resolution": 500
@@ -348,15 +506,49 @@
         "data"
       ]
     },
-    "FparStdDev": {
-      "href": "../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_FparStdDev.tif",
+    "LaiStdDev_fill": {
+      "href": "../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_LaiStdDev_fill.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Standard deviation of FPAR",
+      "title": "LAI Standard Deviation Fill Values",
       "raster:bands": [
         {
           "data_type": "uint8",
-          "scale": 0.01,
+          "nodata": 200,
           "spatial_resolution": 500
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "No standard deviation available, pixel produced using backup method",
+          "value": 248
+        },
+        {
+          "description": "land cover assigned as 'unclassified1 or not able to determine",
+          "value": 249
+        },
+        {
+          "description": "land cover assigned as urban/built-up",
+          "value": 250
+        },
+        {
+          "description": "land cover assigned as \u201cpermanent\u201d wetlands/inundated marshlands",
+          "value": 251
+        },
+        {
+          "description": "land cover assigned as perennial snow, ice",
+          "value": 252
+        },
+        {
+          "description": "land cover assigned as barren, sparse vegetation (rock, tundra, desert)",
+          "value": 253
+        },
+        {
+          "description": "land cover assigned as perennial salt or inland fresh water",
+          "value": 254
+        },
+        {
+          "description": "Fillvalue, assigned when: the VNP09GA surface reflectance for channels VIS, NIR was assigned as Fillvalue, or land cover pixel itself was assigned Fillvalue of 255 or 254",
+          "value": 255
         }
       ],
       "roles": [

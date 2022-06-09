@@ -97,6 +97,81 @@
         "metadata"
       ]
     },
+    "SurfReflect_I1": {
+      "href": "../../tests/data-files/external/VNP09H1.A2012017.h00v09.001.2016294114238_SurfReflect_I1.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Surface Reflectance Band I1",
+      "eo:bands": [
+        {
+          "name": "I1",
+          "description": "Near Infrared",
+          "center_wavelength": 0.64,
+          "full_width_half_max": 0.075
+        }
+      ],
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": -28672,
+          "scale": 0.0001,
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ]
+    },
+    "SurfReflect_I2": {
+      "href": "../../tests/data-files/external/VNP09H1.A2012017.h00v09.001.2016294114238_SurfReflect_I2.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Surface Reflectance Band I2",
+      "eo:bands": [
+        {
+          "name": "I2",
+          "description": "Shortwave Infrared",
+          "center_wavelength": 0.865,
+          "full_width_half_max": 0.039
+        }
+      ],
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": -28672,
+          "scale": 0.0001,
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ]
+    },
+    "SurfReflect_I3": {
+      "href": "../../tests/data-files/external/VNP09H1.A2012017.h00v09.001.2016294114238_SurfReflect_I3.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Surface Reflectance Band I3",
+      "eo:bands": [
+        {
+          "name": "I3",
+          "description": "Medium-wave Infrared",
+          "center_wavelength": 1.61,
+          "full_width_half_max": 0.06
+        }
+      ],
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": -28672,
+          "scale": 0.0001,
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ]
+    },
     "SurfReflect_QC_500m": {
       "href": "../../tests/data-files/external/VNP09H1.A2012017.h00v09.001.2016294114238_SurfReflect_QC_500m.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
@@ -467,81 +542,6 @@
       ],
       "roles": [
         "data"
-      ]
-    },
-    "SurfReflect_I3": {
-      "href": "../../tests/data-files/external/VNP09H1.A2012017.h00v09.001.2016294114238_SurfReflect_I3.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Surface Reflectance Band I3",
-      "eo:bands": [
-        {
-          "name": "I3",
-          "description": "Medium-wave Infrared",
-          "center_wavelength": 1.61,
-          "full_width_half_max": 0.06
-        }
-      ],
-      "raster:bands": [
-        {
-          "data_type": "int16",
-          "nodata": -28672,
-          "scale": 0.0001,
-          "spatial_resolution": 500
-        }
-      ],
-      "roles": [
-        "data",
-        "reflectance"
-      ]
-    },
-    "SurfReflect_I2": {
-      "href": "../../tests/data-files/external/VNP09H1.A2012017.h00v09.001.2016294114238_SurfReflect_I2.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Surface Reflectance Band I2",
-      "eo:bands": [
-        {
-          "name": "I2",
-          "description": "Shortwave Infrared",
-          "center_wavelength": 0.865,
-          "full_width_half_max": 0.039
-        }
-      ],
-      "raster:bands": [
-        {
-          "data_type": "int16",
-          "nodata": -28672,
-          "scale": 0.0001,
-          "spatial_resolution": 500
-        }
-      ],
-      "roles": [
-        "data",
-        "reflectance"
-      ]
-    },
-    "SurfReflect_I1": {
-      "href": "../../tests/data-files/external/VNP09H1.A2012017.h00v09.001.2016294114238_SurfReflect_I1.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Surface Reflectance Band I1",
-      "eo:bands": [
-        {
-          "name": "I1",
-          "description": "Near Infrared",
-          "center_wavelength": 0.64,
-          "full_width_half_max": 0.075
-        }
-      ],
-      "raster:bands": [
-        {
-          "data_type": "int16",
-          "nodata": -28672,
-          "scale": 0.0001,
-          "spatial_resolution": 500
-        }
-      ],
-      "roles": [
-        "data",
-        "reflectance"
       ]
     }
   },

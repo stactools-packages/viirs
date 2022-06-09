@@ -71,38 +71,6 @@
         "metadata"
       ]
     },
-    "sample": {
-      "href": "../../tests/data-files/external/VNP14A1.A2019054.h11v05.001.2019055201945_sample.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Sample number within a swath",
-      "raster:bands": [
-        {
-          "data_type": "int16",
-          "nodata": -1,
-          "spatial_resolution": 1000
-        }
-      ],
-      "roles": [
-        "data"
-      ]
-    },
-    "MaxFRP": {
-      "href": "../../tests/data-files/external/VNP14A1.A2019054.h11v05.001.2019055201945_MaxFRP.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Maximum Fire Radiative Power",
-      "raster:bands": [
-        {
-          "data_type": "int32",
-          "nodata": 0,
-          "unit": "megawatt",
-          "scale": 0.1,
-          "spatial_resolution": 1000
-        }
-      ],
-      "roles": [
-        "data"
-      ]
-    },
     "FireMask": {
       "href": "../../tests/data-files/external/VNP14A1.A2019054.h11v05.001.2019055201945_FireMask.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
@@ -153,6 +121,23 @@
         {
           "description": "fire (high confidence)",
           "value": 9
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "MaxFRP": {
+      "href": "../../tests/data-files/external/VNP14A1.A2019054.h11v05.001.2019055201945_MaxFRP.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Maximum Fire Radiative Power",
+      "raster:bands": [
+        {
+          "data_type": "int32",
+          "nodata": 0,
+          "unit": "megawatt",
+          "scale": 0.1,
+          "spatial_resolution": 1000
         }
       ],
       "roles": [
@@ -210,6 +195,21 @@
               "value": 1
             }
           ]
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "sample": {
+      "href": "../../tests/data-files/external/VNP14A1.A2019054.h11v05.001.2019055201945_sample.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Sample number within a swath",
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": -1,
+          "spatial_resolution": 1000
         }
       ],
       "roles": [

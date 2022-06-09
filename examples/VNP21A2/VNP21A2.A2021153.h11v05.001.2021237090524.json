@@ -71,21 +71,91 @@
         "metadata"
       ]
     },
-    "View_Angle_Night": {
-      "href": "../../tests/data-files/external/VNP21A2.A2021153.h11v05.001.2021237090524_View_Angle_Night.tif",
+    "Emis_14": {
+      "href": "../../tests/data-files/external/VNP21A2.A2021153.h11v05.001.2021237090524_Emis_14.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Night View Zenith Angle of LST",
+      "title": "M14 Emissivity",
       "raster:bands": [
         {
           "data_type": "uint8",
-          "nodata": 255,
-          "unit": "degree",
-          "offset": -65,
+          "nodata": 0,
+          "scale": 0.002,
+          "offset": 0.49,
           "spatial_resolution": 1000
         }
       ],
       "roles": [
         "data"
+      ]
+    },
+    "Emis_15": {
+      "href": "../../tests/data-files/external/VNP21A2.A2021153.h11v05.001.2021237090524_Emis_15.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "M15 Emissivity",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 0,
+          "scale": 0.002,
+          "offset": 0.49,
+          "spatial_resolution": 1000
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "Emis_16": {
+      "href": "../../tests/data-files/external/VNP21A2.A2021153.h11v05.001.2021237090524_Emis_16.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "M16 Emissivity",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 0,
+          "scale": 0.002,
+          "offset": 0.49,
+          "spatial_resolution": 1000
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "LST_Day_1KM": {
+      "href": "../../tests/data-files/external/VNP21A2.A2021153.h11v05.001.2021237090524_LST_Day_1KM.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Day Land Surface Temperature",
+      "raster:bands": [
+        {
+          "data_type": "uint16",
+          "nodata": 0,
+          "unit": "kelvin",
+          "scale": 0.02,
+          "spatial_resolution": 1000
+        }
+      ],
+      "roles": [
+        "data",
+        "temperature"
+      ]
+    },
+    "LST_Night_1KM": {
+      "href": "../../tests/data-files/external/VNP21A2.A2021153.h11v05.001.2021237090524_LST_Night_1KM.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Night 1 km Land Surface Temperature",
+      "raster:bands": [
+        {
+          "data_type": "uint16",
+          "nodata": 0,
+          "unit": "kelvin",
+          "scale": 0.02,
+          "spatial_resolution": 1000
+        }
+      ],
+      "roles": [
+        "data",
+        "temperature"
       ]
     },
     "QC_Day": {
@@ -194,76 +264,6 @@
               "value": 3
             }
           ]
-        }
-      ],
-      "roles": [
-        "data"
-      ]
-    },
-    "View_Time_Night": {
-      "href": "../../tests/data-files/external/VNP21A2.A2021153.h11v05.001.2021237090524_View_Time_Night.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Night Time of LST Observation",
-      "raster:bands": [
-        {
-          "data_type": "uint8",
-          "nodata": 255,
-          "unit": "hours",
-          "scale": 0.1,
-          "spatial_resolution": 1000
-        }
-      ],
-      "roles": [
-        "data"
-      ]
-    },
-    "LST_Day_1KM": {
-      "href": "../../tests/data-files/external/VNP21A2.A2021153.h11v05.001.2021237090524_LST_Day_1KM.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Day Land Surface Temperature",
-      "raster:bands": [
-        {
-          "data_type": "uint16",
-          "nodata": 0,
-          "unit": "kelvin",
-          "scale": 0.02,
-          "spatial_resolution": 1000
-        }
-      ],
-      "roles": [
-        "data",
-        "temperature"
-      ]
-    },
-    "LST_Night_1KM": {
-      "href": "../../tests/data-files/external/VNP21A2.A2021153.h11v05.001.2021237090524_LST_Night_1KM.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Night 1 km Land Surface Temperature",
-      "raster:bands": [
-        {
-          "data_type": "uint16",
-          "nodata": 0,
-          "unit": "kelvin",
-          "scale": 0.02,
-          "spatial_resolution": 1000
-        }
-      ],
-      "roles": [
-        "data",
-        "temperature"
-      ]
-    },
-    "View_Time_Day": {
-      "href": "../../tests/data-files/external/VNP21A2.A2021153.h11v05.001.2021237090524_View_Time_Day.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Day Time of LST Observation",
-      "raster:bands": [
-        {
-          "data_type": "uint8",
-          "nodata": 255,
-          "unit": "hours",
-          "scale": 0.1,
-          "spatial_resolution": 1000
         }
       ],
       "roles": [
@@ -399,16 +399,16 @@
         "data"
       ]
     },
-    "Emis_16": {
-      "href": "../../tests/data-files/external/VNP21A2.A2021153.h11v05.001.2021237090524_Emis_16.tif",
+    "View_Angle_Night": {
+      "href": "../../tests/data-files/external/VNP21A2.A2021153.h11v05.001.2021237090524_View_Angle_Night.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "M16 Emissivity",
+      "title": "Night View Zenith Angle of LST",
       "raster:bands": [
         {
           "data_type": "uint8",
-          "nodata": 0,
-          "scale": 0.002,
-          "offset": 0.49,
+          "nodata": 255,
+          "unit": "degree",
+          "offset": -65,
           "spatial_resolution": 1000
         }
       ],
@@ -416,16 +416,16 @@
         "data"
       ]
     },
-    "Emis_14": {
-      "href": "../../tests/data-files/external/VNP21A2.A2021153.h11v05.001.2021237090524_Emis_14.tif",
+    "View_Time_Day": {
+      "href": "../../tests/data-files/external/VNP21A2.A2021153.h11v05.001.2021237090524_View_Time_Day.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "M14 Emissivity",
+      "title": "Day Time of LST Observation",
       "raster:bands": [
         {
           "data_type": "uint8",
-          "nodata": 0,
-          "scale": 0.002,
-          "offset": 0.49,
+          "nodata": 255,
+          "unit": "hours",
+          "scale": 0.1,
           "spatial_resolution": 1000
         }
       ],
@@ -433,16 +433,16 @@
         "data"
       ]
     },
-    "Emis_15": {
-      "href": "../../tests/data-files/external/VNP21A2.A2021153.h11v05.001.2021237090524_Emis_15.tif",
+    "View_Time_Night": {
+      "href": "../../tests/data-files/external/VNP21A2.A2021153.h11v05.001.2021237090524_View_Time_Night.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "M15 Emissivity",
+      "title": "Night Time of LST Observation",
       "raster:bands": [
         {
           "data_type": "uint8",
-          "nodata": 0,
-          "scale": 0.002,
-          "offset": 0.49,
+          "nodata": 255,
+          "unit": "hours",
+          "scale": 0.1,
           "spatial_resolution": 1000
         }
       ],

@@ -220,7 +220,7 @@ class Metadata:
         shape = [
             int(metadata_dict["YDim"]),
             int(metadata_dict["XDim"]),
-        ]  # [rows, columns]
+        ]
         assert shape[0] == shape[1]
 
         left, top = ast.literal_eval(metadata_dict["UpperLeftPointMtrs"])

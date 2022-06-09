@@ -71,81 +71,6 @@
         "metadata"
       ]
     },
-    "BRDF_Albedo_Band_Mandatory_Quality_M7": {
-      "href": "../../tests/data-files/external/VNP43MA4.A2022140.h11v05.001.2022148093246_BRDF_Albedo_Band_Mandatory_Quality_M7.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "BRDF/Albedo mandatory quality for band M7",
-      "raster:bands": [
-        {
-          "data_type": "uint8",
-          "nodata": 255,
-          "spatial_resolution": 1000
-        }
-      ],
-      "classification:classes": [
-        {
-          "description": "full BRDF inversions",
-          "value": 0
-        },
-        {
-          "description": "magnitude BRDF inversions",
-          "value": 1
-        }
-      ],
-      "roles": [
-        "data"
-      ]
-    },
-    "BRDF_Albedo_Band_Mandatory_Quality_M5": {
-      "href": "../../tests/data-files/external/VNP43MA4.A2022140.h11v05.001.2022148093246_BRDF_Albedo_Band_Mandatory_Quality_M5.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "BRDF/Albedo mandatory quality for band M5",
-      "raster:bands": [
-        {
-          "data_type": "uint8",
-          "nodata": 255,
-          "spatial_resolution": 1000
-        }
-      ],
-      "classification:classes": [
-        {
-          "description": "full BRDF inversions",
-          "value": 0
-        },
-        {
-          "description": "magnitude BRDF inversions",
-          "value": 1
-        }
-      ],
-      "roles": [
-        "data"
-      ]
-    },
-    "BRDF_Albedo_Band_Mandatory_Quality_M4": {
-      "href": "../../tests/data-files/external/VNP43MA4.A2022140.h11v05.001.2022148093246_BRDF_Albedo_Band_Mandatory_Quality_M4.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "BRDF/Albedo mandatory quality for band M4",
-      "raster:bands": [
-        {
-          "data_type": "uint8",
-          "nodata": 255,
-          "spatial_resolution": 1000
-        }
-      ],
-      "classification:classes": [
-        {
-          "description": "full BRDF inversions",
-          "value": 0
-        },
-        {
-          "description": "magnitude BRDF inversions",
-          "value": 1
-        }
-      ],
-      "roles": [
-        "data"
-      ]
-    },
     "BRDF_Albedo_Band_Mandatory_Quality_M1": {
       "href": "../../tests/data-files/external/VNP43MA4.A2022140.h11v05.001.2022148093246_BRDF_Albedo_Band_Mandatory_Quality_M1.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
@@ -171,10 +96,35 @@
         "data"
       ]
     },
-    "BRDF_Albedo_Band_Mandatory_Quality_M3": {
-      "href": "../../tests/data-files/external/VNP43MA4.A2022140.h11v05.001.2022148093246_BRDF_Albedo_Band_Mandatory_Quality_M3.tif",
+    "BRDF_Albedo_Band_Mandatory_Quality_M10": {
+      "href": "../../tests/data-files/external/VNP43MA4.A2022140.h11v05.001.2022148093246_BRDF_Albedo_Band_Mandatory_Quality_M10.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "BRDF/Albedo mandatory quality for band M3",
+      "title": "BRDF/Albedo mandatory quality for band M10",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "spatial_resolution": 1000
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "full BRDF inversions",
+          "value": 0
+        },
+        {
+          "description": "magnitude BRDF inversions",
+          "value": 1
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "BRDF_Albedo_Band_Mandatory_Quality_M11": {
+      "href": "../../tests/data-files/external/VNP43MA4.A2022140.h11v05.001.2022148093246_BRDF_Albedo_Band_Mandatory_Quality_M11.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "BRDF/Albedo mandatory quality for band M11",
       "raster:bands": [
         {
           "data_type": "uint8",
@@ -221,10 +171,135 @@
         "data"
       ]
     },
-    "Nadir_Reflectance_M8": {
-      "href": "../../tests/data-files/external/VNP43MA4.A2022140.h11v05.001.2022148093246_Nadir_Reflectance_M8.tif",
+    "BRDF_Albedo_Band_Mandatory_Quality_M3": {
+      "href": "../../tests/data-files/external/VNP43MA4.A2022140.h11v05.001.2022148093246_BRDF_Albedo_Band_Mandatory_Quality_M3.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Nadir BRDF/Albedo reflectance at local solar noon for band M8",
+      "title": "BRDF/Albedo mandatory quality for band M3",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "spatial_resolution": 1000
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "full BRDF inversions",
+          "value": 0
+        },
+        {
+          "description": "magnitude BRDF inversions",
+          "value": 1
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "BRDF_Albedo_Band_Mandatory_Quality_M4": {
+      "href": "../../tests/data-files/external/VNP43MA4.A2022140.h11v05.001.2022148093246_BRDF_Albedo_Band_Mandatory_Quality_M4.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "BRDF/Albedo mandatory quality for band M4",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "spatial_resolution": 1000
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "full BRDF inversions",
+          "value": 0
+        },
+        {
+          "description": "magnitude BRDF inversions",
+          "value": 1
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "BRDF_Albedo_Band_Mandatory_Quality_M5": {
+      "href": "../../tests/data-files/external/VNP43MA4.A2022140.h11v05.001.2022148093246_BRDF_Albedo_Band_Mandatory_Quality_M5.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "BRDF/Albedo mandatory quality for band M5",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "spatial_resolution": 1000
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "full BRDF inversions",
+          "value": 0
+        },
+        {
+          "description": "magnitude BRDF inversions",
+          "value": 1
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "BRDF_Albedo_Band_Mandatory_Quality_M7": {
+      "href": "../../tests/data-files/external/VNP43MA4.A2022140.h11v05.001.2022148093246_BRDF_Albedo_Band_Mandatory_Quality_M7.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "BRDF/Albedo mandatory quality for band M7",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "spatial_resolution": 1000
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "full BRDF inversions",
+          "value": 0
+        },
+        {
+          "description": "magnitude BRDF inversions",
+          "value": 1
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "BRDF_Albedo_Band_Mandatory_Quality_M8": {
+      "href": "../../tests/data-files/external/VNP43MA4.A2022140.h11v05.001.2022148093246_BRDF_Albedo_Band_Mandatory_Quality_M8.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "BRDF/Albedo mandatory quality for band M8",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "spatial_resolution": 1000
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "full BRDF inversions",
+          "value": 0
+        },
+        {
+          "description": "magnitude BRDF inversions",
+          "value": 1
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "Nadir_Reflectance_M1": {
+      "href": "../../tests/data-files/external/VNP43MA4.A2022140.h11v05.001.2022148093246_Nadir_Reflectance_M1.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Nadir BRDF/Albedo reflectance at local solar noon for band M1",
       "raster:bands": [
         {
           "data_type": "int16",
@@ -235,10 +310,60 @@
       ],
       "eo:bands": [
         {
-          "name": "M8",
-          "description": "Shortwave Infrared",
-          "center_wavelength": 1.24,
+          "name": "M1",
+          "description": "Visible/Reflective",
+          "center_wavelength": 0.415,
           "full_width_half_max": 0.02
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ]
+    },
+    "Nadir_Reflectance_M10": {
+      "href": "../../tests/data-files/external/VNP43MA4.A2022140.h11v05.001.2022148093246_Nadir_Reflectance_M10.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Nadir BRDF/Albedo reflectance at local solar noon for band M10",
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": 32767,
+          "scale": 0.0001,
+          "spatial_resolution": 1000
+        }
+      ],
+      "eo:bands": [
+        {
+          "name": "M10",
+          "description": "Shortwave Infrared",
+          "center_wavelength": 1.61,
+          "full_width_half_max": 0.06
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ]
+    },
+    "Nadir_Reflectance_M11": {
+      "href": "../../tests/data-files/external/VNP43MA4.A2022140.h11v05.001.2022148093246_Nadir_Reflectance_M11.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Nadir BRDF/Albedo reflectance at local solar noon for band M11",
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": 32767,
+          "scale": 0.0001,
+          "spatial_resolution": 1000
+        }
+      ],
+      "eo:bands": [
+        {
+          "name": "M11",
+          "description": "Medium-wave Infrared",
+          "center_wavelength": 2.25,
+          "full_width_half_max": 0.05
         }
       ],
       "roles": [
@@ -294,81 +419,6 @@
       "roles": [
         "data",
         "reflectance"
-      ]
-    },
-    "BRDF_Albedo_Band_Mandatory_Quality_M10": {
-      "href": "../../tests/data-files/external/VNP43MA4.A2022140.h11v05.001.2022148093246_BRDF_Albedo_Band_Mandatory_Quality_M10.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "BRDF/Albedo mandatory quality for band M10",
-      "raster:bands": [
-        {
-          "data_type": "uint8",
-          "nodata": 255,
-          "spatial_resolution": 1000
-        }
-      ],
-      "classification:classes": [
-        {
-          "description": "full BRDF inversions",
-          "value": 0
-        },
-        {
-          "description": "magnitude BRDF inversions",
-          "value": 1
-        }
-      ],
-      "roles": [
-        "data"
-      ]
-    },
-    "Nadir_Reflectance_M1": {
-      "href": "../../tests/data-files/external/VNP43MA4.A2022140.h11v05.001.2022148093246_Nadir_Reflectance_M1.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Nadir BRDF/Albedo reflectance at local solar noon for band M1",
-      "raster:bands": [
-        {
-          "data_type": "int16",
-          "nodata": 32767,
-          "scale": 0.0001,
-          "spatial_resolution": 1000
-        }
-      ],
-      "eo:bands": [
-        {
-          "name": "M1",
-          "description": "Visible/Reflective",
-          "center_wavelength": 0.415,
-          "full_width_half_max": 0.02
-        }
-      ],
-      "roles": [
-        "data",
-        "reflectance"
-      ]
-    },
-    "BRDF_Albedo_Band_Mandatory_Quality_M11": {
-      "href": "../../tests/data-files/external/VNP43MA4.A2022140.h11v05.001.2022148093246_BRDF_Albedo_Band_Mandatory_Quality_M11.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "BRDF/Albedo mandatory quality for band M11",
-      "raster:bands": [
-        {
-          "data_type": "uint8",
-          "nodata": 255,
-          "spatial_resolution": 1000
-        }
-      ],
-      "classification:classes": [
-        {
-          "description": "full BRDF inversions",
-          "value": 0
-        },
-        {
-          "description": "magnitude BRDF inversions",
-          "value": 1
-        }
-      ],
-      "roles": [
-        "data"
       ]
     },
     "Nadir_Reflectance_M4": {
@@ -446,10 +496,10 @@
         "reflectance"
       ]
     },
-    "Nadir_Reflectance_M10": {
-      "href": "../../tests/data-files/external/VNP43MA4.A2022140.h11v05.001.2022148093246_Nadir_Reflectance_M10.tif",
+    "Nadir_Reflectance_M8": {
+      "href": "../../tests/data-files/external/VNP43MA4.A2022140.h11v05.001.2022148093246_Nadir_Reflectance_M8.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Nadir BRDF/Albedo reflectance at local solar noon for band M10",
+      "title": "Nadir BRDF/Albedo reflectance at local solar noon for band M8",
       "raster:bands": [
         {
           "data_type": "int16",
@@ -460,65 +510,15 @@
       ],
       "eo:bands": [
         {
-          "name": "M10",
+          "name": "M8",
           "description": "Shortwave Infrared",
-          "center_wavelength": 1.61,
-          "full_width_half_max": 0.06
+          "center_wavelength": 1.24,
+          "full_width_half_max": 0.02
         }
       ],
       "roles": [
         "data",
         "reflectance"
-      ]
-    },
-    "Nadir_Reflectance_M11": {
-      "href": "../../tests/data-files/external/VNP43MA4.A2022140.h11v05.001.2022148093246_Nadir_Reflectance_M11.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Nadir BRDF/Albedo reflectance at local solar noon for band M11",
-      "raster:bands": [
-        {
-          "data_type": "int16",
-          "nodata": 32767,
-          "scale": 0.0001,
-          "spatial_resolution": 1000
-        }
-      ],
-      "eo:bands": [
-        {
-          "name": "M11",
-          "description": "Medium-wave Infrared",
-          "center_wavelength": 2.25,
-          "full_width_half_max": 0.05
-        }
-      ],
-      "roles": [
-        "data",
-        "reflectance"
-      ]
-    },
-    "BRDF_Albedo_Band_Mandatory_Quality_M8": {
-      "href": "../../tests/data-files/external/VNP43MA4.A2022140.h11v05.001.2022148093246_BRDF_Albedo_Band_Mandatory_Quality_M8.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "BRDF/Albedo mandatory quality for band M8",
-      "raster:bands": [
-        {
-          "data_type": "uint8",
-          "nodata": 255,
-          "spatial_resolution": 1000
-        }
-      ],
-      "classification:classes": [
-        {
-          "description": "full BRDF inversions",
-          "value": 0
-        },
-        {
-          "description": "magnitude BRDF inversions",
-          "value": 1
-        }
-      ],
-      "roles": [
-        "data"
       ]
     }
   },
