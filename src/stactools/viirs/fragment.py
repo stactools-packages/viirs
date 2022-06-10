@@ -1,5 +1,5 @@
 import json
-from typing import Any
+from typing import Any, Dict
 
 import pkg_resources
 from pystac import Extent, Link, MediaType, Provider
@@ -14,13 +14,19 @@ class STACFragments:
     def load_assets(self) -> None:
         self.assets = self._load("assets.json")
 
+    def assets_dict(self) -> Dict[str, Any]:
+        assets: Dict[str, Any] = self.assets
+        for key in assets.keys():
+            assets[key]["type"] = MediaType.COG
+        return assets
+
     def subdataset_dict(self, subdataset: str) -> Any:
         subdataset_asset = self.assets[subdataset]
         subdataset_asset["type"] = MediaType.COG
         return subdataset_asset
 
-    def collection_dict(self) -> Any:
-        collection = self._load("collection.json")
+    def collection_dict(self) -> Dict[str, Any]:
+        collection: Dict[str, Any] = self._load("collection.json")
         collection["extent"] = Extent.from_dict(collection["extent"])
         collection["providers"] = [
             Provider.from_dict(provider) for provider in collection["providers"]

@@ -71,6 +71,41 @@
         "metadata"
       ]
     },
+    "LST_1KM": {
+      "href": "../../tests/data-files/external/VNP21A1D.A2015343.h11v05.001.2019130023611_LST_1KM.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Daily 1 km Land Surface Temperature (LST)",
+      "raster:bands": [
+        {
+          "data_type": "uint16",
+          "nodata": 0,
+          "unit": "kelvin",
+          "scale": 0.02,
+          "spatial_resolution": 1000
+        }
+      ],
+      "roles": [
+        "data",
+        "temperature"
+      ]
+    },
+    "View_Time": {
+      "href": "../../tests/data-files/external/VNP21A1D.A2015343.h11v05.001.2019130023611_View_Time.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Time of LST observation",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "unit": "hours",
+          "scale": 0.1,
+          "spatial_resolution": 1000
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
     "Emis_14": {
       "href": "../../tests/data-files/external/VNP21A1D.A2015343.h11v05.001.2019130023611_Emis_14.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
@@ -120,24 +155,6 @@
       ],
       "roles": [
         "data"
-      ]
-    },
-    "LST_1KM": {
-      "href": "../../tests/data-files/external/VNP21A1D.A2015343.h11v05.001.2019130023611_LST_1KM.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Daily 1 km Land Surface Temperature (LST)",
-      "raster:bands": [
-        {
-          "data_type": "uint16",
-          "nodata": 0,
-          "unit": "kelvin",
-          "scale": 0.02,
-          "spatial_resolution": 1000
-        }
-      ],
-      "roles": [
-        "data",
-        "temperature"
       ]
     },
     "QC": {
@@ -361,23 +378,6 @@
       "roles": [
         "data"
       ]
-    },
-    "View_Time": {
-      "href": "../../tests/data-files/external/VNP21A1D.A2015343.h11v05.001.2019130023611_View_Time.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Time of LST observation",
-      "raster:bands": [
-        {
-          "data_type": "uint8",
-          "nodata": 255,
-          "unit": "hours",
-          "scale": 0.1,
-          "spatial_resolution": 1000
-        }
-      ],
-      "roles": [
-        "data"
-      ]
     }
   },
   "bbox": [
@@ -385,10 +385,5 @@
     29.99999999730591,
     -69.28203229465252,
     39.99999999641088
-  ],
-  "stac_extensions": [
-    "https://stac-extensions.github.io/classification/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/raster/v1.0.0/schema.json"
   ]
 }

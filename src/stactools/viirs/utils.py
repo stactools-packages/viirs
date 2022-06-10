@@ -1,8 +1,7 @@
 import warnings
-from typing import List, Optional, cast
+from typing import Any, Dict, List, Optional, cast
 
 import rasterio
-from pystac import Item
 from pystac.extensions.eo import EOExtension
 from pystac.extensions.raster import RasterExtension
 from rasterio.errors import NotGeoreferencedWarning
@@ -44,7 +43,7 @@ def modify_href(
         return href
 
 
-def add_extensions(item: Item) -> None:
+def find_extensions(assets: Dict[str, Any]) -> List[str]:
     """Adds extensions to the Item extension list if they exist on the Item assets.
 
     NOTE: This package does not nest the classification extension inside
@@ -54,20 +53,12 @@ def add_extensions(item: Item) -> None:
         item (Item): The Item being modified
     """
     extensions = set()
-    for asset in item.assets.values():
-        asset_dict = asset.to_dict()
-        if (
-            "classification:classes" in asset_dict
-            or "classification:bitfields" in asset_dict
-        ):
+    for asset in assets:
+        if "classification:classes" in asset or "classification:bitfields" in asset:
             extensions.add(constants.CLASSIFICATION_EXTENSION_HREF)
-        if "eo:bands" in asset_dict:
+        if "eo:bands" in asset:
             extensions.add(EOExtension.get_schema_uri())
-        if "raster:bands" in asset_dict:
+        if "raster:bands" in asset:
             extensions.add(RasterExtension.get_schema_uri())
 
-    for extension in extensions:
-        if extension not in item.stac_extensions:
-            item.stac_extensions.append(extension)
-
-    return None
+    return list(extensions)

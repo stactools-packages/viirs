@@ -4,7 +4,8 @@ from typing import List, Optional
 
 import pystac.utils
 import stactools.core.utils.antimeridian
-from pystac import Asset, Item
+from pystac import Asset, Collection, Item
+from pystac.extensions.item_assets import AssetDefinition, ItemAssetsExtension
 from pystac.extensions.projection import ProjectionExtension
 from stactools.core.io import ReadHrefModifier
 from stactools.core.utils.antimeridian import Strategy
@@ -12,7 +13,7 @@ from stactools.core.utils.antimeridian import Strategy
 from stactools.viirs import constants
 from stactools.viirs.fragment import STACFragments
 from stactools.viirs.metadata import viirs_metadata
-from stactools.viirs.utils import add_extensions
+from stactools.viirs.utils import find_extensions
 
 logger = logging.getLogger(__name__)
 
@@ -84,7 +85,37 @@ def create_item(
     projection.transform = metadata.transform
     projection.shape = metadata.shape
 
-    add_extensions(item)
-    item.stac_extensions.sort()
+    extensions = find_extensions(item.assets)
+    item.stac_extensions.extend(extensions)
+    item.stac_extensions = list(set(item.stac_extensions)).sort()  # type: ignore
 
     return item
+
+
+def create_collection(product: str) -> Collection:
+    fragments = STACFragments(product)
+    collection_fragments = fragments.collection_dict()
+    collection = Collection(
+        id=product,
+        title=collection_fragments["title"],
+        description=collection_fragments["description"],
+        license=collection_fragments["license"],
+        keywords=collection_fragments["keywords"],
+        providers=collection_fragments["providers"],
+        extent=collection_fragments["extent"],
+    )
+    collection.add_links(collection_fragments["links"])
+
+    item_assets_dict = {
+        constants.HDF5_ASSET_KEY: AssetDefinition(constants.HDF5_ASSET_PROPERTIES),
+        constants.METADATA_ASSET_KEY: AssetDefinition(
+            constants.METADATA_ASSET_PROPERTIES
+        ),
+    }
+    item_assets_dict.update(fragments.assets_dict())
+    item_assets_ext = ItemAssetsExtension.ext(collection, add_if_missing=True)
+    item_assets_ext.item_assets = item_assets_dict
+
+    collection.stac_extensions = find_extensions(item_assets_dict)
+
+    return collection

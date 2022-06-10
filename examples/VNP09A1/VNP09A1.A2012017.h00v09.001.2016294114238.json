@@ -97,300 +97,8 @@
         "metadata"
       ]
     },
-    "RelativeAzimuth": {
-      "href": "../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_RelativeAzimuth.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Relative Azimuth Angle",
-      "raster:bands": [
-        {
-          "data_type": "int16",
-          "nodata": 0,
-          "unit": "degree",
-          "scale": 0.01,
-          "spatial_resolution": 1000
-        }
-      ],
-      "roles": [
-        "data"
-      ]
-    },
-    "SensorZenith": {
-      "href": "../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_SensorZenith.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Sensor Zenith Angle",
-      "raster:bands": [
-        {
-          "data_type": "int16",
-          "nodata": 0,
-          "unit": "degree",
-          "scale": 0.01,
-          "spatial_resolution": 1000
-        }
-      ],
-      "roles": [
-        "data"
-      ]
-    },
-    "SolarZenith": {
-      "href": "../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_SolarZenith.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Solar Zenith Angle",
-      "raster:bands": [
-        {
-          "data_type": "int16",
-          "nodata": 0,
-          "unit": "degree",
-          "scale": 0.01,
-          "spatial_resolution": 1000
-        }
-      ],
-      "roles": [
-        "data"
-      ]
-    },
-    "SurfReflect_Day_Of_Year": {
-      "href": "../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_SurfReflect_Day_Of_Year.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "Day of Year",
-      "raster:bands": [
-        {
-          "data_type": "uint16",
-          "nodata": 65535,
-          "unit": "Julian day",
-          "spatial_resolution": 1000
-        }
-      ],
-      "roles": [
-        "data"
-      ]
-    },
-    "SurfReflect_M1": {
-      "href": "../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_SurfReflect_M1.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "1 km Surface Reflectance Band M1",
-      "raster:bands": [
-        {
-          "date_type": "int16",
-          "nodata": -28672,
-          "scale": 0.0001,
-          "spatial_resolution": 1000
-        }
-      ],
-      "eo:bands": [
-        {
-          "name": "M1",
-          "description": "Visible/Reflective",
-          "center_wavelength": 0.415,
-          "full_width_half_max": 0.02
-        }
-      ],
-      "roles": [
-        "data",
-        "reflectance"
-      ]
-    },
-    "SurfReflect_M10": {
-      "href": "../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_SurfReflect_M10.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "1 km Surface Reflectance Band M10",
-      "raster:bands": [
-        {
-          "date_type": "int16",
-          "nodata": -28672,
-          "scale": 0.0001,
-          "spatial_resolution": 1000
-        }
-      ],
-      "eo:bands": [
-        {
-          "name": "M10",
-          "description": "Shortwave Infrared",
-          "center_wavelength": 1.61,
-          "full_width_half_max": 0.06
-        }
-      ],
-      "roles": [
-        "data",
-        "reflectance"
-      ]
-    },
-    "SurfReflect_M11": {
-      "href": "../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_SurfReflect_M11.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "1 km Surface Reflectance Band M11",
-      "raster:bands": [
-        {
-          "date_type": "int16",
-          "nodata": -28672,
-          "scale": 0.0001,
-          "spatial_resolution": 1000
-        }
-      ],
-      "eo:bands": [
-        {
-          "name": "M11",
-          "description": "Medium-wave Infrared",
-          "center_wavelength": 2.25,
-          "full_width_half_max": 0.05
-        }
-      ],
-      "roles": [
-        "data",
-        "reflectance"
-      ]
-    },
-    "SurfReflect_M2": {
-      "href": "../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_SurfReflect_M2.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "1 km Surface Reflectance Band M2",
-      "raster:bands": [
-        {
-          "date_type": "int16",
-          "nodata": -28672,
-          "scale": 0.0001,
-          "spatial_resolution": 1000
-        }
-      ],
-      "eo:bands": [
-        {
-          "name": "M2",
-          "description": "Visible/Reflective",
-          "center_wavelength": 0.445,
-          "full_width_half_max": 0.02
-        }
-      ],
-      "roles": [
-        "data",
-        "reflectance"
-      ]
-    },
-    "SurfReflect_M3": {
-      "href": "../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_SurfReflect_M3.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "1 km Surface Reflectance Band M3",
-      "raster:bands": [
-        {
-          "date_type": "int16",
-          "nodata": -28672,
-          "scale": 0.0001,
-          "spatial_resolution": 1000
-        }
-      ],
-      "eo:bands": [
-        {
-          "name": "M3",
-          "description": "Visible/Reflective",
-          "center_wavelength": 0.49,
-          "full_width_half_max": 0.02
-        }
-      ],
-      "roles": [
-        "data",
-        "reflectance"
-      ]
-    },
-    "SurfReflect_M4": {
-      "href": "../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_SurfReflect_M4.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "1 km Surface Reflectance Band M4",
-      "raster:bands": [
-        {
-          "date_type": "int16",
-          "nodata": -28672,
-          "scale": 0.0001,
-          "spatial_resolution": 1000
-        }
-      ],
-      "eo:bands": [
-        {
-          "name": "M4",
-          "description": "Visible/Reflective",
-          "center_wavelength": 0.555,
-          "full_width_half_max": 0.02
-        }
-      ],
-      "roles": [
-        "data",
-        "reflectance"
-      ]
-    },
-    "SurfReflect_M5": {
-      "href": "../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_SurfReflect_M5.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "1 km Surface Reflectance Band M5",
-      "raster:bands": [
-        {
-          "date_type": "int16",
-          "nodata": -28672,
-          "scale": 0.0001,
-          "spatial_resolution": 1000
-        }
-      ],
-      "eo:bands": [
-        {
-          "name": "M5",
-          "description": "Near Infrared",
-          "center_wavelength": 0.673,
-          "full_width_half_max": 0.021
-        }
-      ],
-      "roles": [
-        "data",
-        "reflectance"
-      ]
-    },
-    "SurfReflect_M7": {
-      "href": "../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_SurfReflect_M7.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "1 km Surface Reflectance Band M7",
-      "raster:bands": [
-        {
-          "date_type": "int16",
-          "nodata": -28672,
-          "scale": 0.0001,
-          "spatial_resolution": 1000
-        }
-      ],
-      "eo:bands": [
-        {
-          "name": "M7",
-          "description": "Shortwave Infrared",
-          "center_wavelength": 0.865,
-          "full_width_half_max": 0.039
-        }
-      ],
-      "roles": [
-        "data",
-        "reflectance"
-      ]
-    },
-    "SurfReflect_M8": {
-      "href": "../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_SurfReflect_M8.tif",
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
-      "title": "1 km Surface Reflectance Band M8",
-      "raster:bands": [
-        {
-          "date_type": "int16",
-          "nodata": -28672,
-          "scale": 0.0001,
-          "spatial_resolution": 1000
-        }
-      ],
-      "eo:bands": [
-        {
-          "name": "M8",
-          "description": "Shortwave Infrared",
-          "center_wavelength": 1.24,
-          "full_width_half_max": 0.02
-        }
-      ],
-      "roles": [
-        "data",
-        "reflectance"
-      ]
-    },
     "SurfReflect_QC": {
-      "href": "../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_SurfReflect_QC.tif",
+      "href": "../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_QC.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Surface Reflectance Band Quality Control (QC)",
       "raster:bands": [
@@ -783,8 +491,83 @@
         "data"
       ]
     },
+    "SurfReflect_M8": {
+      "href": "../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_SurfReflect_M8.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "1 km Surface Reflectance Band M8",
+      "raster:bands": [
+        {
+          "date_type": "int16",
+          "nodata": -28672,
+          "scale": 0.0001,
+          "spatial_resolution": 1000
+        }
+      ],
+      "eo:bands": [
+        {
+          "name": "M8",
+          "description": "Shortwave Infrared",
+          "center_wavelength": 1.24,
+          "full_width_half_max": 0.02
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ]
+    },
+    "SurfReflect_M10": {
+      "href": "../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M10.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "1 km Surface Reflectance Band M10",
+      "raster:bands": [
+        {
+          "date_type": "int16",
+          "nodata": -28672,
+          "scale": 0.0001,
+          "spatial_resolution": 1000
+        }
+      ],
+      "eo:bands": [
+        {
+          "name": "M10",
+          "description": "Shortwave Infrared",
+          "center_wavelength": 1.61,
+          "full_width_half_max": 0.06
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ]
+    },
+    "SurfReflect_M11": {
+      "href": "../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M11.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "1 km Surface Reflectance Band M11",
+      "raster:bands": [
+        {
+          "date_type": "int16",
+          "nodata": -28672,
+          "scale": 0.0001,
+          "spatial_resolution": 1000
+        }
+      ],
+      "eo:bands": [
+        {
+          "name": "M11",
+          "description": "Medium-wave Infrared",
+          "center_wavelength": 2.25,
+          "full_width_half_max": 0.05
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ]
+    },
     "SurfReflect_State": {
-      "href": "../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_SurfReflect_State.tif",
+      "href": "../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_State.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Surface Reflectance State Quality Assurance (QA)",
       "raster:bands": [
@@ -957,6 +740,223 @@
       "roles": [
         "data"
       ]
+    },
+    "SolarZenith": {
+      "href": "../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_SolarZenith.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Solar Zenith Angle",
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": 0,
+          "unit": "degree",
+          "scale": 0.01,
+          "spatial_resolution": 1000
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "SurfReflect_Day_Of_Year": {
+      "href": "../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_SurfReflect_Day_Of_Year.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Day of Year",
+      "raster:bands": [
+        {
+          "data_type": "uint16",
+          "nodata": 65535,
+          "unit": "Julian day",
+          "spatial_resolution": 1000
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "RelativeAzimuth": {
+      "href": "../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_RelativeAzimuth.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Relative Azimuth Angle",
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": 0,
+          "unit": "degree",
+          "scale": 0.01,
+          "spatial_resolution": 1000
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "SurfReflect_M2": {
+      "href": "../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M2.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "1 km Surface Reflectance Band M2",
+      "raster:bands": [
+        {
+          "date_type": "int16",
+          "nodata": -28672,
+          "scale": 0.0001,
+          "spatial_resolution": 1000
+        }
+      ],
+      "eo:bands": [
+        {
+          "name": "M2",
+          "description": "Visible/Reflective",
+          "center_wavelength": 0.445,
+          "full_width_half_max": 0.02
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ]
+    },
+    "SurfReflect_M3": {
+      "href": "../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M3.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "1 km Surface Reflectance Band M3",
+      "raster:bands": [
+        {
+          "date_type": "int16",
+          "nodata": -28672,
+          "scale": 0.0001,
+          "spatial_resolution": 1000
+        }
+      ],
+      "eo:bands": [
+        {
+          "name": "M3",
+          "description": "Visible/Reflective",
+          "center_wavelength": 0.49,
+          "full_width_half_max": 0.02
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ]
+    },
+    "SurfReflect_M1": {
+      "href": "../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M1.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "1 km Surface Reflectance Band M1",
+      "raster:bands": [
+        {
+          "date_type": "int16",
+          "nodata": -28672,
+          "scale": 0.0001,
+          "spatial_resolution": 1000
+        }
+      ],
+      "eo:bands": [
+        {
+          "name": "M1",
+          "description": "Visible/Reflective",
+          "center_wavelength": 0.415,
+          "full_width_half_max": 0.02
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ]
+    },
+    "SurfReflect_M4": {
+      "href": "../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M4.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "1 km Surface Reflectance Band M4",
+      "raster:bands": [
+        {
+          "date_type": "int16",
+          "nodata": -28672,
+          "scale": 0.0001,
+          "spatial_resolution": 1000
+        }
+      ],
+      "eo:bands": [
+        {
+          "name": "M4",
+          "description": "Visible/Reflective",
+          "center_wavelength": 0.555,
+          "full_width_half_max": 0.02
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ]
+    },
+    "SurfReflect_M5": {
+      "href": "../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M5.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "1 km Surface Reflectance Band M5",
+      "raster:bands": [
+        {
+          "date_type": "int16",
+          "nodata": -28672,
+          "scale": 0.0001,
+          "spatial_resolution": 1000
+        }
+      ],
+      "eo:bands": [
+        {
+          "name": "M5",
+          "description": "Near Infrared",
+          "center_wavelength": 0.673,
+          "full_width_half_max": 0.021
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ]
+    },
+    "SurfReflect_M7": {
+      "href": "../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M7.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "1 km Surface Reflectance Band M7",
+      "raster:bands": [
+        {
+          "date_type": "int16",
+          "nodata": -28672,
+          "scale": 0.0001,
+          "spatial_resolution": 1000
+        }
+      ],
+      "eo:bands": [
+        {
+          "name": "M7",
+          "description": "Shortwave Infrared",
+          "center_wavelength": 0.865,
+          "full_width_half_max": 0.039
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ]
+    },
+    "SensorZenith": {
+      "href": "../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SensorZenith.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Sensor Zenith Angle",
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": 0,
+          "unit": "degree",
+          "scale": 0.01,
+          "spatial_resolution": 1000
+        }
+      ],
+      "roles": [
+        "data"
+      ]
     }
   },
   "bbox": [
@@ -964,11 +964,5 @@
     -9.999999999104968,
     -169.99999998473047,
     0.0
-  ],
-  "stac_extensions": [
-    "https://stac-extensions.github.io/classification/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/raster/v1.0.0/schema.json"
   ]
 }
