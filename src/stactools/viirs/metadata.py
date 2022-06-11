@@ -322,11 +322,6 @@ class Metadata:
         else:
             return None
 
-    @property
-    def platform(self) -> str:
-        product_prefix = self.product[0:3]
-        return constants.PLATFORMS[product_prefix]
-
 
 def viirs_metadata(
     h5_href: str,

@@ -1,9 +1,12 @@
+import glob
 import logging
 import os
+from collections import defaultdict
 from typing import Optional
 
 import click
 from click import Command, Group
+from pystac import CatalogType
 from stactools.core.utils.antimeridian import Strategy
 
 from stactools.viirs import cog, stac
@@ -23,15 +26,15 @@ def create_viirs_command(cli: Group) -> Command:
 
     @viirs.command("create-cogs", short_help="Create subdataset COGs")
     @click.argument("INFILE")
-    @click.option("-o", "--outdir", help="directory for COG file")
+    @click.option("-o", "--outdir", help="Directory for COG files")
     def create_cogs(infile: str, outdir: Optional[str]) -> None:
         """Creates a COG for each subdataset in an H5 file.
 
         \b
         Args:
             infile (str): HREF to a VIIRS H5 file
-            outdir (str): The directory that will contain the COGs. The default
-                is the H5 directory.
+            outdir (str, optional): The directory that will contain the COGs. If
+            not specified, the COGs will be saved to the H5 directory.
         """
         if outdir is None:
             outdir = os.path.dirname(infile)
@@ -48,11 +51,11 @@ def create_viirs_command(cli: Group) -> Command:
         type=click.Choice(["normalize", "split"], case_sensitive=False),
         default="split",
         show_default=True,
-        help="geometry strategy for antimeridian scenes",
+        help="Geometry strategy for antimeridian scenes",
     )
     @click.option(
         "-c",
-        "--cogify",
+        "--create-cogs",
         is_flag=True,
         help="Convert the H5 subdatasets into COGs",
         default=False,
@@ -70,7 +73,7 @@ def create_viirs_command(cli: Group) -> Command:
         infile: str,
         outdir: str,
         antimeridian_strategy: str,
-        cogify: bool,
+        create_cogs: bool,
         densify_factor: Optional[int] = None,
         file_list: Optional[str] = None,
     ) -> None:
@@ -85,9 +88,10 @@ def create_viirs_command(cli: Group) -> Command:
                 'split' to either split the Item geometry on -180 longitude or
                 normalize the Item geometry so all longitudes are either
                 positive or negative. Default is 'split'.
-            cogify (bool, optional): Flag to create COGS from the subdatasets in
-                the H5 file. The COGs will saved alongside the H5 file. COGs
-                will not be created if the file_list option is also supplied.
+            create_cogs (bool, optional): Flag to create COGS from the
+                subdatasets in the H5 file. The COGs will saved alongside the H5
+                file. COGs will not be created if the file_list option is also
+                supplied.
             file_list (str, optional): Text file containing one HREF per line.
                 The HREFs should point to subdataset COG files.
         """
@@ -97,7 +101,7 @@ def create_viirs_command(cli: Group) -> Command:
         if file_list:
             with open(file_list) as file:
                 hrefs = [line.strip() for line in file.readlines()]
-        elif cogify:
+        elif create_cogs:
             h5dir = os.path.dirname(infile)
             hrefs = cog.cogify(infile, h5dir)
 
@@ -114,5 +118,71 @@ def create_viirs_command(cli: Group) -> Command:
         item.save_object()
 
         return None
+
+    @viirs.command("create-collection", short_help="Create a STAC Collection")
+    @click.argument("INFILE")
+    @click.argument("OUTDIR")
+    @click.option(
+        "-c",
+        "--create-cogs",
+        is_flag=True,
+        help="Convert the H5 subdatasets into COGs",
+        default=False,
+    )
+    @click.option(
+        "-a",
+        "--antimeridian_strategy",
+        type=click.Choice(["normalize", "split"], case_sensitive=False),
+        default="split",
+        show_default=True,
+        help="Geometry strategy for antimeridian scenes",
+    )
+    def create_collection_command(
+        infile: str, outdir: str, create_cogs: bool, antimeridian_strategy: str
+    ) -> None:
+        """Creates STAC Collections with Items for the VIIRS H5 HREFs listed in
+        INFILE."
+
+        \b
+        Args:
+            infile (str): Text file containing one HREF per line. The HREFs
+                should point to H5 files.
+            outdir (str): Directory that will contain the collections.
+            create_cogs (bool, optional): Flag to create COGs for all source h5
+                files. If False, COGs are assumed to exist alongside the H5
+                files.
+            antimeridian_strategy (str, optional): Choice of 'normalize' or
+                'split' to either split the Item geometry on -180 longitude or
+                normalize the Item geometry so all longitudes are either
+                positive or negative. Default is 'split'.
+        """
+        with open(infile) as f:
+            hrefs = [os.path.abspath(line.strip()) for line in f.readlines()]
+
+        strategy = Strategy[antimeridian_strategy.upper()]
+        item_dict = defaultdict(list)
+        for href in hrefs:
+            h5dir = os.path.dirname(href)
+            product = os.path.basename(href).split(".")[0]
+            cog_hrefs = None
+            if create_cogs:
+                cog_hrefs = cog.cogify(href, h5dir)
+            else:
+                cog_hrefs = glob.glob(f"{h5dir}/{product}*.tif")
+            item = stac.create_item(
+                href, cog_hrefs=cog_hrefs, antimeridian_strategy=strategy
+            )
+            item_dict[product].append(item)
+
+        for product, items in item_dict.items():
+            collection = stac.create_collection(product)
+            collection.set_self_href(os.path.join(outdir, f"{product}/collection.json"))
+            for item in items:
+                collection.add_item(item)
+
+        collection.catalog_type = CatalogType.SELF_CONTAINED
+        collection.make_all_asset_hrefs_relative()
+        collection.validate_all()
+        collection.save()
 
     return viirs

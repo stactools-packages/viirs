@@ -10,6 +10,9 @@
     "viirs:tile-id": "51000009",
     "created": "2016-10-20T11:42:38Z",
     "platform": "snpp",
+    "instruments": [
+      "viirs"
+    ],
     "proj:epsg": null,
     "proj:wkt2": "PROJCS[\"unnamed\",GEOGCS[\"Unknown datum based upon the custom spheroid\",DATUM[\"Not specified (based on custom spheroid)\",SPHEROID[\"Custom spheroid\",6371007.181,0]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Sinusoidal\"],PARAMETER[\"longitude_of_center\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"Meter\",1],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
     "proj:transform": [
@@ -79,10 +82,29 @@
       ]
     ]
   },
-  "links": [],
+  "links": [
+    {
+      "rel": "root",
+      "href": "../collection.json",
+      "type": "application/json",
+      "title": "VIIRS M-Band (1000m) Surface Reflectance 8-Day"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json",
+      "title": "VIIRS M-Band (1000m) Surface Reflectance 8-Day"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json",
+      "title": "VIIRS M-Band (1000m) Surface Reflectance 8-Day"
+    }
+  ],
   "assets": {
     "hdf5": {
-      "href": "../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238.h5",
+      "href": "../../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238.h5",
       "type": "application/x-hdf5",
       "title": "Source data containing all bands",
       "roles": [
@@ -90,7 +112,7 @@
       ]
     },
     "metadata": {
-      "href": "../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238.h5.xml",
+      "href": "../../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238.h5.xml",
       "type": "application/xml",
       "title": "Earth Observing System Data and Information System (EOSDIS) metadata",
       "roles": [
@@ -98,7 +120,7 @@
       ]
     },
     "SurfReflect_QC": {
-      "href": "../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_QC.tif",
+      "href": "../../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_QC.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Surface Reflectance Band Quality Control (QC)",
       "raster:bands": [
@@ -492,7 +514,7 @@
       ]
     },
     "SurfReflect_M8": {
-      "href": "../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_SurfReflect_M8.tif",
+      "href": "../../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_SurfReflect_M8.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "1 km Surface Reflectance Band M8",
       "raster:bands": [
@@ -517,7 +539,7 @@
       ]
     },
     "SurfReflect_M10": {
-      "href": "../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M10.tif",
+      "href": "../../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M10.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "1 km Surface Reflectance Band M10",
       "raster:bands": [
@@ -542,7 +564,7 @@
       ]
     },
     "SurfReflect_M11": {
-      "href": "../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M11.tif",
+      "href": "../../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M11.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "1 km Surface Reflectance Band M11",
       "raster:bands": [
@@ -567,7 +589,7 @@
       ]
     },
     "SurfReflect_State": {
-      "href": "../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_State.tif",
+      "href": "../../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_State.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Surface Reflectance State Quality Assurance (QA)",
       "raster:bands": [
@@ -742,7 +764,7 @@
       ]
     },
     "SolarZenith": {
-      "href": "../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_SolarZenith.tif",
+      "href": "../../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_SolarZenith.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Solar Zenith Angle",
       "raster:bands": [
@@ -759,7 +781,7 @@
       ]
     },
     "SurfReflect_Day_Of_Year": {
-      "href": "../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_SurfReflect_Day_Of_Year.tif",
+      "href": "../../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_SurfReflect_Day_Of_Year.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Day of Year",
       "raster:bands": [
@@ -775,7 +797,7 @@
       ]
     },
     "RelativeAzimuth": {
-      "href": "../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_RelativeAzimuth.tif",
+      "href": "../../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_RelativeAzimuth.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Relative Azimuth Angle",
       "raster:bands": [
@@ -792,7 +814,7 @@
       ]
     },
     "SurfReflect_M2": {
-      "href": "../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M2.tif",
+      "href": "../../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M2.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "1 km Surface Reflectance Band M2",
       "raster:bands": [
@@ -817,7 +839,7 @@
       ]
     },
     "SurfReflect_M3": {
-      "href": "../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M3.tif",
+      "href": "../../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M3.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "1 km Surface Reflectance Band M3",
       "raster:bands": [
@@ -842,7 +864,7 @@
       ]
     },
     "SurfReflect_M1": {
-      "href": "../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M1.tif",
+      "href": "../../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M1.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "1 km Surface Reflectance Band M1",
       "raster:bands": [
@@ -867,7 +889,7 @@
       ]
     },
     "SurfReflect_M4": {
-      "href": "../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M4.tif",
+      "href": "../../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M4.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "1 km Surface Reflectance Band M4",
       "raster:bands": [
@@ -892,7 +914,7 @@
       ]
     },
     "SurfReflect_M5": {
-      "href": "../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M5.tif",
+      "href": "../../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M5.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "1 km Surface Reflectance Band M5",
       "raster:bands": [
@@ -917,7 +939,7 @@
       ]
     },
     "SurfReflect_M7": {
-      "href": "../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M7.tif",
+      "href": "../../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M7.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "1 km Surface Reflectance Band M7",
       "raster:bands": [
@@ -942,7 +964,7 @@
       ]
     },
     "SensorZenith": {
-      "href": "../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SensorZenith.tif",
+      "href": "../../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SensorZenith.tif",
       "type": "image/tiff; application=geotiff; profile=cloud-optimized",
       "title": "Sensor Zenith Angle",
       "raster:bands": [
@@ -964,5 +986,12 @@
     -9.999999999104968,
     -169.99999998473047,
     0.0
-  ]
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/classification/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/raster/v1.0.0/schema.json"
+  ],
+  "collection": "viirs-09a1-001"
 }

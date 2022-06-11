@@ -1,6 +1,7 @@
 from pystac import MediaType
 
-PLATFORMS = {"VNP": "snpp"}
+PLATFORM = "snpp"
+INSTRUMENT = ["viirs"]
 
 HDF5_ASSET_KEY = "hdf5"
 HDF5_ASSET_PROPERTIES = {

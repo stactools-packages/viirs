@@ -4,9 +4,10 @@ from typing import List, Optional
 
 import pystac.utils
 import stactools.core.utils.antimeridian
-from pystac import Asset, Collection, Item
+from pystac import Asset, Collection, Item, Summaries
 from pystac.extensions.item_assets import AssetDefinition, ItemAssetsExtension
 from pystac.extensions.projection import ProjectionExtension
+from pystac.extensions.scientific import ScientificExtension
 from stactools.core.io import ReadHrefModifier
 from stactools.core.utils.antimeridian import Strategy
 
@@ -55,7 +56,8 @@ def create_item(
         },
     )
     item.common_metadata.created = metadata.created_datetime
-    item.common_metadata.platform = metadata.platform
+    item.common_metadata.platform = constants.PLATFORM
+    item.common_metadata.instruments = constants.INSTRUMENT
 
     stactools.core.utils.antimeridian.fix_item(item, antimeridian_strategy)
 
@@ -85,37 +87,51 @@ def create_item(
     projection.transform = metadata.transform
     projection.shape = metadata.shape
 
-    extensions = find_extensions(item.assets)
+    assets_dict = {k: v.to_dict() for k, v in item.assets.items()}
+    extensions = find_extensions(assets_dict)
     item.stac_extensions.extend(extensions)
-    item.stac_extensions = list(set(item.stac_extensions)).sort()  # type: ignore
+    item.stac_extensions = list(set(item.stac_extensions))
+    item.stac_extensions.sort()
 
     return item
 
 
 def create_collection(product: str) -> Collection:
+    summaries = {
+        "instruments": constants.INSTRUMENT,
+        "platform": [constants.PLATFORM],
+    }
+
     fragments = STACFragments(product)
+    fragments.load_assets()
     collection_fragments = fragments.collection_dict()
     collection = Collection(
-        id=product,
+        id=collection_fragments["id"],
         title=collection_fragments["title"],
         description=collection_fragments["description"],
         license=collection_fragments["license"],
         keywords=collection_fragments["keywords"],
         providers=collection_fragments["providers"],
         extent=collection_fragments["extent"],
+        summaries=Summaries(summaries),
     )
     collection.add_links(collection_fragments["links"])
 
     item_assets_dict = {
-        constants.HDF5_ASSET_KEY: AssetDefinition(constants.HDF5_ASSET_PROPERTIES),
-        constants.METADATA_ASSET_KEY: AssetDefinition(
-            constants.METADATA_ASSET_PROPERTIES
-        ),
+        constants.HDF5_ASSET_KEY: constants.HDF5_ASSET_PROPERTIES,
+        constants.METADATA_ASSET_KEY: constants.METADATA_ASSET_PROPERTIES,
     }
     item_assets_dict.update(fragments.assets_dict())
+    item_assets = {k: AssetDefinition(v) for k, v in item_assets_dict.items()}
     item_assets_ext = ItemAssetsExtension.ext(collection, add_if_missing=True)
-    item_assets_ext.item_assets = item_assets_dict
+    item_assets_ext.item_assets = item_assets
 
-    collection.stac_extensions = find_extensions(item_assets_dict)
+    ScientificExtension.add_to(collection)
+    collection.extra_fields["sci:doi"] = collection_fragments["sci:doi"]
+
+    extensions = find_extensions(item_assets_dict)
+    collection.stac_extensions.extend(extensions)
+    collection.stac_extensions = list(set(collection.stac_extensions))
+    collection.stac_extensions.sort()
 
     return collection

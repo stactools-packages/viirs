@@ -53,7 +53,7 @@ def find_extensions(assets: Dict[str, Any]) -> List[str]:
         item (Item): The Item being modified
     """
     extensions = set()
-    for asset in assets:
+    for asset in assets.values():
         if "classification:classes" in asset or "classification:bitfields" in asset:
             extensions.add(constants.CLASSIFICATION_EXTENSION_HREF)
         if "eo:bands" in asset:
