@@ -2,7 +2,6 @@ import ast
 import datetime
 import logging
 import os.path
-import warnings
 from dataclasses import dataclass
 from typing import Any, Callable, Dict, List, Optional, Tuple
 
@@ -13,14 +12,14 @@ import rasterio
 import shapely.geometry
 from dateutil import parser
 from lxml import etree
-from rasterio.errors import NotGeoreferencedWarning
 from shapely.geometry import Polygon
 from stactools.core.io import ReadHrefModifier
 from stactools.core.io.xml import XmlElement
 from stactools.core.projection import reproject_geom
 from stactools.core.utils import href_exists
 
-from stactools.viirs import constants, utils
+from stactools.viirs import constants
+from stactools.viirs.utils import ignore_not_georeferenced, modify_href
 
 logger = logging.getLogger(__name__)
 
@@ -33,11 +32,10 @@ class MissingElement(Exception):
 class Metadata:
     """Structure to hold values from a metadata XML file or source H5 file.
 
-    XML metadata is preferred since it is consistent between products.
-    Neither an XML metadata file nor the H5 source file attributes contain all
-        required information; additional information is extracted from the EOS
-        Metadata Structure in the H5 file whether using an XML or H5 file as the
-        primary metadata source.
+    XML metadata is preferred since it is consistent between products. However,
+    neither an XML metadata file nor the H5 source file attributes contain all
+    required information. Additional information is extracted from the EOS
+    Metadata Structure in the H5 file.
     """
 
     id: str
@@ -61,8 +59,19 @@ class Metadata:
         read_href_modifier: Optional[ReadHrefModifier] = None,
         densify_factor: Optional[int] = None,
     ) -> "Metadata":
-        """Extracts metadata from XML elements and H5 EOS metadata structure"""
+        """Extracts metadata from XML elements and H5 EOS metadata structure.
 
+        Args:
+            h5_href (str): HREF to the H5 source file.
+            read_href_modifier (ReadHrefModifier, optional): An optional
+                function to modify the href (e.g. to add a token to a url)
+            densify_factor (int, optional): Factor by which to increase the
+                number of vertices on the geometry to mitigate projection error.
+
+        Returns:
+            Metadata: Metadata dataclass
+        """
+        # Extracts metadata from XML elements and H5 EOS metadata structure
         def missing_element(attribute: str) -> Callable[[str], Exception]:
             def get_exception(xpath: str) -> Exception:
                 return MissingElement(
@@ -73,8 +82,8 @@ class Metadata:
             return get_exception
 
         xml_href = f"{h5_href}.xml"
-        read_xml_href = utils.modify_href(xml_href, read_href_modifier)
-        read_h5_href = utils.modify_href(h5_href, read_href_modifier)
+        read_xml_href = modify_href(xml_href, read_href_modifier)
+        read_h5_href = modify_href(h5_href, read_href_modifier)
 
         with fsspec.open(read_xml_href) as file:
             root = XmlElement(etree.parse(file, base_url=xml_href).getroot())
@@ -153,23 +162,37 @@ class Metadata:
         )
 
     @classmethod
+    @ignore_not_georeferenced()
     def from_h5(
         cls,
         h5_href: str,
         read_href_modifier: Optional[ReadHrefModifier] = None,
         densify_factor: Optional[int] = None,
     ) -> "Metadata":
-        """Extracts metadata from H5 attributes and H5 EOS metadata structure"""
-        read_h5_href = utils.modify_href(h5_href, read_href_modifier)
-        with warnings.catch_warnings():
-            warnings.simplefilter("ignore", category=NotGeoreferencedWarning)
-            with rasterio.open(read_h5_href) as dataset:
-                tags = dataset.tags()
-                tags = {k.lower(): v for k, v in tags.items()}
+        """Extracts metadata from H5 attributes and H5 EOS metadata structure.
+
+        Args:
+            h5_href (str): HREF to the H5 source file.
+            read_href_modifier (ReadHrefModifier, optional): An optional
+                function to modify the href (e.g. to add a token to a url)
+            densify_factor (int, optional): Factor by which to increase the
+                number of vertices on the geometry to mitigate projection error.
+
+        Returns:
+            Metadata: Metadata dataclass
+        """
+        read_h5_href = modify_href(h5_href, read_href_modifier)
+        with rasterio.open(read_h5_href) as dataset:
+            tags = dataset.tags()
+            tags = {k.lower(): v for k, v in tags.items()}
 
         id = os.path.splitext(tags["localgranuleid"])[0]
         product: str = tags["shortname"]
-        version = tags["versionid"]
+        _version = int(tags["versionid"])
+        if _version == 1:
+            version = "001"
+        else:
+            raise ValueError(f"Unsupported VIIRS version: {_version}")
 
         start_datetime = parser.parse(tags["starttime"])
         end_datetime = parser.parse(tags["endtime"])
@@ -199,15 +222,14 @@ class Metadata:
 
     @classmethod
     def _hdfeos_metadata(cls, h5_href: str) -> Dict[str, Any]:
-        """Extracts spatial metadata from the EOS metadata structure of an H5 file.
+        """Extracts spatial metadata from the EOS metadata structure in an H5
+        file.
 
         Args:
-            h5_href (str): HREF to the h5 file
+            h5_href (str): HREF to the H5 file
 
         Returns:
-            Tuple[List[int], Tuple[float]]:
-                - Height and width of the data arrays stored in the H5 file
-                - Projected coordinates of the left, top corner of the data
+            Dict[str, Any]: Dictionary of spatial metadata
         """
         with h5py.File(h5_href, "r") as h5:
             metadata_str = (
@@ -238,6 +260,7 @@ class Metadata:
 
     @property
     def transform(self) -> List[float]:
+        """Georeferencing transformation matrix for the grid data."""
         height_pixels = self.shape_bounds["height"]
         width_pixels = self.shape_bounds["width"]
         if self.epsg == 4326:
@@ -258,11 +281,13 @@ class Metadata:
 
     @property
     def shape(self) -> List[int]:
+        """Grid shape: height (rows), width (columns)"""
         shape: List[int] = self.shape_bounds["shape"]
         return shape
 
     @property
     def geometry(self) -> Dict[str, Any]:
+        """GeoJSON geometry of the grid boundary in WGS84."""
         num_rows, num_cols = self.shape
         upper_left = (0, 0)
         lower_left = (0, num_rows)
@@ -283,11 +308,24 @@ class Metadata:
 
     @property
     def bbox(self) -> List[float]:
+        """WGS84 bounding box of grid boundary"""
         return list(shapely.geometry.shape(self.geometry).bounds)
 
     def _densify(
         self, point_list: List[Tuple[float, float]], densify_factor: int
     ) -> List[Tuple[float, float]]:
+        """Creates additional points on straight lines between points in
+        the passed point list.
+
+        Args:
+            point_list (List[Tuple[float, float]]): Points defining the shape
+                to densify with additional points.
+            densify_factor (int): Factor by which to increase the number of
+                points.
+
+        Returns:
+            List[Tuple[float, float]]: Densified point list.
+        """
         # https://stackoverflow.com/questions/64995977/generating-equidistance-points-along-the-boundary-of-a-polygon-but-cw-ccw  # noqa
         points: Any = np.asarray(point_list)
         densified_number = len(points) * densify_factor
@@ -300,6 +338,7 @@ class Metadata:
 
     @property
     def crs(self) -> str:
+        """Grid Coordinate Reference System in EPSG or WKT2."""
         epsg = constants.EPSG.get(self.product, None)
         if epsg is not None:
             return epsg
@@ -308,6 +347,7 @@ class Metadata:
 
     @property
     def epsg(self) -> Optional[int]:
+        """Grid EPSG code, if defined."""
         crs = self.crs
         if crs.startswith("PROJCS"):
             return None
@@ -316,6 +356,7 @@ class Metadata:
 
     @property
     def wkt2(self) -> Optional[str]:
+        """Grid WKT2, if defined."""
         crs = self.crs
         if crs.startswith("PROJCS"):
             return crs
@@ -335,14 +376,14 @@ def viirs_metadata(
 
     Args:
         h5_href (str): HREF to the H5 data file
-        read_href_modifier (Optional[ReadHrefModifier], optional): An optional
-            function to modify the HREF (e.g. to add a token to a url)
+        read_href_modifier (ReadHrefModifier, optional): An optional function to
+            modify the href (e.g. to add a token to a url)
 
     Returns:
-        Metadata: Metadata class
+        Metadata: Metadata dataclass
     """
     xml_href = f"{h5_href}.xml"
-    read_xml_href = utils.modify_href(xml_href, read_href_modifier)
+    read_xml_href = modify_href(xml_href, read_href_modifier)
 
     if href_exists(read_xml_href):
         return Metadata.from_xml_and_h5(h5_href, read_href_modifier, densify_factor)

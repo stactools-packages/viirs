@@ -1,7 +1,7 @@
 import warnings
-from typing import Any, Dict, List, Optional, cast
+from contextlib import contextmanager
+from typing import Any, Dict, Generator, List, Optional
 
-import rasterio
 from pystac.extensions.eo import EOExtension
 from pystac.extensions.raster import RasterExtension
 from rasterio.errors import NotGeoreferencedWarning
@@ -10,21 +10,14 @@ from stactools.core.io import ReadHrefModifier
 from stactools.viirs import constants
 
 
-def subdatasets(href: str) -> List[str]:
-    """Returns a list of subdatasets from this HDF file href.
-
-    Includes a warning-catcher so you don't get a "no CRS" warning while doing it.
-
-    Args:
-        href (str): The HREF to a VIIRS H5 file.
-
-    Returns:
-        List[str]: A list of subdatasets (GDAL-openable paths)
+@contextmanager
+def ignore_not_georeferenced() -> Generator[None, None, None]:
+    """Suppress rasterio's warning when opening a dataset that contains no
+    georeferencing information.
     """
     with warnings.catch_warnings():
         warnings.simplefilter("ignore", category=NotGeoreferencedWarning)
-        with rasterio.open(href) as dataset:
-            return cast(List[str], dataset.subdatasets)
+        yield
 
 
 def modify_href(

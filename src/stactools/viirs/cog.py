@@ -1,23 +1,23 @@
 import os
-import warnings
 from typing import Any, Dict, List, Optional, Tuple, cast
 
 import h5py
 import numpy as np
 import rasterio
 import stactools.core.utils.convert
-from rasterio.errors import NotGeoreferencedWarning
 from rasterio.io import MemoryFile
 
 from stactools.viirs.constants import MULTIPLE_NODATA
 from stactools.viirs.metadata import viirs_metadata
+from stactools.viirs.utils import ignore_not_georeferenced
 
 
+@ignore_not_georeferenced()
 def cogify(infile: str, outdir: str) -> List[str]:
     """Creates COGs for the provided HDF5 file.
 
-    COGs are created using h5py as the data reader; rasterio and GDAL silently
-    convert int8 (signed byte) data to uint8 (byte) data.
+    COGs are created using h5py as the data reader to avoid rasterio and/or GDAL
+    silently converting int8 (signed byte) data to uint8 (byte).
 
     Args:
         infile (str): The input HDF5 file
@@ -48,10 +48,8 @@ def cogify(infile: str, outdir: str) -> List[str]:
         cog_filename = f"{base_filename}_{subdataset_name}.tif"
         cog_path = os.path.join(outdir, cog_filename)
 
-        with warnings.catch_warnings():
-            warnings.simplefilter("ignore", category=NotGeoreferencedWarning)
-            with rasterio.open(rasterio_subdataset_path, "r") as tag_src:
-                rasterio_tags = tag_src.tags()
+        with rasterio.open(rasterio_subdataset_path, "r") as tag_src:
+            rasterio_tags = tag_src.tags()
 
         with h5py.File(infile) as h5:
             data: Any = np.array(h5[subdataset_key])
