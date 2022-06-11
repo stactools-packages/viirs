@@ -59,9 +59,7 @@ def cogify(infile: str, outdir: str) -> List[str]:
                 continue
             if len(data.shape) == 3:
                 raise ValueError(
-                    f"MultiBand COG creation not supported for "
-                    f"subdataset '{subdataset_name}' in product "
-                    f"'{metadata.product}'"
+                    f"MultiBand COG creation not supported for {metadata.product}"
                 )
 
             # gdal (and software built on gdal) doesn't always play well with signed byte data
@@ -71,19 +69,15 @@ def cogify(infile: str, outdir: str) -> List[str]:
                 temp = h5[subdataset_key].attrs["_FillValue"].item()
             elif "_Fillvalue" in h5[subdataset_key].attrs.keys():
                 temp = h5[subdataset_key].attrs["_Fillvalue"].item()
-            nodata_values: List[Optional[int]] = [None] if temp == b"n/a" else [temp]
+            nodata = None if temp == b"n/a" else temp
 
-            nodata_new: int
-            if metadata.product in MULTIPLE_NODATA:
-                subdatasets = MULTIPLE_NODATA[metadata.product]
-                if subdataset_name in subdatasets:
-                    nodata_values = cast(
-                        List[Optional[int]], subdatasets[subdataset_name]["multiple"]
-                    )
-                    nodata_new = cast(int, subdatasets[subdataset_name]["new"])
-
-            if len(nodata_values) > 1:
-                clean_data, clean_nodata = clean(data, nodata_values, nodata_new)
+            multiple = MULTIPLE_NODATA.get(metadata.product, {}).get(
+                subdataset_name, None
+            )
+            if multiple:
+                nodatas = cast(List[int], multiple["multiple"])
+                nodata_new = cast(int, multiple["new"])
+                clean_data, clean_nodata = clean(data, nodatas, nodata_new)
                 nodata_cog_path = f"{os.path.splitext(cog_path)[0]}_fill.tif"
                 cog(
                     clean_data,
@@ -110,7 +104,7 @@ def cogify(infile: str, outdir: str) -> List[str]:
                     metadata.transform,
                     rasterio_tags,
                     cog_path,
-                    nodata_values[0],
+                    nodata,
                 )
                 cog_paths.append(cog_path)
 
@@ -143,11 +137,9 @@ def cog(
             stactools.core.utils.convert.cogify(mem, cog_path)
 
 
-def clean(
-    data: Any, nodata_values: List[Optional[int]], nodata_new: int
-) -> Tuple[Any, Any]:
+def clean(data: Any, nodatas: List[int], nodata_new: int) -> Tuple[Any, Any]:
     np.ma.asarray(data)
-    for nodata in nodata_values:
+    for nodata in nodatas:
         data = np.ma.masked_equal(data, nodata)
     clean_data = np.ma.filled(data, nodata_new)
 
