@@ -77,9 +77,9 @@ def cogify(infile: str, outdir: str) -> List[str]:
             if multiple:
                 nodatas = cast(List[int], multiple["multiple"])
                 nodata_new = cast(int, multiple["new"])
-                clean_data, clean_nodata = clean(data, nodatas, nodata_new)
+                clean_data, clean_nodata = _clean(data, nodatas, nodata_new)
                 nodata_cog_path = f"{os.path.splitext(cog_path)[0]}_fill.tif"
-                cog(
+                _cog(
                     clean_data,
                     metadata.crs,
                     metadata.transform,
@@ -88,7 +88,7 @@ def cogify(infile: str, outdir: str) -> List[str]:
                     nodata_new,
                 )
                 cog_paths.append(cog_path)
-                cog(
+                _cog(
                     clean_nodata,
                     metadata.crs,
                     metadata.transform,
@@ -98,7 +98,7 @@ def cogify(infile: str, outdir: str) -> List[str]:
                 )
                 cog_paths.append(nodata_cog_path)
             else:
-                cog(
+                _cog(
                     data,
                     metadata.crs,
                     metadata.transform,
@@ -111,7 +111,7 @@ def cogify(infile: str, outdir: str) -> List[str]:
     return cog_paths
 
 
-def cog(
+def _cog(
     data: Any,
     crs: str,
     transform: List[float],
@@ -137,7 +137,7 @@ def cog(
             stactools.core.utils.convert.cogify(mem, cog_path)
 
 
-def clean(data: Any, nodatas: List[int], nodata_new: int) -> Tuple[Any, Any]:
+def _clean(data: Any, nodatas: List[int], nodata_new: int) -> Tuple[Any, Any]:
     np.ma.asarray(data)
     for nodata in nodatas:
         data = np.ma.masked_equal(data, nodata)
