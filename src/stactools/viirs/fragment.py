@@ -10,22 +10,41 @@ class STACFragments:
 
     def __init__(self, product: str) -> None:
         self.product = product
-
-    def load_assets(self) -> None:
         self.assets = self._load("assets.json")
 
     def assets_dict(self) -> Dict[str, Any]:
+        """Returns a dictionary of Asset dictionaries (less the 'href' field)
+        for the VIIRS product used to create the class instance.
+
+        Returns:
+            Dict[str, Any]: Dictionary of Asset dictionaries
+        """
         assets: Dict[str, Any] = self.assets
         for key in assets.keys():
             assets[key]["type"] = MediaType.COG
         return assets
 
-    def subdataset_dict(self, subdataset: str) -> Any:
-        subdataset_asset = self.assets[subdataset]
+    def subdataset_dict(self, subdataset: str) -> Dict[str, Any]:
+        """Returns an Asset dictionary (less the 'href' field) for the given
+        product subdataset.
+
+        Args:
+            subdataset (str): Subdataset name (from H5 file)
+
+        Returns:
+            Dict[str, Any]: Asset dictionary
+        """
+        subdataset_asset: Dict[str, Any] = self.assets[subdataset]
         subdataset_asset["type"] = MediaType.COG
         return subdataset_asset
 
     def collection_dict(self) -> Dict[str, Any]:
+        """Returns a dictionary of Collection fields (not exhaustive) for the
+        VIIRS product used to create the class instance.
+
+        Returns:
+            Dict[str, Any]: Dictionary of Collection fields
+        """
         collection: Dict[str, Any] = self._load("collection.json")
         collection["extent"] = Extent.from_dict(collection["extent"])
         collection["providers"] = [

@@ -74,7 +74,6 @@ def create_item(
 
     if cog_hrefs:
         fragments = STACFragments(metadata.product)
-        fragments.load_assets()
         for href in cog_hrefs:
             basename = os.path.splitext(os.path.basename(href))[0]
             subdataset_name = basename.split("_", 1)[1]
@@ -113,7 +112,6 @@ def create_collection(product: str) -> Collection:
     }
 
     fragments = STACFragments(product)
-    fragments.load_assets()
     collection_fragments = fragments.collection_dict()
     collection = Collection(
         id=collection_fragments["id"],
