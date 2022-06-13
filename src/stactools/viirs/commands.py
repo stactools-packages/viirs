@@ -62,7 +62,7 @@ def create_viirs_command(cli: Group) -> Command:
     )
     @click.option(
         "-d",
-        "--densify_factor",
+        "--densify-factor",
         help="Factor by which to densify the Item geometry",
         type=int,
     )
