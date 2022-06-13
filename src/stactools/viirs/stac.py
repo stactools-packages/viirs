@@ -139,7 +139,6 @@ def create_collection(product: str) -> Collection:
 
     extensions = find_extensions(item_assets_dict)
     collection.stac_extensions.extend(extensions)
-    collection.stac_extensions = list(set(collection.stac_extensions))
-    collection.stac_extensions.sort()
+    collection.stac_extensions = sorted(list(set(collection.stac_extensions)))
 
     return collection
