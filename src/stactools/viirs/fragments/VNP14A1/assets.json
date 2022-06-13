@@ -1,0 +1,139 @@
+{
+    "FireMask": {
+        "raster:bands": [
+            {
+                "data_type": "uint8",
+                "spatial_resolution": 1000
+            }
+        ],
+        "classification:classes": [
+            {
+                "description": "not processed (missing input data)",
+                "value": 0
+            },
+            {
+                "description": "not processed (trim)",
+                "value": 1
+            },
+            {
+                "description": "not processed (obsolete)",
+                "value": 2
+            },
+            {
+                "description": "non-fire water",
+                "value": 3
+            },
+            {
+                "description": "cloud (land or water)",
+                "value": 4
+            },
+            {
+                "description": "non-fire land",
+                "value": 5
+            },
+            {
+                "description": "unknown",
+                "value": 6
+            },
+            {
+                "description": "fire (low confidence)",
+                "value": 7
+            },
+            {
+                "description": "fire (nominal confidence)",
+                "value": 8
+            },
+            {
+                "description": "fire (high confidence)",
+                "value": 9
+            }
+        ],
+        "title": "Confidence of fire",
+        "roles": [
+            "data"
+        ]
+    },
+    "MaxFRP": {
+        "raster:bands": [
+            {
+                "data_type": "int32",
+                "nodata": 0,
+                "unit": "megawatt",
+                "scale": 0.1,
+                "spatial_resolution": 1000
+            }
+        ],
+        "title": "Maximum Fire Radiative Power",
+        "roles": [
+            "data"
+        ]
+    },
+    "QA": {
+        "raster:bands": [
+            {
+                "data_type": "uint8",
+                "unit": "bit field",
+                "spatial_resolution": 1000
+            }
+        ],
+        "classification:bitfields": [
+            {
+                "name": "land_water",
+                "description": "land/water state",
+                "offset": 0,
+                "length": 2,
+                "classes": [
+                    {
+                        "description": "water",
+                        "value": 0
+                    },
+                    {
+                        "description": "coast",
+                        "value": 1
+                    },
+                    {
+                        "description": "land",
+                        "value": 2
+                    },
+                    {
+                        "description": "missing data",
+                        "value": 3
+                    }
+                ]
+            },
+            {
+                "name": "day_night",
+                "description": "day/night observation",
+                "offset": 2,
+                "length": 1,
+                "classes": [
+                    {
+                        "description": "day",
+                        "value": 0
+                    },
+                    {
+                        "description": "night",
+                        "value": 1
+                    }
+                ]
+            }
+        ],
+        "title": "Pixel quality indicators",
+        "roles": [
+            "data"
+        ]
+    },
+    "sample": {
+        "raster:bands": [
+            {
+                "data_type": "int16",
+                "nodata": -1,
+                "spatial_resolution": 1000
+            }
+        ],
+        "title": "Sample number within a swath",
+        "roles": [
+            "data"
+        ]
+    }
+}

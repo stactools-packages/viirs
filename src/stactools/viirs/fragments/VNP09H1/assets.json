@@ -1,0 +1,439 @@
+{
+    "SurfReflect_I1": {
+        "title": "Surface Reflectance Band I1",
+        "roles": [
+            "data",
+            "reflectance"
+        ],
+        "eo:bands": [
+            {
+                "name": "I1",
+                "description": "Near Infrared",
+                "center_wavelength": 0.64,
+                "full_width_half_max": 0.075
+            }
+        ],
+        "raster:bands": [
+            {
+                "data_type": "int16",
+                "nodata": -28672,
+                "scale": 0.0001,
+                "spatial_resolution": 500
+            }
+        ]
+    },
+    "SurfReflect_I2": {
+        "title": "Surface Reflectance Band I2",
+        "roles": [
+            "data",
+            "reflectance"
+        ],
+        "eo:bands": [
+            {
+                "name": "I2",
+                "description": "Shortwave Infrared",
+                "center_wavelength": 0.865,
+                "full_width_half_max": 0.039
+            }
+        ],
+        "raster:bands": [
+            {
+                "data_type": "int16",
+                "nodata": -28672,
+                "scale": 0.0001,
+                "spatial_resolution": 500
+            }
+        ]
+    },
+    "SurfReflect_I3": {
+        "title": "Surface Reflectance Band I3",
+        "roles": [
+            "data",
+            "reflectance"
+        ],
+        "eo:bands": [
+            {
+                "name": "I3",
+                "description": "Medium-wave Infrared",
+                "center_wavelength": 1.61,
+                "full_width_half_max": 0.06
+            }
+        ],
+        "raster:bands": [
+            {
+                "data_type": "int16",
+                "nodata": -28672,
+                "scale": 0.0001,
+                "spatial_resolution": 500
+            }
+        ]
+    },
+    "SurfReflect_State_500m": {
+        "title": "Surface Reflectance State Quality Assurance (QA)",
+        "roles": [
+            "data"
+        ],
+        "raster:bands": [
+            {
+                "data_type": "uint16", 
+                "nodata": 65535,
+                "unit": "bit field",
+                "spatial_resolution": 500
+            }
+        ],
+        "classification:bitfields": [
+            {
+                "name": "cloud_state",
+                "offset": 0,
+                "length": 2,
+                "classes": [
+                    {
+                        "description": "clear",
+                        "value": 0
+                    },
+                    {
+                        "description": "cloudy",
+                        "value": 1
+                    },
+                    {
+                        "description": "mixed",
+                        "value": 2
+                    },
+                    {
+                        "description": "not set, assumed clear",
+                        "value": 3
+                    }
+                ]
+            },
+            {
+                "name": "cloud_shadow",
+                "offset": 2,
+                "length": 1,
+                "classes": [
+                    {
+                        "description": "no",
+                        "value": 0
+                    },
+                    {
+                        "description": "yes",
+                        "value": 1
+                    }
+                ]
+            },
+            {
+                "name": "land_water",
+                "description": "Land/water flag",
+                "offset": 3,
+                "length": 3,
+                "classes": [
+                    {
+                        "description": "shallow ocean",
+                        "value": 0
+                    },
+                    {
+                        "description": "land",
+                        "value": 1
+                    },
+                    {
+                        "description": "ocean coastlines and lake shorelines",
+                        "value": 2
+                    },
+                    {
+                        "description": "shallow inland water",
+                        "value": 3
+                    },
+                    {
+                        "description": "ephemeral water",
+                        "value": 4
+                    },
+                    {
+                        "description": "deep inland water",
+                        "value": 5
+                    },
+                    {
+                        "description": "continental/moderate ocean",
+                        "value": 6
+                    },
+                    {
+                        "description": "deep ocean",
+                        "value": 7
+                    }
+                ]
+            },
+            {
+                "name": "aerosol_uncertainty",
+                "description": "Aerosol quantity: level of uncertainty in aerosol correction",
+                "offset": 6,
+                "length": 2,
+                "classes":[
+                    {
+                        "description": "climatology",
+                        "value": 0
+                    },
+                    {
+                        "description": "low",
+                        "value": 1
+                    },
+                    {
+                        "description": "average",
+                        "value": 2
+                    },
+                    {
+                        "description": "high",
+                        "value": 3
+                    }
+                ]
+            },
+            {
+                "name": "cirrus_detected",
+                "offset": 8,
+                "length": 2,
+                "classes": [
+                    {
+                        "description": "none",
+                        "value": 0
+                    },
+                    {
+                        "description": "small",
+                        "value": 1
+                    },
+                    {
+                        "description": "average",
+                        "value": 2
+                    },
+                    {
+                        "description": "high",
+                        "value": 3
+                    }
+                ]
+            },
+            {
+                "name": "snow_ice",
+                "description": "Snow/ice flag",
+                "offset": 12,
+                "length": 1,
+                "classes": [
+                    {
+                        "description": "no",
+                        "value": 0
+                    },
+                    {
+                        "description": "yes",
+                        "value": 1
+                    }
+                ]
+            },
+            {
+                "name": "cloud_adjacent",
+                "description": "Pixel is adjacent to cloud",
+                "offset": 13,
+                "length": 1,
+                "classes": [
+                    {
+                        "description": "no",
+                        "value": 0
+                    },
+                    {
+                        "description": "yes",
+                        "value": 1
+                    }
+                ]
+            }
+        ]
+    },
+    "SurfReflect_QC_500m": {
+        "title": "Surface Reflectance Band Quality Control (QC)",
+        "roles": [
+            "data"
+        ],
+        "raster:bands": [
+            {
+                "data_type": "uint16",
+                "nodata": 65535,
+                "unit": "bit field",
+                "spatial_resolution": 500
+            }
+        ],
+        "classification:bitfields": [
+            {
+                "name": "modland_qa",
+                "description": "MODLAND QA bits",
+                "offset": 0,
+                "length": 2,
+                "classes": [
+                    {
+                        "description": "Corrected product produced at ideal quality all bands",
+                        "value": 0
+                    },
+                    {
+                        "description": "Corrected product produced at less than ideal quality some or all bands",
+                        "value": 1
+                    },
+                    {
+                        "description": "Corrected product not produced due to cloud effects all bands",
+                        "value": 2
+                    },
+                    {
+                        "description": "Corrected product not produced due to other reasons some or all bands may be fill value [Note that a value of (3) overrides a value of (1)]",
+                        "value": 3
+                    }
+                ]
+            },
+            {
+                "name": "cloud_state",
+                "offset": 2,
+                "length": 2,
+                "classes": [
+                    {
+                        "description": "Always set at 3. Users should use cloud_state in the Surface Reflectance State Quality Assurance (QA) band.",
+                        "value": 3
+                    }
+                ]
+            },
+            {
+                "name": "band_1_quality",
+                "description": "Band 1 data quality four bit range",
+                "offset": 4,
+                "length": 4,
+                "classes":[
+                    {
+                        "description": "Highest quality",
+                        "value": 0
+                    },
+                    {
+                        "description": "Noisy detector",
+                        "value": 7
+                    },
+                    {
+                        "description": "Dead detector, data interpolated in L1B",
+                        "value": 8
+                    },
+                    {
+                        "description": "Solar zenith >= 86 degrees",
+                        "value": 9
+                    },
+                    {
+                        "description": "Solar zenith >= 85 and < 86 degrees",
+                        "value": 10
+                    },
+                    {
+                        "description": "Missing input",
+                        "value": 11
+                    },
+                    {
+                        "description": "Internal constant used in place of climatological data for at least one atmospheric constant",
+                        "value": 12
+                    },
+                    {
+                        "description": "Correction out of bounds, pixel constrained to extreme allowable value",
+                        "value": 13
+                    },
+                    {
+                        "description": "L1B data faulty",
+                        "value": 14
+                    },
+                    {
+                        "description": "Not processed due to deep ocean or clouds",
+                        "value": 15
+                    }
+                ]
+            },
+            {
+                "name": "band_2_quality",
+                "description": "Band 2 data quality four bit range",
+                "offset": 8,
+                "length": 4,
+                "classes":[
+                    {
+                        "description": "Highest quality",
+                        "value": 0
+                    },
+                    {
+                        "description": "Noisy detector",
+                        "value": 7
+                    },
+                    {
+                        "description": "Dead detector, data interpolated in L1B",
+                        "value": 8
+                    },
+                    {
+                        "description": "Solar zenith >= 86 degrees",
+                        "value": 9
+                    },
+                    {
+                        "description": "Solar zenith >= 85 and < 86 degrees",
+                        "value": 10
+                    },
+                    {
+                        "description": "Missing input",
+                        "value": 11
+                    },
+                    {
+                        "description": "Internal constant used in place of climatological data for at least one atmospheric constant",
+                        "value": 12
+                    },
+                    {
+                        "description": "Correction out of bounds, pixel constrained to extreme allowable value",
+                        "value": 13
+                    },
+                    {
+                        "description": "L1B data faulty",
+                        "value": 14
+                    },
+                    {
+                        "description": "Not processed due to deep ocean or clouds",
+                        "value": 15
+                    }
+                ]
+            },
+            {
+                "name": "atmospheric_correction",
+                "description": "Atmospheric correction performed",
+                "offset": 12,
+                "length": 1,
+                "classes": [
+                    {
+                        "description": "No",
+                        "value": 0
+                    },
+                    {
+                        "description": "Yes",
+                        "value": 1
+                    }
+                ]
+            },
+            {
+                "name": "adjacency_correction",
+                "description": "Adjacency correction performed",
+                "offset": 13,
+                "length": 1,
+                "classes": [
+                    {
+                        "description": "No",
+                        "value": 0
+                    },
+                    {
+                        "description": "Yes",
+                        "value": 1
+                    }
+                ]
+            },
+            {
+                "name": "different_orbit",
+                "description": "Different orbit from 500 m",
+                "offset": 14,
+                "length": 1,
+                "classes": [
+                    {
+                        "description": "No",
+                        "value": 0
+                    },
+                    {
+                        "description": "Yes",
+                        "value": 1
+                    }
+                ]
+            }
+        ]
+    }
+}

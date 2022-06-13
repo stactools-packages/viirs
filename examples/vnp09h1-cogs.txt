@@ -1,0 +1,5 @@
+tests/data-files/external/VNP09H1.A2022097.h11v05.001.2022105085030_SurfReflect_I1.tif
+tests/data-files/external/VNP09H1.A2022097.h11v05.001.2022105085030_SurfReflect_I2.tif
+tests/data-files/external/VNP09H1.A2022097.h11v05.001.2022105085030_SurfReflect_I3.tif
+tests/data-files/external/VNP09H1.A2022097.h11v05.001.2022105085030_SurfReflect_QC_500m.tif
+tests/data-files/external/VNP09H1.A2022097.h11v05.001.2022105085030_SurfReflect_State_500m.tif
