@@ -25,6 +25,7 @@
         {
             "rel": "cite-as",
             "href": "https://doi.org/10.5067/VIIRS/VNP10A1.001",
+            "type": "text/html",
             "title": "NSIDC DAAC - VNP10A1 v001"
         }
     ],
