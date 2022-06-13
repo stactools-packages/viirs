@@ -92,6 +92,9 @@ def create_viirs_command(cli: Group) -> Command:
                 subdatasets in the H5 file. The COGs will saved alongside the H5
                 file. COGs will not be created if the file_list option is also
                 supplied.
+            densify_factor (int, optional): Factor by which to increase the
+                number of vertices on the Item geometry to mitigate projection
+                error.
             file_list (str, optional): Text file containing one HREF per line.
                 The HREFs should point to subdataset COG files.
         """
