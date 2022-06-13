@@ -1,0 +1,65 @@
+{
+    "id": "viirs-15a2h-001",
+    "title": "VIIRS Leaf Area Index/FPAR 8-Day",
+    "description": "The VIIRS Leaf Area Index (LAI) and Fraction of Photosynthetically Active Radiation (FPAR) Version 1 data product provides information about the vegetative canopy layer at 500 meter resolution. LAI is an index that quantifies the one-sided leaf area of a canopy, while FPAR is the fraction of incoming solar energy absorbed through photosynthesis at 400 to 700 nanometers. This product is intentionally designed after the Terra and Aqua Moderate Resolution Imaging Spectroradiometer (MODIS) LAI/FPAR operational algorithm to promote the continuity of the Earth Observation System (EOS) mission. The product includes six science data set layers: the LAI and FPAR measurements, quality detail for LAI/FPAR, extra quality detail for FPAR, and the standard deviation for LAI and FPAR.",
+    "license": "proprietary",
+    "links": [
+        {
+            "rel": "license",
+            "href": "https://lpdaac.usgs.gov/data/data-citation-and-policies/",
+            "type": "text/html",
+            "title": "LP DAAC - Data Citation and Policies"
+        },
+        {
+            "rel": "help",
+            "href": "https://lpdaac.usgs.gov/documents/126/VNP15_User_Guide.pdf",
+            "type": "application/pdf",
+            "title": "VIIRS Leaf Area Index (LAI) and Fraction of Photosynthetically Active Radiation Absorbed by Vegetation (FPAR) User Guide"
+        },
+        {
+            "rel": "cite-as",
+            "href": "https://doi.org/10.5067/VIIRS/VNP15A2H.001",
+            "title": "LP DAAC - VNP15A2H v001"
+        }
+    ],
+    "keywords": [
+        "NASA",
+        "VIIRS",
+        "Satellite",
+        "Global",
+        "Vegetation",
+        "VNP15A2H"
+    ],
+    "providers": [
+        {
+            "name": "NASA LP DAAC at the USGS EROS Center",
+            "roles": [
+                "producer",
+                "licensor"
+            ],
+            "url": "https://lpdaac.usgs.gov/"
+        }
+    ],
+    "extent": {
+        "spatial": {
+            "bbox": [
+                [
+                    -180,
+                    -90,
+                    180,
+                    90
+                ]
+            ]
+        },
+        "temporal": {
+            "interval": [
+                [
+                    "2012-01-17T00:00:00Z",
+                    null
+                ]
+            ]
+        }
+    },
+    "sci:doi": "10.5067/VIIRS/VNP15A2H.001",
+    "sci:citation": "Myneni, RB. 2018. VIIRS/NPP Leaf Area Index/FPAR 8-Day L4 Global 500 m SIN Grid, Version 1. Land Processes Distributed Active Archive Center (LP DAAC), Sioux Falls, South Dakota USA."
+}

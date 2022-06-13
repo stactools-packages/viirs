@@ -136,6 +136,11 @@ def create_collection(product: str) -> Collection:
 
     ScientificExtension.add_to(collection)
     collection.extra_fields["sci:doi"] = collection_fragments["sci:doi"]
+    collection.extra_fields["sci:citation"] = collection_fragments["sci:citation"]
+    if collection_fragments.get("sci:publications", None):
+        collection.extra_fields["sci:publications"] = collection_fragments[
+            "sci:publications"
+        ]
 
     extensions = find_extensions(item_assets_dict)
     collection.stac_extensions.extend(extensions)

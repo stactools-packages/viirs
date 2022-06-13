@@ -1,0 +1,582 @@
+{
+  "type": "Collection",
+  "id": "viirs-15a2h-001",
+  "stac_version": "1.0.0",
+  "description": "The VIIRS Leaf Area Index (LAI) and Fraction of Photosynthetically Active Radiation (FPAR) Version 1 data product provides information about the vegetative canopy layer at 500 meter resolution. LAI is an index that quantifies the one-sided leaf area of a canopy, while FPAR is the fraction of incoming solar energy absorbed through photosynthesis at 400 to 700 nanometers. This product is intentionally designed after the Terra and Aqua Moderate Resolution Imaging Spectroradiometer (MODIS) LAI/FPAR operational algorithm to promote the continuity of the Earth Observation System (EOS) mission. The product includes six science data set layers: the LAI and FPAR measurements, quality detail for LAI/FPAR, extra quality detail for FPAR, and the standard deviation for LAI and FPAR.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "./collection.json",
+      "type": "application/json",
+      "title": "VIIRS Leaf Area Index/FPAR 8-Day"
+    },
+    {
+      "rel": "license",
+      "href": "https://lpdaac.usgs.gov/data/data-citation-and-policies/",
+      "type": "text/html",
+      "title": "LP DAAC - Data Citation and Policies"
+    },
+    {
+      "rel": "help",
+      "href": "https://lpdaac.usgs.gov/documents/126/VNP15_User_Guide.pdf",
+      "type": "application/pdf",
+      "title": "VIIRS Leaf Area Index (LAI) and Fraction of Photosynthetically Active Radiation Absorbed by Vegetation (FPAR) User Guide"
+    },
+    {
+      "rel": "cite-as",
+      "href": "https://doi.org/10.5067/VIIRS/VNP15A2H.001",
+      "title": "LP DAAC - VNP15A2H v001"
+    },
+    {
+      "rel": "item",
+      "href": "./VNP15A2H.A2017137.h11v05.001.2018160084840/VNP15A2H.A2017137.h11v05.001.2018160084840.json",
+      "type": "application/json"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/classification/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/raster/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json"
+  ],
+  "item_assets": {
+    "hdf5": {
+      "type": "application/x-hdf5",
+      "roles": [
+        "data"
+      ],
+      "title": "Source data containing all bands"
+    },
+    "metadata": {
+      "type": "application/xml",
+      "roles": [
+        "metadata"
+      ],
+      "title": "Earth Observing System Data and Information System (EOSDIS) metadata"
+    },
+    "Fpar": {
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 200,
+          "scale": 0.01,
+          "spatial_resolution": 500
+        }
+      ],
+      "title": "Fraction of Photosynthetically Active Radiation (FPAR)",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "Fpar_fill": {
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 200,
+          "spatial_resolution": 500
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "land cover assigned as 'unclassified1 or not able to determine",
+          "value": 249
+        },
+        {
+          "description": "land cover assigned as urban/built-up",
+          "value": 250
+        },
+        {
+          "description": "land cover assigned as \u201cpermanent\u201d wetlands/inundated marshlands",
+          "value": 251
+        },
+        {
+          "description": "land cover assigned as perennial snow, ice",
+          "value": 252
+        },
+        {
+          "description": "land cover assigned as barren, sparse vegetation (rock, tundra, desert)",
+          "value": 253
+        },
+        {
+          "description": "land cover assigned as perennial salt or inland fresh water",
+          "value": 254
+        },
+        {
+          "description": "Fillvalue, assigned when: the VNP09GA surface reflectance for channels VIS, NIR was assigned as Fillvalue, or land cover pixel itself was assigned Fillvalue of 255 or 254",
+          "value": 255
+        }
+      ],
+      "title": "Fpar Fill Values",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "FparExtra_QC": {
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "unit": "bit field",
+          "spatial_resolution": 500
+        }
+      ],
+      "classification:bitfields": [
+        {
+          "name": "cloud_confidence",
+          "description": "Cloud detection and confidence",
+          "offset": 0,
+          "length": 2,
+          "classes": [
+            {
+              "description": "Confident clear",
+              "value": 0
+            },
+            {
+              "description": "Probably clear",
+              "value": 1
+            },
+            {
+              "description": "Probably cloudy",
+              "value": 2
+            },
+            {
+              "description": "Confident cloudy",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "name": "cloud_shadow",
+          "offset": 2,
+          "length": 1,
+          "classes": [
+            {
+              "description": "No cloud shadow",
+              "value": 0
+            },
+            {
+              "description": "Shadow",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "Thin cirrus",
+          "offset": 3,
+          "length": 1,
+          "classes": [
+            {
+              "description": "No",
+              "value": 0
+            },
+            {
+              "description": "Yes",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "aerosol_quantity",
+          "offset": 4,
+          "length": 2,
+          "classes": [
+            {
+              "description": "Climatology",
+              "value": 0
+            },
+            {
+              "description": "Low",
+              "value": 1
+            },
+            {
+              "description": "Average",
+              "value": 2
+            },
+            {
+              "description": "High",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "name": "snow_ice",
+          "offset": 6,
+          "length": 1,
+          "classes": [
+            {
+              "description": "No",
+              "value": 0
+            },
+            {
+              "description": "Yes",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      "title": "Pass-through Quality Control (QC) for FPAR",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "FparLai_QC": {
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "unit": "bit field",
+          "spatial_resolution": 500
+        }
+      ],
+      "classification:bitfields": [
+        {
+          "name": "scf_qc",
+          "description": "SCF_QC (five-level confidence score)",
+          "offset": 0,
+          "length": 3,
+          "classes": [
+            {
+              "description": "Main (RT) method used, best result possible (no saturation)",
+              "value": 0
+            },
+            {
+              "description": "Main (RT) method used with saturation. Good, very usable",
+              "value": 1
+            },
+            {
+              "description": "Main (RT) method failed due to bad geometry, empirical algorithm used",
+              "value": 2
+            },
+            {
+              "description": "Main (RT) method failed due to problems other than geometry, empirical algorithm used",
+              "value": 3
+            },
+            {
+              "description": "Pixel not produced at all, value couldn't be retrieved (possible reasons: bad L1B data, unusable VNP09GA data, water pixel)",
+              "value": 4
+            }
+          ]
+        },
+        {
+          "name": "dead_detector",
+          "offset": 3,
+          "length": 1,
+          "classes": [
+            {
+              "description": "Both red and NIR detectors are fine",
+              "value": 0
+            },
+            {
+              "description": "At least one band has dead detector",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "biome_type",
+          "offset": 4,
+          "length": 4,
+          "classes": [
+            {
+              "description": "Water",
+              "value": 0
+            },
+            {
+              "description": "Grasses/cereal crops",
+              "value": 1
+            },
+            {
+              "description": "Shrubs",
+              "value": 2
+            },
+            {
+              "description": "Broadleaf crops",
+              "value": 3
+            },
+            {
+              "description": "Savanna",
+              "value": 4
+            },
+            {
+              "description": "Evergreen broadleaf forest",
+              "value": 5
+            },
+            {
+              "description": "Deciduous broadleaf forest",
+              "value": 6
+            },
+            {
+              "description": "Evergreen needleleaf forest",
+              "value": 7
+            },
+            {
+              "description": "Deciduous needleaf forest",
+              "value": 8
+            },
+            {
+              "description": "Non-vegetated",
+              "value": 9
+            },
+            {
+              "description": "Urban",
+              "value": 10
+            },
+            {
+              "description": "Unclassified",
+              "value": 11
+            },
+            {
+              "description": "Filled Value",
+              "value": 12
+            }
+          ]
+        }
+      ],
+      "title": "Quality for LAI and FPAR",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "FparStdDev": {
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 200,
+          "scale": 0.01,
+          "spatial_resolution": 500
+        }
+      ],
+      "title": "FPAR Standard deviation",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "FparStdDev_fill": {
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 200,
+          "spatial_resolution": 500
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "No standard deviation available, pixel produced using backup method",
+          "value": 248
+        },
+        {
+          "description": "land cover assigned as 'unclassified1 or not able to determine",
+          "value": 249
+        },
+        {
+          "description": "land cover assigned as urban/built-up",
+          "value": 250
+        },
+        {
+          "description": "land cover assigned as \u201cpermanent\u201d wetlands/inundated marshlands",
+          "value": 251
+        },
+        {
+          "description": "land cover assigned as perennial snow, ice",
+          "value": 252
+        },
+        {
+          "description": "land cover assigned as barren, sparse vegetation (rock, tundra, desert)",
+          "value": 253
+        },
+        {
+          "description": "land cover assigned as perennial salt or inland fresh water",
+          "value": 254
+        },
+        {
+          "description": "Fillvalue, assigned when: the VNP09GA surface reflectance for channels VIS, NIR was assigned as Fillvalue, or land cover pixel itself was assigned Fillvalue of 255 or 254",
+          "value": 255
+        }
+      ],
+      "title": "FPAR Standard deviation Fill Values",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "Lai": {
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 200,
+          "unit": "square_meter/square_meter",
+          "scale": 0.1,
+          "spatial_resolution": 500
+        }
+      ],
+      "title": "Leaf Area Index (LAI)",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "Lai_fill": {
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 200,
+          "spatial_resolution": 500
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "land cover assigned as 'unclassified1 or not able to determine",
+          "value": 249
+        },
+        {
+          "description": "land cover assigned as urban/built-up",
+          "value": 250
+        },
+        {
+          "description": "land cover assigned as \u201cpermanent\u201d wetlands/inundated marshlands",
+          "value": 251
+        },
+        {
+          "description": "land cover assigned as perennial snow, ice",
+          "value": 252
+        },
+        {
+          "description": "land cover assigned as barren, sparse vegetation (rock, tundra, desert)",
+          "value": 253
+        },
+        {
+          "description": "land cover assigned as perennial salt or inland fresh water",
+          "value": 254
+        },
+        {
+          "description": "Fillvalue, assigned when: the VNP09GA surface reflectance for channels VIS, NIR was assigned as Fillvalue, or land cover pixel itself was assigned Fillvalue of 255 or 254",
+          "value": 255
+        }
+      ],
+      "title": "LAI Fill Values",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "LaiStdDev": {
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 200,
+          "unit": "square_meter/square_meter",
+          "scale": 0.1,
+          "spatial_resolution": 500
+        }
+      ],
+      "title": "LAI Standard Deviation",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "LaiStdDev_fill": {
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 200,
+          "spatial_resolution": 500
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "No standard deviation available, pixel produced using backup method",
+          "value": 248
+        },
+        {
+          "description": "land cover assigned as 'unclassified1 or not able to determine",
+          "value": 249
+        },
+        {
+          "description": "land cover assigned as urban/built-up",
+          "value": 250
+        },
+        {
+          "description": "land cover assigned as \u201cpermanent\u201d wetlands/inundated marshlands",
+          "value": 251
+        },
+        {
+          "description": "land cover assigned as perennial snow, ice",
+          "value": 252
+        },
+        {
+          "description": "land cover assigned as barren, sparse vegetation (rock, tundra, desert)",
+          "value": 253
+        },
+        {
+          "description": "land cover assigned as perennial salt or inland fresh water",
+          "value": 254
+        },
+        {
+          "description": "Fillvalue, assigned when: the VNP09GA surface reflectance for channels VIS, NIR was assigned as Fillvalue, or land cover pixel itself was assigned Fillvalue of 255 or 254",
+          "value": 255
+        }
+      ],
+      "title": "LAI Standard Deviation Fill Values",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    }
+  },
+  "sci:doi": "10.5067/VIIRS/VNP15A2H.001",
+  "sci:citation": "Myneni, RB. 2018. VIIRS/NPP Leaf Area Index/FPAR 8-Day L4 Global 500 m SIN Grid, Version 1. Land Processes Distributed Active Archive Center (LP DAAC), Sioux Falls, South Dakota USA.",
+  "title": "VIIRS Leaf Area Index/FPAR 8-Day",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180,
+          -90,
+          180,
+          90
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2012-01-17T00:00:00Z",
+          null
+        ]
+      ]
+    }
+  },
+  "license": "proprietary",
+  "keywords": [
+    "NASA",
+    "VIIRS",
+    "Satellite",
+    "Global",
+    "Vegetation",
+    "VNP15A2H"
+  ],
+  "providers": [
+    {
+      "name": "NASA LP DAAC at the USGS EROS Center",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://lpdaac.usgs.gov/"
+    }
+  ],
+  "summaries": {
+    "instruments": [
+      "viirs"
+    ],
+    "platform": [
+      "snpp"
+    ]
+  }
+}

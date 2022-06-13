@@ -1,0 +1,78 @@
+{
+    "id": "viirs-46a2-001",
+    "title": "VIIRS Gap-Filled Lunar BRDF-Adjusted Nighttime Lights Daily",
+    "description": "The VIIRS Day-Night Band (DNB) sensor provides global daily measurements of nocturnal visible and near-infrared (NIR) light that are suitable for Earth system science and applications. The VIIRS DNB's ultra-sensitivity in lowlight conditions enables generation of a new set of science-quality nighttime products that manifest substantial improvements in sensor resolution and calibration when compared to the previous era of Defense Meteorological Satellite Program/Operational Linescan System's (DMSP/OLS) nighttime lights image products. Such improvements allow the VIIRS DNB products to better monitor both the magnitude and signature of nighttime phenomena, and anthropogenic sources of light emissions.",
+    "license": "proprietary",
+    "links": [
+        {
+            "rel": "license",
+            "href": "https://modaps.modaps.eosdis.nasa.gov/services/faq/LAADS_Data-Use_Citation_Policies.pdf",
+            "type": "application/pdf",
+            "title": "LAADS DAAC Data Use Policies and Copyright"
+        },
+        {
+            "rel": "help",
+            "href": "https://ladsweb.modaps.eosdis.nasa.gov/missions-and-measurements/viirs/VIIRS_Black_Marble_UG_v1.1_July_2020.pdf",
+            "type": "application/pdf",
+            "title": "Black Marble User Guide Version 1.1"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://ladsweb.modaps.eosdis.nasa.gov/missions-and-measurements/viirs/VIIRS_Black_Marble_ATBD_v1.1_July_2020.pdf",
+            "type": "application/pdf",
+            "title": "NASA's Black Marble Nighttime Lights Product Suite Algorithm Theoretical Basis Document (ATBD)"
+        },
+        {
+            "rel": "cite-as",
+            "href": "https://doi.org/10.5067/VIIRS/VNP46A2.001",
+            "title": "LAADS DAAC - VNP46A2 v001"
+        }
+    ],
+    "keywords": [
+        "NASA",
+        "VIIRS",
+        "Satellite",
+        "Imagery",
+        "Global",
+        "Reflectance",
+        "VNP46A2"
+    ],
+    "providers": [
+        {
+            "name": "NASA LAADS DAAC at the Goddard Space Flight Center",
+            "roles": [
+                "producer",
+                "licensor"
+            ],
+            "url": "https://ladsweb.modaps.eosdis.nasa.gov/"
+        }
+    ],
+    "extent": {
+        "spatial": {
+            "bbox": [
+                [
+                    -180,
+                    -90,
+                    180,
+                    90
+                ]
+            ]
+        },
+        "temporal": {
+            "interval": [
+                [
+                    "2012-01-19T00:00:00Z",
+                    null
+                ]
+            ]
+        }
+    },
+    "sci:doi": "10.5067/VIIRS/VNP46A2.001",
+    "sci:citation": "Roman, MO., 2020. VIIRS/NPP Gap-Filled Lunar BRDF-Adjusted Nighttime Lights Daily L3 Global 500m Linear Lat Lon Grid. NASA Level-1 and Atmosphere Archive & Distribution System (LAADS) Distributed Active Archive Center (DAAC), Goddard Space Flight Center, Greenbelt, Maryland USA.",
+    "sci:publications": [
+        {
+            "doi": "10.1016/j.rse.2018.03.017",
+            "citation": "Román, M.O., Wang, Z., Sun, Q., Kalb, V., Miller, S.D., Molthan, A., Schultz, L., Bell, J., Stokes, E.C., Pandey, B. and Seto, K.C., et al. (2018). NASA's Black Marble nighttime lights product suite. Remote Sensing of Environment 210, 113-143."
+        }
+    ]
+}

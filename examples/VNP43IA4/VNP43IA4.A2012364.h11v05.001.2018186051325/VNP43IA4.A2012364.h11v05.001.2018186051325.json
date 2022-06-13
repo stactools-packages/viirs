@@ -1,0 +1,260 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "id": "VNP43IA4.A2012364.h11v05.001.2018186051325",
+  "properties": {
+    "start_datetime": "2012-12-29T00:00:00Z",
+    "end_datetime": "2013-01-05T23:59:59Z",
+    "viirs:horizontal-tile": 11,
+    "viirs:vertical-tile": 5,
+    "viirs:tile-id": "51011005",
+    "created": "2018-07-05T05:13:25Z",
+    "platform": "snpp",
+    "instruments": [
+      "viirs"
+    ],
+    "proj:epsg": null,
+    "proj:wkt2": "PROJCS[\"unnamed\",GEOGCS[\"Unknown datum based upon the custom spheroid\",DATUM[\"Not specified (based on custom spheroid)\",SPHEROID[\"Custom spheroid\",6371007.181,0]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Sinusoidal\"],PARAMETER[\"longitude_of_center\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"Meter\",1],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+    "proj:transform": [
+      463.3127165279169,
+      0.0,
+      -7783653.637667,
+      0.0,
+      -463.3127165279167,
+      4447802.078667
+    ],
+    "proj:shape": [
+      2400,
+      2400
+    ],
+    "datetime": null
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -91.37851024025423,
+          39.99999999641088
+        ],
+        [
+          -80.82903767709807,
+          29.99999999730591
+        ],
+        [
+          -69.28203229465252,
+          29.99999999730591
+        ],
+        [
+          -78.32443734878598,
+          39.99999999641088
+        ],
+        [
+          -91.37851024025423,
+          39.99999999641088
+        ]
+      ]
+    ]
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../collection.json",
+      "type": "application/json",
+      "title": "VIIRS Imagery Band (500m) Nadir BRDF-Adjusted Reflectance (NBAR) Daily"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json",
+      "title": "VIIRS Imagery Band (500m) Nadir BRDF-Adjusted Reflectance (NBAR) Daily"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json",
+      "title": "VIIRS Imagery Band (500m) Nadir BRDF-Adjusted Reflectance (NBAR) Daily"
+    }
+  ],
+  "assets": {
+    "hdf5": {
+      "href": "../../../tests/data-files/external/VNP43IA4.A2012364.h11v05.001.2018186051325.h5",
+      "type": "application/x-hdf5",
+      "title": "Source data containing all bands",
+      "roles": [
+        "data"
+      ]
+    },
+    "metadata": {
+      "href": "../../../tests/data-files/external/VNP43IA4.A2012364.h11v05.001.2018186051325.h5.xml",
+      "type": "application/xml",
+      "title": "Earth Observing System Data and Information System (EOSDIS) metadata",
+      "roles": [
+        "metadata"
+      ]
+    },
+    "Nadir_Reflectance_I1": {
+      "href": "../../../tests/data-files/external/VNP43IA4.A2012364.h11v05.001.2018186051325_Nadir_Reflectance_I1.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Nadir BRDF/Albedo Reflectance at Local Solar Noon for Band I1",
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": 32767,
+          "scale": 0.0001,
+          "spatial_resolution": 500
+        }
+      ],
+      "eo:bands": [
+        {
+          "name": "I1",
+          "description": "Near Infrared",
+          "center_wavelength": 0.64,
+          "full_width_half_max": 0.075
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ]
+    },
+    "Nadir_Reflectance_I3": {
+      "href": "../../../tests/data-files/external/VNP43IA4.A2012364.h11v05.001.2018186051325_Nadir_Reflectance_I3.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Nadir BRDF/Albedo Reflectance at Local Solar Noon for Band 3",
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": 32767,
+          "scale": 0.0001,
+          "spatial_resolution": 500
+        }
+      ],
+      "eo:bands": [
+        {
+          "name": "I3",
+          "description": "Medium-wave Infrared",
+          "center_wavelength": 1.61,
+          "full_width_half_max": 0.06
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ]
+    },
+    "Nadir_Reflectance_I2": {
+      "href": "../../../tests/data-files/external/VNP43IA4.A2012364.h11v05.001.2018186051325_Nadir_Reflectance_I2.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Nadir BRDF/Albedo Reflectance at Local Solar Noon for Band I2",
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": 32767,
+          "scale": 0.0001,
+          "spatial_resolution": 500
+        }
+      ],
+      "eo:bands": [
+        {
+          "name": "I2",
+          "description": "Shortwave Infrared",
+          "center_wavelength": 0.865,
+          "full_width_half_max": 0.039
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ]
+    },
+    "BRDF_Albedo_Band_Mandatory_Quality_I2": {
+      "href": "../../../tests/data-files/external/VNP43IA4.A2012364.h11v05.001.2018186051325_BRDF_Albedo_Band_Mandatory_Quality_I2.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "BRDF/Albedo Mandatory Quality for Band I2",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "spatial_resolution": 500
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "full BRDF inversions",
+          "value": 0
+        },
+        {
+          "description": "magnitude BRDF inversions",
+          "value": 1
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "BRDF_Albedo_Band_Mandatory_Quality_I3": {
+      "href": "../../../tests/data-files/external/VNP43IA4.A2012364.h11v05.001.2018186051325_BRDF_Albedo_Band_Mandatory_Quality_I3.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "BRDF/Albedo Mandatory Quality for Band I3",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "spatial_resolution": 500
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "full BRDF inversions",
+          "value": 0
+        },
+        {
+          "description": "magnitude BRDF inversions",
+          "value": 1
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "BRDF_Albedo_Band_Mandatory_Quality_I1": {
+      "href": "../../../tests/data-files/external/VNP43IA4.A2012364.h11v05.001.2018186051325_BRDF_Albedo_Band_Mandatory_Quality_I1.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "BRDF/Albedo Mandatory Quality for Band I1",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "spatial_resolution": 500
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "full BRDF inversions",
+          "value": 0
+        },
+        {
+          "description": "magnitude BRDF inversions",
+          "value": 1
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    }
+  },
+  "bbox": [
+    -91.37851024025423,
+    29.99999999730591,
+    -69.28203229465252,
+    39.99999999641088
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/classification/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/raster/v1.0.0/schema.json"
+  ],
+  "collection": "viirs-43ia4-001"
+}

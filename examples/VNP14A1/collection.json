@@ -1,0 +1,249 @@
+{
+  "type": "Collection",
+  "id": "viirs-14a1-001",
+  "stac_version": "1.0.0",
+  "description": "The daily VIIRS Thermal Anomalies/Fire (VNP14A1) Version 1 data product provides information about active fires and other thermal anomalies. The data product is a global, 1 kilometer gridded composite of fire pixels detected from VIIRS 750 meter bands over a daily (24-hour) period. The data products are designed after the Moderate Resolution Imaging Spectroradiometer (MODIS) Thermal Anomalies/Fire product suite. Four Science Dataset layers are provided: confidence of fire, maximum fire radiative power (FRP), quality assessment (QA), and position of fire within scan.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "./collection.json",
+      "type": "application/json",
+      "title": "VIIRS Thermal Anomalies/Fire Daily"
+    },
+    {
+      "rel": "license",
+      "href": "https://lpdaac.usgs.gov/data/data-citation-and-policies/",
+      "type": "text/html",
+      "title": "LP DAAC - Data Citation and Policies"
+    },
+    {
+      "rel": "help",
+      "href": "https://lpdaac.usgs.gov/documents/427/VNP14_User_Guide_V1.pdf",
+      "type": "application/pdf",
+      "title": "NASA VIIRS Land Science Investigator Processing System (SIPS) Visible Infrared Imaging Radiometer Suite (VIIRS) 375 m & 750 m Active Fire Products"
+    },
+    {
+      "rel": "cite-as",
+      "href": "https://doi.org/10.5067/VIIRS/VNP14A1.001",
+      "title": "LP DAAC - VNP14A1 v001"
+    },
+    {
+      "rel": "item",
+      "href": "./VNP14A1.A2019054.h11v05.001.2019055201945/VNP14A1.A2019054.h11v05.001.2019055201945.json",
+      "type": "application/json"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/classification/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/raster/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json"
+  ],
+  "item_assets": {
+    "hdf5": {
+      "type": "application/x-hdf5",
+      "roles": [
+        "data"
+      ],
+      "title": "Source data containing all bands"
+    },
+    "metadata": {
+      "type": "application/xml",
+      "roles": [
+        "metadata"
+      ],
+      "title": "Earth Observing System Data and Information System (EOSDIS) metadata"
+    },
+    "FireMask": {
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "spatial_resolution": 1000
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "not processed (missing input data)",
+          "value": 0
+        },
+        {
+          "description": "not processed (trim)",
+          "value": 1
+        },
+        {
+          "description": "not processed (obsolete)",
+          "value": 2
+        },
+        {
+          "description": "non-fire water",
+          "value": 3
+        },
+        {
+          "description": "cloud (land or water)",
+          "value": 4
+        },
+        {
+          "description": "non-fire land",
+          "value": 5
+        },
+        {
+          "description": "unknown",
+          "value": 6
+        },
+        {
+          "description": "fire (low confidence)",
+          "value": 7
+        },
+        {
+          "description": "fire (nominal confidence)",
+          "value": 8
+        },
+        {
+          "description": "fire (high confidence)",
+          "value": 9
+        }
+      ],
+      "title": "Confidence of fire",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "MaxFRP": {
+      "raster:bands": [
+        {
+          "data_type": "int32",
+          "nodata": 0,
+          "unit": "megawatt",
+          "scale": 0.1,
+          "spatial_resolution": 1000
+        }
+      ],
+      "title": "Maximum Fire Radiative Power",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "QA": {
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "unit": "bit field",
+          "spatial_resolution": 1000
+        }
+      ],
+      "classification:bitfields": [
+        {
+          "name": "land_water",
+          "description": "land/water state",
+          "offset": 0,
+          "length": 2,
+          "classes": [
+            {
+              "description": "water",
+              "value": 0
+            },
+            {
+              "description": "coast",
+              "value": 1
+            },
+            {
+              "description": "land",
+              "value": 2
+            },
+            {
+              "description": "missing data",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "name": "day_night",
+          "description": "day/night observation",
+          "offset": 2,
+          "length": 1,
+          "classes": [
+            {
+              "description": "day",
+              "value": 0
+            },
+            {
+              "description": "night",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      "title": "Pixel quality indicators",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "sample": {
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": -1,
+          "spatial_resolution": 1000
+        }
+      ],
+      "title": "Sample number within a swath",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    }
+  },
+  "sci:doi": "10.5067/VIIRS/VNP14A1.001",
+  "sci:citation": "Schroeder, W and L Giglio. 2018. VIIRS/NPP Thermal Anomalies/Fire Daily L3 Global 1 km SIN Grid, Version 1. Land Processes Distributed Active Archive Center (LP DAAC), Sioux Falls, South Dakota USA.",
+  "title": "VIIRS Thermal Anomalies/Fire Daily",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180,
+          -90,
+          180,
+          90
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2012-01-19T00:00:00Z",
+          null
+        ]
+      ]
+    }
+  },
+  "license": "proprietary",
+  "keywords": [
+    "NASA",
+    "VIIRS",
+    "Satellite",
+    "Global",
+    "Fire",
+    "VNP14A1"
+  ],
+  "providers": [
+    {
+      "name": "NASA LP DAAC at the USGS EROS Center",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://lpdaac.usgs.gov/"
+    }
+  ],
+  "summaries": {
+    "instruments": [
+      "viirs"
+    ],
+    "platform": [
+      "snpp"
+    ]
+  }
+}

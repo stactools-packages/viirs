@@ -1,344 +1,106 @@
 {
-  "type": "Collection",
-  "id": "viirs-09a1-001",
+  "type": "Feature",
   "stac_version": "1.0.0",
-  "description": "The 8-day VIIRS surface reflectance Version 1 composite product provides an estimate of land surface reflectance from the VIIRS sensor for nine moderate resolution bands (M1 - M5, M7, M8, M10, M11) at nominal 1 kilometer resolution (~926 meter). The 1 kilometer dataset is derived through resampling the native 750 meter VIIRS resolution in the Level 2 input product. Each pixel represents the best possible Level 2G observation during an 8-day period.",
+  "id": "VNP09A1.A2012017.h00v09.001.2016294114238",
+  "properties": {
+    "start_datetime": "2012-01-17T00:00:00Z",
+    "end_datetime": "2012-01-25T00:00:00Z",
+    "viirs:horizontal-tile": 0,
+    "viirs:vertical-tile": 9,
+    "viirs:tile-id": "51000009",
+    "created": "2016-10-20T11:42:38Z",
+    "platform": "snpp",
+    "instruments": [
+      "viirs"
+    ],
+    "proj:epsg": null,
+    "proj:wkt2": "PROJCS[\"unnamed\",GEOGCS[\"Unknown datum based upon the custom spheroid\",DATUM[\"Not specified (based on custom spheroid)\",SPHEROID[\"Custom spheroid\",6371007.181,0]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Sinusoidal\"],PARAMETER[\"longitude_of_center\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"Meter\",1],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+    "proj:transform": [
+      926.625433055833,
+      0.0,
+      -20015109.354,
+      0.0,
+      -926.6254330558334,
+      0.0
+    ],
+    "proj:shape": [
+      1200,
+      1200
+    ],
+    "datetime": null
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -179.99999998383547,
+          0.0
+        ],
+        [
+          -182.7767901225167,
+          -9.999999999104968
+        ],
+        [
+          -172.62252400459607,
+          -9.999999999104968
+        ],
+        [
+          -169.99999998473047,
+          0.0
+        ],
+        [
+          -179.99999998383547,
+          0.0
+        ]
+      ]
+    ]
+  },
   "links": [
     {
       "rel": "root",
-      "href": "./collection.json",
+      "href": "../collection.json",
       "type": "application/json",
       "title": "VIIRS Moderate Band (1000m) Surface Reflectance 8-Day"
     },
     {
-      "rel": "license",
-      "href": "https://lpdaac.usgs.gov/data/data-citation-and-policies/",
-      "type": "text/html",
-      "title": "LP DAAC - Data Citation and Policies"
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json",
+      "title": "VIIRS Moderate Band (1000m) Surface Reflectance 8-Day"
     },
     {
-      "rel": "help",
-      "href": "https://lpdaac.usgs.gov/documents/1333/VNP09_User_Guide_V1.7.pdf",
-      "type": "application/pdf",
-      "title": "Suomi-NPP VIIRS Surface Reflectance User's Guide"
-    },
-    {
-      "rel": "cite-as",
-      "href": "https://doi.org/10.5067/VIIRS/VNP09A1.001",
-      "title": "LP DAAC - VNP09A1 v001"
-    },
-    {
-      "rel": "item",
-      "href": "./VNP09A1.A2012017.h00v09.001.2016294114238/VNP09A1.A2012017.h00v09.001.2016294114238.json",
-      "type": "application/json"
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json",
+      "title": "VIIRS Moderate Band (1000m) Surface Reflectance 8-Day"
     }
   ],
-  "stac_extensions": [
-    "https://stac-extensions.github.io/classification/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/raster/v1.0.0/schema.json",
-    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json"
-  ],
-  "item_assets": {
+  "assets": {
     "hdf5": {
+      "href": "../../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238.h5",
       "type": "application/x-hdf5",
+      "title": "Source data containing all bands",
       "roles": [
         "data"
-      ],
-      "title": "Source data containing all bands"
+      ]
     },
     "metadata": {
+      "href": "../../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238.h5.xml",
       "type": "application/xml",
+      "title": "Earth Observing System Data and Information System (EOSDIS) metadata",
       "roles": [
         "metadata"
-      ],
-      "title": "Earth Observing System Data and Information System (EOSDIS) metadata"
-    },
-    "RelativeAzimuth": {
-      "raster:bands": [
-        {
-          "data_type": "int16",
-          "nodata": 0,
-          "unit": "degree",
-          "scale": 0.01,
-          "spatial_resolution": 1000
-        }
-      ],
-      "title": "Relative Azimuth Angle",
-      "roles": [
-        "data"
-      ],
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
-    },
-    "SolarZenith": {
-      "raster:bands": [
-        {
-          "data_type": "int16",
-          "nodata": 0,
-          "unit": "degree",
-          "scale": 0.01,
-          "spatial_resolution": 1000
-        }
-      ],
-      "title": "Solar Zenith Angle",
-      "roles": [
-        "data"
-      ],
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
-    },
-    "SensorZenith": {
-      "raster:bands": [
-        {
-          "data_type": "int16",
-          "nodata": 0,
-          "unit": "degree",
-          "scale": 0.01,
-          "spatial_resolution": 1000
-        }
-      ],
-      "title": "Sensor Zenith Angle",
-      "roles": [
-        "data"
-      ],
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
-    },
-    "SurfReflect_Day_Of_Year": {
-      "raster:bands": [
-        {
-          "data_type": "uint16",
-          "nodata": 65535,
-          "unit": "Julian day",
-          "spatial_resolution": 1000
-        }
-      ],
-      "title": "Day of Year",
-      "roles": [
-        "data"
-      ],
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
-    },
-    "SurfReflect_M1": {
-      "raster:bands": [
-        {
-          "date_type": "int16",
-          "nodata": -28672,
-          "scale": 0.0001,
-          "spatial_resolution": 1000
-        }
-      ],
-      "eo:bands": [
-        {
-          "name": "M1",
-          "description": "Visible/Reflective",
-          "center_wavelength": 0.415,
-          "full_width_half_max": 0.02
-        }
-      ],
-      "title": "1 km Surface Reflectance Band M1",
-      "roles": [
-        "data",
-        "reflectance"
-      ],
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
-    },
-    "SurfReflect_M2": {
-      "raster:bands": [
-        {
-          "date_type": "int16",
-          "nodata": -28672,
-          "scale": 0.0001,
-          "spatial_resolution": 1000
-        }
-      ],
-      "eo:bands": [
-        {
-          "name": "M2",
-          "description": "Visible/Reflective",
-          "center_wavelength": 0.445,
-          "full_width_half_max": 0.02
-        }
-      ],
-      "title": "1 km Surface Reflectance Band M2",
-      "roles": [
-        "data",
-        "reflectance"
-      ],
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
-    },
-    "SurfReflect_M3": {
-      "raster:bands": [
-        {
-          "date_type": "int16",
-          "nodata": -28672,
-          "scale": 0.0001,
-          "spatial_resolution": 1000
-        }
-      ],
-      "eo:bands": [
-        {
-          "name": "M3",
-          "description": "Visible/Reflective",
-          "center_wavelength": 0.49,
-          "full_width_half_max": 0.02
-        }
-      ],
-      "title": "1 km Surface Reflectance Band M3",
-      "roles": [
-        "data",
-        "reflectance"
-      ],
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
-    },
-    "SurfReflect_M4": {
-      "raster:bands": [
-        {
-          "date_type": "int16",
-          "nodata": -28672,
-          "scale": 0.0001,
-          "spatial_resolution": 1000
-        }
-      ],
-      "eo:bands": [
-        {
-          "name": "M4",
-          "description": "Visible/Reflective",
-          "center_wavelength": 0.555,
-          "full_width_half_max": 0.02
-        }
-      ],
-      "title": "1 km Surface Reflectance Band M4",
-      "roles": [
-        "data",
-        "reflectance"
-      ],
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
-    },
-    "SurfReflect_M5": {
-      "raster:bands": [
-        {
-          "date_type": "int16",
-          "nodata": -28672,
-          "scale": 0.0001,
-          "spatial_resolution": 1000
-        }
-      ],
-      "eo:bands": [
-        {
-          "name": "M5",
-          "description": "Near Infrared",
-          "center_wavelength": 0.673,
-          "full_width_half_max": 0.021
-        }
-      ],
-      "title": "1 km Surface Reflectance Band M5",
-      "roles": [
-        "data",
-        "reflectance"
-      ],
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
-    },
-    "SurfReflect_M7": {
-      "raster:bands": [
-        {
-          "date_type": "int16",
-          "nodata": -28672,
-          "scale": 0.0001,
-          "spatial_resolution": 1000
-        }
-      ],
-      "eo:bands": [
-        {
-          "name": "M7",
-          "description": "Shortwave Infrared",
-          "center_wavelength": 0.865,
-          "full_width_half_max": 0.039
-        }
-      ],
-      "title": "1 km Surface Reflectance Band M7",
-      "roles": [
-        "data",
-        "reflectance"
-      ],
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
-    },
-    "SurfReflect_M8": {
-      "raster:bands": [
-        {
-          "date_type": "int16",
-          "nodata": -28672,
-          "scale": 0.0001,
-          "spatial_resolution": 1000
-        }
-      ],
-      "eo:bands": [
-        {
-          "name": "M8",
-          "description": "Shortwave Infrared",
-          "center_wavelength": 1.24,
-          "full_width_half_max": 0.02
-        }
-      ],
-      "title": "1 km Surface Reflectance Band M8",
-      "roles": [
-        "data",
-        "reflectance"
-      ],
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
-    },
-    "SurfReflect_M10": {
-      "raster:bands": [
-        {
-          "date_type": "int16",
-          "nodata": -28672,
-          "scale": 0.0001,
-          "spatial_resolution": 1000
-        }
-      ],
-      "eo:bands": [
-        {
-          "name": "M10",
-          "description": "Shortwave Infrared",
-          "center_wavelength": 1.61,
-          "full_width_half_max": 0.06
-        }
-      ],
-      "title": "1 km Surface Reflectance Band M10",
-      "roles": [
-        "data",
-        "reflectance"
-      ],
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
-    },
-    "SurfReflect_M11": {
-      "raster:bands": [
-        {
-          "date_type": "int16",
-          "nodata": -28672,
-          "scale": 0.0001,
-          "spatial_resolution": 1000
-        }
-      ],
-      "eo:bands": [
-        {
-          "name": "M11",
-          "description": "Medium-wave Infrared",
-          "center_wavelength": 2.25,
-          "full_width_half_max": 0.05
-        }
-      ],
-      "title": "1 km Surface Reflectance Band M11",
-      "roles": [
-        "data",
-        "reflectance"
-      ],
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+      ]
     },
     "SurfReflect_QC": {
+      "href": "../../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_QC.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Surface Reflectance Band Quality Control (QC)",
       "raster:bands": [
         {
           "data_type": "uint32",
-          "nodata": 4294967295,
+          "nodata": 1073741824,
           "unit": "bit field",
           "spatial_resolution": 1000
         }
@@ -721,13 +483,89 @@
           ]
         }
       ],
-      "title": "Surface Reflectance Band Quality Control (QC)",
       "roles": [
         "data"
+      ]
+    },
+    "SurfReflect_M8": {
+      "href": "../../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_SurfReflect_M8.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "1 km Surface Reflectance Band M8",
+      "raster:bands": [
+        {
+          "date_type": "int16",
+          "nodata": 0,
+          "scale": 0.0001,
+          "spatial_resolution": 1000
+        }
       ],
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+      "eo:bands": [
+        {
+          "name": "M8",
+          "description": "Shortwave Infrared",
+          "center_wavelength": 1.24,
+          "full_width_half_max": 0.02
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ]
+    },
+    "SurfReflect_M10": {
+      "href": "../../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M10.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "1 km Surface Reflectance Band M10",
+      "raster:bands": [
+        {
+          "date_type": "int16",
+          "nodata": 0,
+          "scale": 0.0001,
+          "spatial_resolution": 1000
+        }
+      ],
+      "eo:bands": [
+        {
+          "name": "M10",
+          "description": "Shortwave Infrared",
+          "center_wavelength": 1.61,
+          "full_width_half_max": 0.06
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ]
+    },
+    "SurfReflect_M11": {
+      "href": "../../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M11.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "1 km Surface Reflectance Band M11",
+      "raster:bands": [
+        {
+          "date_type": "int16",
+          "nodata": 0,
+          "scale": 0.0001,
+          "spatial_resolution": 1000
+        }
+      ],
+      "eo:bands": [
+        {
+          "name": "M11",
+          "description": "Medium-wave Infrared",
+          "center_wavelength": 2.25,
+          "full_width_half_max": 0.05
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ]
     },
     "SurfReflect_State": {
+      "href": "../../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_State.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Surface Reflectance State Quality Assurance (QA)",
       "raster:bands": [
         {
           "data_type": "uint16",
@@ -895,62 +733,239 @@
           ]
         }
       ],
-      "title": "Surface Reflectance State Quality Assurance (QA)",
       "roles": [
         "data"
-      ],
-      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
-    }
-  },
-  "sci:doi": "10.5067/VIIRS/VNP09A1.001",
-  "sci:citation": "Vermote, E. 2020. VIIRS/NPP Surface Reflectance 8-Day L3 Global 1 km SIN Grid, Version 1. Land Processes Distributed Active Archive Center (LP DAAC), Sioux Falls, South Dakota USA.",
-  "title": "VIIRS Moderate Band (1000m) Surface Reflectance 8-Day",
-  "extent": {
-    "spatial": {
-      "bbox": [
-        [
-          -180,
-          -90,
-          180,
-          90
-        ]
       ]
     },
-    "temporal": {
-      "interval": [
-        [
-          "2012-01-17T00:00:00Z",
-          null
-        ]
+    "SolarZenith": {
+      "href": "../../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_SolarZenith.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Solar Zenith Angle",
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": 0,
+          "unit": "degree",
+          "scale": 0.01,
+          "spatial_resolution": 1000
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "SurfReflect_Day_Of_Year": {
+      "href": "../../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_SurfReflect_Day_Of_Year.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Day of Year",
+      "raster:bands": [
+        {
+          "data_type": "uint16",
+          "nodata": 65535,
+          "unit": "Julian day",
+          "spatial_resolution": 1000
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "RelativeAzimuth": {
+      "href": "../../../tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238_RelativeAzimuth.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Relative Azimuth Angle",
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": 0,
+          "unit": "degree",
+          "scale": 0.01,
+          "spatial_resolution": 1000
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "SurfReflect_M2": {
+      "href": "../../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M2.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "1 km Surface Reflectance Band M2",
+      "raster:bands": [
+        {
+          "date_type": "int16",
+          "nodata": 0,
+          "scale": 0.0001,
+          "spatial_resolution": 1000
+        }
+      ],
+      "eo:bands": [
+        {
+          "name": "M2",
+          "description": "Visible/Reflective",
+          "center_wavelength": 0.445,
+          "full_width_half_max": 0.02
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ]
+    },
+    "SurfReflect_M3": {
+      "href": "../../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M3.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "1 km Surface Reflectance Band M3",
+      "raster:bands": [
+        {
+          "date_type": "int16",
+          "nodata": 0,
+          "scale": 0.0001,
+          "spatial_resolution": 1000
+        }
+      ],
+      "eo:bands": [
+        {
+          "name": "M3",
+          "description": "Visible/Reflective",
+          "center_wavelength": 0.49,
+          "full_width_half_max": 0.02
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ]
+    },
+    "SurfReflect_M1": {
+      "href": "../../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M1.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "1 km Surface Reflectance Band M1",
+      "raster:bands": [
+        {
+          "date_type": "int16",
+          "nodata": 0,
+          "scale": 0.0001,
+          "spatial_resolution": 1000
+        }
+      ],
+      "eo:bands": [
+        {
+          "name": "M1",
+          "description": "Visible/Reflective",
+          "center_wavelength": 0.415,
+          "full_width_half_max": 0.02
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ]
+    },
+    "SurfReflect_M4": {
+      "href": "../../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M4.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "1 km Surface Reflectance Band M4",
+      "raster:bands": [
+        {
+          "date_type": "int16",
+          "nodata": 0,
+          "scale": 0.0001,
+          "spatial_resolution": 1000
+        }
+      ],
+      "eo:bands": [
+        {
+          "name": "M4",
+          "description": "Visible/Reflective",
+          "center_wavelength": 0.555,
+          "full_width_half_max": 0.02
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ]
+    },
+    "SurfReflect_M5": {
+      "href": "../../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M5.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "1 km Surface Reflectance Band M5",
+      "raster:bands": [
+        {
+          "date_type": "int16",
+          "nodata": 0,
+          "scale": 0.0001,
+          "spatial_resolution": 1000
+        }
+      ],
+      "eo:bands": [
+        {
+          "name": "M5",
+          "description": "Near Infrared",
+          "center_wavelength": 0.673,
+          "full_width_half_max": 0.021
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ]
+    },
+    "SurfReflect_M7": {
+      "href": "../../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SurfReflect_M7.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "1 km Surface Reflectance Band M7",
+      "raster:bands": [
+        {
+          "date_type": "int16",
+          "nodata": 0,
+          "scale": 0.0001,
+          "spatial_resolution": 1000
+        }
+      ],
+      "eo:bands": [
+        {
+          "name": "M7",
+          "description": "Shortwave Infrared",
+          "center_wavelength": 0.865,
+          "full_width_half_max": 0.039
+        }
+      ],
+      "roles": [
+        "data",
+        "reflectance"
+      ]
+    },
+    "SensorZenith": {
+      "href": "../../../tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417_SensorZenith.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Sensor Zenith Angle",
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": 0,
+          "unit": "degree",
+          "scale": 0.01,
+          "spatial_resolution": 1000
+        }
+      ],
+      "roles": [
+        "data"
       ]
     }
   },
-  "license": "proprietary",
-  "keywords": [
-    "NASA",
-    "VIIRS",
-    "Satellite",
-    "Imagery",
-    "Global",
-    "Reflectance",
-    "VNP09A1"
+  "bbox": [
+    -182.7767901225167,
+    -9.999999999104968,
+    -169.99999998473047,
+    0.0
   ],
-  "providers": [
-    {
-      "name": "NASA LP DAAC at the USGS EROS Center",
-      "roles": [
-        "producer",
-        "licensor"
-      ],
-      "url": "https://lpdaac.usgs.gov/"
-    }
+  "stac_extensions": [
+    "https://stac-extensions.github.io/classification/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/eo/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/raster/v1.0.0/schema.json"
   ],
-  "summaries": {
-    "instruments": [
-      "viirs"
-    ],
-    "platform": [
-      "snpp"
-    ]
-  }
+  "collection": "viirs-09a1-001"
 }
