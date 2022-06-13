@@ -73,7 +73,7 @@ def create_item(
         item.add_asset(constants.METADATA_ASSET_KEY, Asset.from_dict(properties))
 
     if cog_hrefs:
-        fragments = STACFragments(metadata.product)
+        fragments = STACFragments(metadata.product, metadata.production_year_doy)
         for href in cog_hrefs:
             basename = os.path.splitext(os.path.basename(href))[0]
             subdataset_name = basename.split("_", 1)[1]

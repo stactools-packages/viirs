@@ -1,1 +1,1 @@
-tests/data-files/external/VNP09A1.A2012017.h00v09.001.2016294114238.h5
+tests/data-files/external/VNP09A1.A2022145.h11v05.001.2022154194417.h5

@@ -40,6 +40,7 @@ class Metadata:
 
     id: str
     product: str
+    production_year_doy: str
     version: str
     start_datetime: datetime.datetime
     end_datetime: datetime.datetime
@@ -144,10 +145,12 @@ class Metadata:
                 tile_id = value
 
         shape_bounds = cls._hdfeos_metadata(read_h5_href)
+        production_year_doy = cls._production_year_doy(h5_href)
 
         return Metadata(
             id=id,
             product=product,
+            production_year_doy=production_year_doy,
             version=version,
             start_datetime=start_datetime,
             end_datetime=end_datetime,
@@ -203,10 +206,12 @@ class Metadata:
         tile_id = tags["tileid"]
 
         shape_bounds = cls._hdfeos_metadata(read_h5_href)
+        production_year_doy = cls._production_year_doy(h5_href)
 
         return Metadata(
             id=id,
             product=product,
+            production_year_doy=production_year_doy,
             version=version,
             start_datetime=start_datetime,
             end_datetime=end_datetime,
@@ -257,6 +262,12 @@ class Metadata:
             "top": top,
             "bottom": bottom,
         }
+
+    @classmethod
+    def _production_year_doy(cls, h5_href: str) -> str:
+        basename = os.path.basename(h5_href)
+        production_time = basename.split(".")[-2]
+        return production_time[0:7]
 
     @property
     def transform(self) -> List[float]:

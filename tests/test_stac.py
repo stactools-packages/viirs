@@ -58,4 +58,5 @@ def test_only_h5_exists(file_name: str) -> None:
     href = test_data.get_external_data(file_name)
     item = stac.create_item(href)
     assert "hdf5" in item.assets
+    assert "metadata" not in item.assets
     item.validate()
