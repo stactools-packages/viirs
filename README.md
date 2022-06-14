@@ -23,7 +23,7 @@ Use this repository to create STAC Items and Collections for [VIIRS](https://vii
 
 ## STAC Examples
 
-There is an example Collection and Item for each VIIRS product in the [examples](examples) directory.
+There is an example Collection and Item for each VIIRS product supported by this repository in the [examples](examples) directory.
 
 ## Installation
 ```shell
