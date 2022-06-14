@@ -1,6 +1,8 @@
+import os
 import warnings
 from contextlib import contextmanager
 from typing import Any, Dict, Generator, List, Optional
+from enum import Enum
 
 from pystac.extensions.eo import EOExtension
 from pystac.extensions.raster import RasterExtension
@@ -9,6 +11,11 @@ from stactools.core.io import ReadHrefModifier
 
 from stactools.viirs import constants
 
+
+class VIIRSProducts(Enum):
+    VNP09A1 = "VNP09A1"
+
+VIIRSProducts.VNP09A1
 
 @contextmanager
 def ignore_not_georeferenced() -> Generator[None, None, None]:
@@ -55,3 +62,8 @@ def find_extensions(assets: Dict[str, Any]) -> List[str]:
             extensions.add(RasterExtension.get_schema_uri())
 
     return list(extensions)
+
+
+def product_from_filename(filename: str) -> str:
+    product = os.path.basename(filename).split(".")[0]
+
