@@ -28,6 +28,10 @@ class MissingElement(Exception):
     """An expected element is missing from the XML file"""
 
 
+class MissingXMLFile(Exception):
+    """H5 companion XML file is missing"""
+
+
 @dataclass
 class Metadata:
     """Structure to hold values from a metadata XML file or source H5 file.
@@ -399,4 +403,8 @@ def viirs_metadata(
     if href_exists(read_xml_href):
         return Metadata.from_xml_and_h5(h5_href, read_href_modifier, densify_factor)
     else:
-        return Metadata.from_h5(h5_href, read_href_modifier, densify_factor)
+        product = os.path.basename(xml_href).split(".")[0]
+        if product == "VNP46A2":
+            return Metadata.from_h5(h5_href, read_href_modifier, densify_factor)
+        else:
+            raise MissingXMLFile(f"{product} H5 files require a companion XML file")
