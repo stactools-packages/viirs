@@ -8,8 +8,11 @@ from pystac import Extent, Link, MediaType, Provider
 class STACFragments:
     """Class for accessing collection and asset data."""
 
-    def __init__(self, product: str, production_year_doy: int = 2100000) -> None:
-        # default production_year_doy value produces updated assets.
+    def __init__(self, product: str, production_year_doy: int = 2999000) -> None:
+        # If a production date is not supplied, we would like to default to
+        # generating the most up to date assets. The default value is therefore
+        # set far into the future (year 2999, day 000) to force all asset
+        # updates to be applied.
         self.product = product
         self.assets = self._load("assets.json")
         if self.product[0:5] == "VNP09":
