@@ -8,7 +8,7 @@ from pystac import Extent, Link, MediaType, Provider
 class STACFragments:
     """Class for accessing collection and asset data."""
 
-    def __init__(self, product: str, production_year_doy: str = "2100000") -> None:
+    def __init__(self, product: str, production_year_doy: int = 2100000) -> None:
         # default production_year_doy value produces updated assets.
         self.product = product
         self.assets = self._load("assets.json")
@@ -56,7 +56,7 @@ class STACFragments:
         collection["links"] = [Link.from_dict(link) for link in collection["links"]]
         return collection
 
-    def _update_assets(self, production_year_doy: str) -> None:
+    def _update_assets(self, production_year_doy: int) -> None:
         def update_fields(source: Dict[str, Any], updates: Dict[str, Any]) -> None:
             for band, fields in updates.items():
                 for field, value in fields.items():
@@ -64,7 +64,7 @@ class STACFragments:
 
         asset_updates = self._load("assets-updates.json")
         for update_year_doy, bands in asset_updates.items():
-            if int(production_year_doy) >= int(update_year_doy):
+            if production_year_doy >= int(update_year_doy):
                 update_fields(self.assets, bands)
 
     def _load(self, file_name: str) -> Any:

@@ -40,7 +40,7 @@ class Metadata:
 
     id: str
     product: str
-    production_year_doy: str
+    production_year_doy: int
     version: str
     start_datetime: datetime.datetime
     end_datetime: datetime.datetime
@@ -264,10 +264,10 @@ class Metadata:
         }
 
     @classmethod
-    def _production_year_doy(cls, h5_href: str) -> str:
+    def _production_year_doy(cls, h5_href: str) -> int:
         basename = os.path.basename(h5_href)
         production_time = basename.split(".")[-2]
-        return production_time[0:7]
+        return int(production_time[0:7])
 
     @property
     def transform(self) -> List[float]:
