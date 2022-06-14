@@ -1,0 +1,72 @@
+{
+    "id": "viirs-10a1-001",
+    "title": "VIIRS Snow Cover Daily",
+    "description": "This data set contains daily snow cover derived from radiance data acquired by the VIIRS sensor. The data is a gridded composite, generated from 6 minute swaths, and projected to a 375 m Sinusoidal grid. Snow cover is identified using the Normalized Difference Snow Index (NDSI) and a series of screens designed to alleviate errors and flag uncertain snow cover detections.",
+    "license": "proprietary",
+    "links": [
+        {
+            "rel": "license",
+            "href": "https://nsidc.org/about/use_copyright.html",
+            "type": "text/html",
+            "title": "NSIDC - Use and Copyright"
+        },
+        {
+            "rel": "help",
+            "href": "https://nsidc.org/sites/nsidc.org/files/technical-references/VIIRS_snow_products_user_guide_version_8.pdf",
+            "type": "application/pdf",
+            "title": "NASA S-NPP VIIRS Snow Cover Products Collection 1 (C1) User Guide"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://nsidc.org/sites/nsidc.org/files/technical-references/VIIRS_snow_cover_ATBD_2015.pdf",
+            "type": "application/pdf",
+            "title": "VIIRS Snow Cover Algorithm Theoretical Basis Document (ATBD)"
+        },
+        {
+            "rel": "cite-as",
+            "href": "https://doi.org/10.5067/VIIRS/VNP10A1.001",
+            "type": "text/html",
+            "title": "NSIDC DAAC - VNP10A1 v001"
+        }
+    ],
+    "keywords": [
+        "NASA",
+        "VIIRS",
+        "Satellite",
+        "Global",
+        "Snow",
+        "VNP10A1"
+    ],
+    "providers": [
+        {
+            "name": "NASA National Snow and Ice Data Center (NSIDC) Distributed Active Archive Center (DAAC)",
+            "roles": [
+                "producer",
+                "licensor"
+            ],
+            "url": "https://nsidc.org/daac"
+        }
+    ],
+    "extent": {
+        "spatial": {
+            "bbox": [
+                [
+                    -180,
+                    -90,
+                    180,
+                    90
+                ]
+            ]
+        },
+        "temporal": {
+            "interval": [
+                [
+                    "2012-01-19T00:00:00Z",
+                    null
+                ]
+            ]
+        }
+    },
+    "sci:doi": "10.5067/VIIRS/VNP10A1.001",
+    "sci:citation": "Riggs, GA, DK Hall, and MO Roman. 2019. VIIRS/NPP Snow Cover Daily L3 Global 375m SIN Grid, Version 1. NASA National Snow and Ice Data Center Distributed Active Archive Center, Boulder, Colorado USA."
+}

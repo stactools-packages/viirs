@@ -1,0 +1,67 @@
+{
+    "id": "viirs-43ma4-001",
+    "title": "VIIRS Moderate Band (1000m) Nadir BRDF-Adjusted Reflectance (NBAR) Daily",
+    "description": "The VIIRS Nadir Bidirectional Reflectance Distribution Function (BRDF) Adjusted Reflectance (NBAR) Version 1 product provides NBAR estimates at 1 kilometer resolution. The product is produced daily using 16 days of VIIRS data and is weighted temporally to the ninth day, which is reflected in the file name. The view angle effects are removed from the directional reflectances, resulting in a stable and consistent NBAR product. The VNP43 data products are designed to promote the continuity of NASA's Moderate Resolution Imaging Spectroradiometer (MODIS) BRDF/Albedo data product suite. The product includes 18 layers for BRDF/Albedo mandatory quality and nadir reflectance for VIIRS moderate bands M1-M5, M7-M8, and M10-M11.",
+    "license": "proprietary",
+    "links": [
+        {
+            "rel": "license",
+            "href": "https://lpdaac.usgs.gov/data/data-citation-and-policies/",
+            "type": "text/html",
+            "title": "LP DAAC - Data Citation and Policies"
+        },
+        {
+            "rel": "describedby",
+            "href": "https://lpdaac.usgs.gov/documents/194/VNP43_ATBD_V1.pdf",
+            "type": "application/pdf",
+            "title": "VIIRS BRDF, Albedo, and NBAR Product Algorithm Theoretical Basis Document(ATBD)"
+        },
+        {
+            "rel": "cite-as",
+            "href": "https://doi.org/10.5067/VIIRS/VNP43MA4.001",
+            "type": "text/html",
+            "title": "LP DAAC - VNP43MA4 v001"
+        }
+    ],
+    "keywords": [
+        "NASA",
+        "VIIRS",
+        "Satellite",
+        "Imagery",
+        "Global",
+        "Reflectance",
+        "VNP43MA4"
+    ],
+    "providers": [
+        {
+            "name": "NASA LP DAAC at the USGS EROS Center",
+            "roles": [
+                "producer",
+                "licensor"
+            ],
+            "url": "https://lpdaac.usgs.gov/"
+        }
+    ],
+    "extent": {
+        "spatial": {
+            "bbox": [
+                [
+                    -180,
+                    -90,
+                    180,
+                    90
+                ]
+            ]
+        },
+        "temporal": {
+            "interval": [
+                [
+                    "2012-01-17T00:00:00Z",
+                    null
+                ]
+            ]
+        }
+    },
+    "sci:doi": "10.5067/VIIRS/VNP43MA4.001",
+    "sci:citation": "Schaaf, CB. 2017. VIIRS/NPP Nadir BRDF-Adjusted Reflectance Daily L3 Global 1 km SIN Grid, Version 1. Land Processes Distributed Active Archive Center (LP DAAC), Sioux Falls, South Dakota USA."
+}

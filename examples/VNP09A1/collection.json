@@ -8,7 +8,7 @@
       "rel": "root",
       "href": "./collection.json",
       "type": "application/json",
-      "title": "VIIRS M-Band (1000m) Surface Reflectance 8-Day"
+      "title": "VIIRS Moderate Band (1000m) Surface Reflectance 8-Day"
     },
     {
       "rel": "license",
@@ -25,11 +25,17 @@
     {
       "rel": "cite-as",
       "href": "https://doi.org/10.5067/VIIRS/VNP09A1.001",
+      "type": "text/html",
       "title": "LP DAAC - VNP09A1 v001"
     },
     {
       "rel": "item",
       "href": "./VNP09A1.A2012017.h00v09.001.2016294114238/VNP09A1.A2012017.h00v09.001.2016294114238.json",
+      "type": "application/json"
+    },
+    {
+      "rel": "item",
+      "href": "./VNP09A1.A2022145.h11v05.001.2022154194417/VNP09A1.A2022145.h11v05.001.2022154194417.json",
       "type": "application/json"
     }
   ],
@@ -903,7 +909,8 @@
     }
   },
   "sci:doi": "10.5067/VIIRS/VNP09A1.001",
-  "title": "VIIRS M-Band (1000m) Surface Reflectance 8-Day",
+  "sci:citation": "Vermote, E. 2020. VIIRS/NPP Surface Reflectance 8-Day L3 Global 1 km SIN Grid, Version 1. Land Processes Distributed Active Archive Center (LP DAAC), Sioux Falls, South Dakota USA.",
+  "title": "VIIRS Moderate Band (1000m) Surface Reflectance 8-Day",
   "extent": {
     "spatial": {
       "bbox": [

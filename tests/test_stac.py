@@ -1,3 +1,5 @@
+import os
+
 import pytest
 import shapely.geometry
 from stactools.core.utils.antimeridian import Strategy
@@ -58,4 +60,27 @@ def test_only_h5_exists(file_name: str) -> None:
     href = test_data.get_external_data(file_name)
     item = stac.create_item(href)
     assert "hdf5" in item.assets
+    assert "metadata" not in item.assets
     item.validate()
+
+
+def test_asset_updates() -> None:
+    filename = "VNP09A1.A2012017.h00v09.001.2016294114238.h5"
+    basename = os.path.splitext(filename)[0]
+    cog_name = [f"{basename}_SurfReflect_M1.tif"]
+    href = test_data.get_external_data(filename)
+    _ = test_data.get_external_data(f"{filename}.xml")
+    item = stac.create_item(href, cog_hrefs=cog_name)
+    assets = {k: v.to_dict() for k, v in item.assets.items()}
+    raster_bands = assets["SurfReflect_M1"]["raster:bands"][0]
+    assert raster_bands["nodata"] == 0
+
+    filename = "VNP09A1.A2022145.h11v05.001.2022154194417.h5"
+    basename = os.path.splitext(filename)[0]
+    cog_name = [f"{basename}_SurfReflect_M1.tif"]
+    href = test_data.get_external_data(filename)
+    _ = test_data.get_external_data(f"{filename}.xml")
+    item = stac.create_item(href, cog_hrefs=cog_name)
+    assets = {k: v.to_dict() for k, v in item.assets.items()}
+    raster_bands = assets["SurfReflect_M1"]["raster:bands"][0]
+    assert raster_bands["nodata"] == -28672

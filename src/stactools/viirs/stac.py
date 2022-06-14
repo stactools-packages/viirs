@@ -73,7 +73,7 @@ def create_item(
         item.add_asset(constants.METADATA_ASSET_KEY, Asset.from_dict(properties))
 
     if cog_hrefs:
-        fragments = STACFragments(metadata.product)
+        fragments = STACFragments(metadata.product, metadata.production_year_doy)
         for href in cog_hrefs:
             basename = os.path.splitext(os.path.basename(href))[0]
             subdataset_name = basename.split("_", 1)[1]
@@ -136,6 +136,11 @@ def create_collection(product: str) -> Collection:
 
     ScientificExtension.add_to(collection)
     collection.extra_fields["sci:doi"] = collection_fragments["sci:doi"]
+    collection.extra_fields["sci:citation"] = collection_fragments["sci:citation"]
+    if "sci:publications" in collection_fragments:
+        collection.extra_fields["sci:publications"] = collection_fragments[
+            "sci:publications"
+        ]
 
     extensions = find_extensions(item_assets_dict)
     collection.stac_extensions.extend(extensions)

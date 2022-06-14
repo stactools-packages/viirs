@@ -166,12 +166,13 @@ def create_viirs_command(cli: Group) -> Command:
         item_dict = defaultdict(list)
         for href in hrefs:
             h5dir = os.path.dirname(href)
+            root = os.path.splitext(href)[0]
             product = os.path.basename(href).split(".")[0]
             cog_hrefs = None
             if create_cogs:
                 cog_hrefs = cog.cogify(href, h5dir)
             else:
-                cog_hrefs = glob.glob(f"{h5dir}/{product}*.tif")
+                cog_hrefs = glob.glob(f"{root}*.tif")
             item = stac.create_item(
                 href, cog_hrefs=cog_hrefs, antimeridian_strategy=strategy
             )
@@ -182,10 +183,9 @@ def create_viirs_command(cli: Group) -> Command:
             collection.set_self_href(os.path.join(outdir, f"{product}/collection.json"))
             for item in items:
                 collection.add_item(item)
-
-        collection.catalog_type = CatalogType.SELF_CONTAINED
-        collection.make_all_asset_hrefs_relative()
-        collection.validate_all()
-        collection.save()
+            collection.catalog_type = CatalogType.SELF_CONTAINED
+            collection.make_all_asset_hrefs_relative()
+            collection.validate_all()
+            collection.save()
 
     return viirs

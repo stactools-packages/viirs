@@ -8,9 +8,15 @@ from pystac import Extent, Link, MediaType, Provider
 class STACFragments:
     """Class for accessing collection and asset data."""
 
-    def __init__(self, product: str) -> None:
+    def __init__(self, product: str, production_year_doy: int = 2999000) -> None:
+        # If a production date is not supplied, we would like to default to
+        # generating the most up to date assets. The default value is therefore
+        # set far into the future (year 2999, day 000) to force all asset
+        # updates to be applied.
         self.product = product
         self.assets = self._load("assets.json")
+        if self.product[0:5] == "VNP09":
+            self._update_assets(production_year_doy)
 
     def assets_dict(self) -> Dict[str, Any]:
         """Returns a dictionary of Asset dictionaries (less the 'href' field)
@@ -52,6 +58,17 @@ class STACFragments:
         ]
         collection["links"] = [Link.from_dict(link) for link in collection["links"]]
         return collection
+
+    def _update_assets(self, production_year_doy: int) -> None:
+        def update_fields(source: Dict[str, Any], updates: Dict[str, Any]) -> None:
+            for band, fields in updates.items():
+                for field, value in fields.items():
+                    source[band][field] = value
+
+        asset_updates = self._load("assets-updates.json")
+        for update_year_doy, bands in asset_updates.items():
+            if production_year_doy >= int(update_year_doy):
+                update_fields(self.assets, bands)
 
     def _load(self, file_name: str) -> Any:
         try:

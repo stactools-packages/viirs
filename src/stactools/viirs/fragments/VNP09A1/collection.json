@@ -1,6 +1,6 @@
 {
     "id": "viirs-09a1-001",
-    "title": "VIIRS M-Band (1000m) Surface Reflectance 8-Day",
+    "title": "VIIRS Moderate Band (1000m) Surface Reflectance 8-Day",
     "description": "The 8-day VIIRS surface reflectance Version 1 composite product provides an estimate of land surface reflectance from the VIIRS sensor for nine moderate resolution bands (M1 - M5, M7, M8, M10, M11) at nominal 1 kilometer resolution (~926 meter). The 1 kilometer dataset is derived through resampling the native 750 meter VIIRS resolution in the Level 2 input product. Each pixel represents the best possible Level 2G observation during an 8-day period.",
     "license": "proprietary",
     "links": [
@@ -62,5 +62,6 @@
             ]
         }
     },
-    "sci:doi": "10.5067/VIIRS/VNP09A1.001"
+    "sci:doi": "10.5067/VIIRS/VNP09A1.001",
+    "sci:citation": "Vermote, E. 2020. VIIRS/NPP Surface Reflectance 8-Day L3 Global 1 km SIN Grid, Version 1. Land Processes Distributed Active Archive Center (LP DAAC), Sioux Falls, South Dakota USA."
 }

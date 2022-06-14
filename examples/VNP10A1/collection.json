@@ -1,0 +1,407 @@
+{
+  "type": "Collection",
+  "id": "viirs-10a1-001",
+  "stac_version": "1.0.0",
+  "description": "This data set contains daily snow cover derived from radiance data acquired by the VIIRS sensor. The data is a gridded composite, generated from 6 minute swaths, and projected to a 375 m Sinusoidal grid. Snow cover is identified using the Normalized Difference Snow Index (NDSI) and a series of screens designed to alleviate errors and flag uncertain snow cover detections.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "./collection.json",
+      "type": "application/json",
+      "title": "VIIRS Snow Cover Daily"
+    },
+    {
+      "rel": "license",
+      "href": "https://nsidc.org/about/use_copyright.html",
+      "type": "text/html",
+      "title": "NSIDC - Use and Copyright"
+    },
+    {
+      "rel": "help",
+      "href": "https://nsidc.org/sites/nsidc.org/files/technical-references/VIIRS_snow_products_user_guide_version_8.pdf",
+      "type": "application/pdf",
+      "title": "NASA S-NPP VIIRS Snow Cover Products Collection 1 (C1) User Guide"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://nsidc.org/sites/nsidc.org/files/technical-references/VIIRS_snow_cover_ATBD_2015.pdf",
+      "type": "application/pdf",
+      "title": "VIIRS Snow Cover Algorithm Theoretical Basis Document (ATBD)"
+    },
+    {
+      "rel": "cite-as",
+      "href": "https://doi.org/10.5067/VIIRS/VNP10A1.001",
+      "type": "text/html",
+      "title": "NSIDC DAAC - VNP10A1 v001"
+    },
+    {
+      "rel": "item",
+      "href": "./VNP10A1.A2022097.h11v05.001.2022098094651/VNP10A1.A2022097.h11v05.001.2022098094651.json",
+      "type": "application/json"
+    }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/classification/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/raster/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json"
+  ],
+  "item_assets": {
+    "hdf5": {
+      "type": "application/x-hdf5",
+      "roles": [
+        "data"
+      ],
+      "title": "Source data containing all bands"
+    },
+    "metadata": {
+      "type": "application/xml",
+      "roles": [
+        "metadata"
+      ],
+      "title": "Earth Observing System Data and Information System (EOSDIS) metadata"
+    },
+    "NDSI": {
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": 32767,
+          "scale": 0.001,
+          "spatial_resolution": 375
+        }
+      ],
+      "title": "Normalized Difference Snow Index (NDSI)",
+      "description": "NDSI for all land and inland water pixels without the cloud mask applied",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "NDSI_fill": {
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": 32767,
+          "spatial_resolution": 375
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "night",
+          "value": 21100
+        },
+        {
+          "description": "ocean",
+          "value": 23900
+        },
+        {
+          "description": "L1B_missing",
+          "value": 25100
+        },
+        {
+          "description": "L1B_unusable",
+          "value": 25200
+        },
+        {
+          "description": "bowtie_trim",
+          "value": 25300
+        },
+        {
+          "description": "L1B_fill",
+          "value": 25400
+        }
+      ],
+      "title": "Normalized Difference Snow Index (NDSI) Fill Values",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "NDSI_Snow_Cover": {
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "spatial_resolution": 375
+        }
+      ],
+      "title": "Snow Cover by NDSI",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "NDSI_Snow_Cover_fill": {
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "spatial_resolution": 375
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "no_decision",
+          "value": 201
+        },
+        {
+          "description": "night",
+          "value": 211
+        },
+        {
+          "description": "lake",
+          "value": 237
+        },
+        {
+          "description": "ocean",
+          "value": 239
+        },
+        {
+          "description": "cloud",
+          "value": 250
+        },
+        {
+          "description": "missing_data",
+          "value": 251
+        },
+        {
+          "description": "bowtie_trim",
+          "value": 253
+        },
+        {
+          "description": "L1B_fill",
+          "value": 254
+        }
+      ],
+      "title": "Snow Cover by NDSI Fill Values",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "Algorithm_bit_flags_QA": {
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "unit": "bit field",
+          "spatial_resolution": 375
+        }
+      ],
+      "classification:bitfields": [
+        {
+          "name": "inland_water_flag",
+          "offset": 0,
+          "length": 1,
+          "classes": [
+            {
+              "description": "true",
+              "value": 1
+            },
+            {
+              "description": "false",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "name": "low_visible_screen",
+          "offset": 1,
+          "length": 1,
+          "classes": [
+            {
+              "description": "true",
+              "value": 1
+            },
+            {
+              "description": "false",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "name": "low_ndsi_screen",
+          "offset": 2,
+          "length": 1,
+          "classes": [
+            {
+              "description": "true",
+              "value": 1
+            },
+            {
+              "description": "false",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "name": "combined_surface_temperature_and_height_screen_or_flag",
+          "offset": 3,
+          "length": 1,
+          "classes": [
+            {
+              "description": "true",
+              "value": 1
+            },
+            {
+              "description": "false",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "name": "high_swir_screen_or_flag",
+          "offset": 5,
+          "length": 1,
+          "classes": [
+            {
+              "description": "true",
+              "value": 1
+            },
+            {
+              "description": "false",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "name": "solar_zenith_flag",
+          "offset": 7,
+          "length": 1,
+          "classes": [
+            {
+              "description": "true",
+              "value": 1
+            },
+            {
+              "description": "false",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "title": "Algorithm Bit Flags QA",
+      "description": "A bitfield of flags set for certain conditions detected by data screens in the algorithm. Multiple flags may be set for a pixel.",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "Basic_QA": {
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "spatial_resolution": 375
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "good",
+          "value": 0
+        },
+        {
+          "description": "poor",
+          "value": 1
+        },
+        {
+          "description": "bad",
+          "value": 2
+        },
+        {
+          "description": "other",
+          "value": 3
+        },
+        {
+          "description": "night",
+          "value": 211
+        },
+        {
+          "description": "ocean",
+          "value": 239
+        },
+        {
+          "description": "cloud",
+          "value": 250
+        },
+        {
+          "description": "no_decision",
+          "value": 252
+        },
+        {
+          "description": "bowtie_trim",
+          "value": 253
+        }
+      ],
+      "title": "Basic QA Value",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "granule_pnt": {
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "spatial_resolution": 375
+        }
+      ],
+      "title": "Granule Pointer",
+      "description": "A numeric value that points to the index of values stored in the global attributes GranulePointerArray, GranuleBeginningDateTime and GranuleEndingDateTime. This pointer points to the index of the value in those arrays from which the 'best' observation was selected.",
+      "role": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    }
+  },
+  "sci:doi": "10.5067/VIIRS/VNP10A1.001",
+  "sci:citation": "Riggs, GA, DK Hall, and MO Roman. 2019. VIIRS/NPP Snow Cover Daily L3 Global 375m SIN Grid, Version 1. NASA National Snow and Ice Data Center Distributed Active Archive Center, Boulder, Colorado USA.",
+  "title": "VIIRS Snow Cover Daily",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180,
+          -90,
+          180,
+          90
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2012-01-19T00:00:00Z",
+          null
+        ]
+      ]
+    }
+  },
+  "license": "proprietary",
+  "keywords": [
+    "NASA",
+    "VIIRS",
+    "Satellite",
+    "Global",
+    "Snow",
+    "VNP10A1"
+  ],
+  "providers": [
+    {
+      "name": "NASA National Snow and Ice Data Center (NSIDC) Distributed Active Archive Center (DAAC)",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://nsidc.org/daac"
+    }
+  ],
+  "summaries": {
+    "instruments": [
+      "viirs"
+    ],
+    "platform": [
+      "snpp"
+    ]
+  }
+}

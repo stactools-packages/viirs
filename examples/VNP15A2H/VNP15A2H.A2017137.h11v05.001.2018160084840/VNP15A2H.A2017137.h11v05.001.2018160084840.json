@@ -1,0 +1,593 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "id": "VNP15A2H.A2017137.h11v05.001.2018160084840",
+  "properties": {
+    "start_datetime": "2017-05-17T00:00:00Z",
+    "end_datetime": "2017-05-24T23:59:59Z",
+    "viirs:horizontal-tile": 11,
+    "viirs:vertical-tile": 5,
+    "viirs:tile-id": "51011005",
+    "created": "2018-06-09T08:48:40Z",
+    "platform": "snpp",
+    "instruments": [
+      "viirs"
+    ],
+    "proj:epsg": null,
+    "proj:wkt2": "PROJCS[\"unnamed\",GEOGCS[\"Unknown datum based upon the custom spheroid\",DATUM[\"Not specified (based on custom spheroid)\",SPHEROID[\"Custom spheroid\",6371007.181,0]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Sinusoidal\"],PARAMETER[\"longitude_of_center\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"Meter\",1],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+    "proj:transform": [
+      463.3127165279169,
+      0.0,
+      -7783653.637667,
+      0.0,
+      -463.3127165279167,
+      4447802.078667
+    ],
+    "proj:shape": [
+      2400,
+      2400
+    ],
+    "datetime": null
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -91.37851024025423,
+          39.99999999641088
+        ],
+        [
+          -80.82903767709807,
+          29.99999999730591
+        ],
+        [
+          -69.28203229465252,
+          29.99999999730591
+        ],
+        [
+          -78.32443734878598,
+          39.99999999641088
+        ],
+        [
+          -91.37851024025423,
+          39.99999999641088
+        ]
+      ]
+    ]
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../collection.json",
+      "type": "application/json",
+      "title": "VIIRS Leaf Area Index/FPAR 8-Day"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json",
+      "title": "VIIRS Leaf Area Index/FPAR 8-Day"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json",
+      "title": "VIIRS Leaf Area Index/FPAR 8-Day"
+    }
+  ],
+  "assets": {
+    "hdf5": {
+      "href": "../../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840.h5",
+      "type": "application/x-hdf5",
+      "title": "Source data containing all bands",
+      "roles": [
+        "data"
+      ]
+    },
+    "metadata": {
+      "href": "../../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840.h5.xml",
+      "type": "application/xml",
+      "title": "Earth Observing System Data and Information System (EOSDIS) metadata",
+      "roles": [
+        "metadata"
+      ]
+    },
+    "Lai_fill": {
+      "href": "../../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_Lai_fill.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "LAI Fill Values",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 200,
+          "spatial_resolution": 500
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "land cover assigned as 'unclassified1 or not able to determine",
+          "value": 249
+        },
+        {
+          "description": "land cover assigned as urban/built-up",
+          "value": 250
+        },
+        {
+          "description": "land cover assigned as \u201cpermanent\u201d wetlands/inundated marshlands",
+          "value": 251
+        },
+        {
+          "description": "land cover assigned as perennial snow, ice",
+          "value": 252
+        },
+        {
+          "description": "land cover assigned as barren, sparse vegetation (rock, tundra, desert)",
+          "value": 253
+        },
+        {
+          "description": "land cover assigned as perennial salt or inland fresh water",
+          "value": 254
+        },
+        {
+          "description": "Fillvalue, assigned when: the VNP09GA surface reflectance for channels VIS, NIR was assigned as Fillvalue, or land cover pixel itself was assigned Fillvalue of 255 or 254",
+          "value": 255
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "Fpar": {
+      "href": "../../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_Fpar.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Fraction of Photosynthetically Active Radiation (FPAR)",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 200,
+          "scale": 0.01,
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "FparStdDev_fill": {
+      "href": "../../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_FparStdDev_fill.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "FPAR Standard deviation Fill Values",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 200,
+          "spatial_resolution": 500
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "No standard deviation available, pixel produced using backup method",
+          "value": 248
+        },
+        {
+          "description": "land cover assigned as 'unclassified1 or not able to determine",
+          "value": 249
+        },
+        {
+          "description": "land cover assigned as urban/built-up",
+          "value": 250
+        },
+        {
+          "description": "land cover assigned as \u201cpermanent\u201d wetlands/inundated marshlands",
+          "value": 251
+        },
+        {
+          "description": "land cover assigned as perennial snow, ice",
+          "value": 252
+        },
+        {
+          "description": "land cover assigned as barren, sparse vegetation (rock, tundra, desert)",
+          "value": 253
+        },
+        {
+          "description": "land cover assigned as perennial salt or inland fresh water",
+          "value": 254
+        },
+        {
+          "description": "Fillvalue, assigned when: the VNP09GA surface reflectance for channels VIS, NIR was assigned as Fillvalue, or land cover pixel itself was assigned Fillvalue of 255 or 254",
+          "value": 255
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "FparExtra_QC": {
+      "href": "../../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_FparExtra_QC.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Pass-through Quality Control (QC) for FPAR",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "unit": "bit field",
+          "spatial_resolution": 500
+        }
+      ],
+      "classification:bitfields": [
+        {
+          "name": "cloud_confidence",
+          "description": "Cloud detection and confidence",
+          "offset": 0,
+          "length": 2,
+          "classes": [
+            {
+              "description": "Confident clear",
+              "value": 0
+            },
+            {
+              "description": "Probably clear",
+              "value": 1
+            },
+            {
+              "description": "Probably cloudy",
+              "value": 2
+            },
+            {
+              "description": "Confident cloudy",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "name": "cloud_shadow",
+          "offset": 2,
+          "length": 1,
+          "classes": [
+            {
+              "description": "No cloud shadow",
+              "value": 0
+            },
+            {
+              "description": "Shadow",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "Thin cirrus",
+          "offset": 3,
+          "length": 1,
+          "classes": [
+            {
+              "description": "No",
+              "value": 0
+            },
+            {
+              "description": "Yes",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "aerosol_quantity",
+          "offset": 4,
+          "length": 2,
+          "classes": [
+            {
+              "description": "Climatology",
+              "value": 0
+            },
+            {
+              "description": "Low",
+              "value": 1
+            },
+            {
+              "description": "Average",
+              "value": 2
+            },
+            {
+              "description": "High",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "name": "snow_ice",
+          "offset": 6,
+          "length": 1,
+          "classes": [
+            {
+              "description": "No",
+              "value": 0
+            },
+            {
+              "description": "Yes",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "FparLai_QC": {
+      "href": "../../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_FparLai_QC.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Quality for LAI and FPAR",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "unit": "bit field",
+          "spatial_resolution": 500
+        }
+      ],
+      "classification:bitfields": [
+        {
+          "name": "scf_qc",
+          "description": "SCF_QC (five-level confidence score)",
+          "offset": 0,
+          "length": 3,
+          "classes": [
+            {
+              "description": "Main (RT) method used, best result possible (no saturation)",
+              "value": 0
+            },
+            {
+              "description": "Main (RT) method used with saturation. Good, very usable",
+              "value": 1
+            },
+            {
+              "description": "Main (RT) method failed due to bad geometry, empirical algorithm used",
+              "value": 2
+            },
+            {
+              "description": "Main (RT) method failed due to problems other than geometry, empirical algorithm used",
+              "value": 3
+            },
+            {
+              "description": "Pixel not produced at all, value couldn't be retrieved (possible reasons: bad L1B data, unusable VNP09GA data, water pixel)",
+              "value": 4
+            }
+          ]
+        },
+        {
+          "name": "dead_detector",
+          "offset": 3,
+          "length": 1,
+          "classes": [
+            {
+              "description": "Both red and NIR detectors are fine",
+              "value": 0
+            },
+            {
+              "description": "At least one band has dead detector",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "biome_type",
+          "offset": 4,
+          "length": 4,
+          "classes": [
+            {
+              "description": "Water",
+              "value": 0
+            },
+            {
+              "description": "Grasses/cereal crops",
+              "value": 1
+            },
+            {
+              "description": "Shrubs",
+              "value": 2
+            },
+            {
+              "description": "Broadleaf crops",
+              "value": 3
+            },
+            {
+              "description": "Savanna",
+              "value": 4
+            },
+            {
+              "description": "Evergreen broadleaf forest",
+              "value": 5
+            },
+            {
+              "description": "Deciduous broadleaf forest",
+              "value": 6
+            },
+            {
+              "description": "Evergreen needleleaf forest",
+              "value": 7
+            },
+            {
+              "description": "Deciduous needleaf forest",
+              "value": 8
+            },
+            {
+              "description": "Non-vegetated",
+              "value": 9
+            },
+            {
+              "description": "Urban",
+              "value": 10
+            },
+            {
+              "description": "Unclassified",
+              "value": 11
+            },
+            {
+              "description": "Filled Value",
+              "value": 12
+            }
+          ]
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "Fpar_fill": {
+      "href": "../../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_Fpar_fill.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Fpar Fill Values",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 200,
+          "spatial_resolution": 500
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "land cover assigned as 'unclassified1 or not able to determine",
+          "value": 249
+        },
+        {
+          "description": "land cover assigned as urban/built-up",
+          "value": 250
+        },
+        {
+          "description": "land cover assigned as \u201cpermanent\u201d wetlands/inundated marshlands",
+          "value": 251
+        },
+        {
+          "description": "land cover assigned as perennial snow, ice",
+          "value": 252
+        },
+        {
+          "description": "land cover assigned as barren, sparse vegetation (rock, tundra, desert)",
+          "value": 253
+        },
+        {
+          "description": "land cover assigned as perennial salt or inland fresh water",
+          "value": 254
+        },
+        {
+          "description": "Fillvalue, assigned when: the VNP09GA surface reflectance for channels VIS, NIR was assigned as Fillvalue, or land cover pixel itself was assigned Fillvalue of 255 or 254",
+          "value": 255
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "LaiStdDev_fill": {
+      "href": "../../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_LaiStdDev_fill.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "LAI Standard Deviation Fill Values",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 200,
+          "spatial_resolution": 500
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "No standard deviation available, pixel produced using backup method",
+          "value": 248
+        },
+        {
+          "description": "land cover assigned as 'unclassified1 or not able to determine",
+          "value": 249
+        },
+        {
+          "description": "land cover assigned as urban/built-up",
+          "value": 250
+        },
+        {
+          "description": "land cover assigned as \u201cpermanent\u201d wetlands/inundated marshlands",
+          "value": 251
+        },
+        {
+          "description": "land cover assigned as perennial snow, ice",
+          "value": 252
+        },
+        {
+          "description": "land cover assigned as barren, sparse vegetation (rock, tundra, desert)",
+          "value": 253
+        },
+        {
+          "description": "land cover assigned as perennial salt or inland fresh water",
+          "value": 254
+        },
+        {
+          "description": "Fillvalue, assigned when: the VNP09GA surface reflectance for channels VIS, NIR was assigned as Fillvalue, or land cover pixel itself was assigned Fillvalue of 255 or 254",
+          "value": 255
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "Lai": {
+      "href": "../../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_Lai.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Leaf Area Index (LAI)",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 200,
+          "unit": "square_meter/square_meter",
+          "scale": 0.1,
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "LaiStdDev": {
+      "href": "../../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_LaiStdDev.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "LAI Standard Deviation",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 200,
+          "unit": "square_meter/square_meter",
+          "scale": 0.1,
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "FparStdDev": {
+      "href": "../../../tests/data-files/external/VNP15A2H.A2017137.h11v05.001.2018160084840_FparStdDev.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "FPAR Standard deviation",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 200,
+          "scale": 0.01,
+          "spatial_resolution": 500
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    }
+  },
+  "bbox": [
+    -91.37851024025423,
+    29.99999999730591,
+    -69.28203229465252,
+    39.99999999641088
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/classification/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/raster/v1.0.0/schema.json"
+  ],
+  "collection": "viirs-15a2h-001"
+}

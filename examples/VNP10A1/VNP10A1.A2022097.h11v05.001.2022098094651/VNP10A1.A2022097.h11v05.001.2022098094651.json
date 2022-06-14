@@ -1,0 +1,408 @@
+{
+  "type": "Feature",
+  "stac_version": "1.0.0",
+  "id": "VNP10A1.A2022097.h11v05.001.2022098094651",
+  "properties": {
+    "start_datetime": "2022-04-07T00:00:00Z",
+    "end_datetime": "2022-04-07T23:59:59Z",
+    "viirs:horizontal-tile": 11,
+    "viirs:vertical-tile": 5,
+    "viirs:tile-id": "51011005",
+    "created": "2022-04-08T09:46:51Z",
+    "platform": "snpp",
+    "instruments": [
+      "viirs"
+    ],
+    "proj:epsg": null,
+    "proj:wkt2": "PROJCS[\"unnamed\",GEOGCS[\"Unknown datum based upon the custom spheroid\",DATUM[\"Not specified (based on custom spheroid)\",SPHEROID[\"Custom spheroid\",6371007.181,0]],PRIMEM[\"Greenwich\",0],UNIT[\"degree\",0.0174532925199433,AUTHORITY[\"EPSG\",\"9122\"]]],PROJECTION[\"Sinusoidal\"],PARAMETER[\"longitude_of_center\",0],PARAMETER[\"false_easting\",0],PARAMETER[\"false_northing\",0],UNIT[\"Meter\",1],AXIS[\"Easting\",EAST],AXIS[\"Northing\",NORTH]]",
+    "proj:transform": [
+      370.6501732223335,
+      0.0,
+      -7783653.637667,
+      0.0,
+      -370.65017322233336,
+      4447802.078667
+    ],
+    "proj:shape": [
+      3000,
+      3000
+    ],
+    "datetime": null
+  },
+  "geometry": {
+    "type": "Polygon",
+    "coordinates": [
+      [
+        [
+          -91.37851024025423,
+          39.99999999641088
+        ],
+        [
+          -80.82903767709807,
+          29.99999999730591
+        ],
+        [
+          -69.28203229465252,
+          29.99999999730591
+        ],
+        [
+          -78.32443734878598,
+          39.99999999641088
+        ],
+        [
+          -91.37851024025423,
+          39.99999999641088
+        ]
+      ]
+    ]
+  },
+  "links": [
+    {
+      "rel": "root",
+      "href": "../collection.json",
+      "type": "application/json",
+      "title": "VIIRS Snow Cover Daily"
+    },
+    {
+      "rel": "collection",
+      "href": "../collection.json",
+      "type": "application/json",
+      "title": "VIIRS Snow Cover Daily"
+    },
+    {
+      "rel": "parent",
+      "href": "../collection.json",
+      "type": "application/json",
+      "title": "VIIRS Snow Cover Daily"
+    }
+  ],
+  "assets": {
+    "hdf5": {
+      "href": "../../../tests/data-files/external/VNP10A1.A2022097.h11v05.001.2022098094651.h5",
+      "type": "application/x-hdf5",
+      "title": "Source data containing all bands",
+      "roles": [
+        "data"
+      ]
+    },
+    "metadata": {
+      "href": "../../../tests/data-files/external/VNP10A1.A2022097.h11v05.001.2022098094651.h5.xml",
+      "type": "application/xml",
+      "title": "Earth Observing System Data and Information System (EOSDIS) metadata",
+      "roles": [
+        "metadata"
+      ]
+    },
+    "NDSI_fill": {
+      "href": "../../../tests/data-files/external/VNP10A1.A2022097.h11v05.001.2022098094651_NDSI_fill.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Normalized Difference Snow Index (NDSI) Fill Values",
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": 32767,
+          "spatial_resolution": 375
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "night",
+          "value": 21100
+        },
+        {
+          "description": "ocean",
+          "value": 23900
+        },
+        {
+          "description": "L1B_missing",
+          "value": 25100
+        },
+        {
+          "description": "L1B_unusable",
+          "value": 25200
+        },
+        {
+          "description": "bowtie_trim",
+          "value": 25300
+        },
+        {
+          "description": "L1B_fill",
+          "value": 25400
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "granule_pnt": {
+      "href": "../../../tests/data-files/external/VNP10A1.A2022097.h11v05.001.2022098094651_granule_pnt.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Granule Pointer",
+      "description": "A numeric value that points to the index of values stored in the global attributes GranulePointerArray, GranuleBeginningDateTime and GranuleEndingDateTime. This pointer points to the index of the value in those arrays from which the 'best' observation was selected.",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "spatial_resolution": 375
+        }
+      ],
+      "role": [
+        "data"
+      ]
+    },
+    "Basic_QA": {
+      "href": "../../../tests/data-files/external/VNP10A1.A2022097.h11v05.001.2022098094651_Basic_QA.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Basic QA Value",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "spatial_resolution": 375
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "good",
+          "value": 0
+        },
+        {
+          "description": "poor",
+          "value": 1
+        },
+        {
+          "description": "bad",
+          "value": 2
+        },
+        {
+          "description": "other",
+          "value": 3
+        },
+        {
+          "description": "night",
+          "value": 211
+        },
+        {
+          "description": "ocean",
+          "value": 239
+        },
+        {
+          "description": "cloud",
+          "value": 250
+        },
+        {
+          "description": "no_decision",
+          "value": 252
+        },
+        {
+          "description": "bowtie_trim",
+          "value": 253
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "NDSI_Snow_Cover": {
+      "href": "../../../tests/data-files/external/VNP10A1.A2022097.h11v05.001.2022098094651_NDSI_Snow_Cover.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Snow Cover by NDSI",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "spatial_resolution": 375
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "NDSI": {
+      "href": "../../../tests/data-files/external/VNP10A1.A2022097.h11v05.001.2022098094651_NDSI.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Normalized Difference Snow Index (NDSI)",
+      "description": "NDSI for all land and inland water pixels without the cloud mask applied",
+      "raster:bands": [
+        {
+          "data_type": "int16",
+          "nodata": 32767,
+          "scale": 0.001,
+          "spatial_resolution": 375
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "NDSI_Snow_Cover_fill": {
+      "href": "../../../tests/data-files/external/VNP10A1.A2022097.h11v05.001.2022098094651_NDSI_Snow_Cover_fill.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Snow Cover by NDSI Fill Values",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "spatial_resolution": 375
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "no_decision",
+          "value": 201
+        },
+        {
+          "description": "night",
+          "value": 211
+        },
+        {
+          "description": "lake",
+          "value": 237
+        },
+        {
+          "description": "ocean",
+          "value": 239
+        },
+        {
+          "description": "cloud",
+          "value": 250
+        },
+        {
+          "description": "missing_data",
+          "value": 251
+        },
+        {
+          "description": "bowtie_trim",
+          "value": 253
+        },
+        {
+          "description": "L1B_fill",
+          "value": 254
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    },
+    "Algorithm_bit_flags_QA": {
+      "href": "../../../tests/data-files/external/VNP10A1.A2022097.h11v05.001.2022098094651_Algorithm_bit_flags_QA.tif",
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized",
+      "title": "Algorithm Bit Flags QA",
+      "description": "A bitfield of flags set for certain conditions detected by data screens in the algorithm. Multiple flags may be set for a pixel.",
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "unit": "bit field",
+          "spatial_resolution": 375
+        }
+      ],
+      "classification:bitfields": [
+        {
+          "name": "inland_water_flag",
+          "offset": 0,
+          "length": 1,
+          "classes": [
+            {
+              "description": "true",
+              "value": 1
+            },
+            {
+              "description": "false",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "name": "low_visible_screen",
+          "offset": 1,
+          "length": 1,
+          "classes": [
+            {
+              "description": "true",
+              "value": 1
+            },
+            {
+              "description": "false",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "name": "low_ndsi_screen",
+          "offset": 2,
+          "length": 1,
+          "classes": [
+            {
+              "description": "true",
+              "value": 1
+            },
+            {
+              "description": "false",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "name": "combined_surface_temperature_and_height_screen_or_flag",
+          "offset": 3,
+          "length": 1,
+          "classes": [
+            {
+              "description": "true",
+              "value": 1
+            },
+            {
+              "description": "false",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "name": "high_swir_screen_or_flag",
+          "offset": 5,
+          "length": 1,
+          "classes": [
+            {
+              "description": "true",
+              "value": 1
+            },
+            {
+              "description": "false",
+              "value": 0
+            }
+          ]
+        },
+        {
+          "name": "solar_zenith_flag",
+          "offset": 7,
+          "length": 1,
+          "classes": [
+            {
+              "description": "true",
+              "value": 1
+            },
+            {
+              "description": "false",
+              "value": 0
+            }
+          ]
+        }
+      ],
+      "roles": [
+        "data"
+      ]
+    }
+  },
+  "bbox": [
+    -91.37851024025423,
+    29.99999999730591,
+    -69.28203229465252,
+    39.99999999641088
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/classification/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/projection/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/raster/v1.0.0/schema.json"
+  ],
+  "collection": "viirs-10a1-001"
+}

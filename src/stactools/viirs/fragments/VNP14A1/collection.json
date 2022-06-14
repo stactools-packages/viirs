@@ -1,0 +1,66 @@
+{
+    "id": "viirs-14a1-001",
+    "title": "VIIRS Thermal Anomalies/Fire Daily",
+    "description": "The daily VIIRS Thermal Anomalies/Fire (VNP14A1) Version 1 data product provides information about active fires and other thermal anomalies. The data product is a global, 1 kilometer gridded composite of fire pixels detected from VIIRS 750 meter bands over a daily (24-hour) period. The data products are designed after the Moderate Resolution Imaging Spectroradiometer (MODIS) Thermal Anomalies/Fire product suite. Four Science Dataset layers are provided: confidence of fire, maximum fire radiative power (FRP), quality assessment (QA), and position of fire within scan.",
+    "license": "proprietary",
+    "links": [
+        {
+            "rel": "license",
+            "href": "https://lpdaac.usgs.gov/data/data-citation-and-policies/",
+            "type": "text/html",
+            "title": "LP DAAC - Data Citation and Policies"
+        },
+        {
+            "rel": "help",
+            "href": "https://lpdaac.usgs.gov/documents/427/VNP14_User_Guide_V1.pdf",
+            "type": "application/pdf",
+            "title": "NASA VIIRS Land Science Investigator Processing System (SIPS) Visible Infrared Imaging Radiometer Suite (VIIRS) 375 m & 750 m Active Fire Products"
+        },
+        {
+            "rel": "cite-as",
+            "href": "https://doi.org/10.5067/VIIRS/VNP14A1.001",
+            "type": "text/html",
+            "title": "LP DAAC - VNP14A1 v001"
+        }
+    ],
+    "keywords": [
+        "NASA",
+        "VIIRS",
+        "Satellite",
+        "Global",
+        "Fire",
+        "VNP14A1"
+    ],
+    "providers": [
+        {
+            "name": "NASA LP DAAC at the USGS EROS Center",
+            "roles": [
+                "producer",
+                "licensor"
+            ],
+            "url": "https://lpdaac.usgs.gov/"
+        }
+    ],
+    "extent": {
+        "spatial": {
+            "bbox": [
+                [
+                    -180,
+                    -90,
+                    180,
+                    90
+                ]
+            ]
+        },
+        "temporal": {
+            "interval": [
+                [
+                    "2012-01-19T00:00:00Z",
+                    null
+                ]
+            ]
+        }
+    },
+    "sci:doi": "10.5067/VIIRS/VNP14A1.001",
+    "sci:citation": "Schroeder, W and L Giglio. 2018. VIIRS/NPP Thermal Anomalies/Fire Daily L3 Global 1 km SIN Grid, Version 1. Land Processes Distributed Active Archive Center (LP DAAC), Sioux Falls, South Dakota USA."
+}
