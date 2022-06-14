@@ -62,10 +62,9 @@ class CogTest(TestCase):
         _ = test_data.get_external_data(f"{filename}.xml")
         with TemporaryDirectory() as tmp_dir:
             paths = stactools.viirs.cog.cogify(href, tmp_dir)
-            for index, path in enumerate(paths):
-                if "pixel_reliability.tif" in path:
-                    break
-            native_int8_cog = paths[index]
+            native_int8_cog = next(
+                (path for path in paths if "pixel_reliability.tif" in path)
+            )
             with rasterio.open(native_int8_cog, "r") as src:
                 assert src.dtypes[0] == "int16"
                 assert src.nodata == -32768
