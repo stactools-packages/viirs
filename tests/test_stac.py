@@ -84,3 +84,19 @@ def test_asset_updates() -> None:
     assets = {k: v.to_dict() for k, v in item.assets.items()}
     raster_bands = assets["SurfReflect_M1"]["raster:bands"][0]
     assert raster_bands["nodata"] == -28672
+
+
+def test_densify() -> None:
+    filename = "VNP13A1.A2022097.h11v05.001.2022113080900.h5"
+    href = test_data.get_external_data(filename)
+    _ = test_data.get_external_data(f"{filename}.xml")
+
+    item = stac.create_item(href)
+    item_dict = item.to_dict()
+    assert len(item_dict["geometry"]["coordinates"][0]) == 5
+    item.validate()
+
+    item = stac.create_item(href, densify_factor=2)
+    item_dict = item.to_dict()
+    assert len(item_dict["geometry"]["coordinates"][0]) == 9
+    item.validate()
