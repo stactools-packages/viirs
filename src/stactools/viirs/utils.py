@@ -2,7 +2,6 @@ import os
 import warnings
 from contextlib import contextmanager
 from typing import Any, Dict, Generator, List, Optional
-from enum import Enum
 
 from pystac.extensions.eo import EOExtension
 from pystac.extensions.raster import RasterExtension
@@ -12,10 +11,9 @@ from stactools.core.io import ReadHrefModifier
 from stactools.viirs import constants
 
 
-class VIIRSProducts(Enum):
-    VNP09A1 = "VNP09A1"
+class UnsupportedProduct(Exception):
+    """Product is not supported by this stactools package"""
 
-VIIRSProducts.VNP09A1
 
 @contextmanager
 def ignore_not_georeferenced() -> Generator[None, None, None]:
@@ -64,6 +62,25 @@ def find_extensions(assets: Dict[str, Any]) -> List[str]:
     return list(extensions)
 
 
-def product_from_filename(filename: str) -> str:
-    product = os.path.basename(filename).split(".")[0]
+def supported_product(product: str) -> bool:
+    if product in [p.name for p in constants.VIIRSProducts]:
+        return True
+    else:
+        return False
 
+
+def product_from_h5(href: str) -> str:
+    return os.path.basename(href).split(".")[0]
+
+
+def id_from_h5(href: str) -> str:
+    return os.path.splitext(os.path.basename(href))[0]
+
+
+def version_from_h5(href: str) -> str:
+    return id_from_h5(href).split(".")[3]
+
+
+def production_date_from_h5(href: str) -> int:
+    datetime_str = id_from_h5(href).split(".")[4]
+    return int(datetime_str[0:7])

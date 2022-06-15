@@ -14,7 +14,12 @@ from stactools.core.utils.antimeridian import Strategy
 from stactools.viirs import constants
 from stactools.viirs.fragment import STACFragments
 from stactools.viirs.metadata import viirs_metadata
-from stactools.viirs.utils import find_extensions
+from stactools.viirs.utils import (
+    UnsupportedProduct,
+    find_extensions,
+    production_date_from_h5,
+    supported_product,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -73,7 +78,7 @@ def create_item(
         item.add_asset(constants.METADATA_ASSET_KEY, Asset.from_dict(properties))
 
     if cog_hrefs:
-        fragments = STACFragments(metadata.product, metadata.production_year_doy)
+        fragments = STACFragments(metadata.product, production_date_from_h5(h5_href))
         for href in cog_hrefs:
             basename = os.path.splitext(os.path.basename(href))[0]
             subdataset_name = basename.split("_", 1)[1]
@@ -106,6 +111,11 @@ def create_collection(product: str) -> Collection:
     Returns:
         Collection: A STAC Collection for the product.
     """
+    if not supported_product(product):
+        raise UnsupportedProduct(
+            f"{product} is not supported by this stactools package"
+        )
+
     summaries = {
         "instruments": constants.INSTRUMENT,
         "platform": [constants.PLATFORM],

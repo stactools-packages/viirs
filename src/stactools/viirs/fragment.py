@@ -10,9 +10,9 @@ class STACFragments:
 
     def __init__(self, product: str, production_year_doy: int = 2999000) -> None:
         # If a production date is not supplied, we would like to default to
-        # generating the most up to date assets. The default value is therefore
-        # set far into the future (year 2999, day 000) to force all asset
-        # updates to be applied.
+        # generating the most up-to-date assets. The default value is therefore
+        # set far into the future (year 2999, day 000) so that all asset
+        # updates are applied when a production_year_doy is not supplied.
         self.product = product
         self.assets = self._load("assets.json")
         if self.product[0:5] == "VNP09":
