@@ -1,3 +1,4 @@
+import os
 import warnings
 from contextlib import contextmanager
 from typing import Any, Dict, Generator, List, Optional
@@ -8,6 +9,10 @@ from rasterio.errors import NotGeoreferencedWarning
 from stactools.core.io import ReadHrefModifier
 
 from stactools.viirs import constants
+
+
+class UnsupportedProduct(Exception):
+    """Product is not supported by this stactools package"""
 
 
 @contextmanager
@@ -55,3 +60,27 @@ def find_extensions(assets: Dict[str, Any]) -> List[str]:
             extensions.add(RasterExtension.get_schema_uri())
 
     return list(extensions)
+
+
+def supported_product(product: str) -> bool:
+    if product in [p.name for p in constants.VIIRSProducts]:
+        return True
+    else:
+        return False
+
+
+def product_from_h5(href: str) -> str:
+    return os.path.basename(href).split(".")[0]
+
+
+def id_from_h5(href: str) -> str:
+    return os.path.splitext(os.path.basename(href))[0]
+
+
+def version_from_h5(href: str) -> str:
+    return id_from_h5(href).split(".")[3]
+
+
+def production_date_from_h5(href: str) -> int:
+    datetime_str = id_from_h5(href).split(".")[4]
+    return int(datetime_str[0:7])

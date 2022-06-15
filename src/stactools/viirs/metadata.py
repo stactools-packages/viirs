@@ -12,20 +12,22 @@ import rasterio
 import shapely.geometry
 from dateutil import parser
 from lxml import etree
-from shapely.geometry import Polygon
 from stactools.core.io import ReadHrefModifier
 from stactools.core.io.xml import XmlElement
 from stactools.core.projection import reproject_geom
 from stactools.core.utils import href_exists
 
-from stactools.viirs import constants
-from stactools.viirs.utils import ignore_not_georeferenced, modify_href
+from stactools.viirs import constants, utils
 
 logger = logging.getLogger(__name__)
 
 
 class MissingElement(Exception):
     """An expected element is missing from the XML file"""
+
+
+class MissingXMLFile(Exception):
+    """H5 companion XML file is missing"""
 
 
 @dataclass
@@ -40,7 +42,6 @@ class Metadata:
 
     id: str
     product: str
-    production_year_doy: int
     version: str
     start_datetime: datetime.datetime
     end_datetime: datetime.datetime
@@ -83,8 +84,8 @@ class Metadata:
             return get_exception
 
         xml_href = f"{h5_href}.xml"
-        read_xml_href = modify_href(xml_href, read_href_modifier)
-        read_h5_href = modify_href(h5_href, read_href_modifier)
+        read_xml_href = utils.modify_href(xml_href, read_href_modifier)
+        read_h5_href = utils.modify_href(h5_href, read_href_modifier)
 
         with fsspec.open(read_xml_href) as file:
             root = XmlElement(etree.parse(file, base_url=xml_href).getroot())
@@ -145,12 +146,10 @@ class Metadata:
                 tile_id = value
 
         shape_bounds = cls._hdfeos_metadata(read_h5_href)
-        production_year_doy = cls._production_year_doy(h5_href)
 
         return Metadata(
             id=id,
             product=product,
-            production_year_doy=production_year_doy,
             version=version,
             start_datetime=start_datetime,
             end_datetime=end_datetime,
@@ -165,7 +164,7 @@ class Metadata:
         )
 
     @classmethod
-    @ignore_not_georeferenced()
+    @utils.ignore_not_georeferenced()
     def from_h5(
         cls,
         h5_href: str,
@@ -184,7 +183,7 @@ class Metadata:
         Returns:
             Metadata: Metadata dataclass
         """
-        read_h5_href = modify_href(h5_href, read_href_modifier)
+        read_h5_href = utils.modify_href(h5_href, read_href_modifier)
         with rasterio.open(read_h5_href) as dataset:
             tags = dataset.tags()
             tags = {k.lower(): v for k, v in tags.items()}
@@ -206,12 +205,10 @@ class Metadata:
         tile_id = tags["tileid"]
 
         shape_bounds = cls._hdfeos_metadata(read_h5_href)
-        production_year_doy = cls._production_year_doy(h5_href)
 
         return Metadata(
             id=id,
             product=product,
-            production_year_doy=production_year_doy,
             version=version,
             start_datetime=start_datetime,
             end_datetime=end_datetime,
@@ -263,12 +260,6 @@ class Metadata:
             "bottom": bottom,
         }
 
-    @classmethod
-    def _production_year_doy(cls, h5_href: str) -> int:
-        basename = os.path.basename(h5_href)
-        production_time = basename.split(".")[-2]
-        return int(production_time[0:7])
-
     @property
     def transform(self) -> List[float]:
         """Georeferencing transformation matrix for the grid data."""
@@ -311,7 +302,7 @@ class Metadata:
 
         if self.densify_factor is not None:
             proj_points = self._densify(proj_points, self.densify_factor)
-        proj_polygon = Polygon(proj_points)
+        proj_polygon = shapely.geometry.Polygon(proj_points)
         proj_geometry = shapely.geometry.mapping(proj_polygon)
         wgs84_geometry = reproject_geom(self.crs, "epsg:4326", proj_geometry)
 
@@ -383,20 +374,29 @@ def viirs_metadata(
     """Creates a metadata class from the appropriate source (XML or H5).
 
     Metadata based on XML data is preferred (over the H5 data file) since it is
-    consistent between products; the same can not be said of the H5 attributes.
+    consistent between products. Metadata is created from H5 file attributes for
+    the VNP46A2 product (only) since it does not come with an XML sidecar file.
 
     Args:
         h5_href (str): HREF to the H5 data file
         read_href_modifier (ReadHrefModifier, optional): An optional function to
             modify the href (e.g. to add a token to a url)
+        densify_factor (int, optional): Factor by which to increase the number
+            of vertices on the Item geometry to mitigate projection error.
 
     Returns:
         Metadata: Metadata dataclass
     """
-    xml_href = f"{h5_href}.xml"
-    read_xml_href = modify_href(xml_href, read_href_modifier)
+    product = utils.product_from_h5(h5_href)
+    if not utils.supported_product(product):
+        raise utils.UnsupportedProduct(
+            f"{product} is not supported by this stactools package"
+        )
 
+    read_xml_href = utils.modify_href(f"{h5_href}.xml", read_href_modifier)
     if href_exists(read_xml_href):
         return Metadata.from_xml_and_h5(h5_href, read_href_modifier, densify_factor)
-    else:
+    elif constants.VIIRSProducts[product] is constants.VIIRSProducts.VNP46A2:
         return Metadata.from_h5(h5_href, read_href_modifier, densify_factor)
+    else:
+        raise MissingXMLFile(f"{product} H5 files require a companion XML file")
