@@ -18,6 +18,7 @@ from stactools.core.projection import reproject_geom
 from stactools.core.utils import href_exists
 
 from stactools.viirs import constants, utils
+from stactools.viirs.constants import VIIRSProducts
 
 logger = logging.getLogger(__name__)
 
@@ -53,6 +54,7 @@ class Metadata:
     shape_bounds: Dict[str, Any]
     densify_factor: Optional[int]
     xml_href: Optional[str]
+    cloud_cover: Optional[int]
 
     @classmethod
     def from_xml_and_h5(
@@ -146,6 +148,7 @@ class Metadata:
                 tile_id = value
 
         shape_bounds = cls._hdfeos_metadata(read_h5_href)
+        cloud_cover = cls._cloud_cover(read_h5_href)
 
         return Metadata(
             id=id,
@@ -161,6 +164,7 @@ class Metadata:
             shape_bounds=shape_bounds,
             densify_factor=densify_factor,
             xml_href=xml_href,
+            cloud_cover=cloud_cover,
         )
 
     @classmethod
@@ -205,6 +209,7 @@ class Metadata:
         tile_id = tags["tileid"]
 
         shape_bounds = cls._hdfeos_metadata(read_h5_href)
+        cloud_cover = cls._cloud_cover(read_h5_href)
 
         return Metadata(
             id=id,
@@ -220,6 +225,7 @@ class Metadata:
             shape_bounds=shape_bounds,
             densify_factor=densify_factor,
             xml_href=None,
+            cloud_cover=cloud_cover,
         )
 
     @classmethod
@@ -259,6 +265,56 @@ class Metadata:
             "top": top,
             "bottom": bottom,
         }
+
+    @classmethod
+    @utils.ignore_not_georeferenced()
+    def _cloud_cover(cls, h5_href: str) -> Optional[int]:
+        """Extracts cloud cover percentage from H5 attributes.
+
+        Args:
+            h5_href (str): HREF to the H5 file
+
+        Returns:
+            int: Percent cloud cover rounded to nearest whole number
+        """
+        with rasterio.open(h5_href) as dataset:
+            tags = dataset.tags()
+            tags = {k.lower(): v for k, v in tags.items()}
+
+        product = VIIRSProducts[tags["shortname"]]
+        if (product is VIIRSProducts.VNP09A1) or (product is VIIRSProducts.VNP09H1):
+            cloud_cover = round(float(tags["hdfeos_grids_percentcloud"]))
+        elif product is VIIRSProducts.VNP10A1:
+            cloud_cover = round(float(str(tags["cloud_cover_extent"]).strip("%")))
+        else:
+            cloud_cover = None
+
+        return cloud_cover
+
+    def _densify(
+        self, point_list: List[Tuple[float, float]], densify_factor: int
+    ) -> List[Tuple[float, float]]:
+        """Creates additional points on straight lines between points in
+        the passed point list.
+
+        Args:
+            point_list (List[Tuple[float, float]]): Points defining the shape
+                to densify with additional points.
+            densify_factor (int): Factor by which to increase the number of
+                points.
+
+        Returns:
+            List[Tuple[float, float]]: Densified point list.
+        """
+        # https://stackoverflow.com/questions/64995977/generating-equidistance-points-along-the-boundary-of-a-polygon-but-cw-ccw  # noqa
+        points: Any = np.asarray(point_list)
+        densified_number = len(points) * densify_factor
+        existing_indices = np.arange(0, densified_number, densify_factor)
+        interp_indices = np.arange(existing_indices[-1])
+        interp_x = np.interp(interp_indices, existing_indices, points[:, 0])  # noqa
+        interp_y = np.interp(interp_indices, existing_indices, points[:, 1])  # noqa
+        densified_points = [(x, y) for x, y in zip(interp_x, interp_y)]
+        return densified_points
 
     @property
     def transform(self) -> List[float]:
@@ -312,31 +368,6 @@ class Metadata:
     def bbox(self) -> List[float]:
         """WGS84 bounding box of grid boundary"""
         return list(shapely.geometry.shape(self.geometry).bounds)
-
-    def _densify(
-        self, point_list: List[Tuple[float, float]], densify_factor: int
-    ) -> List[Tuple[float, float]]:
-        """Creates additional points on straight lines between points in
-        the passed point list.
-
-        Args:
-            point_list (List[Tuple[float, float]]): Points defining the shape
-                to densify with additional points.
-            densify_factor (int): Factor by which to increase the number of
-                points.
-
-        Returns:
-            List[Tuple[float, float]]: Densified point list.
-        """
-        # https://stackoverflow.com/questions/64995977/generating-equidistance-points-along-the-boundary-of-a-polygon-but-cw-ccw  # noqa
-        points: Any = np.asarray(point_list)
-        densified_number = len(points) * densify_factor
-        existing_indices = np.arange(0, densified_number, densify_factor)
-        interp_indices = np.arange(existing_indices[-1])
-        interp_x = np.interp(interp_indices, existing_indices, points[:, 0])  # noqa
-        interp_y = np.interp(interp_indices, existing_indices, points[:, 1])  # noqa
-        densified_points = [(x, y) for x, y in zip(interp_x, interp_y)]
-        return densified_points
 
     @property
     def crs(self) -> str:
@@ -396,7 +427,7 @@ def viirs_metadata(
     read_xml_href = utils.modify_href(f"{h5_href}.xml", read_href_modifier)
     if href_exists(read_xml_href):
         return Metadata.from_xml_and_h5(h5_href, read_href_modifier, densify_factor)
-    elif constants.VIIRSProducts[product] is constants.VIIRSProducts.VNP46A2:
+    elif VIIRSProducts[product] is VIIRSProducts.VNP46A2:
         return Metadata.from_h5(h5_href, read_href_modifier, densify_factor)
     else:
         raise MissingXMLFile(f"{product} H5 files require a companion XML file")
