@@ -46,7 +46,11 @@ To create a STAC Collection, enter H5 file paths into a text file with one file 
 $ stac viirs create-collection <text file path> <output directory>
 ```
 
-If the text file contains H5 file paths from multiple VIIRS products, multiple STAC Collections will be created. If COGs exist alongside the H5 files, they will be included as Assets in the STAC Items contained in the Collection(s).
+If the text file contains H5 file paths from multiple VIIRS products, multiple STAC Collections will be created. If COGs exist alongside the H5 files, they will be included as Assets in the STAC Items contained in the Collection(s). For example, if COGs exist for all H5 files in [examples/file-list.txt](examples/file-list.txt), then the example Collections and Items can be created with:
+
+```shell
+$ stac viirs create-collection examples/file-list.txt examples --antimeridian-strategy normalize
+```
 
 Use `stac viirs --help` to see all subcommands and options.
 
