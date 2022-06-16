@@ -1,19 +1,19 @@
-from enum import Enum, auto
+from enum import Enum
 
 from pystac import MediaType
 
 
-class VIIRSProducts(Enum):
-    VNP09A1 = auto()
-    VNP09H1 = auto()
-    VNP10A1 = auto()
-    VNP13A1 = auto()
-    VNP14A1 = auto()
-    VNP15A2H = auto()
-    VNP21A2 = auto()
-    VNP43IA4 = auto()
-    VNP43MA4 = auto()
-    VNP46A2 = auto()
+class VIIRSProducts(str, Enum):
+    VNP09A1 = "VNP09A1"
+    VNP09H1 = "VNP09H1"
+    VNP10A1 = "VNP10A1"
+    VNP13A1 = "VNP13A1"
+    VNP14A1 = "VNP14A1"
+    VNP15A2H = "VNP15A2H"
+    VNP21A2 = "VNP21A2"
+    VNP43IA4 = "VNP43IA4"
+    VNP43MA4 = "VNP43MA4"
+    VNP46A2 = "VNP46A2"
 
 
 PLATFORM = "snpp"

@@ -1,5 +1,4 @@
 import glob
-import logging
 import os
 from collections import defaultdict
 from typing import Optional
@@ -10,8 +9,6 @@ from pystac import CatalogType
 from stactools.core.utils.antimeridian import Strategy
 
 from stactools.viirs import cog, stac
-
-logger = logging.getLogger(__name__)
 
 
 def create_viirs_command(cli: Group) -> Command:

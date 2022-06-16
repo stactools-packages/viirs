@@ -1,9 +1,9 @@
-import logging
 import os
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
 import pystac.utils
+import shapely.geometry
 import stactools.core.utils.antimeridian
 from pystac import Asset, Collection, Item, Summaries
 from pystac.extensions.eo import EOExtension
@@ -16,14 +16,7 @@ from stactools.core.utils.antimeridian import Strategy
 from stactools.viirs import constants
 from stactools.viirs.fragment import STACFragments
 from stactools.viirs.metadata import viirs_metadata
-from stactools.viirs.utils import (
-    UnsupportedProduct,
-    find_extensions,
-    production_date_from_h5,
-    supported_product,
-)
-
-logger = logging.getLogger(__name__)
+from stactools.viirs.utils import check_if_supported, find_extensions
 
 
 def create_item(
@@ -49,14 +42,15 @@ def create_item(
     Returns:
         pystac.Item: A STAC Item representing the VIIRS data.
     """
-    metadata = viirs_metadata(h5_href, read_href_modifier, densify_factor)
-    fragments = STACFragments(metadata.product, production_date_from_h5(h5_href))
+    metadata = viirs_metadata(h5_href, read_href_modifier)
+    fragments = STACFragments(metadata.product, metadata.production_julian_date)
 
+    geometry = metadata.geometry(densify_factor)
     item = Item(
         id=metadata.id,
-        geometry=metadata.geometry,
-        bbox=metadata.bbox,
-        datetime=None,
+        geometry=geometry,
+        bbox=list(shapely.geometry.shape(geometry).bounds),
+        datetime=metadata.acquisition_datetime,
         properties={
             "start_datetime": pystac.utils.datetime_to_str(metadata.start_datetime),
             "end_datetime": pystac.utils.datetime_to_str(metadata.end_datetime),
@@ -75,13 +69,15 @@ def create_item(
 
     properties = constants.HDF5_ASSET_PROPERTIES.copy()
     properties["href"] = pystac.utils.make_absolute_href(h5_href)
-    properties["created"] = pystac.utils.datetime_to_str(metadata.created_datetime)
+    properties["created"] = pystac.utils.datetime_to_str(metadata.production_datetime)
     item.add_asset(constants.HDF5_ASSET_KEY, Asset.from_dict(properties))
 
     if metadata.xml_href:
         properties = constants.METADATA_ASSET_PROPERTIES.copy()
         properties["href"] = pystac.utils.make_absolute_href(metadata.xml_href)
-        properties["created"] = pystac.utils.datetime_to_str(metadata.created_datetime)
+        properties["created"] = pystac.utils.datetime_to_str(
+            metadata.production_datetime
+        )
         item.add_asset(constants.METADATA_ASSET_KEY, Asset.from_dict(properties))
 
     if cog_hrefs:
@@ -121,10 +117,7 @@ def create_collection(product: str) -> Collection:
     Returns:
         Collection: A STAC Collection for the product.
     """
-    if not supported_product(product):
-        raise UnsupportedProduct(
-            f"{product} is not supported by this stactools package"
-        )
+    check_if_supported(product)
 
     fragments = STACFragments(product)
 

@@ -3,12 +3,12 @@
   "stac_version": "1.0.0",
   "id": "VNP43MA4.A2022140.h11v05.001.2022148093246",
   "properties": {
-    "start_datetime": "2022-05-20T00:00:00Z",
+    "start_datetime": "2022-05-12T00:00:00Z",
     "end_datetime": "2022-05-27T23:59:59Z",
     "viirs:horizontal-tile": 11,
     "viirs:vertical-tile": 5,
     "viirs:tile-id": "51011005",
-    "created": "2022-06-16T13:56:33.521315Z",
+    "created": "2022-06-16T16:12:59.294211Z",
     "platform": "snpp",
     "instruments": [
       "viirs"
@@ -28,7 +28,7 @@
       1200,
       1200
     ],
-    "datetime": null
+    "datetime": "2022-05-20T00:00:00Z"
   },
   "geometry": {
     "type": "Polygon",

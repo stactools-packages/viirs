@@ -1,6 +1,7 @@
 import os
 import warnings
 from contextlib import contextmanager
+from datetime import datetime
 from typing import Any, Dict, Generator, List, Optional
 
 from pystac.extensions.eo import EOExtension
@@ -62,11 +63,11 @@ def find_extensions(assets: Dict[str, Any]) -> List[str]:
     return list(extensions)
 
 
-def supported_product(product: str) -> bool:
-    if product in [p.name for p in constants.VIIRSProducts]:
-        return True
-    else:
-        return False
+def check_if_supported(product: str) -> None:
+    if product not in [p.name for p in constants.VIIRSProducts]:
+        raise UnsupportedProduct(
+            f"{product} is not supported by this stactools package"
+        )
 
 
 def product_from_h5(href: str) -> str:
@@ -81,6 +82,11 @@ def version_from_h5(href: str) -> str:
     return id_from_h5(href).split(".")[3]
 
 
-def production_date_from_h5(href: str) -> int:
-    datetime_str = id_from_h5(href).split(".")[4]
-    return int(datetime_str[0:7])
+def production_julian_date_from_h5(href: str) -> int:
+    production = id_from_h5(href).split(".")[4]
+    return int(production[0:7])
+
+
+def acquisition_datetime_from_h5(href: str) -> datetime:
+    acquired = id_from_h5(href).split(".")[1][1:]
+    return datetime.strptime(acquired, "%Y%j")
