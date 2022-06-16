@@ -21,12 +21,12 @@ logger = logging.getLogger(__name__)
 
 @dataclass
 class Metadata:
-    """Structure to hold values from a metadata XML file or source H5 file.
+    """Structure to hold metadata extracted from the source H5 file.
 
-    XML metadata is preferred since it is consistent between products. However,
-    neither an XML metadata file nor the H5 source file attributes contain all
-    required information. Additional information is extracted from the EOS
-    Metadata Structure in the H5 file.
+    Although XML metadata was originally preferred since the field names are
+    more consistent between products, there are several values that can only be
+    obtained from the source H5 file, and the start dates in the VNP43 XML files
+    are incorrect. Thus, only the H5 metadata is considered.
     """
 
     id: str
@@ -59,9 +59,10 @@ class Metadata:
         """Extracts metadata from H5 attributes and H5 EOS metadata structure.
 
         Args:
-            h5_href (str): HREF to the H5 source file.
+            h5_href (str): HREF to the H5 source file
             read_href_modifier (ReadHrefModifier, optional): An optional
                 function to modify the href (e.g. to add a token to a url)
+            xml_href (str, optional): HREF to the XML metadata file
 
         Returns:
             Metadata: Metadata dataclass
@@ -162,7 +163,16 @@ class Metadata:
         return densified_points
 
     def geometry(self, densify_factor: Optional[int]) -> Dict[str, Any]:
-        """GeoJSON geometry of the grid boundary in WGS84."""
+        """GeoJSON geometry of the VIIRS tile boundary in WGS84.
+
+        Args:
+            densify_factor (int, optional): Factor by which to increase the
+            number of vertices on the geometry to mitigate projection error.
+
+        Returns:
+            Dict[str, Any]: GeoJSON geometry with additional vertices.
+        """
+        # """."""
         num_rows, num_cols = self.shape
         upper_left = (0, 0)
         lower_left = (0, num_rows)
@@ -234,11 +244,7 @@ def viirs_metadata(
     h5_href: str,
     read_href_modifier: Optional[ReadHrefModifier] = None,
 ) -> Metadata:
-    """Creates a metadata class from the appropriate source (XML or H5).
-
-    Metadata based on XML data is preferred (over the H5 data file) since it is
-    consistent between products. Metadata is created from H5 file attributes for
-    the VNP46A2 product (only) since it does not come with an XML sidecar file.
+    """Checks input file validity and returns a metadata class.
 
     Args:
         h5_href (str): HREF to the H5 data file

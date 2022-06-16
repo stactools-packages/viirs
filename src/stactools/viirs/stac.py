@@ -2,7 +2,6 @@ import os
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
-import pystac.utils
 import shapely.geometry
 import stactools.core.utils.antimeridian
 from pystac import Asset, Collection, Item, Summaries
@@ -10,6 +9,7 @@ from pystac.extensions.eo import EOExtension
 from pystac.extensions.item_assets import AssetDefinition, ItemAssetsExtension
 from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.scientific import ScientificExtension
+from pystac.utils import datetime_to_str, make_absolute_href
 from stactools.core.io import ReadHrefModifier
 from stactools.core.utils.antimeridian import Strategy
 
@@ -44,40 +44,37 @@ def create_item(
     """
     metadata = viirs_metadata(h5_href, read_href_modifier)
     fragments = STACFragments(metadata.product, metadata.production_julian_date)
-
     geometry = metadata.geometry(densify_factor)
+
     item = Item(
         id=metadata.id,
         geometry=geometry,
         bbox=list(shapely.geometry.shape(geometry).bounds),
         datetime=metadata.acquisition_datetime,
         properties={
-            "start_datetime": pystac.utils.datetime_to_str(metadata.start_datetime),
-            "end_datetime": pystac.utils.datetime_to_str(metadata.end_datetime),
+            "start_datetime": datetime_to_str(metadata.start_datetime),
+            "end_datetime": datetime_to_str(metadata.end_datetime),
             "viirs:horizontal-tile": metadata.horizontal_tile,
             "viirs:vertical-tile": metadata.vertical_tile,
             "viirs:tile-id": metadata.tile_id,
         },
     )
+
     item.common_metadata.created = datetime.now(tz=timezone.utc)
     item.common_metadata.platform = constants.PLATFORM
     item.common_metadata.instruments = constants.INSTRUMENT
     if fragments.gsd():
         item.common_metadata.gsd = fragments.gsd()
 
-    stactools.core.utils.antimeridian.fix_item(item, antimeridian_strategy)
-
     properties = constants.HDF5_ASSET_PROPERTIES.copy()
-    properties["href"] = pystac.utils.make_absolute_href(h5_href)
-    properties["created"] = pystac.utils.datetime_to_str(metadata.production_datetime)
+    properties["href"] = make_absolute_href(h5_href)
+    properties["created"] = datetime_to_str(metadata.production_datetime)
     item.add_asset(constants.HDF5_ASSET_KEY, Asset.from_dict(properties))
 
     if metadata.xml_href:
         properties = constants.METADATA_ASSET_PROPERTIES.copy()
-        properties["href"] = pystac.utils.make_absolute_href(metadata.xml_href)
-        properties["created"] = pystac.utils.datetime_to_str(
-            metadata.production_datetime
-        )
+        properties["href"] = make_absolute_href(metadata.xml_href)
+        properties["created"] = datetime_to_str(metadata.production_datetime)
         item.add_asset(constants.METADATA_ASSET_KEY, Asset.from_dict(properties))
 
     if cog_hrefs:
@@ -85,7 +82,7 @@ def create_item(
             basename = os.path.splitext(os.path.basename(href))[0]
             subdataset_name = basename.split("_", 1)[1]
             asset_dict = fragments.subdataset_dict(subdataset_name)
-            asset_dict["href"] = pystac.utils.make_absolute_href(href)
+            asset_dict["href"] = make_absolute_href(href)
             item.add_asset(subdataset_name, Asset.from_dict(asset_dict))
 
     if metadata.cloud_cover:
@@ -104,6 +101,8 @@ def create_item(
     item.stac_extensions.extend(extensions)
     item.stac_extensions = list(set(item.stac_extensions))
     item.stac_extensions.sort()
+
+    stactools.core.utils.antimeridian.fix_item(item, antimeridian_strategy)
 
     return item
 

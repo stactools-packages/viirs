@@ -20,7 +20,7 @@ def cogify(infile: str, outdir: str) -> List[str]:
     silently converting int8 (signed byte) data to uint8 (byte).
 
     Args:
-        infile (str): The input HDF5 file
+        infile (str): The input H5 file
         outdir (str): The output directory
 
     Returns:
