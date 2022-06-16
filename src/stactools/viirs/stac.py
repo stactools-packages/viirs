@@ -5,6 +5,7 @@ from typing import List, Optional
 import pystac.utils
 import stactools.core.utils.antimeridian
 from pystac import Asset, Collection, Item, Summaries
+from pystac.extensions.eo import EOExtension
 from pystac.extensions.item_assets import AssetDefinition, ItemAssetsExtension
 from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.scientific import ScientificExtension
@@ -85,6 +86,10 @@ def create_item(
             asset_dict = fragments.subdataset_dict(subdataset_name)
             asset_dict["href"] = pystac.utils.make_absolute_href(href)
             item.add_asset(subdataset_name, Asset.from_dict(asset_dict))
+
+    if metadata.cloud_cover:
+        eo = EOExtension.ext(item, add_if_missing=True)
+        eo.cloud_cover = metadata.cloud_cover
 
     projection = ProjectionExtension.ext(item, add_if_missing=True)
     projection.epsg = metadata.epsg
