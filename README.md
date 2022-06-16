@@ -32,9 +32,7 @@ pip install stactools-viirs
 
 ## Command-line Usage
 
-VIIRS products are delivered as an H5 (HDF5) file with a corresponding XML metadata file. This stactools package uses information from both files for STAC creation and expects them to exist in the same directory. The Black Marble (VNP46A2) product is an exception since it is not delivered with an XML metadata file.
-
-To create a STAC Item from a single VIIRS H5 file (and corresponding XML file):
+To create a single STAC Item from a VIIRS H5 file:
 
 ```shell
 $ stac viirs create-item <H5 file path> <output directory>
