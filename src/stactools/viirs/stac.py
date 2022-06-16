@@ -1,28 +1,22 @@
-import logging
 import os
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
-import pystac.utils
+import shapely.geometry
 import stactools.core.utils.antimeridian
 from pystac import Asset, Collection, Item, Summaries
 from pystac.extensions.eo import EOExtension
 from pystac.extensions.item_assets import AssetDefinition, ItemAssetsExtension
 from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.scientific import ScientificExtension
+from pystac.utils import datetime_to_str, make_absolute_href
 from stactools.core.io import ReadHrefModifier
 from stactools.core.utils.antimeridian import Strategy
 
 from stactools.viirs import constants
 from stactools.viirs.fragment import STACFragments
 from stactools.viirs.metadata import viirs_metadata
-from stactools.viirs.utils import (
-    UnsupportedProduct,
-    find_extensions,
-    production_date_from_h5,
-    supported_product,
-)
-
-logger = logging.getLogger(__name__)
+from stactools.viirs.utils import check_if_supported, find_extensions
 
 
 def create_item(
@@ -48,37 +42,39 @@ def create_item(
     Returns:
         pystac.Item: A STAC Item representing the VIIRS data.
     """
-    metadata = viirs_metadata(h5_href, read_href_modifier, densify_factor)
-    fragments = STACFragments(metadata.product, production_date_from_h5(h5_href))
+    metadata = viirs_metadata(h5_href, read_href_modifier)
+    fragments = STACFragments(metadata.product, metadata.production_julian_date)
+    geometry = metadata.geometry(densify_factor)
 
     item = Item(
         id=metadata.id,
-        geometry=metadata.geometry,
-        bbox=metadata.bbox,
-        datetime=None,
+        geometry=geometry,
+        bbox=list(shapely.geometry.shape(geometry).bounds),
+        datetime=metadata.acquisition_datetime,
         properties={
-            "start_datetime": pystac.utils.datetime_to_str(metadata.start_datetime),
-            "end_datetime": pystac.utils.datetime_to_str(metadata.end_datetime),
+            "start_datetime": datetime_to_str(metadata.start_datetime),
+            "end_datetime": datetime_to_str(metadata.end_datetime),
             "viirs:horizontal-tile": metadata.horizontal_tile,
             "viirs:vertical-tile": metadata.vertical_tile,
             "viirs:tile-id": metadata.tile_id,
         },
     )
-    item.common_metadata.created = metadata.created_datetime
+
+    item.common_metadata.created = datetime.now(tz=timezone.utc)
     item.common_metadata.platform = constants.PLATFORM
     item.common_metadata.instruments = constants.INSTRUMENT
     if fragments.gsd():
         item.common_metadata.gsd = fragments.gsd()
 
-    stactools.core.utils.antimeridian.fix_item(item, antimeridian_strategy)
-
     properties = constants.HDF5_ASSET_PROPERTIES.copy()
-    properties["href"] = pystac.utils.make_absolute_href(h5_href)
+    properties["href"] = make_absolute_href(h5_href)
+    properties["created"] = datetime_to_str(metadata.production_datetime)
     item.add_asset(constants.HDF5_ASSET_KEY, Asset.from_dict(properties))
 
     if metadata.xml_href:
         properties = constants.METADATA_ASSET_PROPERTIES.copy()
-        properties["href"] = pystac.utils.make_absolute_href(metadata.xml_href)
+        properties["href"] = make_absolute_href(metadata.xml_href)
+        properties["created"] = datetime_to_str(metadata.production_datetime)
         item.add_asset(constants.METADATA_ASSET_KEY, Asset.from_dict(properties))
 
     if cog_hrefs:
@@ -86,7 +82,7 @@ def create_item(
             basename = os.path.splitext(os.path.basename(href))[0]
             subdataset_name = basename.split("_", 1)[1]
             asset_dict = fragments.subdataset_dict(subdataset_name)
-            asset_dict["href"] = pystac.utils.make_absolute_href(href)
+            asset_dict["href"] = make_absolute_href(href)
             item.add_asset(subdataset_name, Asset.from_dict(asset_dict))
 
     if metadata.cloud_cover:
@@ -106,6 +102,8 @@ def create_item(
     item.stac_extensions = list(set(item.stac_extensions))
     item.stac_extensions.sort()
 
+    stactools.core.utils.antimeridian.fix_item(item, antimeridian_strategy)
+
     return item
 
 
@@ -118,10 +116,7 @@ def create_collection(product: str) -> Collection:
     Returns:
         Collection: A STAC Collection for the product.
     """
-    if not supported_product(product):
-        raise UnsupportedProduct(
-            f"{product} is not supported by this stactools package"
-        )
+    check_if_supported(product)
 
     fragments = STACFragments(product)
 
