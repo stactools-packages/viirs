@@ -1,5 +1,6 @@
 import logging
 import os
+from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
 import pystac.utils
@@ -64,7 +65,7 @@ def create_item(
             "viirs:tile-id": metadata.tile_id,
         },
     )
-    item.common_metadata.created = metadata.created_datetime
+    item.common_metadata.created = datetime.now(tz=timezone.utc)
     item.common_metadata.platform = constants.PLATFORM
     item.common_metadata.instruments = constants.INSTRUMENT
     if fragments.gsd():
@@ -74,11 +75,13 @@ def create_item(
 
     properties = constants.HDF5_ASSET_PROPERTIES.copy()
     properties["href"] = pystac.utils.make_absolute_href(h5_href)
+    properties["created"] = pystac.utils.datetime_to_str(metadata.created_datetime)
     item.add_asset(constants.HDF5_ASSET_KEY, Asset.from_dict(properties))
 
     if metadata.xml_href:
         properties = constants.METADATA_ASSET_PROPERTIES.copy()
         properties["href"] = pystac.utils.make_absolute_href(metadata.xml_href)
+        properties["created"] = pystac.utils.datetime_to_str(metadata.created_datetime)
         item.add_asset(constants.METADATA_ASSET_KEY, Asset.from_dict(properties))
 
     if cog_hrefs:

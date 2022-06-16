@@ -8,7 +8,7 @@
     "viirs:horizontal-tile": 0,
     "viirs:vertical-tile": 9,
     "viirs:tile-id": "51000009",
-    "created": "2016-10-20T11:42:38Z",
+    "created": "2022-06-16T13:56:33.420084Z",
     "platform": "snpp",
     "instruments": [
       "viirs"
@@ -83,6 +83,7 @@
       "href": "../../../tests/data-files/external/VNP09H1.A2012017.h00v09.001.2016294114238.h5",
       "type": "application/x-hdf5",
       "title": "Source data containing all bands",
+      "created": "2016-10-20T11:42:38Z",
       "roles": [
         "data"
       ]
@@ -91,6 +92,7 @@
       "href": "../../../tests/data-files/external/VNP09H1.A2012017.h00v09.001.2016294114238.h5.xml",
       "type": "application/xml",
       "title": "Earth Observing System Data and Information System (EOSDIS) metadata",
+      "created": "2016-10-20T11:42:38Z",
       "roles": [
         "metadata"
       ]
