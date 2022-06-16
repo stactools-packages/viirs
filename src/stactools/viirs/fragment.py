@@ -1,5 +1,5 @@
 import json
-from typing import Any, Dict
+from typing import Any, Dict, Optional
 
 import pkg_resources
 from pystac import Extent, Link, MediaType, Provider
@@ -14,9 +14,19 @@ class STACFragments:
         # set far into the future (year 2999, day 000) so that all asset
         # updates are applied when a production_year_doy is not supplied.
         self.product = product
-        self.assets = self._load("assets.json")
-        if self.product[0:5] == "VNP09":
+        self.item = self._load("item.json")
+        self.assets = self.item["assets"]
+        if "asset-updates" in self.item:
             self._update_assets(production_year_doy)
+
+    def gsd(self) -> Optional[int]:
+        """Returns the Item Ground Sample Distance (GSD).
+
+        Returns:
+            Optional[int]: GSD in meters
+        """
+        gsd: Optional[int] = self.item.get("gsd", None)
+        return gsd
 
     def assets_dict(self) -> Dict[str, Any]:
         """Returns a dictionary of Asset dictionaries (less the 'href' field)
@@ -65,7 +75,7 @@ class STACFragments:
                 for field, value in fields.items():
                     source[band][field] = value
 
-        asset_updates = self._load("assets-updates.json")
+        asset_updates = self.item["asset-updates"]
         for update_year_doy, bands in asset_updates.items():
             if production_year_doy >= int(update_year_doy):
                 update_fields(self.assets, bands)

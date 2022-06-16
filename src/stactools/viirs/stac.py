@@ -1,6 +1,6 @@
 import logging
 import os
-from typing import List, Optional
+from typing import Any, Dict, List, Optional
 
 import pystac.utils
 import stactools.core.utils.antimeridian
@@ -49,6 +49,7 @@ def create_item(
         pystac.Item: A STAC Item representing the VIIRS data.
     """
     metadata = viirs_metadata(h5_href, read_href_modifier, densify_factor)
+    fragments = STACFragments(metadata.product, production_date_from_h5(h5_href))
 
     item = Item(
         id=metadata.id,
@@ -66,6 +67,8 @@ def create_item(
     item.common_metadata.created = metadata.created_datetime
     item.common_metadata.platform = constants.PLATFORM
     item.common_metadata.instruments = constants.INSTRUMENT
+    if fragments.gsd():
+        item.common_metadata.gsd = fragments.gsd()
 
     stactools.core.utils.antimeridian.fix_item(item, antimeridian_strategy)
 
@@ -79,7 +82,6 @@ def create_item(
         item.add_asset(constants.METADATA_ASSET_KEY, Asset.from_dict(properties))
 
     if cog_hrefs:
-        fragments = STACFragments(metadata.product, production_date_from_h5(h5_href))
         for href in cog_hrefs:
             basename = os.path.splitext(os.path.basename(href))[0]
             subdataset_name = basename.split("_", 1)[1]
@@ -121,12 +123,15 @@ def create_collection(product: str) -> Collection:
             f"{product} is not supported by this stactools package"
         )
 
-    summaries = {
+    fragments = STACFragments(product)
+
+    summaries: Dict[str, Any] = {
         "instruments": constants.INSTRUMENT,
         "platform": [constants.PLATFORM],
     }
+    if fragments.gsd() is not None:
+        summaries["gsd"] = [fragments.gsd()]
 
-    fragments = STACFragments(product)
     collection_fragments = fragments.collection_dict()
     collection = Collection(
         id=collection_fragments["id"],

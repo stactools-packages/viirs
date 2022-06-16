@@ -1,0 +1,289 @@
+{
+    "assets": {
+        "NDSI": {
+            "raster:bands": [
+                {
+                    "data_type": "int16",
+                    "nodata": 32767,
+                    "scale": 0.001,
+                    "spatial_resolution": 375
+                }
+            ],
+            "title": "Normalized Difference Snow Index (NDSI)",
+            "description": "NDSI for all land and inland water pixels without the cloud mask applied",
+            "roles": [
+                "data"
+            ]
+        },
+        "NDSI_fill": {
+            "raster:bands": [
+                {
+                    "data_type": "int16",
+                    "nodata": 32767,
+                    "spatial_resolution": 375
+                }
+            ],
+            "classification:classes": [
+                {
+                    "description": "night",
+                    "value": 21100
+                },
+                {
+                    "description": "ocean",
+                    "value": 23900
+                },
+                {
+                    "description": "L1B_missing",
+                    "value": 25100
+                },
+                {
+                    "description": "L1B_unusable",
+                    "value": 25200
+                },
+                {
+                    "description": "bowtie_trim",
+                    "value": 25300
+                },
+                {
+                    "description": "L1B_fill",
+                    "value": 25400
+                }
+            ],
+            "title": "Normalized Difference Snow Index (NDSI) Fill Values",
+            "roles": [
+                "data"
+            ]
+        },
+        "NDSI_Snow_Cover": {
+            "raster:bands": [
+                {
+                    "data_type": "uint8",
+                    "nodata": 255,
+                    "spatial_resolution": 375
+                }
+            ],
+            "title": "Snow Cover by NDSI",
+            "roles": [
+                "data"
+            ]
+        },
+        "NDSI_Snow_Cover_fill": {
+            "raster:bands": [
+                {
+                    "data_type": "uint8",
+                    "nodata": 255,
+                    "spatial_resolution": 375
+                }
+            ],
+            "classification:classes": [
+                {
+                    "description": "no_decision",
+                    "value": 201
+                },
+                {
+                    "description": "night",
+                    "value": 211
+                },
+                {
+                    "description": "lake",
+                    "value": 237
+                },
+                {
+                    "description": "ocean",
+                    "value": 239
+                },
+                {
+                    "description": "cloud",
+                    "value": 250
+                },
+                {
+                    "description": "missing_data",
+                    "value": 251
+                },
+                {
+                    "description": "bowtie_trim",
+                    "value": 253
+                },
+                {
+                    "description": "L1B_fill",
+                    "value": 254
+                }
+            ],
+            "title": "Snow Cover by NDSI Fill Values",
+            "roles": [
+                "data"
+            ]
+        },
+        "Algorithm_bit_flags_QA": {
+            "raster:bands": [
+                {
+                    "data_type": "uint8",
+                    "unit": "bit field",
+                    "spatial_resolution": 375
+                }
+            ],
+            "classification:bitfields": [
+                {
+                    "name": "inland_water_flag",
+                    "offset": 0,
+                    "length": 1,
+                    "classes": [
+                        {
+                            "description": "true",
+                            "value": 1
+                        },
+                        {
+                            "description": "false",
+                            "value": 0
+                        }
+                    ]
+                },
+                {
+                    "name": "low_visible_screen",
+                    "offset": 1,
+                    "length": 1,
+                    "classes": [
+                        {
+                            "description": "true",
+                            "value": 1
+                        },
+                        {
+                            "description": "false",
+                            "value": 0
+                        }
+                    ]
+                },
+                {
+                    "name": "low_ndsi_screen",
+                    "offset": 2,
+                    "length": 1,
+                    "classes": [
+                        {
+                            "description": "true",
+                            "value": 1
+                        },
+                        {
+                            "description": "false",
+                            "value": 0
+                        }
+                    ]
+                },
+                {
+                    "name": "combined_surface_temperature_and_height_screen_or_flag",
+                    "offset": 3,
+                    "length": 1,
+                    "classes": [
+                        {
+                            "description": "true",
+                            "value": 1
+                        },
+                        {
+                            "description": "false",
+                            "value": 0
+                        }
+                    ]
+                },
+                {
+                    "name": "high_swir_screen_or_flag",
+                    "offset": 5,
+                    "length": 1,
+                    "classes": [
+                        {
+                            "description": "true",
+                            "value": 1
+                        },
+                        {
+                            "description": "false",
+                            "value": 0
+                        }
+                    ]
+                },
+                {
+                    "name": "solar_zenith_flag",
+                    "offset": 7,
+                    "length": 1,
+                    "classes": [
+                        {
+                            "description": "true",
+                            "value": 1
+                        },
+                        {
+                            "description": "false",
+                            "value": 0
+                        }
+                    ]
+                }
+            ],
+            "title": "Algorithm Bit Flags QA",
+            "description": "A bitfield of flags set for certain conditions detected by data screens in the algorithm. Multiple flags may be set for a pixel.",
+            "roles": [
+                "data"
+            ]
+        },
+        "Basic_QA": {
+            "raster:bands": [
+                {
+                    "data_type": "uint8",
+                    "nodata": 255,
+                    "spatial_resolution": 375
+                }
+            ],
+            "classification:classes": [
+                {
+                    "description": "good",
+                    "value": 0
+                },
+                {
+                    "description": "poor",
+                    "value": 1
+                },
+                {
+                    "description": "bad",
+                    "value": 2
+                },
+                {
+                    "description": "other",
+                    "value": 3
+                },
+                {
+                    "description": "night",
+                    "value": 211
+                },
+                {
+                    "description": "ocean",
+                    "value": 239
+                },
+                {
+                    "description": "cloud",
+                    "value": 250
+                },
+                {
+                    "description": "no_decision",
+                    "value": 252
+                },
+                {
+                    "description": "bowtie_trim",
+                    "value": 253
+                }
+            ],
+            "title": "Basic QA Value",
+            "roles": [
+                "data"
+            ]
+        },
+        "granule_pnt": {
+            "raster:bands": [
+                {
+                    "data_type": "uint8",
+                    "nodata": 255,
+                    "spatial_resolution": 375
+                }
+            ],
+            "title": "Granule Pointer",
+            "description": "A numeric value that points to the index of values stored in the global attributes GranulePointerArray, GranuleBeginningDateTime and GranuleEndingDateTime. This pointer points to the index of the value in those arrays from which the 'best' observation was selected.",
+            "role": [
+                "data"
+            ]
+        }
+    }
+}
