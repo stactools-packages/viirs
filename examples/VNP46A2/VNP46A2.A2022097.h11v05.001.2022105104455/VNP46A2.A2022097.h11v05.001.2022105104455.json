@@ -8,7 +8,7 @@
     "viirs:horizontal-tile": 11,
     "viirs:vertical-tile": 5,
     "viirs:tile-id": "61011005",
-    "created": "2022-06-16T16:12:59.300689Z",
+    "created": "2022-06-17T15:34:33.453130Z",
     "platform": "snpp",
     "instruments": [
       "viirs"
@@ -79,7 +79,7 @@
     "hdf5": {
       "href": "../../../tests/data-files/external/VNP46A2.A2022097.h11v05.001.2022105104455.h5",
       "type": "application/x-hdf5",
-      "title": "Source data containing all bands",
+      "title": "Source Data Containing All Bands",
       "created": "2022-04-15T10:44:55Z",
       "roles": [
         "data"

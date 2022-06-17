@@ -2,7 +2,7 @@
   "type": "Collection",
   "id": "viirs-14a1-001",
   "stac_version": "1.0.0",
-  "description": "The daily VIIRS Thermal Anomalies/Fire (VNP14A1) Version 1 data product provides information about active fires and other thermal anomalies. The data product is a global, 1 kilometer gridded composite of fire pixels detected from VIIRS 750 meter bands over a daily (24-hour) period. The data products are designed after the Moderate Resolution Imaging Spectroradiometer (MODIS) Thermal Anomalies/Fire product suite. Four Science Dataset layers are provided: confidence of fire, maximum fire radiative power (FRP), quality assessment (QA), and position of fire within scan.",
+  "description": "The daily Visible Infrared Imaging Radiometer Suite (VIIRS) Thermal Anomalies/Fire Version 1 data product provides information about active fires and other thermal anomalies. The data product is a global, 1 kilometer gridded composite of fire pixels detected from VIIRS 750 meter bands over a daily (24-hour) period. The data products are designed after the Moderate Resolution Imaging Spectroradiometer (MODIS) Thermal Anomalies/Fire product suite. Four science dataset layers are provided: confidence of fire, maximum fire radiative power (FRP), quality assessment (QA), and position of fire within scan.",
   "links": [
     {
       "rel": "root",
@@ -46,14 +46,14 @@
       "roles": [
         "data"
       ],
-      "title": "Source data containing all bands"
+      "title": "Source Data Containing All Bands"
     },
     "metadata": {
       "type": "application/xml",
       "roles": [
         "metadata"
       ],
-      "title": "Earth Observing System Data and Information System (EOSDIS) metadata"
+      "title": "Earth Observing System Data and Information System (EOSDIS) Metadata"
     },
     "FireMask": {
       "raster:bands": [

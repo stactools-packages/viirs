@@ -2,7 +2,7 @@
   "type": "Collection",
   "id": "viirs-10a1-001",
   "stac_version": "1.0.0",
-  "description": "This data set contains daily snow cover derived from radiance data acquired by the VIIRS sensor. The data is a gridded composite, generated from 6 minute swaths, and projected to a 375 m Sinusoidal grid. Snow cover is identified using the Normalized Difference Snow Index (NDSI) and a series of screens designed to alleviate errors and flag uncertain snow cover detections.",
+  "description": "The Visible Infrared Imaging Radiometer Suite (VIIRS) Snow Cover Version 1 product contains daily snow cover derived from radiance data acquired by the VIIRS sensor. The data is a gridded composite, generated from 6 minute swaths, and projected to a 375 m Sinusoidal grid. Snow cover is identified using the Normalized Difference Snow Index (NDSI) and a series of screens designed to alleviate errors and flag uncertain snow cover detections.",
   "links": [
     {
       "rel": "root",
@@ -52,14 +52,14 @@
       "roles": [
         "data"
       ],
-      "title": "Source data containing all bands"
+      "title": "Source Data Containing All Bands"
     },
     "metadata": {
       "type": "application/xml",
       "roles": [
         "metadata"
       ],
-      "title": "Earth Observing System Data and Information System (EOSDIS) metadata"
+      "title": "Earth Observing System Data and Information System (EOSDIS) Metadata"
     },
     "NDSI": {
       "raster:bands": [

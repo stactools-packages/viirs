@@ -2,7 +2,7 @@
   "type": "Collection",
   "id": "viirs-21a2-001",
   "stac_version": "1.0.0",
-  "description": "The VIIRS Land Surface Temperature and Emissivity (LST&E) 8-day product combines the daily VNP21A1D and VNP21A1N products over an 8-day compositing period into a single product based on a simple averaging method. The algorithm calculates the average from all the cloud-free VNP21A1D and VNP21A1N daily acquisitions from the 8-day period. The product is developed synergistically with the Moderate Resolution Imaging Spectroradiometer (MODIS) LST&E Version 6 product (MOD21A2) using the same input atmospheric products and algorithmic approach. VIIRS LST&E products are available 2 months after acquisition due to latency of data inputs. The product contains 11 science datasets: LST, quality control, view zenith angle, and time of observation for both day and night observations along with emissivity for bands M14, M15, and M16.",
+  "description": "The Visible Infrared Imaging Radiometer Suite (VIIRS) Land Surface Temperature and Emissivity (LST&E) 8-day product combines the daily VNP21A1D and VNP21A1N products over an 8-day compositing period into a single product based on a simple averaging method. The algorithm calculates the average from all the cloud-free VNP21A1D and VNP21A1N daily acquisitions from the 8-day period. The product is developed synergistically with the Moderate Resolution Imaging Spectroradiometer (MODIS) LST&E Version 6 product (MOD21A2) using the same input atmospheric products and algorithmic approach. VIIRS LST&E products are available 2 months after acquisition due to latency of data inputs. The product contains 11 science datasets: LST, quality control, view zenith angle, and time of observation for both day and night observations along with emissivity for bands M14, M15, and M16.",
   "links": [
     {
       "rel": "root",
@@ -46,14 +46,14 @@
       "roles": [
         "data"
       ],
-      "title": "Source data containing all bands"
+      "title": "Source Data Containing All Bands"
     },
     "metadata": {
       "type": "application/xml",
       "roles": [
         "metadata"
       ],
-      "title": "Earth Observing System Data and Information System (EOSDIS) metadata"
+      "title": "Earth Observing System Data and Information System (EOSDIS) Metadata"
     },
     "Emis_14": {
       "raster:bands": [

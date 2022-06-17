@@ -2,7 +2,7 @@
   "type": "Collection",
   "id": "viirs-13a1-001",
   "stac_version": "1.0.0",
-  "description": "The VIIRS Vegetation Indices Version 1 data product provides vegetation indices by a process of selecting the best available pixel over a 16-day acquisition period at 500 meter resolution. The data product is designed after the Moderate Resolution Imaging Spectroradiometer (MODIS) Terra and Aqua Vegetation Indices product suite to promote the continuity of the Earth Observation System (EOS) mission. Three vegetation indices are provided: Normalized Difference Vegetation Index (NDVI),Enhanced Vegetation Index (EVI), and Enhanced Vegetation Index-2 (EVI2). Along with the Vegetation Indices, this product also NIR reflectance; three shortwave infrared (SWIR) reflectance bands; red, blue, and green reflectance bands; composite day of year; pixel reliability; relative azimuth, view, and sun angles; and a quality layer.",
+  "description": "The Visible Infrared Imaging Radiometer Suite (VIIRS) Vegetation Indices Version 1 data product provides vegetation indices by a process of selecting the best available pixel over a 16-day acquisition period at 500 meter resolution. The data product is designed after the Moderate Resolution Imaging Spectroradiometer (MODIS) Terra and Aqua Vegetation Indices product suite to promote the continuity of the Earth Observation System (EOS) mission. Three vegetation indices are provided: Normalized Difference Vegetation Index (NDVI), Enhanced Vegetation Index (EVI), and Enhanced Vegetation Index-2 (EVI2). Along with the Vegetation Indices, this product also includes bands for NIR reflectance; three shortwave infrared (SWIR) reflectance bands; red, blue, and green reflectance bands; composite day of year; pixel reliability; relative azimuth, view, and sun angles; and a quality band.",
   "links": [
     {
       "rel": "root",
@@ -47,14 +47,14 @@
       "roles": [
         "data"
       ],
-      "title": "Source data containing all bands"
+      "title": "Source Data Containing All Bands"
     },
     "metadata": {
       "type": "application/xml",
       "roles": [
         "metadata"
       ],
-      "title": "Earth Observing System Data and Information System (EOSDIS) metadata"
+      "title": "Earth Observing System Data and Information System (EOSDIS) Metadata"
     },
     "500_m_16_days_blue_reflectance": {
       "eo:bands": [
