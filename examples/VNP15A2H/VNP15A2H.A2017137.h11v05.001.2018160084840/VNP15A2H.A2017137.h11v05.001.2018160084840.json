@@ -8,7 +8,7 @@
     "viirs:horizontal-tile": 11,
     "viirs:vertical-tile": 5,
     "viirs:tile-id": "51011005",
-    "created": "2022-06-17T15:34:33.415305Z",
+    "created": "2022-06-21T21:16:53.465662Z",
     "platform": "snpp",
     "instruments": [
       "viirs"
@@ -116,7 +116,7 @@
           "value": 250
         },
         {
-          "description": "land cover assigned as \u201cpermanent\u201d wetlands/inundated marshlands",
+          "description": "land cover assigned as “permanent” wetlands/inundated marshlands",
           "value": 251
         },
         {
@@ -181,7 +181,7 @@
           "value": 250
         },
         {
-          "description": "land cover assigned as \u201cpermanent\u201d wetlands/inundated marshlands",
+          "description": "land cover assigned as “permanent” wetlands/inundated marshlands",
           "value": 251
         },
         {
@@ -456,7 +456,7 @@
           "value": 250
         },
         {
-          "description": "land cover assigned as \u201cpermanent\u201d wetlands/inundated marshlands",
+          "description": "land cover assigned as “permanent” wetlands/inundated marshlands",
           "value": 251
         },
         {
@@ -505,7 +505,7 @@
           "value": 250
         },
         {
-          "description": "land cover assigned as \u201cpermanent\u201d wetlands/inundated marshlands",
+          "description": "land cover assigned as “permanent” wetlands/inundated marshlands",
           "value": 251
         },
         {

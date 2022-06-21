@@ -446,7 +446,7 @@
                         "date_type": "int16",
                         "nodata": -28672,
                         "scale": 0.0001,
-                        "spatial_resolution": 1000
+                        "spatial_resolution": 500
                     }
                 ]
             },
@@ -456,7 +456,7 @@
                         "date_type": "int16",
                         "nodata": -28672,
                         "scale": 0.0001,
-                        "spatial_resolution": 1000
+                        "spatial_resolution": 500
                     }
                 ]
             },
@@ -466,7 +466,7 @@
                         "date_type": "int16",
                         "nodata": -28672,
                         "scale": 0.0001,
-                        "spatial_resolution": 1000
+                        "spatial_resolution": 500
                     }
                 ]
             }

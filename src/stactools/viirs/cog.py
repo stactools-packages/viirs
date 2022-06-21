@@ -63,6 +63,7 @@ def cogify(infile: str, outdir: str) -> List[str]:
             # gdal (and software built on gdal) doesn't always play well with signed byte data
             data = np.int16(data) if data.dtype == "int8" else data
 
+            temp = None
             if "_FillValue" in h5[subdataset_key].attrs.keys():
                 temp = h5[subdataset_key].attrs["_FillValue"].item()
             elif "_Fillvalue" in h5[subdataset_key].attrs.keys():

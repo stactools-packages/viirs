@@ -1,374 +1,374 @@
 {
-    "type": "Collection",
-    "id": "viirs-46a2-001",
-    "stac_version": "1.0.0",
-    "description": "The Visible Infrared Imaging Radiometer Suite (VIIRS) Gap-Filled Lunar BRDF-Adjusted Nighttime Lights Daily Version 1 product provides a daily moonlight- and atmosphere-corrected Nighttime Lights (NTL) dataset. This product is generated from measurements by the VIIRS Day-Night Band (DNB) sensor, which provides global daily measurements of nocturnal visible and near-infrared (NIR) light that are suitable for Earth system science and applications. The VIIRS DNB's ultra-sensitivity in lowlight conditions enables generation of a new set of science-quality nighttime products that manifest substantial improvements in sensor resolution and calibration when compared to the previous era of Defense Meteorological Satellite Program/Operational Linescan System's (DMSP/OLS) nighttime lights image products. The product includes seven science dataset layers: DNB BRDF-corrected and gap-filled DNB BRDF-corrected NTL, DNB lunar irradiance, temporal gap (days) to the latest high-quality retrieval, and bands for mandatory quality, cloud mask, and snow flags.",
-    "links": [
-        {
-            "rel": "root",
-            "href": "./collection.json",
-            "type": "application/json",
-            "title": "VIIRS Gap-Filled Lunar BRDF-Adjusted Nighttime Lights Daily"
-        },
-        {
-            "rel": "license",
-            "href": "https://modaps.modaps.eosdis.nasa.gov/services/faq/LAADS_Data-Use_Citation_Policies.pdf",
-            "type": "application/pdf",
-            "title": "LAADS DAAC Data Use Policies and Copyright"
-        },
-        {
-            "rel": "help",
-            "href": "https://ladsweb.modaps.eosdis.nasa.gov/missions-and-measurements/viirs/VIIRS_Black_Marble_UG_v1.1_July_2020.pdf",
-            "type": "application/pdf",
-            "title": "Black Marble User Guide Version 1.1"
-        },
-        {
-            "rel": "describedby",
-            "href": "https://ladsweb.modaps.eosdis.nasa.gov/missions-and-measurements/viirs/VIIRS_Black_Marble_ATBD_v1.1_July_2020.pdf",
-            "type": "application/pdf",
-            "title": "NASA's Black Marble Nighttime Lights Product Suite Algorithm Theoretical Basis Document (ATBD)"
-        },
-        {
-            "rel": "cite-as",
-            "href": "https://doi.org/10.5067/VIIRS/VNP46A2.001",
-            "type": "text/html",
-            "title": "LAADS DAAC - VNP46A2 v001"
-        },
-        {
-            "rel": "item",
-            "href": "./VNP46A2.A2022097.h11v05.001.2022105104455/VNP46A2.A2022097.h11v05.001.2022105104455.json",
-            "type": "application/json"
-        }
-    ],
-    "stac_extensions": [
-        "https://stac-extensions.github.io/classification/v1.0.0/schema.json",
-        "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
-        "https://stac-extensions.github.io/raster/v1.0.0/schema.json",
-        "https://stac-extensions.github.io/scientific/v1.0.0/schema.json"
-    ],
-    "item_assets": {
-        "hdf5": {
-            "type": "application/x-hdf5",
-            "roles": [
-                "data"
-            ],
-            "title": "Source Data Containing All Bands"
-        },
-        "metadata": {
-            "type": "application/xml",
-            "roles": [
-                "metadata"
-            ],
-            "title": "Earth Observing System Data and Information System (EOSDIS) Metadata"
-        },
-        "DNB_BRDF-Corrected_NTL": {
-            "raster:bands": [
-                {
-                    "data_type": "uint16",
-                    "nodata": 65535,
-                    "unit": "nWatts / cm^2 / sr",
-                    "scale": 0.1,
-                    "spatial_resolution": 500
-                }
-            ],
-            "title": "BRDF Corrected Day/Night Band Night Time Lights",
-            "roles": [
-                "data"
-            ],
-            "type": "image/tiff; application=geotiff; profile=cloud-optimized"
-        },
-        "Gap_Filled_DNB_BRDF-Corrected_NTL": {
-            "raster:bands": [
-                {
-                    "data_type": "uint16",
-                    "nodata": 65535,
-                    "unit": "nWatts / cm^2 / sr",
-                    "scale": 0.1,
-                    "spatial_resolution": 500
-                }
-            ],
-            "title": "Gap Filled BRDF Corrected Day/Night Band Night Time Lights",
-            "roles": [
-                "data"
-            ],
-            "type": "image/tiff; application=geotiff; profile=cloud-optimized"
-        },
-        "DNB_Lunar_Irradiance": {
-            "raster:bands": [
-                {
-                    "data_type": "uint16",
-                    "nodata": 65535,
-                    "unit": "nWatts / cm^2 / sr",
-                    "scale": 0.1,
-                    "spatial_resolution": 500
-                }
-            ],
-            "title": "Day/Night Band Lunar Irradiance",
-            "roles": [
-                "data"
-            ],
-            "type": "image/tiff; application=geotiff; profile=cloud-optimized"
-        },
-        "Latest_High_Quality_Retrieval": {
-            "raster:bands": [
-                {
-                    "data_type": "uint8",
-                    "nodata": 255,
-                    "unit": "days",
-                    "spatial_resolution": 500
-                }
-            ],
-            "title": "Latest High Quality BRDF Corrected Day/Night Band Radiance Retrieval",
-            "roles": [
-                "data"
-            ],
-            "type": "image/tiff; application=geotiff; profile=cloud-optimized"
-        },
-        "Mandatory_Quality_Flag": {
-            "raster:bands": [
-                {
-                    "data_type": "uint8",
-                    "nodata": 255,
-                    "spatial_resolution": 500
-                }
-            ],
-            "classification:classes": [
-                {
-                    "description": "High-Quality Main Algorithm (Persistent Nighttime Lights)",
-                    "value": 0
-                },
-                {
-                    "description": "High-Quality Main Algorithm (Ephemeral Nighttime Lights)",
-                    "value": 1
-                },
-                {
-                    "description": "Poor-Quality Main Algorithm (Outlier, Potential cloud contamination or other issues)",
-                    "value": 2
-                },
-                {
-                    "description": "No Retrieval (Fill Value)",
-                    "value": 255
-                }
-            ],
-            "title": "Mandatory Quality Flag",
-            "roles": [
-                "data"
-            ],
-            "type": "image/tiff; application=geotiff; profile=cloud-optimized"
-        },
-        "QF_Cloud_Mask": {
-            "raster:bands": [
-                {
-                    "data_type": "uint16",
-                    "nodata": 65535,
-                    "unit": "bit field",
-                    "spatial_resolution": 500
-                }
-            ],
-            "classification:bitfields": [
-                {
-                    "name": "day_night",
-                    "description": "Day/Night",
-                    "offset": 0,
-                    "length": 1,
-                    "classes": [
-                        {
-                            "description": "Night",
-                            "value": 0
-                        },
-                        {
-                            "description": "Day",
-                            "value": 1
-                        }
-                    ]
-                },
-                {
-                    "name": "land_water",
-                    "description": "Land/Water Background",
-                    "offset": 1,
-                    "length": 3,
-                    "classes": [
-                        {
-                            "description": "Land & Desert",
-                            "value": 0
-                        },
-                        {
-                            "description": "Land no Desert",
-                            "value": 1
-                        },
-                        {
-                            "description": "Inland Water",
-                            "value": 2
-                        },
-                        {
-                            "description": "Sea Water",
-                            "value": 3
-                        },
-                        {
-                            "description": "Coastal",
-                            "value": 5
-                        }
-                    ]
-                },
-                {
-                    "name": "cloud",
-                    "description": "Cloud Detection Results & Confidence Indicator",
-                    "offset": 6,
-                    "length": 2,
-                    "classes": [
-                        {
-                            "description": "Confident Clear",
-                            "value": 0
-                        },
-                        {
-                            "description": "Probably Clear",
-                            "value": 1
-                        },
-                        {
-                            "description": "Probably Cloudy",
-                            "value": 2
-                        },
-                        {
-                            "description": "Confident Cloudy",
-                            "value": 3
-                        }
-                    ]
-                },
-                {
-                    "name": "shadow",
-                    "description": "Shadow Detected",
-                    "offset": 8,
-                    "length": 1,
-                    "classes": [
-                        {
-                            "description": "No",
-                            "value": 0
-                        },
-                        {
-                            "description": "Yes",
-                            "value": 1
-                        }
-                    ]
-                },
-                {
-                    "name": "cirrus",
-                    "description": "Cirrus Detection (IR) (BTM15-BTM16)",
-                    "offset": 9,
-                    "length": 1,
-                    "classes": [
-                        {
-                            "description": "No Cloud",
-                            "value": 0
-                        },
-                        {
-                            "description": "Cloud",
-                            "value": 1
-                        }
-                    ]
-                },
-                {
-                    "name": "snow_ice",
-                    "description": "Snow/Ice",
-                    "offset": 10,
-                    "length": 1,
-                    "classes": [
-                        {
-                            "description": "No Snow/Ice",
-                            "value": 0
-                        },
-                        {
-                            "description": "Snow/Ice",
-                            "value": 1
-                        }
-                    ]
-                }
-            ],
-            "title": "Quality Flag for Cloud Mask",
-            "roles": [
-                "data"
-            ],
-            "type": "image/tiff; application=geotiff; profile=cloud-optimized"
-        },
-        "Snow_Flag": {
-            "raster:bands": [
-                {
-                    "data_type": "uint8",
-                    "nodata": 255,
-                    "spatial_resolution": 500
-                }
-            ],
-            "classification:classes": [
-                {
-                    "description": "No snow/ice",
-                    "value": 0
-                },
-                {
-                    "description": "snow/ice",
-                    "value": 1
-                }
-            ],
-            "title": "Flag for Snow Cover",
-            "roles": [
-                "data"
-            ],
-            "type": "image/tiff; application=geotiff; profile=cloud-optimized"
-        }
+  "type": "Collection",
+  "id": "viirs-46a2-001",
+  "stac_version": "1.0.0",
+  "description": "The Visible Infrared Imaging Radiometer Suite (VIIRS) Gap-Filled Lunar BRDF-Adjusted Nighttime Lights Daily Version 1 product provides a daily moonlight- and atmosphere-corrected Nighttime Lights (NTL) dataset. This product is generated from measurements by the VIIRS Day-Night Band (DNB) sensor, which provides global daily measurements of nocturnal visible and near-infrared (NIR) light that are suitable for Earth system science and applications. The VIIRS DNB's ultra-sensitivity in lowlight conditions enables generation of a new set of science-quality nighttime products that manifest substantial improvements in sensor resolution and calibration when compared to the previous era of Defense Meteorological Satellite Program/Operational Linescan System's (DMSP/OLS) nighttime lights image products. The product includes seven science dataset layers: DNB BRDF-corrected and gap-filled DNB BRDF-corrected NTL, DNB lunar irradiance, temporal gap (days) to the latest high-quality retrieval, and bands for mandatory quality, cloud mask, and snow flags.",
+  "links": [
+    {
+      "rel": "root",
+      "href": "./collection.json",
+      "type": "application/json",
+      "title": "VIIRS Gap-Filled Lunar BRDF-Adjusted Nighttime Lights Daily"
     },
-    "sci:doi": "10.5067/VIIRS/VNP46A2.001",
-    "sci:citation": "Roman, MO., 2020. VIIRS/NPP Gap-Filled Lunar BRDF-Adjusted Nighttime Lights Daily L3 Global 500m Linear Lat Lon Grid. NASA Level-1 and Atmosphere Archive & Distribution System (LAADS) Distributed Active Archive Center (DAAC), Goddard Space Flight Center, Greenbelt, Maryland USA.",
-    "sci:publications": [
-        {
-            "doi": "10.1016/j.rse.2018.03.017",
-            "citation": "Rom\u00e1n, M.O., Wang, Z., Sun, Q., Kalb, V., Miller, S.D., Molthan, A., Schultz, L., Bell, J., Stokes, E.C., Pandey, B. and Seto, K.C., et al. (2018). NASA's Black Marble nighttime lights product suite. Remote Sensing of Environment 210, 113-143."
-        }
-    ],
-    "title": "VIIRS Gap-Filled Lunar BRDF-Adjusted Nighttime Lights Daily",
-    "extent": {
-        "spatial": {
-            "bbox": [
-                [
-                    -180,
-                    -90,
-                    180,
-                    90
-                ]
-            ]
-        },
-        "temporal": {
-            "interval": [
-                [
-                    "2012-01-19T00:00:00Z",
-                    null
-                ]
-            ]
-        }
+    {
+      "rel": "license",
+      "href": "https://modaps.modaps.eosdis.nasa.gov/services/faq/LAADS_Data-Use_Citation_Policies.pdf",
+      "type": "application/pdf",
+      "title": "LAADS DAAC Data Use Policies and Copyright"
     },
-    "license": "proprietary",
-    "keywords": [
-        "NASA",
-        "VIIRS",
-        "Satellite",
-        "Imagery",
-        "Global",
-        "Reflectance",
-        "VNP46A2"
-    ],
-    "providers": [
-        {
-            "name": "NASA LAADS DAAC at the Goddard Space Flight Center",
-            "roles": [
-                "producer",
-                "licensor"
-            ],
-            "url": "https://ladsweb.modaps.eosdis.nasa.gov/"
-        }
-    ],
-    "summaries": {
-        "instruments": [
-            "viirs"
-        ],
-        "platform": [
-            "snpp"
-        ]
+    {
+      "rel": "help",
+      "href": "https://ladsweb.modaps.eosdis.nasa.gov/missions-and-measurements/viirs/VIIRS_Black_Marble_UG_v1.1_July_2020.pdf",
+      "type": "application/pdf",
+      "title": "Black Marble User Guide Version 1.1"
+    },
+    {
+      "rel": "describedby",
+      "href": "https://ladsweb.modaps.eosdis.nasa.gov/missions-and-measurements/viirs/VIIRS_Black_Marble_ATBD_v1.1_July_2020.pdf",
+      "type": "application/pdf",
+      "title": "NASA's Black Marble Nighttime Lights Product Suite Algorithm Theoretical Basis Document (ATBD)"
+    },
+    {
+      "rel": "cite-as",
+      "href": "https://doi.org/10.5067/VIIRS/VNP46A2.001",
+      "type": "text/html",
+      "title": "LAADS DAAC - VNP46A2 v001"
+    },
+    {
+      "rel": "item",
+      "href": "./VNP46A2.A2022097.h11v05.001.2022105104455/VNP46A2.A2022097.h11v05.001.2022105104455.json",
+      "type": "application/json"
     }
+  ],
+  "stac_extensions": [
+    "https://stac-extensions.github.io/classification/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/item-assets/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/raster/v1.0.0/schema.json",
+    "https://stac-extensions.github.io/scientific/v1.0.0/schema.json"
+  ],
+  "item_assets": {
+    "hdf5": {
+      "type": "application/x-hdf5",
+      "roles": [
+        "data"
+      ],
+      "title": "Source Data Containing All Bands"
+    },
+    "metadata": {
+      "type": "application/xml",
+      "roles": [
+        "metadata"
+      ],
+      "title": "Earth Observing System Data and Information System (EOSDIS) Metadata"
+    },
+    "DNB_BRDF-Corrected_NTL": {
+      "raster:bands": [
+        {
+          "data_type": "uint16",
+          "nodata": 65535,
+          "unit": "nWatts / cm^2 / sr",
+          "scale": 0.1,
+          "spatial_resolution": 500
+        }
+      ],
+      "title": "BRDF Corrected Day/Night Band Night Time Lights",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "Gap_Filled_DNB_BRDF-Corrected_NTL": {
+      "raster:bands": [
+        {
+          "data_type": "uint16",
+          "nodata": 65535,
+          "unit": "nWatts / cm^2 / sr",
+          "scale": 0.1,
+          "spatial_resolution": 500
+        }
+      ],
+      "title": "Gap Filled BRDF Corrected Day/Night Band Night Time Lights",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "DNB_Lunar_Irradiance": {
+      "raster:bands": [
+        {
+          "data_type": "uint16",
+          "nodata": 65535,
+          "unit": "nWatts / cm^2 / sr",
+          "scale": 0.1,
+          "spatial_resolution": 500
+        }
+      ],
+      "title": "Day/Night Band Lunar Irradiance",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "Latest_High_Quality_Retrieval": {
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "unit": "days",
+          "spatial_resolution": 500
+        }
+      ],
+      "title": "Latest High Quality BRDF Corrected Day/Night Band Radiance Retrieval",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "Mandatory_Quality_Flag": {
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "spatial_resolution": 500
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "High-Quality Main Algorithm (Persistent Nighttime Lights)",
+          "value": 0
+        },
+        {
+          "description": "High-Quality Main Algorithm (Ephemeral Nighttime Lights)",
+          "value": 1
+        },
+        {
+          "description": "Poor-Quality Main Algorithm (Outlier, Potential cloud contamination or other issues)",
+          "value": 2
+        },
+        {
+          "description": "No Retrieval (Fill Value)",
+          "value": 255
+        }
+      ],
+      "title": "Mandatory Quality Flag",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "QF_Cloud_Mask": {
+      "raster:bands": [
+        {
+          "data_type": "uint16",
+          "nodata": 65535,
+          "unit": "bit field",
+          "spatial_resolution": 500
+        }
+      ],
+      "classification:bitfields": [
+        {
+          "name": "day_night",
+          "description": "Day/Night",
+          "offset": 0,
+          "length": 1,
+          "classes": [
+            {
+              "description": "Night",
+              "value": 0
+            },
+            {
+              "description": "Day",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "land_water",
+          "description": "Land/Water Background",
+          "offset": 1,
+          "length": 3,
+          "classes": [
+            {
+              "description": "Land & Desert",
+              "value": 0
+            },
+            {
+              "description": "Land no Desert",
+              "value": 1
+            },
+            {
+              "description": "Inland Water",
+              "value": 2
+            },
+            {
+              "description": "Sea Water",
+              "value": 3
+            },
+            {
+              "description": "Coastal",
+              "value": 5
+            }
+          ]
+        },
+        {
+          "name": "cloud",
+          "description": "Cloud Detection Results & Confidence Indicator",
+          "offset": 6,
+          "length": 2,
+          "classes": [
+            {
+              "description": "Confident Clear",
+              "value": 0
+            },
+            {
+              "description": "Probably Clear",
+              "value": 1
+            },
+            {
+              "description": "Probably Cloudy",
+              "value": 2
+            },
+            {
+              "description": "Confident Cloudy",
+              "value": 3
+            }
+          ]
+        },
+        {
+          "name": "shadow",
+          "description": "Shadow Detected",
+          "offset": 8,
+          "length": 1,
+          "classes": [
+            {
+              "description": "No",
+              "value": 0
+            },
+            {
+              "description": "Yes",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "cirrus",
+          "description": "Cirrus Detection (IR) (BTM15-BTM16)",
+          "offset": 9,
+          "length": 1,
+          "classes": [
+            {
+              "description": "No Cloud",
+              "value": 0
+            },
+            {
+              "description": "Cloud",
+              "value": 1
+            }
+          ]
+        },
+        {
+          "name": "snow_ice",
+          "description": "Snow/Ice",
+          "offset": 10,
+          "length": 1,
+          "classes": [
+            {
+              "description": "No Snow/Ice",
+              "value": 0
+            },
+            {
+              "description": "Snow/Ice",
+              "value": 1
+            }
+          ]
+        }
+      ],
+      "title": "Quality Flag for Cloud Mask",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    },
+    "Snow_Flag": {
+      "raster:bands": [
+        {
+          "data_type": "uint8",
+          "nodata": 255,
+          "spatial_resolution": 500
+        }
+      ],
+      "classification:classes": [
+        {
+          "description": "No snow/ice",
+          "value": 0
+        },
+        {
+          "description": "snow/ice",
+          "value": 1
+        }
+      ],
+      "title": "Flag for Snow Cover",
+      "roles": [
+        "data"
+      ],
+      "type": "image/tiff; application=geotiff; profile=cloud-optimized"
+    }
+  },
+  "sci:doi": "10.5067/VIIRS/VNP46A2.001",
+  "sci:citation": "Roman, MO., 2020. VIIRS/NPP Gap-Filled Lunar BRDF-Adjusted Nighttime Lights Daily L3 Global 500m Linear Lat Lon Grid. NASA Level-1 and Atmosphere Archive & Distribution System (LAADS) Distributed Active Archive Center (DAAC), Goddard Space Flight Center, Greenbelt, Maryland USA.",
+  "sci:publications": [
+    {
+      "doi": "10.1016/j.rse.2018.03.017",
+      "citation": "Román, M.O., Wang, Z., Sun, Q., Kalb, V., Miller, S.D., Molthan, A., Schultz, L., Bell, J., Stokes, E.C., Pandey, B. and Seto, K.C., et al. (2018). NASA's Black Marble nighttime lights product suite. Remote Sensing of Environment 210, 113-143."
+    }
+  ],
+  "title": "VIIRS Gap-Filled Lunar BRDF-Adjusted Nighttime Lights Daily",
+  "extent": {
+    "spatial": {
+      "bbox": [
+        [
+          -180,
+          -90,
+          180,
+          90
+        ]
+      ]
+    },
+    "temporal": {
+      "interval": [
+        [
+          "2012-01-19T00:00:00Z",
+          null
+        ]
+      ]
+    }
+  },
+  "license": "proprietary",
+  "keywords": [
+    "NASA",
+    "VIIRS",
+    "Satellite",
+    "Imagery",
+    "Global",
+    "Reflectance",
+    "VNP46A2"
+  ],
+  "providers": [
+    {
+      "name": "NASA LAADS DAAC at the Goddard Space Flight Center",
+      "roles": [
+        "producer",
+        "licensor"
+      ],
+      "url": "https://ladsweb.modaps.eosdis.nasa.gov/"
+    }
+  ],
+  "summaries": {
+    "instruments": [
+      "viirs"
+    ],
+    "platform": [
+      "snpp"
+    ]
+  }
 }
