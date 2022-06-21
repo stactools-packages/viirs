@@ -144,6 +144,8 @@ def create_collection(product: str) -> Collection:
         constants.HDF5_ASSET_KEY: constants.HDF5_ASSET_PROPERTIES,
         constants.METADATA_ASSET_KEY: constants.METADATA_ASSET_PROPERTIES,
     }
+    if product == constants.VIIRSProducts.VNP46A2:
+        item_assets_dict.pop(constants.METADATA_ASSET_KEY)
     item_assets_dict.update(fragments.assets_dict())
     item_assets = {k: AssetDefinition(v) for k, v in item_assets_dict.items()}
     item_assets_ext = ItemAssetsExtension.ext(collection, add_if_missing=True)
