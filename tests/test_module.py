@@ -1,8 +1,5 @@
-import unittest
-
 import stactools.viirs
 
 
-class TestModule(unittest.TestCase):
-    def test_version(self) -> None:
-        self.assertIsNotNone(stactools.viirs.__version__)
+def test_version() -> None:
+    assert stactools.viirs.__version__ is not None
