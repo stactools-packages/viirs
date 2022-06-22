@@ -6,20 +6,11 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ## [Unreleased]
 
-### Added
-
 - Nothing.
 
-### Deprecated
+## [0.1.0] - 2022-06-22
 
-- Nothing.
+Initial release.
 
-### Removed
-
-- Nothing.
-
-### Fixed
-
-- Nothing.
-
-[Unreleased]: <https://github.com/stactools-packages/viirs/tree/main/>
+[Unreleased]: <https://github.com/stactools-packages/viirs/compare/v0.1.0..main/>
+[0.1.0]: <https://github.com/stactools-packages/viirs/releases/tag/v0.1.0>
