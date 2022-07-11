@@ -8,7 +8,7 @@
     "viirs:horizontal-tile": 0,
     "viirs:vertical-tile": 9,
     "viirs:tile-id": "51000009",
-    "created": "2022-07-11T20:56:58.405814Z",
+    "created": "2022-07-11T21:22:31.762858Z",
     "platform": "snpp",
     "instruments": [
       "viirs"

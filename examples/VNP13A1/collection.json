@@ -781,6 +781,50 @@
     ],
     "platform": [
       "snpp"
+    ],
+    "eo:bands": [
+      {
+        "name": "M3",
+        "description": "Visible/Reflective",
+        "center_wavelength": 0.488,
+        "full_width_half_max": 0.02
+      },
+      {
+        "name": "M4",
+        "description": "Visible/Reflective",
+        "center_wavelength": 0.555,
+        "full_width_half_max": 0.02
+      },
+      {
+        "name": "I1",
+        "description": "Visible/Reflective",
+        "center_wavelength": 0.64,
+        "full_width_half_max": 0.08
+      },
+      {
+        "name": "M7",
+        "description": "Shortwave Infrared",
+        "center_wavelength": 0.865,
+        "full_width_half_max": 0.039
+      },
+      {
+        "name": "M8",
+        "description": "Shortwave Infrared",
+        "center_wavelength": 1.24,
+        "full_width_half_max": 0.02
+      },
+      {
+        "name": "I3",
+        "description": "Shortwave Infrared",
+        "center_wavelength": 1.61,
+        "full_width_half_max": 0.06
+      },
+      {
+        "name": "M11",
+        "description": "Shortwave Infrared",
+        "center_wavelength": 2.25,
+        "full_width_half_max": 0.05
+      }
     ]
   }
 }
