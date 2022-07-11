@@ -27,7 +27,7 @@ There is an example Collection and Item for each VIIRS product supported by this
 
 ## Installation
 ```shell
-pip install stactools-viirs
+$ pip install stactools-viirs
 ```
 
 ## Command-line Usage
