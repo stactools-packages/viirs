@@ -75,7 +75,7 @@ class STACFragments:
         summary = []
         for asset in self.assets.values():
             if "eo:bands" in asset:
-                summary.append(asset["eo:bands"][0])
+                summary.extend(asset["eo:bands"])
         return summary
 
     def _update_assets(self, production_year_doy: int) -> None:
