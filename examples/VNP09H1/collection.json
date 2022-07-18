@@ -72,7 +72,7 @@
       ],
       "raster:bands": [
         {
-          "date_type": "int16",
+          "data_type": "int16",
           "nodata": -28672,
           "scale": 0.0001,
           "spatial_resolution": 500
@@ -96,7 +96,7 @@
       ],
       "raster:bands": [
         {
-          "date_type": "int16",
+          "data_type": "int16",
           "nodata": -28672,
           "scale": 0.0001,
           "spatial_resolution": 500
@@ -120,7 +120,7 @@
       ],
       "raster:bands": [
         {
-          "date_type": "int16",
+          "data_type": "int16",
           "nodata": -28672,
           "scale": 0.0001,
           "spatial_resolution": 500
