@@ -100,3 +100,10 @@ def test_densify() -> None:
     item_dict = item.to_dict()
     assert len(item_dict["geometry"]["coordinates"][0]) == 9
     item.validate()
+
+
+def test_collection_eo_summary() -> None:
+    collection = stac.create_collection("VNP09A1")
+    summaries_dict = collection.summaries.to_dict()
+    assert "eo:bands" in summaries_dict
+    assert len(summaries_dict["eo:bands"]) == 9

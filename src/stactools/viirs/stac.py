@@ -126,6 +126,8 @@ def create_collection(product: str) -> Collection:
     }
     if fragments.gsd() is not None:
         summaries["gsd"] = [fragments.gsd()]
+    if fragments.collection_eo_bands_summary():
+        summaries["eo:bands"] = fragments.collection_eo_bands_summary()
 
     collection_fragments = fragments.collection_dict()
     collection = Collection(

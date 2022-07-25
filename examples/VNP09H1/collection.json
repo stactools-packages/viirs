@@ -72,7 +72,7 @@
       ],
       "raster:bands": [
         {
-          "date_type": "int16",
+          "data_type": "int16",
           "nodata": -28672,
           "scale": 0.0001,
           "spatial_resolution": 500
@@ -96,7 +96,7 @@
       ],
       "raster:bands": [
         {
-          "date_type": "int16",
+          "data_type": "int16",
           "nodata": -28672,
           "scale": 0.0001,
           "spatial_resolution": 500
@@ -120,7 +120,7 @@
       ],
       "raster:bands": [
         {
-          "date_type": "int16",
+          "data_type": "int16",
           "nodata": -28672,
           "scale": 0.0001,
           "spatial_resolution": 500
@@ -506,10 +506,10 @@
     "spatial": {
       "bbox": [
         [
-          -180,
-          -90,
-          180,
-          90
+          -182.7767901225167,
+          -9.999999999104968,
+          -169.99999998473047,
+          0.0
         ]
       ]
     },
@@ -517,7 +517,7 @@
       "interval": [
         [
           "2012-01-17T00:00:00Z",
-          null
+          "2012-01-25T00:00:00Z"
         ]
       ]
     }
@@ -551,6 +551,26 @@
     ],
     "gsd": [
       375
+    ],
+    "eo:bands": [
+      {
+        "name": "I1",
+        "description": "Near Infrared",
+        "center_wavelength": 0.64,
+        "full_width_half_max": 0.075
+      },
+      {
+        "name": "I2",
+        "description": "Shortwave Infrared",
+        "center_wavelength": 0.865,
+        "full_width_half_max": 0.039
+      },
+      {
+        "name": "I3",
+        "description": "Medium-wave Infrared",
+        "center_wavelength": 1.61,
+        "full_width_half_max": 0.06
+      }
     ]
   }
 }

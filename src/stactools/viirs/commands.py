@@ -180,6 +180,7 @@ def create_viirs_command(cli: Group) -> Command:
             collection.set_self_href(os.path.join(outdir, f"{product}/collection.json"))
             for item in items:
                 collection.add_item(item)
+            collection.update_extent_from_items()
             collection.catalog_type = CatalogType.SELF_CONTAINED
             collection.make_all_asset_hrefs_relative()
             collection.validate_all()

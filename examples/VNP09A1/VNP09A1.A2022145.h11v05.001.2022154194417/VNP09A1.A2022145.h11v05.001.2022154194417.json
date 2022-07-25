@@ -8,7 +8,7 @@
     "viirs:horizontal-tile": 11,
     "viirs:vertical-tile": 5,
     "viirs:tile-id": "51011005",
-    "created": "2022-06-21T21:59:29.117879Z",
+    "created": "2022-07-18T12:51:22.431179Z",
     "platform": "snpp",
     "instruments": [
       "viirs"
@@ -103,7 +103,7 @@
       "title": "1 km Surface Reflectance Band M8",
       "raster:bands": [
         {
-          "date_type": "int16",
+          "data_type": "int16",
           "nodata": -28672,
           "scale": 0.0001,
           "spatial_resolution": 1000
@@ -572,7 +572,7 @@
       "title": "1 km Surface Reflectance Band M11",
       "raster:bands": [
         {
-          "date_type": "int16",
+          "data_type": "int16",
           "nodata": -28672,
           "scale": 0.0001,
           "spatial_resolution": 1000
@@ -597,7 +597,7 @@
       "title": "1 km Surface Reflectance Band M10",
       "raster:bands": [
         {
-          "date_type": "int16",
+          "data_type": "int16",
           "nodata": -28672,
           "scale": 0.0001,
           "spatial_resolution": 1000
@@ -622,7 +622,7 @@
       "title": "1 km Surface Reflectance Band M7",
       "raster:bands": [
         {
-          "date_type": "int16",
+          "data_type": "int16",
           "nodata": -28672,
           "scale": 0.0001,
           "spatial_resolution": 1000
@@ -647,7 +647,7 @@
       "title": "1 km Surface Reflectance Band M5",
       "raster:bands": [
         {
-          "date_type": "int16",
+          "data_type": "int16",
           "nodata": -28672,
           "scale": 0.0001,
           "spatial_resolution": 1000
@@ -672,7 +672,7 @@
       "title": "1 km Surface Reflectance Band M4",
       "raster:bands": [
         {
-          "date_type": "int16",
+          "data_type": "int16",
           "nodata": -28672,
           "scale": 0.0001,
           "spatial_resolution": 1000
@@ -697,7 +697,7 @@
       "title": "1 km Surface Reflectance Band M1",
       "raster:bands": [
         {
-          "date_type": "int16",
+          "data_type": "int16",
           "nodata": -28672,
           "scale": 0.0001,
           "spatial_resolution": 1000
@@ -722,7 +722,7 @@
       "title": "1 km Surface Reflectance Band M3",
       "raster:bands": [
         {
-          "date_type": "int16",
+          "data_type": "int16",
           "nodata": -28672,
           "scale": 0.0001,
           "spatial_resolution": 1000
@@ -764,7 +764,7 @@
       "title": "1 km Surface Reflectance Band M2",
       "raster:bands": [
         {
-          "date_type": "int16",
+          "data_type": "int16",
           "nodata": -28672,
           "scale": 0.0001,
           "spatial_resolution": 1000

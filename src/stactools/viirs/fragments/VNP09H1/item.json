@@ -443,7 +443,7 @@
             "SurfReflect_I1": {
                 "raster:bands": [
                     {
-                        "date_type": "int16",
+                        "data_type": "int16",
                         "nodata": -28672,
                         "scale": 0.0001,
                         "spatial_resolution": 500
@@ -453,7 +453,7 @@
             "SurfReflect_I2": {
                 "raster:bands": [
                     {
-                        "date_type": "int16",
+                        "data_type": "int16",
                         "nodata": -28672,
                         "scale": 0.0001,
                         "spatial_resolution": 500
@@ -463,7 +463,7 @@
             "SurfReflect_I3": {
                 "raster:bands": [
                     {
-                        "date_type": "int16",
+                        "data_type": "int16",
                         "nodata": -28672,
                         "scale": 0.0001,
                         "spatial_resolution": 500

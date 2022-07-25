@@ -62,7 +62,7 @@
         "SurfReflect_M1": {
             "raster:bands": [
                 {
-                    "date_type": "int16",
+                    "data_type": "int16",
                     "nodata": 0,
                     "scale": 0.0001,
                     "spatial_resolution": 1000
@@ -85,7 +85,7 @@
         "SurfReflect_M2": {
             "raster:bands": [
                 {
-                    "date_type": "int16",
+                    "data_type": "int16",
                     "nodata": 0,
                     "scale": 0.0001,
                     "spatial_resolution": 1000
@@ -108,7 +108,7 @@
         "SurfReflect_M3": {
             "raster:bands": [
                 {
-                    "date_type": "int16",
+                    "data_type": "int16",
                     "nodata": 0,
                     "scale": 0.0001,
                     "spatial_resolution": 1000
@@ -131,7 +131,7 @@
         "SurfReflect_M4": {
             "raster:bands": [
                 {
-                    "date_type": "int16",
+                    "data_type": "int16",
                     "nodata": 0,
                     "scale": 0.0001,
                     "spatial_resolution": 1000
@@ -154,7 +154,7 @@
         "SurfReflect_M5": {
             "raster:bands": [
                 {
-                    "date_type": "int16",
+                    "data_type": "int16",
                     "nodata": 0,
                     "scale": 0.0001,
                     "spatial_resolution": 1000
@@ -177,7 +177,7 @@
         "SurfReflect_M7": {
             "raster:bands": [
                 {
-                    "date_type": "int16",
+                    "data_type": "int16",
                     "nodata": 0,
                     "scale": 0.0001,
                     "spatial_resolution": 1000
@@ -200,7 +200,7 @@
         "SurfReflect_M8": {
             "raster:bands": [
                 {
-                    "date_type": "int16",
+                    "data_type": "int16",
                     "nodata": 0,
                     "scale": 0.0001,
                     "spatial_resolution": 1000
@@ -223,7 +223,7 @@
         "SurfReflect_M10": {
             "raster:bands": [
                 {
-                    "date_type": "int16",
+                    "data_type": "int16",
                     "nodata": 0,
                     "scale": 0.0001,
                     "spatial_resolution": 1000
@@ -246,7 +246,7 @@
         "SurfReflect_M11": {
             "raster:bands": [
                 {
-                    "date_type": "int16",
+                    "data_type": "int16",
                     "nodata": 0,
                     "scale": 0.0001,
                     "spatial_resolution": 1000
@@ -837,7 +837,7 @@
             "SurfReflect_M1": {
                 "raster:bands": [
                     {
-                        "date_type": "int16",
+                        "data_type": "int16",
                         "nodata": -28672,
                         "scale": 0.0001,
                         "spatial_resolution": 1000
@@ -847,7 +847,7 @@
             "SurfReflect_M2": {
                 "raster:bands": [
                     {
-                        "date_type": "int16",
+                        "data_type": "int16",
                         "nodata": -28672,
                         "scale": 0.0001,
                         "spatial_resolution": 1000
@@ -857,7 +857,7 @@
             "SurfReflect_M3": {
                 "raster:bands": [
                     {
-                        "date_type": "int16",
+                        "data_type": "int16",
                         "nodata": -28672,
                         "scale": 0.0001,
                         "spatial_resolution": 1000
@@ -867,7 +867,7 @@
             "SurfReflect_M4": {
                 "raster:bands": [
                     {
-                        "date_type": "int16",
+                        "data_type": "int16",
                         "nodata": -28672,
                         "scale": 0.0001,
                         "spatial_resolution": 1000
@@ -877,7 +877,7 @@
             "SurfReflect_M5": {
                 "raster:bands": [
                     {
-                        "date_type": "int16",
+                        "data_type": "int16",
                         "nodata": -28672,
                         "scale": 0.0001,
                         "spatial_resolution": 1000
@@ -887,7 +887,7 @@
             "SurfReflect_M7": {
                 "raster:bands": [
                     {
-                        "date_type": "int16",
+                        "data_type": "int16",
                         "nodata": -28672,
                         "scale": 0.0001,
                         "spatial_resolution": 1000
@@ -897,7 +897,7 @@
             "SurfReflect_M8": {
                 "raster:bands": [
                     {
-                        "date_type": "int16",
+                        "data_type": "int16",
                         "nodata": -28672,
                         "scale": 0.0001,
                         "spatial_resolution": 1000
@@ -907,7 +907,7 @@
             "SurfReflect_M10": {
                 "raster:bands": [
                     {
-                        "date_type": "int16",
+                        "data_type": "int16",
                         "nodata": -28672,
                         "scale": 0.0001,
                         "spatial_resolution": 1000
@@ -917,7 +917,7 @@
             "SurfReflect_M11": {
                 "raster:bands": [
                     {
-                        "date_type": "int16",
+                        "data_type": "int16",
                         "nodata": -28672,
                         "scale": 0.0001,
                         "spatial_resolution": 1000
