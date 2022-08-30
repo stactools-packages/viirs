@@ -8,6 +8,30 @@ from stactools.viirs import stac
 from tests import VNP_H5_ONLY_FILE_NAMES, VNP_HAS_XML_FILE_NAMES, test_data
 
 
+def test_valid_data_footprint_option() -> None:
+    cog_filename = "VNP13A1.A2022097.h11v05.001.2022113080900_500_m_16_days_NDVI.tif"
+    cog_href = test_data.get_path(f"data-files/cogs/{cog_filename}")
+    h5_filename = "VNP13A1.A2022097.h11v05.001.2022113080900.h5"
+    h5_href = test_data.get_external_data(h5_filename)
+    _ = test_data.get_external_data(f"{h5_filename}.xml")
+
+    item_valid_data_footprint = stac.create_item(
+        h5_href, cog_hrefs=[cog_href], use_data_footprint=True
+    )
+    item_valid_data_footprint.validate()
+    coords = item_valid_data_footprint.to_dict()["geometry"]["coordinates"]
+    poly = shapely.geometry.Polygon([list(c) for c in coords[0]])
+    assert poly.area == pytest.approx(80.71800526427202)
+
+    item_raster_outline_footprint = stac.create_item(
+        h5_href, cog_hrefs=[cog_href], use_data_footprint=False
+    )
+    item_raster_outline_footprint.validate()
+    coords = item_raster_outline_footprint.to_dict()["geometry"]["coordinates"]
+    poly = shapely.geometry.Polygon([list(c) for c in coords[0]])
+    assert poly.area == pytest.approx(122.39202964999998)
+
+
 def test_read_href_modifier() -> None:
     filename = "VNP09H1.A2012017.h00v09.001.2016294114238.h5"
     href = test_data.get_external_data(filename)
@@ -107,3 +131,13 @@ def test_collection_eo_summary() -> None:
     summaries_dict = collection.summaries.to_dict()
     assert "eo:bands" in summaries_dict
     assert len(summaries_dict["eo:bands"]) == 9
+
+
+def test_raster_outline_footprint_option() -> None:
+    filename = "VNP13A1.A2022097.h11v05.001.2022113080900.h5"
+    href = test_data.get_external_data(filename)
+    _ = test_data.get_external_data(f"{filename}.xml")
+    item = stac.create_item(href)
+    item_dict = item.to_dict()
+    assert len(item_dict["geometry"]["coordinates"][0]) == 23
+    item.validate()

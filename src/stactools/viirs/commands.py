@@ -75,6 +75,14 @@ def create_viirs_command(cli: Group) -> Command:
         type=float,
     )
     @click.option(
+        "-u",
+        "--use-data-footprint",
+        is_flag=True,
+        help="Flag to use the data footprint for Item geometry",
+        default=False,
+        show_default=True,
+    )
+    @click.option(
         "-f", "--file-list", help="File containing list of subdataset COG HREFs"
     )
     def create_item_command(
@@ -84,6 +92,7 @@ def create_viirs_command(cli: Group) -> Command:
         create_cogs: bool,
         densification_factor: int,
         simplification_tolerance: float,
+        use_data_footprint: bool,
         file_list: Optional[str] = None,
     ) -> None:
         """Creates a STAC Item based on an H5 VIIRS data file and, if it exists,
@@ -111,6 +120,9 @@ def create_viirs_command(cli: Group) -> Command:
                 footprint geometry and the original, densified geometry vertices
                 after reprojection. Default is 0.0006 degrees (~60m at the
                 equator).
+            use_data_footprint (bool): Flag to extract footprint geometry based
+                on data existence rather than the raster outline. Default is
+                False.
             file_list (str, optional): Text file containing one HREF per line.
                 The HREFs should point to subdataset COG files.
         """
@@ -130,6 +142,7 @@ def create_viirs_command(cli: Group) -> Command:
             antimeridian_strategy=strategy,
             densification_factor=densification_factor,
             simplification_tolerance=simplification_tolerance,
+            use_data_footprint=use_data_footprint,
         )
         item_path = os.path.join(outdir, f"{item.id}.json")
         item.set_self_href(item_path)
@@ -174,6 +187,14 @@ def create_viirs_command(cli: Group) -> Command:
         show_default=True,
         type=float,
     )
+    @click.option(
+        "-u",
+        "--use-data-footprint",
+        is_flag=True,
+        help="Flag to use the data footprint for Item geometry",
+        default=False,
+        show_default=True,
+    )
     def create_collection_command(
         infile: str,
         outdir: str,
@@ -181,6 +202,7 @@ def create_viirs_command(cli: Group) -> Command:
         antimeridian_strategy: str,
         densification_factor: int,
         simplification_tolerance: float,
+        use_data_footprint: bool,
     ) -> None:
         """Creates STAC Collections with Items for the VIIRS H5 HREFs listed in
         INFILE."
@@ -207,6 +229,9 @@ def create_viirs_command(cli: Group) -> Command:
                 footprint geometry and the original, densified geometry vertices
                 after reprojection. Default is 0.0006 degrees (~60m at the
                 equator).
+            use_data_footprint (bool): Flag to extract footprint geometry based
+                on data existence rather than the raster outline. Default is
+                False.
         """
         with open(infile) as f:
             hrefs = [os.path.abspath(line.strip()) for line in f.readlines()]
@@ -228,6 +253,7 @@ def create_viirs_command(cli: Group) -> Command:
                 antimeridian_strategy=strategy,
                 densification_factor=densification_factor,
                 simplification_tolerance=simplification_tolerance,
+                use_data_footprint=use_data_footprint,
             )
             item_dict[product].append(item)
 

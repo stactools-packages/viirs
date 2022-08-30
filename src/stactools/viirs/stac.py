@@ -1,9 +1,9 @@
+import logging
 import os
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
 import shapely.geometry
-import stactools.core.utils.antimeridian
 from pystac import Asset, Collection, Item, Summaries
 from pystac.extensions.eo import EOExtension
 from pystac.extensions.item_assets import AssetDefinition, ItemAssetsExtension
@@ -11,12 +11,15 @@ from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.scientific import ScientificExtension
 from pystac.utils import datetime_to_str, make_absolute_href
 from stactools.core.io import ReadHrefModifier
+from stactools.core.utils import antimeridian, raster_footprint
 from stactools.core.utils.antimeridian import Strategy
 
 from stactools.viirs import constants
 from stactools.viirs.fragment import STACFragments
 from stactools.viirs.metadata import viirs_metadata
 from stactools.viirs.utils import check_if_supported, find_extensions
+
+logger = logging.getLogger(__name__)
 
 
 def create_item(
@@ -26,6 +29,7 @@ def create_item(
     antimeridian_strategy: Strategy = Strategy.SPLIT,
     densification_factor: int = constants.FOOTPRINT_DENSIFICATION_FACTOR,
     simplification_tolerance: float = constants.FOOTPRINT_SIMPLIFICATION_TOLERANCE,
+    use_data_footprint: bool = False,
 ) -> Item:
     """Creates a STAC Item from VIIRS data.
 
@@ -45,6 +49,8 @@ def create_item(
             in degrees, between the boundary of the simplified footprint geometry
             and the original, densified geometry vertices after reprojection.
             Default is 0.0006 degrees (~60m at the equator).
+        use_data_footprint (bool): Flag to extract footprint geometry based on
+            data existence rather than the raster outline.
 
     Returns:
         pystac.Item: A STAC Item representing the VIIRS data.
@@ -109,7 +115,25 @@ def create_item(
     item.stac_extensions = list(set(item.stac_extensions))
     item.stac_extensions.sort()
 
-    stactools.core.utils.antimeridian.fix_item(item, antimeridian_strategy)
+    antimeridian.fix_item(item, antimeridian_strategy)
+
+    if use_data_footprint:
+        if not cog_hrefs:
+            logger.warning(
+                "Cannot update Item geometry from valid raster data without "
+                "COG hrefs. The raster outline was used instead."
+            )
+        elif not raster_footprint.update_geometry_from_asset_footprint(
+            item,
+            asset_names=constants.FOOTPRINT_DATA_ASSETS[metadata.product],
+            precision=constants.FOOTPRINT_PRECISION,
+            densification_factor=densification_factor,
+            simplify_tolerance=simplification_tolerance,
+        ):
+            logger.warning(
+                "Request to update Item geometry from valid raster data "
+                "failed. The raster outline was used instead."
+            )
 
     return item
 
