@@ -4,12 +4,14 @@ from typing import Any, Dict, List, Optional, Tuple, cast
 import h5py
 import numpy as np
 import rasterio
-import stactools.core.utils.convert
+import rasterio.shutil
 from rasterio.io import MemoryFile
 
 from stactools.viirs.constants import MULTIPLE_NODATA
 from stactools.viirs.metadata import viirs_metadata
 from stactools.viirs.utils import ignore_not_georeferenced
+
+COG_PROFILE = {"compress": "deflate", "blocksize": 512, "driver": "COG"}
 
 
 @ignore_not_georeferenced()
@@ -133,7 +135,7 @@ def _cog(
         with mem_file.open(**src_profile) as mem:
             mem.write(data, 1)
             mem.update_tags(**tags)
-            stactools.core.utils.convert.cogify(mem, cog_path)
+            rasterio.shutil.copy(mem, cog_path, **COG_PROFILE)
 
 
 def _clean(data: Any, nodatas: List[int], nodata_new: int) -> Tuple[Any, Any]:
