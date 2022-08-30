@@ -2,16 +2,15 @@ import ast
 import logging
 from dataclasses import dataclass
 from datetime import datetime
-from typing import Any, Dict, List, Optional, Tuple
+from typing import Any, Dict, List, Optional
 
 import h5py
-import numpy as np
 import rasterio
 import shapely.geometry
 from dateutil import parser
 from stactools.core.io import ReadHrefModifier
-from stactools.core.projection import reproject_geom
 from stactools.core.utils import href_exists
+from stactools.core.utils.raster_footprint import densify_reproject_simplify
 
 from stactools.viirs import constants, utils
 from stactools.viirs.constants import VIIRSProducts
@@ -137,42 +136,24 @@ class Metadata:
             cloud_cover=cloud_cover,
         )
 
-    def _densify(
-        self, point_list: List[Tuple[float, float]], densify_factor: int
-    ) -> List[Tuple[float, float]]:
-        """Creates additional points on straight lines between points in
-        the passed point list.
-
-        Args:
-            point_list (List[Tuple[float, float]]): Points defining the shape
-                to densify with additional points.
-            densify_factor (int): Factor by which to increase the number of
-                points.
-
-        Returns:
-            List[Tuple[float, float]]: Densified point list.
-        """
-        # https://stackoverflow.com/questions/64995977/generating-equidistance-points-along-the-boundary-of-a-polygon-but-cw-ccw  # noqa
-        points: Any = np.asarray(point_list)
-        densified_number = len(points) * densify_factor
-        existing_indices = np.arange(0, densified_number, densify_factor)
-        interp_indices = np.arange(existing_indices[-1])
-        interp_x = np.interp(interp_indices, existing_indices, points[:, 0])  # noqa
-        interp_y = np.interp(interp_indices, existing_indices, points[:, 1])  # noqa
-        densified_points = [(x, y) for x, y in zip(interp_x, interp_y)]
-        return densified_points
-
-    def geometry(self, densify_factor: Optional[int]) -> Dict[str, Any]:
+    def geometry(
+        self, densification_factor: int, simplification_tolerance: float
+    ) -> Dict[str, Any]:
         """GeoJSON geometry of the VIIRS tile boundary in WGS84.
 
         Args:
-            densify_factor (int, optional): Factor by which to increase the
-            number of vertices on the geometry to mitigate projection error.
+            densification_factor (int): Factor by which to increase the
+                number of vertices on the image footprint. Densification
+                mitigates the distortion error when reprojecting to WGS84
+                geodetic coordinates.
+            simplification_tolerance (float): Maximum acceptable geodetic
+                distance, in degrees, between the boundary of the simplified
+                footprint geometry and the original, densified geometry vertices
+                after reprojection to WGS84.
 
         Returns:
             Dict[str, Any]: GeoJSON geometry with additional vertices.
         """
-        # """."""
         num_rows, num_cols = self.shape
         upper_left = (0, 0)
         lower_left = (0, num_rows)
@@ -182,14 +163,19 @@ class Metadata:
 
         affine = rasterio.Affine(*self.transform)
         proj_points = [affine * xy for xy in pixel_points]
+        proj_polygon = shapely.geometry.polygon.Polygon(proj_points)
 
-        if densify_factor is not None:
-            proj_points = self._densify(proj_points, densify_factor)
-        proj_polygon = shapely.geometry.Polygon(proj_points)
-        proj_geometry = shapely.geometry.mapping(proj_polygon)
-        wgs84_geometry = reproject_geom(self.crs, "epsg:4326", proj_geometry)
+        wgs84_polygon: Dict[str, Any] = shapely.geometry.mapping(
+            densify_reproject_simplify(
+                proj_polygon,
+                self.crs,
+                densification_factor=densification_factor,
+                precision=constants.FOOTPRINT_PRECISION,
+                simplify_tolerance=simplification_tolerance,
+            )
+        )
 
-        return wgs84_geometry
+        return wgs84_polygon
 
     @property
     def transform(self) -> List[float]:

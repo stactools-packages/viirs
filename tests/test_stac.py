@@ -30,8 +30,8 @@ def test_antimeridian_normalize() -> None:
     _ = test_data.get_external_data(f"{filename}.xml")
     item = stac.create_item(href, antimeridian_strategy=Strategy.NORMALIZE)
     bounds = shapely.geometry.shape(item.geometry).bounds
-    assert bounds[0] == pytest.approx(-182.7767901225167)
-    assert bounds[2] == pytest.approx(-169.99999998473047)
+    assert bounds[0] == pytest.approx(-182.7767901)
+    assert bounds[2] == pytest.approx(-170.0007193)
     item.validate()
 
 
@@ -86,19 +86,19 @@ def test_asset_updates() -> None:
     assert raster_bands["nodata"] == -28672
 
 
-def test_densify() -> None:
+def test_densify_simplify() -> None:
     filename = "VNP13A1.A2022097.h11v05.001.2022113080900.h5"
     href = test_data.get_external_data(filename)
     _ = test_data.get_external_data(f"{filename}.xml")
 
     item = stac.create_item(href)
     item_dict = item.to_dict()
-    assert len(item_dict["geometry"]["coordinates"][0]) == 5
+    assert len(item_dict["geometry"]["coordinates"][0]) == 23
     item.validate()
 
-    item = stac.create_item(href, densify_factor=2)
+    item = stac.create_item(href, densification_factor=2)
     item_dict = item.to_dict()
-    assert len(item_dict["geometry"]["coordinates"][0]) == 9
+    assert len(item_dict["geometry"]["coordinates"][0]) == 7
     item.validate()
 
 

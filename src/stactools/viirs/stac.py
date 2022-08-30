@@ -24,7 +24,8 @@ def create_item(
     cog_hrefs: Optional[List[str]] = None,
     read_href_modifier: Optional[ReadHrefModifier] = None,
     antimeridian_strategy: Strategy = Strategy.SPLIT,
-    densify_factor: Optional[int] = None,
+    densification_factor: int = constants.FOOTPRINT_DENSIFICATION_FACTOR,
+    simplification_tolerance: float = constants.FOOTPRINT_SIMPLIFICATION_TOLERANCE,
 ) -> Item:
     """Creates a STAC Item from VIIRS data.
 
@@ -36,15 +37,21 @@ def create_item(
         antimeridian_strategy (Strategy, optional): Either split on -180 or
             normalize geometries so all longitudes are either positive or
             negative. Default is to split antimeridian geometries.
-        densify_factor (int, optional): Factor by which to increase the number
-            of vertices on the geometry to mitigate projection error.
+        densification_factor (int): Factor by which to increase the
+            number of vertices on the extracted footprint geometry in the
+            projected coordinate system. Densification mitigates the distortion
+            error when reprojecting to WGS84 geodetic coordinates. Default is 10.
+        simplification_tolerance (float): Maximum acceptable geodetic distance,
+            in degrees, between the boundary of the simplified footprint geometry
+            and the original, densified geometry vertices after reprojection.
+            Default is 0.0006 degrees (~60m at the equator).
 
     Returns:
         pystac.Item: A STAC Item representing the VIIRS data.
     """
     metadata = viirs_metadata(h5_href, read_href_modifier)
     fragments = STACFragments(metadata.product, metadata.production_julian_date)
-    geometry = metadata.geometry(densify_factor)
+    geometry = metadata.geometry(densification_factor, simplification_tolerance)
 
     item = Item(
         id=metadata.id,
