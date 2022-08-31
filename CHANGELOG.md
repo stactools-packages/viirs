@@ -10,6 +10,10 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Update Collection extents from Items and add an `eo:bands` list to appropriate Collection summaries. ([#13](https://github.com/stactools-packages/viirs/pull/13))
 
+### Removed
+
+- Removed Python 3.7 support ([#15](https://github.com/stactools-packages/viirs/pull/15))
+
 ## [0.1.0] - 2022-06-22
 
 Initial release.
