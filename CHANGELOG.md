@@ -8,7 +8,16 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 ### Added
 
-- Update Collection extents from Items and add an `eo:bands` list to appropriate Collection summaries. ([#13](https://github.com/stactools-packages/viirs/pull/13))
+- Added an `eo:bands` list to appropriate Collection summaries. ([#13](https://github.com/stactools-packages/viirs/pull/13))
+- Added an option to create Item geometry from the valid (not nodata) raster data area. ([#14](https://github.com/stactools-packages/viirs/pull/14))
+
+### Changed
+
+- Collection extents are now updated from the Collection Items when creating a collection with the CLI ([#13](https://github.com/stactools-packages/viirs/pull/13))
+
+### Removed
+
+- Dropped Python 3.7 support. ([#14](https://github.com/stactools-packages/viirs/pull/14))
 
 ## [0.1.0] - 2022-06-22
 
