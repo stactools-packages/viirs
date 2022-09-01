@@ -10,6 +10,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/).
 
 - Added an `eo:bands` list to appropriate Collection summaries. ([#13](https://github.com/stactools-packages/viirs/pull/13))
 - Added an option to create Item geometry from the valid (not nodata) raster data area. ([#14](https://github.com/stactools-packages/viirs/pull/14))
+- Added Python 3.10 support. ([#14](https://github.com/stactools-packages/viirs/pull/14))
 
 ### Changed
 
