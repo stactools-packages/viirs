@@ -16,6 +16,22 @@ class VIIRSProducts(str, Enum):
     VNP46A2 = "VNP46A2"
 
 
+FOOTPRINT_DENSIFICATION_FACTOR = 10
+FOOTPRINT_SIMPLIFICATION_TOLERANCE = 0.0006  # degrees; approximately 60m
+FOOTPRINT_PRECISION = 7
+FOOTPRINT_DATA_ASSETS = {
+    VIIRSProducts.VNP09A1.name: ["SurfReflect_M1"],
+    VIIRSProducts.VNP09H1.name: ["SurfReflect_I1"],
+    VIIRSProducts.VNP10A1.name: ["NDSI"],
+    VIIRSProducts.VNP13A1.name: ["500_m_16_days_NDVI"],
+    VIIRSProducts.VNP14A1.name: ["FireMask"],
+    VIIRSProducts.VNP15A2H.name: ["Lai"],
+    VIIRSProducts.VNP21A2.name: ["Emis_14"],
+    VIIRSProducts.VNP43IA4.name: ["Nadir_Reflectance_I1"],
+    VIIRSProducts.VNP43MA4.name: ["Nadir_Reflectance_M1"],
+    VIIRSProducts.VNP46A2.name: ["Gap_Filled_DNB_BRDF-Corrected_NTL"],
+}
+
 PLATFORM = "snpp"
 INSTRUMENT = ["viirs"]
 

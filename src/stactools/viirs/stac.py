@@ -1,9 +1,9 @@
+import logging
 import os
 from datetime import datetime, timezone
 from typing import Any, Dict, List, Optional
 
 import shapely.geometry
-import stactools.core.utils.antimeridian
 from pystac import Asset, Collection, Item, Summaries
 from pystac.extensions.eo import EOExtension
 from pystac.extensions.item_assets import AssetDefinition, ItemAssetsExtension
@@ -11,6 +11,7 @@ from pystac.extensions.projection import ProjectionExtension
 from pystac.extensions.scientific import ScientificExtension
 from pystac.utils import datetime_to_str, make_absolute_href
 from stactools.core.io import ReadHrefModifier
+from stactools.core.utils import antimeridian, raster_footprint
 from stactools.core.utils.antimeridian import Strategy
 
 from stactools.viirs import constants
@@ -18,13 +19,17 @@ from stactools.viirs.fragment import STACFragments
 from stactools.viirs.metadata import viirs_metadata
 from stactools.viirs.utils import check_if_supported, find_extensions
 
+logger = logging.getLogger(__name__)
+
 
 def create_item(
     h5_href: str,
     cog_hrefs: Optional[List[str]] = None,
     read_href_modifier: Optional[ReadHrefModifier] = None,
     antimeridian_strategy: Strategy = Strategy.SPLIT,
-    densify_factor: Optional[int] = None,
+    densification_factor: int = constants.FOOTPRINT_DENSIFICATION_FACTOR,
+    simplification_tolerance: float = constants.FOOTPRINT_SIMPLIFICATION_TOLERANCE,
+    use_data_footprint: bool = False,
 ) -> Item:
     """Creates a STAC Item from VIIRS data.
 
@@ -36,15 +41,23 @@ def create_item(
         antimeridian_strategy (Strategy, optional): Either split on -180 or
             normalize geometries so all longitudes are either positive or
             negative. Default is to split antimeridian geometries.
-        densify_factor (int, optional): Factor by which to increase the number
-            of vertices on the geometry to mitigate projection error.
+        densification_factor (int): Factor by which to increase the
+            number of vertices on the extracted footprint geometry in the
+            projected coordinate system. Densification mitigates the distortion
+            error when reprojecting to WGS84 geodetic coordinates. Default is 10.
+        simplification_tolerance (float): Maximum acceptable geodetic distance,
+            in degrees, between the boundary of the simplified footprint geometry
+            and the original, densified geometry vertices after reprojection.
+            Default is 0.0006 degrees (~60m at the equator).
+        use_data_footprint (bool): Flag to extract footprint geometry based on
+            data existence rather than the raster outline.
 
     Returns:
         pystac.Item: A STAC Item representing the VIIRS data.
     """
     metadata = viirs_metadata(h5_href, read_href_modifier)
     fragments = STACFragments(metadata.product, metadata.production_julian_date)
-    geometry = metadata.geometry(densify_factor)
+    geometry = metadata.geometry(densification_factor, simplification_tolerance)
 
     item = Item(
         id=metadata.id,
@@ -102,7 +115,25 @@ def create_item(
     item.stac_extensions = list(set(item.stac_extensions))
     item.stac_extensions.sort()
 
-    stactools.core.utils.antimeridian.fix_item(item, antimeridian_strategy)
+    antimeridian.fix_item(item, antimeridian_strategy)
+
+    if use_data_footprint:
+        if not cog_hrefs:
+            logger.warning(
+                "Cannot update Item geometry from valid raster data without "
+                "COG hrefs. The raster outline was used instead."
+            )
+        elif not raster_footprint.update_geometry_from_asset_footprint(
+            item,
+            asset_names=constants.FOOTPRINT_DATA_ASSETS[metadata.product],
+            precision=constants.FOOTPRINT_PRECISION,
+            densification_factor=densification_factor,
+            simplify_tolerance=simplification_tolerance,
+        ):
+            logger.warning(
+                "Request to update Item geometry from valid raster data "
+                "failed. The raster outline was used instead."
+            )
 
     return item
 
